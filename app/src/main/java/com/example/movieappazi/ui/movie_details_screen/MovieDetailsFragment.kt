@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -19,6 +20,10 @@ import com.example.movieappazi.ui.zAdapter.person.PersonDetailsAdapter
 import com.example.movieappazi.uiModels.movie.MovieDetailsUi
 import com.example.movieappazi.uiModels.movie.MovieUi
 import com.example.movieappazi.uiModels.person.PersonDetailsUi
+import com.google.android.youtube.player.YouTubeBaseActivity
+import com.google.android.youtube.player.YouTubeInitializationResult
+import com.google.android.youtube.player.YouTubePlayer
+import com.google.android.youtube.player.YouTubePlayerView
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_movie_details.*
@@ -40,6 +45,10 @@ class MovieDetailsFragment : Fragment(), RvClickListener<MovieUi>,
     private val actorsIds: List<Int> by lazy {
         MovieDetailsFragmentArgs.fromBundle(requireArguments()).movie.genre_ids
     }
+//    val VIDEO_ID = "JA8Xw0ffel8"
+//    val YOUTUBE_API_KEY = "AIzaSyCfwFarKtTY_CL73va5mhI7khFxfU00gB0"
+//    private lateinit var youtubePlayer: YouTubePlayerView
+//    lateinit var youtubePlayerInit: YouTubePlayer.OnInitializedListener
 
     @Inject
     lateinit var viewModelFactory: MovieDetailsFragmentViewModelFactory.Factory
@@ -75,6 +84,27 @@ class MovieDetailsFragment : Fragment(), RvClickListener<MovieUi>,
         observeRecommended()
         observePerson()
         observeSimilarMovies()
+
+//        youtubePlayerInit = object : YouTubePlayer.OnInitializedListener {
+//            override fun onInitializationSuccess(
+//                p0: YouTubePlayer.Provider?,
+//                p1: YouTubePlayer?,
+//                p2: Boolean,
+//            ) {
+//                p1?.loadVideo(VIDEO_ID)
+//                binding.youtubePlayer.initialize(YOUTUBE_API_KEY, youtubePlayerInit)
+//            }
+//
+//            override fun onInitializationFailure(
+//                p0: YouTubePlayer.Provider?,
+//                p1: YouTubeInitializationResult?,
+//            ) {
+//                Toast.makeText(requireContext(), "Something Went Wrong", Toast.LENGTH_SHORT).show()
+//            }
+//
+//        }
+
+
     }
 
     private fun setAdaptersToRv() = with(binding) {

@@ -62,9 +62,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
+            android:fontFamily="@font/aclonica"
             android:textColor="@color/white"
             android:textSize="20sp"
-            android:fontFamily="@font/aclonica"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -376,28 +376,13 @@
                     app:layout_constraintStart_toStartOf="@id/actorsText"
                     app:layout_constraintTop_toBottomOf="@id/actorsRv" />
 
-<!--                                <androidx.recyclerview.widget.RecyclerView-->
-<!--                                    android:id="@+id/videos_titles_rv"-->
-<!--                                    android:layout_width="0dp"-->
-<!--                                    android:layout_height="wrap_content"-->
-<!--                                    android:layout_marginTop="2dp"-->
-<!--                                    android:orientation="horizontal"-->
-<!--                                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
-<!--                                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                                    app:layout_constraintTop_toBottomOf="@id/videoText"-->
-<!--                                    tools:listitem="@layout/trailers_text_item_enabled" />-->
-
-                <!--                <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView-->
-                <!--                    android:id="@+id/youtubePlayer"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="250dp"-->
-                <!--                    app:autoPlay="false"-->
-                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
-                <!--                    app:layout_constraintStart_toStartOf="parent"-->
-                <!--                    app:layout_constraintTop_toBottomOf="@id/videos_titles_rv"-->
-                <!--                    app:showFullScreenButton="false" />-->
-
+<!--                <com.google.android.youtube.player.YouTubePlayerView-->
+<!--                    android:id="@+id/youtube_player"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="250dp"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/videoText" />-->
 
                 <TextView
                     android:id="@+id/similarMoviesText"
