@@ -1,0 +1,17 @@
+plugins {
+    id 'java-library'
+    id 'org.jetbrains.kotlin.jvm'
+}
+dependencies {
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+
+    // Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
+
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_7
+    targetCompatibility = JavaVersion.VERSION_1_7
+}

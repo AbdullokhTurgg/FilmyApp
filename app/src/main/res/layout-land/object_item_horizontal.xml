@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="130dp"
+    android:layout_height="180dp"
+    android:layout_margin="4dp"
+    android:backgroundTint="@color/gold"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="6dp"
+    tools:ignore="MissingDefaultResource">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="2dp"
+        app:cardCornerRadius="10dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/posterImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop" />
+
+            <com.vaibhavlakhera.circularprogressview.CircularProgressView
+                android:id="@+id/progressView"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                app:animate="true"
+                app:animateDuration="800"
+                app:fillColor="@color/darkBlue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:progressColor="@color/green"
+                app:progressInterpolator="@android:anim/accelerate_decelerate_interpolator"
+                app:progressTextColor="@color/white"
+                app:progressTextEnabled="true"
+                app:progressTextSize="8sp"
+                app:progressTextType="percent"
+                app:progressValue="0"
+                app:progressWidth="5dp"
+                app:startAngle="270"
+                app:totalColor="@color/darkBlue"
+                app:totalValue="100"
+                app:totalWidth="8dp" />
+
+            <ImageView
+                android:id="@+id/like"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/progressView"
+                app:layout_constraintStart_toStartOf="@+id/posterImage"
+                app:layout_constraintTop_toTopOf="@+id/progressView"
+                app:srcCompat="@drawable/ic_like_star" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    app:layoutDescription="@xml/fragment_movie_details_scene"
+    tools:context=".ui.movie_details_screen.MovieDetailsFragment">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/toolBarGuidline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/posterImageCard"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:layout_marginEnd="20dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/top_main_image"
+        app:layout_constraintEnd_toStartOf="@id/toolBarGuidline"
+        app:layout_constraintStart_toStartOf="@id/top_title_constraint"
+        app:layout_constraintTop_toBottomOf="@id/top_main_image"
+        app:strokeColor="@color/zero_to_one"
+        app:strokeWidth="1dp">
+
+        <ImageView
+            android:id="@+id/poster_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <ImageView
+        android:id="@+id/top_main_image"
+        android:layout_width="0dp"
+        android:layout_height="240dp"
+        android:background="@color/black"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/top_title_constraint"
+        android:layout_width="0dp"
+        android:layout_height="?android:attr/actionBarSize"
+        android:layout_marginStart="12dp"
+        app:layout_constraintEnd_toStartOf="@id/likeClick"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/top_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:fontFamily="@font/aclonica"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <ImageView
+        android:id="@+id/likeClick"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        android:src="@drawable/ic_add"
+        app:layout_constraintEnd_toEndOf="@+id/top_main_image"
+        app:layout_constraintTop_toTopOf="@+id/top_main_image" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/posterImageCard">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/genConstraint"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/viewConstraint"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/rvs_constraint_layout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.5" />
+
+                <TextView
+                    android:id="@+id/movieTitle"
+                    style="@style/MovieDetailsTextStyle"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="@dimen/movieDetailsTextMarginTop"
+                    android:layout_marginEnd="2dp"
+                    android:text="Название:"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/title"
+                    style="@style/MovieDetailsTextStyle.Italic"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginEnd="2dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/guideline"
+                    app:layout_constraintTop_toTopOf="@id/movieTitle" />
+
+                <TextView
+                    android:id="@+id/moviePopularity"
+                    style="@style/MovieDetailsTextStyle"
+                    android:layout_marginTop="@dimen/movieDetailsTextMarginTop"
+                    android:text="Popularity"
+                    app:layout_constraintEnd_toEndOf="@id/movieTitle"
+                    app:layout_constraintStart_toStartOf="@id/movieTitle"
+                    app:layout_constraintTop_toBottomOf="@id/title" />
+
+                <TextView
+                    android:id="@+id/popularity"
+                    style="@style/MovieDetailsTextStyle.Italic"
+                    app:layout_constraintEnd_toEndOf="@id/title"
+                    app:layout_constraintStart_toStartOf="@id/title"
+                    app:layout_constraintTop_toTopOf="@id/moviePopularity" />
+
+                <TextView
+                    android:id="@+id/movieVoteCount"
+                    style="@style/MovieDetailsTextStyle"
+                    android:layout_marginTop="@dimen/movieDetailsTextMarginTop"
+                    android:text="Проголосовали:"
+                    app:layout_constraintEnd_toEndOf="@id/movieTitle"
+                    app:layout_constraintStart_toStartOf="@id/movieTitle"
+                    app:layout_constraintTop_toBottomOf="@id/moviePopularity" />
+
+                <TextView
+                    android:id="@+id/voteCount"
+                    style="@style/MovieDetailsTextStyle.Italic"
+                    app:layout_constraintEnd_toEndOf="@id/title"
+                    app:layout_constraintStart_toStartOf="@id/title"
+                    app:layout_constraintTop_toTopOf="@id/movieVoteCount" />
+
+                <TextView
+                    android:id="@+id/movieBudget"
+                    style="@style/MovieDetailsTextStyle"
+                    android:layout_marginTop="@dimen/movieDetailsTextMarginTop"
+                    android:text="Бюджет:"
+                    app:layout_constraintEnd_toEndOf="@id/movieTitle"
+                    app:layout_constraintStart_toStartOf="@id/movieTitle"
+                    app:layout_constraintTop_toBottomOf="@id/movieVoteCount" />
+
+                <TextView
+                    android:id="@+id/budget"
+                    style="@style/MovieDetailsTextStyle.Italic"
+                    app:layout_constraintEnd_toEndOf="@id/title"
+                    app:layout_constraintStart_toStartOf="@id/title"
+                    app:layout_constraintTop_toTopOf="@id/movieBudget" />
+
+                <TextView
+                    android:id="@+id/movieVoteAverage"
+                    style="@style/MovieDetailsTextStyle"
+                    android:layout_marginTop="@dimen/movieDetailsTextMarginTop"
+                    android:text="Рейтинг:"
+                    app:layout_constraintEnd_toEndOf="@id/movieTitle"
+                    app:layout_constraintStart_toStartOf="@id/movieTitle"
+                    app:layout_constraintTop_toBottomOf="@id/movieBudget" />
+
+                <androidx.appcompat.widget.AppCompatRatingBar
+                    android:id="@+id/voteAverage"
+                    style="@style/Widget.AppCompat.RatingBar.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:max="10"
+                    android:numStars="10"
+                    android:progressBackgroundTint="@color/green"
+                    android:progressTint="@color/gold"
+                    app:layout_constraintBottom_toBottomOf="@id/movieVoteAverage"
+                    app:layout_constraintEnd_toEndOf="@id/title"
+                    app:layout_constraintStart_toStartOf="@id/title"
+                    app:layout_constraintTop_toTopOf="@id/movieVoteAverage">
+
+                </androidx.appcompat.widget.AppCompatRatingBar>
+
+                <TextView
+                    android:id="@+id/movieOriginalLanguage"
+                    style="@style/MovieDetailsTextStyle"
+                    android:layout_marginTop="@dimen/movieDetailsTextMarginTop"
+                    android:text="Оригинальный язык:"
+                    app:layout_constraintEnd_toEndOf="@id/movieTitle"
+                    app:layout_constraintStart_toStartOf="@id/movieTitle"
+                    app:layout_constraintTop_toBottomOf="@id/movieVoteAverage" />
+
+                <TextView
+                    android:id="@+id/originalLanguage"
+                    style="@style/MovieDetailsTextStyle.Italic"
+                    app:layout_constraintEnd_toEndOf="@id/title"
+                    app:layout_constraintStart_toStartOf="@id/title"
+                    app:layout_constraintTop_toTopOf="@id/movieOriginalLanguage" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/titleConstraint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/movieOriginalLanguage">
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.5" />
+
+                    <TextView
+                        android:id="@+id/movieOriginalTitle"
+                        style="@style/MovieDetailsTextStyle"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginTop="@dimen/movieDetailsTextMarginTop"
+                        android:layout_marginEnd="2dp"
+                        android:text="Оригинальное название"
+                        app:layout_constraintEnd_toStartOf="@id/guideline2"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/originalTitle"
+                        style="@style/MovieDetailsTextStyle.Italic"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginEnd="2dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/guideline2"
+                        app:layout_constraintTop_toTopOf="@id/movieOriginalTitle" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <TextView
+                    android:id="@+id/movieReleaseDate"
+                    style="@style/MovieDetailsTextStyle"
+                    android:layout_marginTop="@dimen/movieDetailsTextMarginTop"
+                    android:text="Дата релиза:"
+                    app:layout_constraintEnd_toEndOf="@id/movieTitle"
+                    app:layout_constraintStart_toStartOf="@id/movieTitle"
+                    app:layout_constraintTop_toBottomOf="@id/titleConstraint" />
+
+                <TextView
+                    android:id="@+id/releaseDate"
+                    style="@style/MovieDetailsTextStyle.Italic"
+                    app:layout_constraintEnd_toEndOf="@id/title"
+                    app:layout_constraintStart_toStartOf="@id/title"
+                    app:layout_constraintTop_toTopOf="@id/movieReleaseDate" />
+
+                <TextView
+                    android:id="@+id/movieRuntime"
+                    style="@style/MovieDetailsTextStyle"
+                    android:layout_marginTop="@dimen/movieDetailsTextMarginTop"
+                    android:text="Продолжительность"
+                    app:layout_constraintEnd_toEndOf="@id/movieTitle"
+                    app:layout_constraintStart_toStartOf="@id/movieTitle"
+                    app:layout_constraintTop_toBottomOf="@id/movieReleaseDate" />
+
+                <TextView
+                    android:id="@+id/runtime"
+                    style="@style/MovieDetailsTextStyle.Italic"
+                    app:layout_constraintEnd_toEndOf="@id/title"
+                    app:layout_constraintStart_toStartOf="@id/title"
+                    app:layout_constraintTop_toTopOf="@id/movieRuntime" />
+
+                <TextView
+                    android:id="@+id/movieStatus"
+                    style="@style/MovieDetailsTextStyle"
+                    android:layout_marginTop="@dimen/movieDetailsTextMarginTop"
+                    android:text="Статус:"
+                    app:layout_constraintEnd_toEndOf="@id/movieTitle"
+                    app:layout_constraintStart_toStartOf="@id/movieTitle"
+                    app:layout_constraintTop_toBottomOf="@id/movieRuntime" />
+
+                <TextView
+                    android:id="@+id/status"
+                    style="@style/MovieDetailsTextStyle.Italic"
+                    app:layout_constraintEnd_toEndOf="@id/title"
+                    app:layout_constraintStart_toStartOf="@id/title"
+                    app:layout_constraintTop_toTopOf="@id/movieStatus" />
+
+                <TextView
+                    android:id="@+id/movieOverview"
+                    style="@style/MovieDetailsTextStyle"
+                    android:layout_marginTop="@dimen/movieDetailsTextMarginTop"
+                    android:text="Описание:"
+                    app:layout_constraintEnd_toEndOf="@id/movieTitle"
+                    app:layout_constraintStart_toStartOf="@id/movieTitle"
+                    app:layout_constraintTop_toBottomOf="@id/movieStatus" />
+
+                <TextView
+                    android:id="@+id/overview"
+                    style="@style/MovieDetailsTextStyle.Italic"
+                    android:layout_marginTop="@dimen/movieDetailsTextMarginTop"
+                    app:layout_constraintEnd_toEndOf="@id/title"
+                    app:layout_constraintStart_toStartOf="@id/movieTitle"
+                    app:layout_constraintTop_toBottomOf="@id/movieOverview" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/rvs_constraint_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/viewConstraint">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.5" />
+
+                <TextView
+                    android:id="@+id/actorsText"
+                    style="@style/MovieDetailsTextStyle"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="@dimen/movieDetailsTextMarginTop"
+                    android:layout_marginEnd="2dp"
+                    android:text="В ролях:"
+                    app:layout_constraintEnd_toStartOf="@id/guideline3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/actorsRv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/movieDetailsTextMarginTop"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/actorsText"
+                    tools:listitem="@layout/object_item_horizontal" />
+
+                <TextView
+                    android:id="@+id/videoText"
+                    style="@style/MovieDetailsTextStyle"
+                    android:layout_marginTop="@dimen/movieDetailsTextMarginTop"
+                    android:text="Трейлеры и фрагменты"
+                    app:layout_constraintEnd_toEndOf="@id/actorsText"
+                    app:layout_constraintStart_toStartOf="@id/actorsText"
+                    app:layout_constraintTop_toBottomOf="@id/actorsRv" />
+
+<!--                                <androidx.recyclerview.widget.RecyclerView-->
+<!--                                    android:id="@+id/videos_titles_rv"-->
+<!--                                    android:layout_width="0dp"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_marginTop="2dp"-->
+<!--                                    android:orientation="horizontal"-->
+<!--                                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+<!--                                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                                    app:layout_constraintTop_toBottomOf="@id/videoText"-->
+<!--                                    tools:listitem="@layout/trailers_text_item_enabled" />-->
+
+                <!--                <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView-->
+                <!--                    android:id="@+id/youtubePlayer"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="250dp"-->
+                <!--                    app:autoPlay="false"-->
+                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                    app:layout_constraintStart_toStartOf="parent"-->
+                <!--                    app:layout_constraintTop_toBottomOf="@id/videos_titles_rv"-->
+                <!--                    app:showFullScreenButton="false" />-->
+
+
+                <TextView
+                    android:id="@+id/similarMoviesText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Похожие фильмы:"
+                    android:textColor="@color/gold"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/actorsText"
+                    app:layout_constraintTop_toBottomOf="@id/videoText" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/similarMoviesRv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/similarMoviesText"
+                    tools:listitem="@layout/object_item_horizontal" />
+
+                <TextView
+                    android:id="@+id/recommendMoviesText"
+                    style="@style/MovieDetailsTextStyle"
+                    android:layout_marginTop="@dimen/movieDetailsTextMarginTop"
+                    android:text="Также рекомендуются"
+                    app:layout_constraintEnd_toEndOf="@id/actorsText"
+                    app:layout_constraintStart_toStartOf="@id/actorsText"
+                    app:layout_constraintTop_toBottomOf="@id/similarMoviesRv" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recommendMoviesRv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/recommendMoviesText"
+                    tools:listitem="@layout/object_item_horizontal" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.motion.widget.MotionLayout>

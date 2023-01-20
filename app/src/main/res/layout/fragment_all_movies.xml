@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipeRefresh"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:backgroundTint="@color/black"
+    tools:context=".ui.all_movies_screen.AllMoviesFragment"
+    tools:ignore="MissingClass,ScrollViewCount">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="ScrollViewSize">
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginBottom="30dp"
+            app:cardBackgroundColor="@color/gold"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="16dp"
+            app:layout_constraintBottom_toBottomOf="@id/textView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="NotSibling">
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/movie1" />
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/textView"
+            style="@style/TitlesForRvTv"
+            android:layout_marginTop="320dp"
+            android:text="@string/popular_category"
+            app:layout_constraintStart_toStartOf="@+id/allMovies_ly"
+            app:layout_constraintTop_toTopOf="@id/cardView" />
+
+        <TextView
+            android:id="@+id/see_all_tv_for_popular"
+            style="@style/seeAllTv"
+            android:layout_marginHorizontal="60dp"
+            android:text="@string/all_movies_fr"
+            app:layout_constraintBottom_toTopOf="@+id/allMovies_ly"
+            app:layout_constraintEnd_toEndOf="@+id/see_all_tv_for_relevancy"
+            app:layout_constraintStart_toStartOf="@+id/see_all_tv_for_relevancy" />
+
+
+        <androidx.constraintlayout.motion.widget.MotionLayout
+            android:id="@+id/allMovies_ly"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="6dp"
+            android:visibility="visible"
+            app:layoutDescription="@xml/fragment_all_movies_xml_allmovies_ly_scene"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView">
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/movies_rv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:padding="4dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/cardView2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:spanCount="2"
+                tools:listitem="@layout/object_item_portrait" />
+
+            <ProgressBar
+                android:id="@+id/popular_rv_pb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+
+
+        </androidx.constraintlayout.motion.widget.MotionLayout>
+
+
+        <TextView
+            android:id="@+id/relevancy_tv"
+            style="@style/TitlesForRvTv"
+            android:text="@string/now_playing_category"
+            app:layout_constraintStart_toStartOf="@+id/allMovies_ly"
+            app:layout_constraintTop_toBottomOf="@+id/allMovies_ly" />
+
+        <TextView
+            android:id="@+id/see_all_tv_for_relevancy"
+            style="@style/seeAllTv"
+            android:layout_marginStart="130dp"
+            android:text="@string/all_movies_fr"
+            app:layout_constraintBottom_toTopOf="@+id/relevancyMovies_ly"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/relevancy_tv" />
+
+        <androidx.constraintlayout.motion.widget.MotionLayout
+            android:id="@+id/relevancyMovies_ly"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="6dp"
+            android:visibility="visible"
+            app:layoutDescription="@xml/fragment_all_movies_xml_allmovies_ly_scene"
+            app:layout_constraintTop_toBottomOf="@+id/relevancy_tv">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/relevancy_movies_rv"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="horizontal"
+                android:padding="4dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/cardView2"
+                app:layout_constraintTop_toTopOf="@id/relevancyMovies_ly"
+                app:spanCount="2"
+                tools:listitem="@layout/object_item_portrait" />
+
+        </androidx.constraintlayout.motion.widget.MotionLayout>
+
+        <TextView
+            android:id="@+id/pubat_tv"
+            style="@style/TitlesForRvTv"
+            android:text="@string/upcoming_category"
+            app:layout_constraintStart_toStartOf="@+id/allMovies_ly"
+            app:layout_constraintTop_toBottomOf="@+id/relevancyMovies_ly" />
+
+
+        <TextView
+            android:id="@+id/see_all_tv_for_pubat"
+            style="@style/seeAllTv"
+            android:text="@string/all_movies_fr"
+            app:layout_constraintBottom_toTopOf="@+id/pubatMovies_ly"
+            app:layout_constraintEnd_toEndOf="@+id/see_all_tv_for_relevancy"
+            app:layout_constraintStart_toStartOf="@+id/see_all_tv_for_relevancy" />
+
+
+        <androidx.constraintlayout.motion.widget.MotionLayout
+            android:id="@+id/pubatMovies_ly"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="6dp"
+            android:visibility="visible"
+            app:layoutDescription="@xml/fragment_all_movies_xml_allmovies_ly_scene"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pubat_tv">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/pubat_movies_rv"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="horizontal"
+                android:padding="4dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/cardView2"
+                app:layout_constraintTop_toTopOf="@id/relevancyMovies_ly"
+                app:spanCount="2"
+                tools:listitem="@layout/object_item_portrait" />
+
+        </androidx.constraintlayout.motion.widget.MotionLayout>
+
+        <TextView
+            android:id="@+id/ratings_tv"
+            style="@style/TitlesForRvTv"
+            android:text="@string/top_rated_category"
+            app:layout_constraintStart_toStartOf="@+id/allMovies_ly"
+            app:layout_constraintTop_toBottomOf="@+id/pubatMovies_ly" />
+
+        <TextView
+            android:id="@+id/see_all_tv_for_rating"
+            style="@style/seeAllTv"
+            android:text="@string/all_movies_fr"
+            app:layout_constraintBottom_toTopOf="@+id/ratingMovies_ly"
+            app:layout_constraintEnd_toEndOf="@+id/see_all_tv_for_relevancy"
+            app:layout_constraintStart_toStartOf="@+id/see_all_tv_for_relevancy" />
+
+
+        <androidx.constraintlayout.motion.widget.MotionLayout
+            android:id="@+id/ratingMovies_ly"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="6dp"
+            android:visibility="visible"
+            app:layoutDescription="@xml/fragment_all_movies_xml_allmovies_ly_scene"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ratings_tv">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rating_movies_rv"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="horizontal"
+                android:padding="4dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/cardView2"
+                app:layout_constraintTop_toTopOf="@id/relevancyMovies_ly"
+                app:spanCount="2"
+                tools:listitem="@layout/object_item_portrait" />
+
+        </androidx.constraintlayout.motion.widget.MotionLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

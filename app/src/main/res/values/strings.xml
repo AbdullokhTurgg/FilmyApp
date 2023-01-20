@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">MovieAppAzi</string>
+    <!-- TODO: Remove or change this placeholder text -->
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="recommendMoviesTextRu">Рекомендуемые фильмы</string>
+    <string name="similarMoviesTextRu">Похожие фильмы</string>
+    <string name="videosTextRu">Трейлеры и фрагменты</string>
+
+    <string name="network_error">Нету подключение к интернету.</string>
+    <string name="generic_error">Что то пошло не так.</string>
+    <string name="service_unavailable">Ошибка Сервера.</string>
+
+    <string name="popular_category">Top Rating</string>
+    <string name="top_rated_category">Ratings</string>
+    <string name="now_playing_category">On Screen</string>
+    <string name="upcoming_category">Upcoming</string>
+
+    <string name="all_movies_fr">see all</string>
+</resources>

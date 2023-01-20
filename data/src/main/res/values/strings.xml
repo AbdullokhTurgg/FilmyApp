@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MyMovieApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="recommendMoviesTextRu">Рекомендуемые фильмы</string>
+    <string name="similarMoviesTextRu">Похожие фильмы</string>
+    <string name="videosTextRu">Трейлеры и фрагменты</string>
+
+    <string name="network_error">Нету подключение к интернету.</string>
+    <string name="generic_error">Что то пошло не так.</string>
+    <string name="service_unavailable">Ошибка Сервера.</string>
+
+    <string name="popular_category">Популярные</string>
+    <string name="top_rated_category">Топовые</string>
+    <string name="now_playing_category">На экранах</string>
+    <string name="upcoming_category">Ожидаются</string>
+
+
+</resources>
