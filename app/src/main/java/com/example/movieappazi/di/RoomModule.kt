@@ -13,6 +13,7 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 class RoomModule {
+
     @Provides
     fun provideMovieDatabase(@ApplicationContext context: Context): MovieDatabase {
         return Room.databaseBuilder(context,

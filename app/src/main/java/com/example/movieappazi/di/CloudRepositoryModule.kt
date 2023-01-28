@@ -1,13 +1,16 @@
 package com.example.movieappazi.di
 
+import com.example.data.dataModel.movie.CreditsResponseData
 import com.example.data.dataModel.movie.MovieData
 import com.example.data.dataModel.movie.MovieDetailsData
 import com.example.data.dataModel.movie.MoviesData
 import com.example.data.dataModel.person.PersonDetailsData
 import com.example.data.dataModel.person.PersonsData
 import com.example.data.dataModel.video.VideosData
+import com.example.data.network.cloud.base.ResourceProvider
 import com.example.data.network.cloud.cloudModels.movie.MovieDetailsCloud
 import com.example.data.network.cloud.cloudModels.movie.MoviesCloud
+import com.example.data.network.cloud.cloudModels.movie.movie_category.CreditsResponseCloud
 import com.example.data.network.cloud.cloudModels.person.PersonDetailsCloud
 import com.example.data.network.cloud.cloudModels.person.PersonsCloud
 import com.example.data.network.cloud.cloudModels.video.VideosCloud
@@ -43,10 +46,12 @@ class CloudRepositoryModule {
         dispatchersProvider: DispatchersProvider,
         responseHandler: ResponseHandler,
         api: MovieApi,
+        mapCreditsResponseCloudToData: BaseMapper<CreditsResponseCloud, CreditsResponseData>,
         mapFromMoviesCloudToData: BaseMapper<MoviesCloud, MoviesData>,
         mapFromDetailsCloudToData: BaseMapper<MovieDetailsCloud, MovieDetailsData>,
     ): CloudDataSourceMovie = CloudDataSourceMovieImpl(
         api = api,
+        mapCreditsResponseCloudToData = mapCreditsResponseCloudToData,
         mapFromMoviesCloudToData = mapFromMoviesCloudToData,
         mapFromDetailsCloudToData = mapFromDetailsCloudToData,
         dispatchersProvider = dispatchersProvider,

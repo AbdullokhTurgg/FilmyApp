@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">MovieAppAzi</string>
     <!-- TODO: Remove or change this placeholder text -->
 
@@ -17,4 +17,26 @@
     <string name="upcoming_category">Upcoming</string>
 
     <string name="all_movies_fr">see all</string>
+
+    <string name="actor_name">Имя Актёра:</string>
+    <string name="actor_gender">Пол Актёра:</string>
+    <string name="actor_popularity">Популярность Актёра:</string>
+    <string name="actor_profession">Профессиональность Актёра:</string>
+    <string name="actor_birthday">Дата рождение:</string>
+    <string name="actor_death_day">Дата Смерти:</string>
+    <string name="actor_birth_place">Место рождения:</string>
+    <string name="actor_biography">Биография:</string>
+    <string name="movie_genre">Жанры Фильмов:</string>
+
+
+    <string name="back_button">back_button</string>
+
+    <string name="profile">Profile</string>
+    <string name="search">Search</string>
+    <string name="home">Home</string>
+
+    <string name="storage_movies">Saved Movies</string>
+    <string name="storage_persons">Saved Persons</string>
+
+
 </resources>

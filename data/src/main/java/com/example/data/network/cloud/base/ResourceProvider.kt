@@ -14,6 +14,7 @@ interface ResourceProvider {
     fun getString(@StringRes id: Int): String
     fun handlerException(exception: Exception): String
     fun handleException(throwable: Throwable): String
+
     class Base(private val context: Context) : ResourceProvider {
         override fun getString(id: Int): String = context.getString(id)
 

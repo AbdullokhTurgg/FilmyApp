@@ -1,31 +1,29 @@
 package com.example.movieappazi.ui.movie_details_screen
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.data.network.retrofit.utils.Utils
 import com.example.domain.state.DataRequestState
+import com.example.movieappazi.R
 import com.example.movieappazi.databinding.FragmentMovieDetailsBinding
 import com.example.movieappazi.extensions.makeToast
 import com.example.movieappazi.ui.zAdapter.movie.adapter_for_popular.MovieItemAdapter
 import com.example.movieappazi.ui.zAdapter.movie.listener_for_adapters.RvClickListener
-import com.example.movieappazi.ui.zAdapter.person.PersonAdapter
 import com.example.movieappazi.ui.zAdapter.person.PersonDetailsAdapter
+import com.example.movieappazi.uiModels.movie.CastUi
 import com.example.movieappazi.uiModels.movie.MovieDetailsUi
 import com.example.movieappazi.uiModels.movie.MovieUi
-import com.example.movieappazi.uiModels.person.PersonDetailsUi
-import com.google.android.youtube.player.YouTubeBaseActivity
-import com.google.android.youtube.player.YouTubeInitializationResult
-import com.google.android.youtube.player.YouTubePlayer
-import com.google.android.youtube.player.YouTubePlayerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_movie_details.*
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.onEach
@@ -45,10 +43,7 @@ class MovieDetailsFragment : Fragment(), RvClickListener<MovieUi>,
     private val actorsIds: List<Int> by lazy {
         MovieDetailsFragmentArgs.fromBundle(requireArguments()).movie.genre_ids
     }
-//    val VIDEO_ID = "JA8Xw0ffel8"
-//    val YOUTUBE_API_KEY = "AIzaSyCfwFarKtTY_CL73va5mhI7khFxfU00gB0"
-//    private lateinit var youtubePlayer: YouTubePlayerView
-//    lateinit var youtubePlayerInit: YouTubePlayer.OnInitializedListener
+    private var isFavorite = false
 
     @Inject
     lateinit var viewModelFactory: MovieDetailsFragmentViewModelFactory.Factory
@@ -79,32 +74,15 @@ class MovieDetailsFragment : Fragment(), RvClickListener<MovieUi>,
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         setAdaptersToRv()
         observeMovieDetails()
         observeRecommended()
-        observePerson()
+//        observePerson()
         observeSimilarMovies()
 
-//        youtubePlayerInit = object : YouTubePlayer.OnInitializedListener {
-//            override fun onInitializationSuccess(
-//                p0: YouTubePlayer.Provider?,
-//                p1: YouTubePlayer?,
-//                p2: Boolean,
-//            ) {
-//                p1?.loadVideo(VIDEO_ID)
-//                binding.youtubePlayer.initialize(YOUTUBE_API_KEY, youtubePlayerInit)
-//            }
-//
-//            override fun onInitializationFailure(
-//                p0: YouTubePlayer.Provider?,
-//                p1: YouTubeInitializationResult?,
-//            ) {
-//                Toast.makeText(requireContext(), "Something Went Wrong", Toast.LENGTH_SHORT).show()
-//            }
-//
-//        }
 
-
+//
     }
 
     private fun setAdaptersToRv() = with(binding) {
@@ -129,13 +107,13 @@ class MovieDetailsFragment : Fragment(), RvClickListener<MovieUi>,
         }
     }
 
-    private fun observePerson() {
-        lifecycleScope.launchWhenStarted {
-            viewModel.persons.collectLatest {
-                personAdapter.personsList = it
-            }
-        }
-    }
+//    private fun observePerson() {
+//        lifecycleScope.launchWhenStarted {
+//            viewModel.castFLow.collectLatest {
+//                personAdapter.personsList = it
+//            }
+//        }
+//    }
 
     private fun observeMovieDetails() {
         lifecycleScope.launchWhenStarted {
@@ -148,17 +126,46 @@ class MovieDetailsFragment : Fragment(), RvClickListener<MovieUi>,
                         makeToast(it.error.message.toString(), requireContext())
                     }
                 }
+
+                lifecycleScope.launchWhenStarted {
+                    viewModel.castFLow.collectLatest {
+                        when (it) {
+                            is DataRequestState.Success -> {
+                                personAdapter.personsList = it.data.cast
+                            }
+                            is DataRequestState.Error -> {
+                                makeToast(it.error.message.toString(), requireContext())
+                            }
+                        }
+                    }
+                }
             }
         }
-
         viewModel.error.onEach {
             makeToast(it, requireContext())
         }
+    }
 
+    private fun setupClicker(item: MovieUi) {
+        binding.likeClick.setOnClickListener {
+            if (isFavorite) {
+                isFavorite = false
+                binding.likeClick.setImageResource(R.drawable.ic_add)
+                makeToast("Movie Saved", requireContext())
+                viewModel.deleteMovieFromRv(movieId = movieId)
+                makeToast("Movie deleted", requireContext())
+            } else {
+                isFavorite = true
+                binding.likeClick.setImageResource(R.drawable.ic_delete)
+                viewModel.saveMovieFromRv(movieUi = item)
+            }
+        }
     }
 
     private fun setMovieUi(movie: MovieDetailsUi) {
         with(binding) {
+            if (isFavorite) likeClick.setImageResource(R.drawable.ic_add)
+            else likeClick.setImageResource(R.drawable.ic_delete)
             topTitle.text = movie.title
             title.text = movie.title
             popularity.text = movie.popularity.toString()
@@ -176,6 +183,8 @@ class MovieDetailsFragment : Fragment(), RvClickListener<MovieUi>,
     }
 
     override fun onItemClick(item: MovieUi) {
+        viewModel.saveMovieFromRv(item)
+        makeToast("${item.title} saved successful", requireContext())
     }
 
     override fun onLongClick(item: MovieUi) {
@@ -183,5 +192,5 @@ class MovieDetailsFragment : Fragment(), RvClickListener<MovieUi>,
             item))
     }
 
-    override fun onPersonItemClick(person: PersonDetailsUi) = Unit
+    override fun onPersonItemClick(person: CastUi) = Unit
 }

@@ -1,5 +1,7 @@
 package com.example.domain.domainModels.movie
 
+import com.example.domain.domainModels.movie.movie_category.MovieCategoriesDomain
+
 
 data class MovieDomain(
     val posterPath: String?,
@@ -17,3 +19,10 @@ data class MovieDomain(
     val rating: Double,
     val genre_ids: List<Int>,
 )
+
+fun MovieDomain.toCategories(): MovieCategoriesDomain {
+    return MovieCategoriesDomain(
+        id = id,
+        name = title,
+    )
+}

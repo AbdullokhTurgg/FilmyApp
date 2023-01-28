@@ -18,14 +18,6 @@ class MovieItemAdapter(
     private val listener: RvClickListener<MovieUi>,
 ) : ListAdapter<MovieUi, ObjectViewHolder>(MovieItemDiffCallback()) {
 
-    var moviesList = listOf<MovieUi>()
-        set(value) {
-            val callback = MovieDiffCallBack(value, moviesList)
-            val diffResult = DiffUtil.calculateDiff(callback)
-            diffResult.dispatchUpdatesTo(this)
-            field = value
-        }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ObjectViewHolder {
         val layout = when (viewType) {
             PORTRAIT_TYPE -> R.layout.object_item_portrait
@@ -57,8 +49,8 @@ class MovieItemAdapter(
     }
 
     companion object {
-        const val PORTRAIT_TYPE = 1
-        const val HORIZONTAL_TYPE = 0
+        const val PORTRAIT_TYPE = 0
+        const val HORIZONTAL_TYPE = 1
     }
 }
 

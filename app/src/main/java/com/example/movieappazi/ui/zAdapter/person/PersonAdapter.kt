@@ -2,6 +2,7 @@ package com.example.movieappazi.ui.zAdapter.person
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -26,17 +27,16 @@ class PersonAdapter(
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ObjectViewHolder =
-        ObjectViewHolder(
-            LayoutInflater.from(parent.context).inflate(
-                R.layout.object_item_portrait, parent, false
-            )
-        )
+        ObjectViewHolder(LayoutInflater.from(parent.context)
+            .inflate(R.layout.object_item_portrait, parent, false))
 
     override fun onBindViewHolder(holder: ObjectViewHolder, position: Int) {
         holder.bindPerson(person = personsList[position])
         holder.view.setOnClickListener {
             listener.onItemClick(item = personsList[position])
         }
+        holder.itemMovie.startAnimation(AnimationUtils.loadAnimation(holder.itemView.context,
+            R.anim.anim_for_recyclerview))
     }
 
     override fun getItemCount() = personsList.size

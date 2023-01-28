@@ -63,4 +63,38 @@
     <color name="one_to_two">#FF3300</color>
     <color name="zero_to_one">#FF0000</color>
     <color name="zero">#808080</color>
+
+    <color name="primary">#F2B833</color>
+    <color name="backGround">#1F2123</color>
+    <color name="backGroundAd">#0E1011</color>
+    <color name="mainText">#FFFFFFFF</color>
+    <color name="textAd">#BABABA</color>
+
+
+
+    <color name="fg">#0E141B</color>
+    <color name="bg">#141d26</color>
+    <color name="box">#886944</color>
+    <color name="bold_text">#BFAE99</color>
+    <color name="text">#F2E6D0</color>
+    <color name="black_light">#191919</color>
+
+
+    <color name="transparent">#BE886944</color>
+    <color name="blue_transparent">#0E141B</color>
+
+    <color name="divider">#6F6B6B</color>
+    <color name="divider_2">#858585</color>
+    <color name="text_primary">#E6E6E6</color>
+    <color name="text_secondary">#B3B3B3</color>
+    <color name="dark_gray">#262626</color>
+    <color name="ripple">#E5E5E5</color>
+    <!--    red: E50914,  orange: F84107, yellow: FF9800-->
+    <color name="black_transparent">#B2000000</color>
+    <color name="black_transparent_1">#66000000</color>
+    <color name="black_transparent_light">#7E000000</color>
+
+    //Shimmer Background
+    <color name="shimmer_background">#dddddd</color>
+
 </resources>

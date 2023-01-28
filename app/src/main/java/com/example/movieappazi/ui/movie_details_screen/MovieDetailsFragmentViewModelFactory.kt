@@ -3,14 +3,19 @@ package com.example.movieappazi.ui.movie_details_screen
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.data.network.cloud.base.ResourceProvider
+import com.example.data.network.retrofit.api.movie.MovieApi
 import com.example.domain.assistant.DispatchersProvider
 import com.example.domain.base.BaseMapper
+import com.example.domain.domainModels.movie.CreditsResponseDomain
 import com.example.domain.domainModels.movie.MovieDetailsDomain
+import com.example.domain.domainModels.movie.MovieDomain
 import com.example.domain.domainModels.movie.MoviesDomain
 import com.example.domain.domainModels.person.PersonDetailsDomain
 import com.example.domain.domainRepositories.network.movie.MovieRepositories
-import com.example.domain.iteractors.movie_iteractors.get_movie_actors_details_usecase.GetMovieActorsDetailsUseCase
+import com.example.domain.domainRepositories.storage.MovieStorageRepository
+import com.example.movieappazi.uiModels.movie.CreditsResponseUi
 import com.example.movieappazi.uiModels.movie.MovieDetailsUi
+import com.example.movieappazi.uiModels.movie.MovieUi
 import com.example.movieappazi.uiModels.movie.MoviesUi
 import com.example.movieappazi.uiModels.person.PersonDetailsUi
 import dagger.assisted.Assisted
@@ -25,25 +30,28 @@ class MovieDetailsFragmentViewModelFactory @AssistedInject constructor(
     @Assisted(ACTORS_IDS_KEY) private val actorsIds: List<Int>,
     private val movieRepository: MovieRepositories,
     private val mapMovieDetails: BaseMapper<MovieDetailsDomain, MovieDetailsUi>,
-    private val mapMovieResponse: BaseMapper<MoviesDomain, MoviesUi>,
-    private val mapPersons: BaseMapper<List<PersonDetailsDomain>, List<PersonDetailsUi>>,
     private val dispatchersProvider: DispatchersProvider,
     private val resourceProvider: ResourceProvider,
-    private val getMovieActorsDetailsUseCase: GetMovieActorsDetailsUseCase,
-
-    ) : ViewModelProvider.Factory {
+    private val mapFromUiToDomain: BaseMapper<MovieUi, MovieDomain>,
+    private val saveMovieRepository: MovieStorageRepository,
+    private val mapCreditsResponseDomain: BaseMapper<CreditsResponseDomain, CreditsResponseUi>,
+    private val mapMovieResponse: BaseMapper<MoviesDomain, MoviesUi>,
+) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         require(modelClass == MovieDetailsFragmentViewModel::class.java)
         return MovieDetailsFragmentViewModel(movieId = movieId,
             actorsIds = actorsIds,
+            mapCreditsResponseDomain = mapCreditsResponseDomain,
             movieRepository = movieRepository,
             mapMovieDetails = mapMovieDetails,
-            mapMovieResponse = mapMovieResponse,
             dispatchersProvider = dispatchersProvider,
             resourceProvider = resourceProvider,
-            mapPersons = mapPersons,
-            getMovieActorsDetailsUseCase = getMovieActorsDetailsUseCase
+//            mapPersons = mapPersons,
+            saveMovieRepository = saveMovieRepository,
+            mapFromUiToDomain = mapFromUiToDomain,
+            mapMovieResponse = mapMovieResponse
+
         ) as T
     }
 

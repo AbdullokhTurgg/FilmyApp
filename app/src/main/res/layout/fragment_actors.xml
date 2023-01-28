@@ -4,21 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@color/backGround"
     tools:context=".ui.actors_screen.ActorsFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/person_rv"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:spanCount="3"
-        tools:listitem="@layout/object_item_portrait"
-        app:layout_constraintTop_toTopOf="parent" />
 
+<!--    <com.facebook.shimmer.ShimmerFrameLayout-->
+<!--        android:id="@+id/shimmer_layout_for_person"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintRight_toRightOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        tools:visibility="visible">-->
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+<!--        <include layout="@layout/shimmer_for_actors" />-->
+<!--    </com.facebook.shimmer.ShimmerFrameLayout>-->
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/person_rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:visibility="visible"
+            app:layout_constraintTop_toTopOf="parent"
+            app:spanCount="3"
+            tools:listitem="@layout/object_item_portrait" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 

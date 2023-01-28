@@ -8,6 +8,7 @@ import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.data.network.retrofit.utils.Utils
 import com.example.movieappazi.R
+import com.example.movieappazi.uiModels.movie.CastUi
 import com.example.movieappazi.uiModels.movie.MovieUi
 import com.example.movieappazi.uiModels.person.PersonDetailsUi
 import com.example.movieappazi.uiModels.person.PersonUi
@@ -27,8 +28,8 @@ class ObjectViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         bind(person.profile_path, person.popularity)
     }
 
-    fun bindPersonDetails(person: PersonDetailsUi) {
-        bind(person.profile_path, person.popularity)
+    fun bindActors(person: CastUi) {
+        bind(person.profilePath, person.popularity)
     }
 
     private fun bind(posterPath: String?, popularity: Double) {

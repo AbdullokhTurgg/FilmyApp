@@ -10,6 +10,8 @@ class MapFromMoviesCloudToData(
     private val mapFromMovieCloudToData: BaseMapper<List<MovieCloud>, List<MovieData>>,
 ) : BaseMapper<MoviesCloud, MoviesData> {
     override fun map(from: MoviesCloud) = from.run {
-        MoviesData(page = page, movies = mapFromMovieCloudToData.map(movies), totalPage = totalPage)
+        MoviesData(page = page,
+            movies = mapFromMovieCloudToData.map(movies),
+            totalPage = totalPage,)
     }
 }

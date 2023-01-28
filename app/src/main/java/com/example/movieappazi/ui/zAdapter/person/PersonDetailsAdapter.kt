@@ -8,6 +8,7 @@ import com.example.movieappazi.R
 import com.example.movieappazi.ui.zAdapter.movie.adapter_for_popular.MovieItemAdapter
 import com.example.movieappazi.ui.zAdapter.movie.diffcallbacks.PersonDetailsListDiffCallback
 import com.example.movieappazi.ui.zAdapter.movie.view_holders.ObjectViewHolder
+import com.example.movieappazi.uiModels.movie.CastUi
 import com.example.movieappazi.uiModels.person.PersonDetailsUi
 
 class PersonDetailsAdapter(
@@ -15,7 +16,7 @@ class PersonDetailsAdapter(
     private val objectViewType: Int,
 ) : RecyclerView.Adapter<ObjectViewHolder>() {
 
-    var personsList = emptyList<PersonDetailsUi>()
+    var personsList = emptyList<CastUi>()
         set(value) {
             val callback = PersonDetailsListDiffCallback(value, personsList)
             val diffResult = DiffUtil.calculateDiff(callback)
@@ -39,7 +40,7 @@ class PersonDetailsAdapter(
             MovieItemAdapter.HORIZONTAL_TYPE -> R.layout.object_item_horizontal
             else -> throw RuntimeException("Unknown view type: $viewType")
         }
-        val view = LayoutInflater.from(parent.context).inflate(layout, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.object_item_portrait, parent, false)
         return ObjectViewHolder(view)
     }
 
@@ -47,13 +48,13 @@ class PersonDetailsAdapter(
         holder.view.setOnClickListener {
             listener.onPersonItemClick(personsList[position])
         }
-        holder.bindPersonDetails(personsList[position])
+        holder.bindActors(personsList[position])
     }
 
 
     override fun getItemCount(): Int = personsList.size
 
     interface RvClickListener {
-        fun onPersonItemClick(person: PersonDetailsUi)
+        fun onPersonItemClick(person: CastUi)
     }
 }

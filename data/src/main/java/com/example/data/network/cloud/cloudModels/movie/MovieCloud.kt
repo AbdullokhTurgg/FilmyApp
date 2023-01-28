@@ -18,4 +18,7 @@ data class MovieCloud(
     @SerializedName("video") val video: Boolean,
     @SerializedName("vote_average") val rating: Double,
     @SerializedName("genre_ids") val genre_ids: List<Int>,
+    val runtime: String,
+    val credits: MovieCloud?,
+    val cast: List<MovieCloud>,
 )

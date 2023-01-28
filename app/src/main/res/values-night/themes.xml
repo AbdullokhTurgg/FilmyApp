@@ -2,18 +2,36 @@
     <!-- Base application theme. -->
     <style name="Theme.MovieAppAzi" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/white</item>
-        <item name="colorPrimaryVariant">#030303</item>
-        <item name="colorOnPrimary">@color/black</item>
-        <item name="android:backgroundTint">@color/black</item>
-        <item name="toolbarStyle">@color/black</item>
-        <item name="actionBarItemBackground">@color/black</item>
+        <item name="colorPrimary">@color/red</item>
+        <item name="colorPrimaryVariant">@color/black</item>
+        <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="colorSecondary">@color/white</item>
+        <item name="colorSecondaryVariant">@color/red</item>
+        <item name="colorOnSecondary">@color/white</item>
         <!-- Customize your theme here. -->
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowBackground">@color/black</item>
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialog</item>
+        <item name="android:popupMenuStyle">@style/PopupMenu</item>
+        <item name="android:navigationBarColor">@color/black</item>
+
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="BottomNavigationTheme" parent="Theme.AppCompat.Light">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="android:textColorSecondary">@color/white</item>
+    </style>
+
+    <style name="CircularDeterminateProgressBar">
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:progressDrawable">@drawable/circle_progress</item>
+    </style>
+
+    <style name="titleAppBar" parent="Theme.MovieAppAzi">
+        <!-- Customize your theme here. -->
+        <item name="android:textSize">20sp</item>
+        <item name="fontFamily">@font/aclonica</item>
     </style>
 </resources>

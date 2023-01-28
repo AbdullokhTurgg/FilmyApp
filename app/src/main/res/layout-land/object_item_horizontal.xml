@@ -1,66 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="130dp"
-    android:layout_height="180dp"
-    android:layout_margin="4dp"
-    android:backgroundTint="@color/gold"
-    app:cardCornerRadius="10dp"
-    app:cardElevation="6dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="14dp"
+    android:clickable="true"
+    android:background="@color/backGround"
     tools:ignore="MissingDefaultResource">
 
+
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="2dp"
-        app:cardCornerRadius="10dp">
+        android:id="@+id/card_img"
+        android:layout_width="105dp"
+        android:layout_height="105dp"
+        android:layout_centerHorizontal="true"
+        android:elevation="12dp"
+        app:cardCornerRadius="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ImageView
+            android:id="@+id/image"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:id="@+id/posterImage"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop" />
-
-            <com.vaibhavlakhera.circularprogressview.CircularProgressView
-                android:id="@+id/progressView"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
-                app:animate="true"
-                app:animateDuration="800"
-                app:fillColor="@color/darkBlue"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:progressColor="@color/green"
-                app:progressInterpolator="@android:anim/accelerate_decelerate_interpolator"
-                app:progressTextColor="@color/white"
-                app:progressTextEnabled="true"
-                app:progressTextSize="8sp"
-                app:progressTextType="percent"
-                app:progressValue="0"
-                app:progressWidth="5dp"
-                app:startAngle="270"
-                app:totalColor="@color/darkBlue"
-                app:totalValue="100"
-                app:totalWidth="8dp" />
-
-            <ImageView
-                android:id="@+id/like"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="10dp"
-                app:layout_constraintBottom_toBottomOf="@+id/progressView"
-                app:layout_constraintStart_toStartOf="@+id/posterImage"
-                app:layout_constraintTop_toTopOf="@+id/progressView"
-                app:srcCompat="@drawable/ic_like_star" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
+            android:layout_height="105dp"
+            android:contentDescription="cast_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars[0]" />
     </androidx.cardview.widget.CardView>
-</androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:alpha=".8"
+        android:textColor="@color/white"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:lines="2"
+        android:paddingTop="5dp"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toLeftOf="@id/card_img"
+        app:layout_constraintRight_toRightOf="@id/card_img"
+        app:layout_constraintTop_toBottomOf="@id/card_img"
+        tools:text="Name" />
+</androidx.constraintlayout.widget.ConstraintLayout>

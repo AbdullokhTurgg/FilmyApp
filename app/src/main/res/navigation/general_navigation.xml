@@ -13,8 +13,8 @@
         <action
             android:id="@+id/action_allMoviesFragment_to_movieDetailsFragment"
             app:destination="@id/movieDetailsFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:popEnterAnim="@anim/slide_in_left" />
+            app:enterAnim="@anim/slide_in_left"
+            app:popEnterAnim="@anim/slide_out_left" />
         <action
             android:id="@+id/action_allMoviesFragment_to_actorsFragment"
             app:destination="@id/nav_person" />
@@ -23,45 +23,34 @@
             app:destination="@id/nav_storage" />
         <action
             android:id="@+id/action_nav_movies_to_movieDetailsFragment"
-            app:destination="@id/movieDetailsFragment" />
+            app:destination="@id/movieDetailsFragment"
+            app:enterAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left" />
+
         <action
-            android:id="@+id/action_nav_movies_to_allPopularMoviesFragment"
-            app:destination="@id/allPopularMoviesFragment"
-            app:enterAnim="@anim/slide_in_left"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_right"
-            app:popExitAnim="@anim/slide_out_right" />
+            android:id="@+id/action_nav_movies_to_movieDetailsFragment2"
+            app:destination="@id/movieDetailsFragment"
+            app:enterAnim="@anim/slide_out_left" />
         <action
-            android:id="@+id/action_nav_movies_to_allNowPlayingFragment"
-            app:destination="@id/allNowPlayingFragment"
-            app:enterAnim="@anim/slide_in_left"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_right"
-            app:popExitAnim="@anim/slide_out_right" />
-        <action
-            android:id="@+id/action_nav_movies_to_allTopRatedMoviesFragment"
-            app:destination="@id/allTopRatedMoviesFragment"
-            app:enterAnim="@anim/slide_in_left"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_right"
-            app:popExitAnim="@anim/slide_out_right" />
-        <action
-            android:id="@+id/action_nav_movies_to_allTopRatedMoviesFragment2"
-            app:destination="@id/allTopRatedMoviesFragment" />
-        <action
-            android:id="@+id/action_nav_movies_to_allUpcomingFragment"
-            app:destination="@id/allUpcomingFragment" />
+            android:id="@+id/action_nav_movies_to_seeAllMoviesFragment"
+            app:destination="@id/seeAllMoviesFragment" />
     </fragment>
     <fragment
         android:id="@+id/nav_person"
         android:name="com.example.movieappazi.ui.actors_screen.ActorsFragment"
         android:label="Actors"
-        tools:layout="@layout/fragment_actors" />
+        tools:layout="@layout/fragment_actors">
+        <action
+            android:id="@+id/action_nav_person_to_actorsDetailsFragment"
+            app:destination="@id/actorsDetailsFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:popEnterAnim="@anim/slide_in_left" />
+    </fragment>
     <fragment
         android:id="@+id/movieDetailsFragment"
         android:name="com.example.movieappazi.ui.movie_details_screen.MovieDetailsFragment"
         android:label="fragment_movie_details"
-        tools:layout="@layout/fragment_movie_details" >
+        tools:layout="@layout/fragment_movie_details">
         <argument
             android:name="movie"
             app:argType="com.example.movieappazi.uiModels.movie.MovieUi" />
@@ -69,65 +58,69 @@
             android:id="@+id/action_movieDetailsFragment_self"
             app:destination="@id/movieDetailsFragment"
             app:enterAnim="@anim/slide_in_left"
-            app:exitAnim="@anim/anim_for_recyclerview"
-            app:popEnterAnim="@anim/slide_out_left"
-            app:popExitAnim="@anim/slide_out_left" />
+            app:popEnterAnim="@anim/slide_out_left" />
+        <action
+            android:id="@+id/action_movieDetailsFragment_to_actorsDetailsFragment"
+            app:destination="@id/actorsDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/nav_storage"
         android:name="com.example.movieappazi.ui.storage_movies_screen.StorageMoviesFragment"
         android:label="Favourites"
         tools:layout="@layout/fragment_storage_movies" />
+
     <fragment
-        android:id="@+id/allPopularMoviesFragment"
-        android:name="com.example.movieappazi.ui.all_popular_screen.AllPopularMoviesFragment"
-        android:label="fragment_all_popular_movies"
-        tools:layout="@layout/fragment_all_popular_movies" >
+        android:id="@+id/splashScreenFragment2"
+        android:name="com.example.movieappazi.ui.splash_screen.SplashScreenFragment"
+        android:label="fragment_splash_screen"
+        tools:layout="@layout/fragment_splash_screen">
         <action
-            android:id="@+id/action_allPopularMoviesFragment_to_movieDetailsFragment"
-            app:destination="@id/movieDetailsFragment"
-            app:enterAnim="@anim/slide_in_left"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_right"
-            app:popExitAnim="@anim/slide_out_right" />
+            android:id="@+id/action_splashScreenFragment2_to_nav_movies"
+            app:destination="@id/nav_movies"
+            app:enterAnim="@anim/slide_out_left" />
     </fragment>
     <fragment
-        android:id="@+id/allNowPlayingFragment"
-        android:name="com.example.movieappazi.ui.all_nowplaying_screen.AllNowPlayingFragment"
-        android:label="fragment_all_now_playing"
-        tools:layout="@layout/fragment_all_now_playing" >
-        <action
-            android:id="@+id/action_allNowPlayingFragment_to_movieDetailsFragment"
-            app:destination="@id/movieDetailsFragment"
-            app:enterAnim="@anim/slide_in_left"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_right"
-            app:popExitAnim="@anim/slide_out_left" />
+        android:id="@+id/actorsDetailsFragment"
+        android:name="com.example.movieappazi.ui.actors_details_screen.ActorsDetailsFragment"
+        android:label="fragment_actors_details"
+        tools:layout="@layout/fragment_actors_details">
+        <argument
+            android:name="person"
+            app:argType="com.example.movieappazi.uiModels.person.PersonUi" />
     </fragment>
     <fragment
-        android:id="@+id/allTopRatedMoviesFragment"
-        android:name="com.example.movieappazi.ui.all_toprated_screen.AllTopRatedMoviesFragment"
+        android:id="@+id/nav_search"
+        android:name="com.example.movieappazi.ui.search_movies_screen.SearchMoviesFragment"
+        android:label="SearchMoviesFragment">
+        <action
+            android:id="@+id/action_nav_search_to_movieDetailsFragment"
+            app:destination="@id/movieDetailsFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:popEnterAnim="@anim/slide_out_left" />
+    </fragment>
+
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        <argument
+            android:name="name"
+            app:argType="string"
+            app:nullable="true" />
+    <fragment
+        android:id="@+id/seeAllMoviesFragment"
+        android:name="com.example.movieappazi.ui.see_all_movies_screen.SeeAllMoviesFragment"
         android:label="fragment_all_top_rated_movies"
         tools:layout="@layout/fragment_all_top_rated_movies" >
+        <argument
+            android:name="type"
+            app:argType="com.example.movieappazi.ui.see_all_movies_screen.MovieType" />
         <action
-            android:id="@+id/action_allTopRatedMoviesFragment_to_movieDetailsFragment"
-            app:destination="@id/movieDetailsFragment"
-            app:enterAnim="@anim/slide_in_left"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_right"
-            app:popExitAnim="@anim/slide_out_right" />
+            android:id="@+id/action_seeAllMoviesFragment_to_movieDetailsFragment"
+            app:destination="@id/movieDetailsFragment" />
     </fragment>
     <fragment
-        android:id="@+id/allUpcomingFragment"
-        android:name="com.example.movieappazi.ui.all_upcoming_screen.AllUpcomingFragment"
-        android:label="fragment_all_upcoming"
-        tools:layout="@layout/fragment_all_upcoming" >
-        <action
-            android:id="@+id/action_allUpcomingFragment_to_movieDetailsFragment"
-            app:destination="@id/movieDetailsFragment"
-            app:enterAnim="@anim/slide_in_left"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_right"
-            app:popExitAnim="@anim/slide_out_right" />
-    </fragment>
+        android:id="@+id/fragmentRoot"
+        android:name="com.example.movieappazi.ui.root_fragment.FragmentRoot"
+        android:label="fragment_root"
+        tools:layout="@layout/fragment_root" />
 </navigation>

@@ -1,5 +1,7 @@
 package com.example.data.network.cloud.handler
 
+import com.example.domain.assistant.Resource
+import com.example.data.network.cloud.cloudModels.movie.MoviesCloud
 import com.example.domain.assistant.DispatchersProvider
 import com.example.domain.base.BaseMapper
 import com.example.domain.state.DataRequestState

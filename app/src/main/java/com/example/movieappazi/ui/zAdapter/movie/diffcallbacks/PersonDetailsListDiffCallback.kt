@@ -1,12 +1,13 @@
 package com.example.movieappazi.ui.zAdapter.movie.diffcallbacks
 
 import androidx.recyclerview.widget.DiffUtil
+import com.example.movieappazi.uiModels.movie.CastUi
 import com.example.movieappazi.uiModels.person.PersonDetailsUi
 import com.example.movieappazi.uiModels.person.PersonUi
 
 class PersonDetailsListDiffCallback(
-    private val oldList: List<PersonDetailsUi>,
-    private val newList: List<PersonDetailsUi>,
+    private val oldList: List<CastUi>,
+    private val newList: List<CastUi>,
 ) : DiffUtil.Callback() {
     override fun getOldListSize() = oldList.size
 

@@ -1,27 +1,44 @@
 package com.example.movieappazi.ui.all_movies_screen
 
+import android.annotation.SuppressLint
+import android.content.Context
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.appcompat.widget.AppCompatRatingBar
+import androidx.core.content.ContentProviderCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import com.example.data.network.retrofit.utils.Utils
+import com.example.movieappazi.R
 import com.example.movieappazi.databinding.FragmentAllMoviesBinding
-import com.example.movieappazi.ui.all_nowplaying_screen.AllNowPlayingFragmentDirections
+import com.example.movieappazi.extensions.makeToast
+import com.example.movieappazi.ui.root_fragment.StudentViewPagerAdapter
+import com.example.movieappazi.ui.see_all_movies_screen.MovieType
 import com.example.movieappazi.ui.zAdapter.movie.adapter_for_popular.MovieItemAdapter
-import com.example.movieappazi.ui.zAdapter.movie.adapter_for_pubat.PublishedAtMoviesAdapter
-import com.example.movieappazi.ui.zAdapter.movie.adapter_for_toprated.TopRatedMoviesAdapter
-import com.example.movieappazi.ui.zAdapter.movie.adapter_for_upcoming.UpcomingMoviesAdapter
 import com.example.movieappazi.ui.zAdapter.movie.listener_for_adapters.RvClickListener
 import com.example.movieappazi.uiModels.movie.MovieUi
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
+import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.alert_item_for_movie_det.*
+import kotlinx.android.synthetic.main.fragment_all_movies.*
+import kotlinx.android.synthetic.main.fragment_root.*
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.supervisorScope
 
 @AndroidEntryPoint
-class AllMoviesFragment(
-) : Fragment(), RvClickListener<MovieUi> {
+class AllMoviesFragment : Fragment(), RvClickListener<MovieUi> {
 
     private val binding by lazy {
         FragmentAllMoviesBinding.inflate(layoutInflater)
@@ -31,14 +48,17 @@ class AllMoviesFragment(
     private val popularAdapter: MovieItemAdapter by lazy {
         MovieItemAdapter(MovieItemAdapter.PORTRAIT_TYPE, this)
     }
-    private val upcomingAdapter: UpcomingMoviesAdapter by lazy {
-        UpcomingMoviesAdapter(objectViewType = UpcomingMoviesAdapter.PORTRAIT_TYPE, this)
+
+    private val upcomingAdapter: MovieItemAdapter by lazy {
+        MovieItemAdapter(objectViewType = MovieItemAdapter.PORTRAIT_TYPE, this)
     }
-    private val publishedAtAdapter: PublishedAtMoviesAdapter by lazy {
-        PublishedAtMoviesAdapter(objectViewType = UpcomingMoviesAdapter.PORTRAIT_TYPE, this)
+
+    private val publishedAtAdapter: MovieItemAdapter by lazy {
+        MovieItemAdapter(objectViewType = MovieItemAdapter.PORTRAIT_TYPE, this)
     }
-    private val ratingAdapter: TopRatedMoviesAdapter by lazy {
-        TopRatedMoviesAdapter(objectViewType = TopRatedMoviesAdapter.PORTRAIT_TYPE, this)
+
+    private val ratingAdapter: MovieItemAdapter by lazy {
+        MovieItemAdapter(objectViewType = MovieItemAdapter.PORTRAIT_TYPE, this)
     }
 
     override fun onCreateView(
@@ -58,13 +78,14 @@ class AllMoviesFragment(
         observeRelevancyMovies()
         observePublishedAtMovies()
         observeRatingMovies()
+
     }
 
     private fun setAdapterToRv() {
-        binding.moviesRv.adapter = popularAdapter
-        binding.relevancyMoviesRv.adapter = upcomingAdapter
-        binding.pubatMoviesRv.adapter = publishedAtAdapter
-        binding.ratingMoviesRv.adapter = ratingAdapter
+        binding.popularMovieRecViewMoviesFragment.adapter = popularAdapter
+        binding.upcomingMovieRecViewMoviesFragment.adapter = upcomingAdapter
+        binding.nowPlayingMovieRecViewMoviesFragment.adapter = publishedAtAdapter
+        binding.topRatedMovieRecViewMoviesFragment.adapter = ratingAdapter
     }
 
     private fun observeRatingMovies() {
@@ -87,6 +108,8 @@ class AllMoviesFragment(
         lifecycleScope.launchWhenResumed {
             viewModel.popularMovies.collectLatest {
                 popularAdapter.submitList(it.movies)
+                binding.allConst.visibility = View.VISIBLE
+                binding.shimmerLayout.visibility = View.GONE
             }
         }
     }
@@ -97,29 +120,66 @@ class AllMoviesFragment(
                 upcomingAdapter.submitList(it.movies)
             }
         }
+
     }
 
-    private fun setupClickers() {
-        binding.seeAllTvForPopular.setOnClickListener {
-            findNavController().navigate(AllMoviesFragmentDirections.actionNavMoviesToAllPopularMoviesFragment())
+    private fun setupClickers() = with(binding) {
+        popular_MovieSeeAll_movieFrag.setOnClickListener {
+
+            launchToSeeAllFragment(MovieType.POPULAR)
         }
-        binding.seeAllTvForRelevancy.setOnClickListener {
-            findNavController().navigate(AllMoviesFragmentDirections.actionNavMoviesToAllNowPlayingFragment())
+        topRated_MovieSeeAll_movieFrag.setOnClickListener {
+            launchToSeeAllFragment(MovieType.TOP_RATED)
         }
-        binding.seeAllTvForPubat.setOnClickListener {
-            findNavController().navigate(AllMoviesFragmentDirections.actionNavMoviesToAllTopRatedMoviesFragment())
+        now_playing_MovieSeeAll_movieFrag.setOnClickListener {
+            launchToSeeAllFragment(MovieType.NOW_PLAYING)
         }
-        binding.seeAllTvForRating.setOnClickListener {
-            findNavController().navigate(AllMoviesFragmentDirections.actionNavMoviesToAllUpcomingFragment())
+        upcoming_MovieSeeAll_movieFrag.setOnClickListener {
+            launchToSeeAllFragment(MovieType.UPCOMING)
         }
     }
 
-    override fun onItemClick(item: MovieUi) {
+    private fun launchToSeeAllFragment(type: MovieType) {
+        findNavController().navigate(AllMoviesFragmentDirections.actionNavMoviesToSeeAllMoviesFragment(
+            type))
+    }
+
+    @SuppressLint("CutPasteId")
+    fun openDialogSheet(item: MovieUi) {
+        val bottomSheet = BottomSheetDialog(requireContext())
+        bottomSheet.setContentView(R.layout.alert_item_for_movie_det)
+        val movieImage = bottomSheet.findViewById<ImageView>(R.id.profile_picture)
+        val movieDes = bottomSheet.findViewById<TextView>(R.id.overview_text)
+        val movieMore = bottomSheet.findViewById<MaterialButton>(R.id.play_button)
+        val movieTitle = bottomSheet.findViewById<TextView>(R.id.name)
+        val cancelBtn = bottomSheet.findViewById<ImageView>(R.id.close_btn)
+        val rel = bottomSheet.findViewById<TextView>(R.id.releaseDate)
+        val prof_img = bottomSheet.findViewById<ImageView>(R.id.profile_picture)
+        val vote = bottomSheet.findViewById<AppCompatRatingBar>(R.id.voteAverage_item)
+        cancelBtn?.setOnClickListener { bottomSheet.dismiss() }
+        Picasso.get().load(Utils.POSTER_PATH_URL + item.backdropPath).into(movieImage)
+        movieDes?.text = item.overview
+        movieTitle?.text = item.title
+        rel?.text = item.releaseDate
+        vote?.rating = item.voteCount.toFloat()
+        Picasso.get().load(Utils.POSTER_PATH_URL + item.posterPath).into(prof_img)
+        movieMore?.setOnClickListener {
+            findNavController().navigate(AllMoviesFragmentDirections.actionAllMoviesFragmentToMovieDetailsFragment(
+                item))
+            bottomSheet.dismiss()
+        }
+        bottomSheet.setCancelable(true)
+        bottomSheet.show()
+
     }
 
     override fun onLongClick(item: MovieUi) {
-        findNavController().navigate(AllMoviesFragmentDirections.actionAllMoviesFragmentToMovieDetailsFragment(
-            item))
+        openDialogSheet(item)
+    }
+
+    override fun onItemClick(item: MovieUi) {
+        viewModel.saveMovie(item)
+        makeToast("${item.title} saved successfully", requireContext())
     }
 }
 

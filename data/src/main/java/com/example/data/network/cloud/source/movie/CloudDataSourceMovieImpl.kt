@@ -1,13 +1,15 @@
 package com.example.data.network.cloud.source.movie
 
+import com.example.data.dataModel.movie.CreditsResponseData
 import com.example.data.dataModel.movie.MovieDetailsData
 import com.example.data.dataModel.movie.MoviesData
 import com.example.data.network.cloud.cloudModels.movie.MovieDetailsCloud
 import com.example.data.network.cloud.cloudModels.movie.MoviesCloud
+import com.example.data.network.cloud.cloudModels.movie.movie_category.CreditsResponseCloud
+import com.example.data.network.cloud.handler.ResponseHandler
 import com.example.data.network.retrofit.api.movie.MovieApi
 import com.example.domain.assistant.DispatchersProvider
 import com.example.domain.base.BaseMapper
-import com.example.data.network.cloud.handler.ResponseHandler
 import com.example.domain.state.DataRequestState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -18,6 +20,7 @@ class CloudDataSourceMovieImpl(
     private val api: MovieApi,
     private val mapFromMoviesCloudToData: BaseMapper<MoviesCloud, MoviesData>,
     private val mapFromDetailsCloudToData: BaseMapper<MovieDetailsCloud, MovieDetailsData>,
+    private val mapCreditsResponseCloudToData: BaseMapper<CreditsResponseCloud, CreditsResponseData>,
     private val dispatchersProvider: DispatchersProvider,
     private val responseHandler: ResponseHandler,
 ) : CloudDataSourceMovie {
@@ -64,6 +67,10 @@ class CloudDataSourceMovieImpl(
         it.body()!!
     }.map(mapFromMoviesCloudToData::map).flowOn(dispatchersProvider.default())
 
+//    override suspend fun getCategories(): MoviesData =
+//        mapFromMoviesCloudToData.map(api.getCategories())
+
+
     override suspend fun getMovieDetails(
         movieId: Int,
     ): DataRequestState<MovieDetailsData> =
@@ -77,10 +84,24 @@ class CloudDataSourceMovieImpl(
         it.body()!!
     }.map(mapFromMoviesCloudToData::map).flowOn(dispatchersProvider.default())
 
+
     override fun deleteRateFromMovie(movieId: Int): Flow<MoviesData> = flow {
         emit(api.deleteMovieRate(movieId = movieId))
     }.flowOn(dispatchersProvider.io()).map {
         it.body()!!
     }.map(mapFromMoviesCloudToData::map).flowOn(dispatchersProvider.default())
+
+
+    override suspend fun getCategories(): MoviesData =
+        mapFromMoviesCloudToData.map(api.getCategories())
+
+
+    override suspend fun getCategoryDetail(id: Int): MoviesData =
+        mapFromMoviesCloudToData.map(api.getCategoryDetail(id = id))
+
+    override suspend fun getActors(movieId: Int): DataRequestState<CreditsResponseData> =
+        responseHandler.safeApiMapperCall(mapCreditsResponseCloudToData) {
+            api.getMovieCredits(movieId = movieId)
+        }
 
 }

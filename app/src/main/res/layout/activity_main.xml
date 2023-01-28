@@ -4,83 +4,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layoutDescription="@xml/activity_main_scene"
-    tools:context=".MainActivity">
+    android:background="@color/backGround"
+    app:layoutDescription="@xml/activity_main_scene">
 
-    <!--    <androidx.cardview.widget.CardView-->
-    <!--        android:id="@+id/cardView2"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginBottom="12dp"-->
-    <!--        android:foregroundGravity="center"-->
-    <!--        app:cardCornerRadius="8dp"-->
-    <!--        app:layout_constraintBottom_toTopOf="@+id/guideline4"-->
+    <!--    <androidx.viewpager2.widget.ViewPager2-->
+    <!--        android:id="@+id/view_pager"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="350dp"-->
+    <!--        android:paddingStart="80dp"-->
+    <!--        android:paddingEnd="80dp"-->
     <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent">-->
-
-    <!--        <SearchView-->
-    <!--            android:id="@+id/searchView"-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="match_parent"-->
-    <!--            android:iconifiedByDefault="false"-->
-    <!--            android:paddingStart="24dp"-->
-    <!--            android:queryHint="Search for the main news"-->
-    <!--            tools:ignore="RtlSymmetry" />-->
-    <!--    </androidx.cardview.widget.CardView>-->
-
-    <!--    <androidx.constraintlayout.widget.Guideline-->
-    <!--        android:id="@+id/guideline4"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:orientation="horizontal"-->
-    <!--        app:layout_constraintGuide_percent="0.1" />-->
-
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/view_pager"
-        android:layout_width="0dp"
-        android:layout_height="350dp"
-        android:paddingStart="80dp"
-        android:paddingEnd="80dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+    <!--        app:layout_constraintHorizontal_bias="0.5"-->
+    <!--        app:layout_constraintStart_toStartOf="parent" />-->
 
 
-    <androidx.fragment.app.FragmentContainerView
+    <fragment
         android:id="@+id/fragmentContainer"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:defaultNavHost="true"
-        app:layout_constraintBottom_toTopOf="@+id/bottomAppBar"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavMenu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:navGraph="@navigation/general_navigation" />
+        app:navGraph="@navigation/general_navigation"
+        />
 
-    <com.google.android.material.bottomappbar.BottomAppBar
-        android:id="@+id/bottomAppBar"
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavMenu"
+        style="@style/BottomNavigationTheme"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:gravity="bottom"
-        app:fabCradleMargin="10dp"
-        app:fabCradleRoundedCornerRadius="10dp"
-        app:fabCradleVerticalOffset="10dp"
+        android:layout_height="70dp"
+        android:background="@drawable/bottom_nav_bg"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="BottomAppBar,MissingConstraints">
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/nav_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginRight="16dp"
-            android:background="@drawable/transperent_background"
-            app:menu="@menu/bottom_nav" />
-    </com.google.android.material.bottomappbar.BottomAppBar>
+        app:menu="@menu/bottom_nav" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,10 +1,7 @@
 package com.example.movieappazi.di
 
 import com.example.data.dataMappers.*
-import com.example.data.dataModel.movie.MovieData
-import com.example.data.dataModel.movie.MovieDetailsData
-import com.example.data.dataModel.movie.MovieGenresData
-import com.example.data.dataModel.movie.MoviesData
+import com.example.data.dataModel.movie.*
 import com.example.data.dataModel.person.PersonData
 import com.example.data.dataModel.person.PersonDetailsData
 import com.example.data.dataModel.person.PersonsData
@@ -18,6 +15,8 @@ import com.example.data.network.cloud.cloudModels.movie.MovieCloud
 import com.example.data.network.cloud.cloudModels.movie.MovieDetailsCloud
 import com.example.data.network.cloud.cloudModels.movie.MovieGenresCloud
 import com.example.data.network.cloud.cloudModels.movie.MoviesCloud
+import com.example.data.network.cloud.cloudModels.movie.movie_category.CastCloud
+import com.example.data.network.cloud.cloudModels.movie.movie_category.CreditsResponseCloud
 import com.example.data.network.cloud.cloudModels.person.PersonCloud
 import com.example.data.network.cloud.cloudModels.person.PersonDetailsCloud
 import com.example.data.network.cloud.cloudModels.person.PersonsCloud
@@ -25,18 +24,13 @@ import com.example.data.storage.mappers.MapFromMovieDataToStorage
 import com.example.data.storage.mappers.MapFromMovieStorageToData
 import com.example.data.storage.model.MovieStorage
 import com.example.domain.base.BaseMapper
-import com.example.domain.domainModels.movie.MovieDetailsDomain
-import com.example.domain.domainModels.movie.MovieDomain
-import com.example.domain.domainModels.movie.MovieGenresDomain
-import com.example.domain.domainModels.movie.MoviesDomain
+import com.example.domain.domainModels.movie.*
 import com.example.domain.domainModels.person.PersonDetailsDomain
 import com.example.domain.domainModels.person.PersonDomain
 import com.example.domain.domainModels.person.PersonsDomain
+import com.example.movieappazi.exception.HandleExeption
 import com.example.movieappazi.uiMappers.*
-import com.example.movieappazi.uiModels.movie.MovieDetailsUi
-import com.example.movieappazi.uiModels.movie.MovieGenresUi
-import com.example.movieappazi.uiModels.movie.MovieUi
-import com.example.movieappazi.uiModels.movie.MoviesUi
+import com.example.movieappazi.uiModels.movie.*
 import com.example.movieappazi.uiModels.person.PersonDetailsUi
 import com.example.movieappazi.uiModels.person.PersonUi
 import com.example.movieappazi.uiModels.person.PersonsUi
@@ -240,4 +234,42 @@ class MapperModule {
         mapFromPersonDomainToUi: BaseMapper<PersonDomain, PersonUi>,
     ): BaseMapper<List<PersonDomain>, List<PersonUi>> =
         MapFromListPersonDomainToUi(mapFromPersonDomainToUi = mapFromPersonDomainToUi)
+
+
+    @Provides
+    fun provideMapCreditsResponseCloudToData(mapper: BaseMapper<List<CastCloud>, List<CastData>>): BaseMapper<CreditsResponseCloud, CreditsResponseData> =
+        MapCreditsResponseCloudToData(mapper = mapper)
+
+    @Provides
+    fun provideMapListCastCloudToData(mapper: BaseMapper<CastCloud, CastData>): BaseMapper<List<CastCloud>, List<CastData>> =
+        MapListCastCloudToData(mapper = mapper)
+
+    @Provides
+    fun provideMapCastCloudToData(): BaseMapper<CastCloud, CastData> = MapCastCloudToData()
+
+    @Provides
+    fun provideCreditsResponseDataToDomain(mapper: BaseMapper<List<CastData>, List<CastDomain>>): BaseMapper<CreditsResponseData, CreditsResponseDomain> =
+        MapCreditsResponseDataToDomain(mapper = mapper)
+
+    @Provides
+    fun provideMapListCastDataToDomain(mapper: BaseMapper<CastData, CastDomain>): BaseMapper<List<CastData>, List<CastDomain>> =
+        MapListCastDataToDomain(mapper = mapper)
+
+    @Provides
+    fun provideMapCastDataToDomain(): BaseMapper<CastData, CastDomain> = MapCastDataToDomain()
+
+    @Provides
+    fun provideMapCreditsResponseDataToDomain(mapper: BaseMapper<List<CastDomain>, List<CastUi>>): BaseMapper<CreditsResponseDomain, CreditsResponseUi> =
+        MapCreditsResponseDomainToUi(mapper = mapper)
+
+    @Provides
+    fun provideMapListCastDomainToUi(mapper: BaseMapper<CastDomain, CastUi>): BaseMapper<List<CastDomain>, List<CastUi>> =
+        MapListCastDomainToUi(mapper = mapper)
+
+    @Provides
+    fun provideMapCastDomainToUi(): BaseMapper<CastDomain, CastUi> = MapCastDomainToUi()
+
+    @Provides
+    fun provideHandlerException(): HandleExeption = HandleExeption.Base()
+
 }

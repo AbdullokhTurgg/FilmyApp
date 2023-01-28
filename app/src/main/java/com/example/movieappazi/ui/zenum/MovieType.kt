@@ -1,8 +1,9 @@
 package com.example.movieappazi.ui.zenum
 
-enum class MovieType {
-    POPULAR,
-    TOP_RATED,
-    NOW_PLAYING,
-    UPCOMING,
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+enum class MovieType : Parcelable {
+    POPULAR, TOP_RATED, NOW_PLAYING, UPCOMING,
 }

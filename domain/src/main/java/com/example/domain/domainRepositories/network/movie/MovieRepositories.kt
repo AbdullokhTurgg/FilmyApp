@@ -1,5 +1,7 @@
 package com.example.domain.domainRepositories.network.movie
 
+import com.example.domain.assistant.Resource
+import com.example.domain.domainModels.movie.CreditsResponseDomain
 import com.example.domain.domainModels.movie.MovieDetailsDomain
 import com.example.domain.domainModels.movie.MoviesDomain
 import com.example.domain.state.DataRequestState
@@ -14,5 +16,9 @@ interface MovieRepositories {
     suspend fun searchMovie(query: String?): DataRequestState<MoviesDomain>
     fun getSimilarMovies(movieId: Int): Flow<MoviesDomain>
     fun getRecommendMovies(movieId: Int): Flow<MoviesDomain>
-   suspend fun getMovieDetails(movieId: Int): DataRequestState<MovieDetailsDomain>
+    suspend fun getMovieDetails(movieId: Int): DataRequestState<MovieDetailsDomain>
+    suspend fun getCategories(): MoviesDomain
+    suspend fun getCategoryDetail(id: Int): MoviesDomain
+    suspend fun getActors(movieId: Int): DataRequestState<CreditsResponseDomain>
+
 }

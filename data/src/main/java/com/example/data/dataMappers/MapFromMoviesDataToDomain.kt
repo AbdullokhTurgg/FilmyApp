@@ -16,5 +16,4 @@ class MapFromMoviesDataToDomain(
             totalPage = totalPage,
         )
     }
-
 }

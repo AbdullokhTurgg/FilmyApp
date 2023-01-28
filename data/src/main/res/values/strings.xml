@@ -18,5 +18,11 @@
     <string name="now_playing_category">На экранах</string>
     <string name="upcoming_category">Ожидаются</string>
 
+    <string name="network_error1">There is no internet connection</string>
+    <string name="generic_error1">Something went wrong</string>
+    <string name="service_unavailable1">Server Error</string>
+    <string name="account_already1">Account already exists for this username</string>
+    <string name="invalid_email_password1">Invalid username/password</string>
+
 
 </resources>

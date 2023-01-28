@@ -1,6 +1,7 @@
 package com.example.movieappazi.di
 
 import android.content.Context
+import com.example.data.dataModel.movie.CreditsResponseData
 import com.example.data.dataModel.movie.MovieData
 import com.example.data.dataModel.movie.MovieDetailsData
 import com.example.data.dataModel.movie.MoviesData
@@ -17,7 +18,9 @@ import com.example.data.network.cloud.source.person.CloudDataSourcePerson
 import com.example.data.network.cloud.source.video.CloudDataSourceVideo
 import com.example.data.storage.source.MovieStorageDataSource
 import com.example.domain.assistant.DispatchersProvider
+import com.example.domain.assistant.Resource
 import com.example.domain.base.BaseMapper
+import com.example.domain.domainModels.movie.CreditsResponseDomain
 import com.example.domain.domainModels.movie.MovieDetailsDomain
 import com.example.domain.domainModels.movie.MovieDomain
 import com.example.domain.domainModels.movie.MoviesDomain
@@ -31,7 +34,6 @@ import com.example.domain.domainRepositories.storage.MovieStorageRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
@@ -45,12 +47,17 @@ class RepositoryModule {
     fun provideMovieRepository(
         dispatchersProvider: DispatchersProvider,
         cloudDataSourceMovie: CloudDataSourceMovie,
-        mapFromMoviesDataToDomain: BaseMapper<MoviesData, MoviesDomain>,
+        mapCreditsResponseData: BaseMapper<CreditsResponseData, CreditsResponseDomain>,
         mapFromDetailsCloudToData: BaseMapper<MovieDetailsData, MovieDetailsDomain>,
-    ): MovieRepositories = MovieRepositoriesImpl(cloudDataSourceMovie = cloudDataSourceMovie,
+        mapFromMoviesDataToDomain: BaseMapper<MoviesData, MoviesDomain>,
+    ): MovieRepositories = MovieRepositoriesImpl(
+        cloudDataSourceMovie = cloudDataSourceMovie,
         mapFromMoviesDataToDomain = mapFromMoviesDataToDomain,
         mapFromDetailsCloudToData = mapFromDetailsCloudToData,
-        dispatchersProvider = dispatchersProvider)
+        dispatchersProvider = dispatchersProvider,
+        mapCreditsResponseData = mapCreditsResponseData,
+
+        )
 
     @Provides
     @Singleton
@@ -92,4 +99,5 @@ class RepositoryModule {
     fun provideResourceProvider(
         @ApplicationContext context: Context,
     ): ResourceProvider = ResourceProvider.Base(context = context)
+
 }
