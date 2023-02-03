@@ -20,15 +20,13 @@ import com.example.data.network.cloud.cloudModels.movie.movie_category.CreditsRe
 import com.example.data.network.cloud.cloudModels.person.PersonCloud
 import com.example.data.network.cloud.cloudModels.person.PersonDetailsCloud
 import com.example.data.network.cloud.cloudModels.person.PersonsCloud
-import com.example.data.storage.mappers.MapFromMovieDataToStorage
-import com.example.data.storage.mappers.MapFromMovieStorageToData
-import com.example.data.storage.model.MovieStorage
+import com.example.data.storage.mappers.*
+import com.example.data.storage.model.movie.MovieStorage
 import com.example.domain.base.BaseMapper
 import com.example.domain.domainModels.movie.*
 import com.example.domain.domainModels.person.PersonDetailsDomain
 import com.example.domain.domainModels.person.PersonDomain
 import com.example.domain.domainModels.person.PersonsDomain
-import com.example.movieappazi.exception.HandleExeption
 import com.example.movieappazi.uiMappers.*
 import com.example.movieappazi.uiModels.movie.*
 import com.example.movieappazi.uiModels.person.PersonDetailsUi
@@ -269,7 +267,22 @@ class MapperModule {
     @Provides
     fun provideMapCastDomainToUi(): BaseMapper<CastDomain, CastUi> = MapCastDomainToUi()
 
+//    @Provides
+//    fun provideMapFromListPersonStorageToData(
+//        mapFromPersonStorageToData: BaseMapper<PersonStorage, PersonDetailsData>,
+//    ): BaseMapper<List<PersonStorage>, List<PersonDetailsData>> =
+//        MapFromListPersonStorageToData(mapFromPersonStorageToData = mapFromPersonStorageToData)
+//
+//    @Provides
+//    fun provideMapperFromPersonStorageToData(): BaseMapper<PersonStorage, PersonDetailsData> =
+//        MapFromPersonStorageToData()
+//
+//    @Provides
+//    fun provideMapperFromPersonDetailsDataToStorage(): BaseMapper<PersonDetailsData, PersonStorage> =
+//        MapFromPersonDetailsDataToStorage()
+
     @Provides
-    fun provideHandlerException(): HandleExeption = HandleExeption.Base()
+    fun provideMapperFromPersonDetailsDomainToData(): BaseMapper<PersonDetailsDomain, PersonDetailsData> =
+        MapFromPersonDetailsDomainToData()
 
 }

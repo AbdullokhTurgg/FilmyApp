@@ -10,11 +10,15 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.movieappazi.databinding.FragmentAllTopRatedMoviesBinding
+import com.example.movieappazi.R
+import com.example.movieappazi.databinding.FragmentSeeMoreBinding
+import com.example.movieappazi.extensions.hideView
 import com.example.movieappazi.extensions.makeToast
+import com.example.movieappazi.base.BaseFragment
 import com.example.movieappazi.ui.zAdapter.movie.adapter_for_popular.MovieItemAdapter
 import com.example.movieappazi.ui.zAdapter.movie.listener_for_adapters.RvClickListener
 import com.example.movieappazi.uiModels.movie.MovieUi
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.parcel.Parcelize
 import kotlinx.coroutines.flow.collectLatest
@@ -25,11 +29,11 @@ enum class MovieType : Parcelable {
 }
 
 @AndroidEntryPoint
-class SeeAllMoviesFragment : Fragment(), RvClickListener<MovieUi> {
+class SeeAllMoviesFragment :
+    BaseFragment<FragmentSeeMoreBinding, SeeAllMoviesFragmentViewModel>(FragmentSeeMoreBinding::inflate),
+    RvClickListener<MovieUi> {
+    override fun onReady(savedInstanceState: Bundle?) {}
 
-    private val binding by lazy {
-        FragmentAllTopRatedMoviesBinding.inflate(layoutInflater)
-    }
     private val args by navArgs<SeeAllMoviesFragmentArgs>()
     private val ratingAdapter: MovieItemAdapter by lazy {
         MovieItemAdapter(MovieItemAdapter.PORTRAIT_TYPE, this)
@@ -43,37 +47,30 @@ class SeeAllMoviesFragment : Fragment(), RvClickListener<MovieUi> {
     private val nowPlayingAdapter: MovieItemAdapter by lazy {
         MovieItemAdapter(MovieItemAdapter.PORTRAIT_TYPE, this)
     }
-    private val viewModel: SeeAllMoviesFragmentViewModel by viewModels()
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View {
-        return binding.root
-    }
-
+    override val viewModel: SeeAllMoviesFragmentViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavMenu2).hideView()
         setupTypes()
     }
 
-    private fun setupTypes() {
+    private fun setupTypes() = with(requireBinding()) {
         when (args.type) {
             MovieType.TOP_RATED -> {
-                binding.allTopratedRv.adapter = ratingAdapter
+                allTopratedRv.adapter = ratingAdapter
                 observeRatingsMovie()
             }
             MovieType.UPCOMING -> {
-                binding.allTopratedRv.adapter = upcomingAdapter
+                allTopratedRv.adapter = upcomingAdapter
                 observeUpcomingMovies()
             }
             MovieType.POPULAR -> {
-                binding.allTopratedRv.adapter = popularAdapter
+                allTopratedRv.adapter = popularAdapter
                 observePopularMovies()
             }
             MovieType.NOW_PLAYING -> {
-                binding.allTopratedRv.adapter = nowPlayingAdapter
+                allTopratedRv.adapter = nowPlayingAdapter
                 observeNowPlayingMovies()
             }
         }
@@ -117,7 +114,8 @@ class SeeAllMoviesFragment : Fragment(), RvClickListener<MovieUi> {
     }
 
     override fun onLongClick(item: MovieUi) {
-        findNavController().navigate(SeeAllMoviesFragmentDirections.actionSeeAllMoviesFragmentToMovieDetailsFragment(
-            item))
+        viewModel.goMovieDetailsFragment(item)
     }
+
+
 }

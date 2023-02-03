@@ -39,15 +39,16 @@
     <!--    </style>-->
 
     <style name="MovieDetailsTextStyle.Italic" parent="MovieDetailsTextStyle">
-        <item name="android:textStyle">italic</item>
+        <item name="fontFamily">@font/baloo</item>
     </style>
 
     <style name="MovieDetailsTextStyle" parent="Widget.MaterialComponents.TextView">
         <item name="android:textSize">@dimen/movieDetailsTextSize</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/gold</item>
+        <item name="android:layout_marginStart">@dimen/_12sdp</item>
+        <item name="android:textColor">@color/shimmer_background</item>
         <item name="android:layout_width">0dp</item>
-        <item name="fontFamily">monospace</item>
+        <item name="fontFamily">@font/actor</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 
@@ -68,7 +69,7 @@
     </style>
 
     <style name="PrevBtnStyle" parent="Widget.MaterialComponents.Button">
-        <item name="rippleColor">@color/gold</item>
+        <item name="rippleColor">@color/zero_to_one</item>
         <item name="shapeAppearance">@style/ShapeAppearancePrevBtn</item>
         <item name="android:textStyle">bold</item>
         <item name="android:layout_width">wrap_content</item>
@@ -112,9 +113,16 @@
         <item name="fontFamily">@font/aclonica</item>
         <item name="android:textColor">@color/blueClearColor</item>
     </style>
+    <style name="StartDetailsTv">
+        <item name="android:fontFamily">@font/bowlby_one</item>
+        <item name="android:textSize">@dimen/_24sdp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
 
     <style name="BottomNavigationTheme" parent="Theme.AppCompat.Light">
-        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimary">@color/zero_to_one</item>
         <item name="android:textColorSecondary">@color/white</item>
     </style>
 

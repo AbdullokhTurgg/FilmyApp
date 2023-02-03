@@ -1,54 +1,55 @@
 package com.example.movieappazi.ui.movie_details_screen
 
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.example.data.network.retrofit.utils.Utils
 import com.example.domain.state.DataRequestState
 import com.example.movieappazi.R
 import com.example.movieappazi.databinding.FragmentMovieDetailsBinding
+import com.example.movieappazi.extensions.hideView
 import com.example.movieappazi.extensions.makeToast
+import com.example.movieappazi.base.BaseFragment
 import com.example.movieappazi.ui.zAdapter.movie.adapter_for_popular.MovieItemAdapter
 import com.example.movieappazi.ui.zAdapter.movie.listener_for_adapters.RvClickListener
 import com.example.movieappazi.ui.zAdapter.person.PersonDetailsAdapter
 import com.example.movieappazi.uiModels.movie.CastUi
 import com.example.movieappazi.uiModels.movie.MovieDetailsUi
 import com.example.movieappazi.uiModels.movie.MovieUi
+import com.example.movieappazi.utils.blur_effect.BlurTransformation
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_movie_details.*
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
+@OptIn(ExperimentalCoroutinesApi::class)
+@DelicateCoroutinesApi
 @AndroidEntryPoint
-class MovieDetailsFragment : Fragment(), RvClickListener<MovieUi>,
+class MovieDetailsFragment :
+    BaseFragment<FragmentMovieDetailsBinding, MovieDetailsFragmentViewModel>(
+        FragmentMovieDetailsBinding::inflate), RvClickListener<MovieUi>,
     PersonDetailsAdapter.RvClickListener {
 
-    private val binding: FragmentMovieDetailsBinding by lazy {
-        FragmentMovieDetailsBinding.inflate(layoutInflater)
-    }
-
     private val movieId: Int by lazy {
-        MovieDetailsFragmentArgs.fromBundle(requireArguments()).movie.id
+        MovieDetailsFragmentArgs.fromBundle(requireArguments()).movie.id!!
     }
     private val actorsIds: List<Int> by lazy {
-        MovieDetailsFragmentArgs.fromBundle(requireArguments()).movie.genre_ids
+        MovieDetailsFragmentArgs.fromBundle(requireArguments()).movie.genre_ids!!
     }
-    private var isFavorite = false
 
     @Inject
     lateinit var viewModelFactory: MovieDetailsFragmentViewModelFactory.Factory
 
-    private val viewModel by viewModels<MovieDetailsFragmentViewModel> {
+    @OptIn(ExperimentalCoroutinesApi::class)
+    override val viewModel by viewModels<MovieDetailsFragmentViewModel> {
         viewModelFactory.create(movieId = movieId, actorsIds = actorsIds)
     }
 
@@ -61,43 +62,57 @@ class MovieDetailsFragment : Fragment(), RvClickListener<MovieUi>,
     }
 
     private val personAdapter: PersonDetailsAdapter by lazy {
-        PersonDetailsAdapter(this@MovieDetailsFragment, PersonDetailsAdapter.PORTRAIT_TYPE)
+        PersonDetailsAdapter(this@MovieDetailsFragment)
     }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View {
-        // Inflate the layout for this fragment
-        return binding.root
+    private val moviee: MovieUi by lazy(LazyThreadSafetyMode.NONE) {
+        MovieDetailsFragmentArgs.fromBundle(requireArguments()).movie
     }
+    private var isFavorite = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavMenu2).hideView()
 
+        setupClickers()
         setAdaptersToRv()
         observeMovieDetails()
-        observeRecommended()
-//        observePerson()
+//        observeRecommended()
         observeSimilarMovies()
 
+//        viewModel.setMovieId(movieId)
+//        viewModel.isFavorite.observe(viewLifecycleOwner) { boolean -> isFavorite = boolean }
+//        g()
 
-//
+
     }
 
-    private fun setAdaptersToRv() = with(binding) {
-        recommendMoviesRv.adapter = recommendMoviesAdapter
+    fun g() = with(requireBinding()) {
+        likeClick.setOnClickListener {
+            if (isFavorite) {
+                isFavorite = false
+                likeClick.setImageResource(R.drawable.ic_save)
+                viewModel.deleteMovieFromRv(movieId = movieId)
+            } else {
+                isFavorite = true
+                likeClick.setImageResource(R.drawable.ic_bookmark)
+                viewModel.saveMovieFromRv(movieUi = moviee)
+            }
+        }
+    }
+
+    private fun setAdaptersToRv() = with(requireBinding()) {
+//        recommendMoviesRv.adapter = recommendMoviesAdapter
         similarMoviesRv.adapter = similarMoviesAdapter
         actorsRv.adapter = personAdapter
     }
 
-    private fun observeRecommended() {
-        lifecycleScope.launchWhenResumed {
-            viewModel.recommendMoviesFlow.collectLatest {
-                recommendMoviesAdapter.submitList(it.movies)
-            }
-        }
-    }
+//    private fun observeRecommended() {
+//        lifecycleScope.launchWhenResumed {
+//            viewModel.recommendMoviesFlow.collectLatest {
+//                recommendMoviesAdapter.submitList(it.movies)
+//            }
+//        }
+//    }
 
     private fun observeSimilarMovies() {
         lifecycleScope.launchWhenStarted {
@@ -107,13 +122,15 @@ class MovieDetailsFragment : Fragment(), RvClickListener<MovieUi>,
         }
     }
 
-//    private fun observePerson() {
-//        lifecycleScope.launchWhenStarted {
-//            viewModel.castFLow.collectLatest {
-//                personAdapter.personsList = it
-//            }
-//        }
-//    }
+    private fun setupClickers() = with(requireBinding()) {
+        backClick.setOnClickListener {
+            viewModel.goBack()
+        }
+        likeClick.setOnClickListener {
+            viewModel.saveMovieFromRv(moviee)
+            makeToast("${moviee.title} Saved", requireContext())
+        }
+    }
 
     private fun observeMovieDetails() {
         lifecycleScope.launchWhenStarted {
@@ -146,38 +163,23 @@ class MovieDetailsFragment : Fragment(), RvClickListener<MovieUi>,
         }
     }
 
-    private fun setupClicker(item: MovieUi) {
-        binding.likeClick.setOnClickListener {
-            if (isFavorite) {
-                isFavorite = false
-                binding.likeClick.setImageResource(R.drawable.ic_add)
-                makeToast("Movie Saved", requireContext())
-                viewModel.deleteMovieFromRv(movieId = movieId)
-                makeToast("Movie deleted", requireContext())
-            } else {
-                isFavorite = true
-                binding.likeClick.setImageResource(R.drawable.ic_delete)
-                viewModel.saveMovieFromRv(movieUi = item)
-            }
-        }
-    }
 
     private fun setMovieUi(movie: MovieDetailsUi) {
-        with(binding) {
-            if (isFavorite) likeClick.setImageResource(R.drawable.ic_add)
-            else likeClick.setImageResource(R.drawable.ic_delete)
+        with(requireBinding()) {
+            tvRating.text = moviee.rating.toString()
+            voteTv.text = movie.voteCount.toString()
+            languageTv.text = movie.originalLanguage
             topTitle.text = movie.title
             title.text = movie.title
             popularity.text = movie.popularity.toString()
-            voteCount.text = movie.voteCount.toString()
             budget.text = movie.budget.toString()
             voteAverage.rating = movie.voteAverage.toFloat()
-            originalLanguage.text = movie.originalLanguage
-            originalTitle.text = movie.originalTitle
             releaseDate.text = movie.releaseDate
             status.text = movie.status
             overview.text = movie.overview
-            Picasso.get().load(Utils.POSTER_PATH_URL + movie.backdrop_path).into(top_main_image)
+            Glide.with(requireContext()).asBitmap()
+                .load(Utils.POSTER_PATH_URL + movie.posterPath) // or url
+                .transform(BlurTransformation(requireContext())).into(top_main_image)
             Picasso.get().load(Utils.POSTER_PATH_URL + movie.posterPath).into(poster_image)
         }
     }
@@ -192,5 +194,10 @@ class MovieDetailsFragment : Fragment(), RvClickListener<MovieUi>,
             item))
     }
 
-    override fun onPersonItemClick(person: CastUi) = Unit
+    override fun onPersonItemClick(person: CastUi) {
+//        findNavController().navigate(MovieDetailsFragmentDirections.actionMovieDetailsFragmentToActorsDetailsFragment())
+    }
+
+
+    override fun onReady(savedInstanceState: Bundle?) {}
 }

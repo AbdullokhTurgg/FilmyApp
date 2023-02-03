@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/general_navigation"
-    app:startDestination="@id/nav_movies">
+    app:startDestination="@id/splashScreenFragment2">
 
     <fragment
         android:id="@+id/nav_movies"
@@ -13,7 +13,8 @@
         <action
             android:id="@+id/action_allMoviesFragment_to_movieDetailsFragment"
             app:destination="@id/movieDetailsFragment"
-            app:enterAnim="@anim/slide_in_left"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@anim/slide_out_left" />
         <action
             android:id="@+id/action_allMoviesFragment_to_actorsFragment"
@@ -30,10 +31,17 @@
         <action
             android:id="@+id/action_nav_movies_to_movieDetailsFragment2"
             app:destination="@id/movieDetailsFragment"
-            app:enterAnim="@anim/slide_out_left" />
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@anim/exit_anim"
+            app:popExitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_nav_movies_to_seeAllMoviesFragment"
-            app:destination="@id/seeAllMoviesFragment" />
+            app:destination="@id/seeAllMoviesFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/nav_person"
@@ -43,8 +51,10 @@
         <action
             android:id="@+id/action_nav_person_to_actorsDetailsFragment"
             app:destination="@id/actorsDetailsFragment"
-            app:enterAnim="@android:anim/slide_in_left"
-            app:popEnterAnim="@anim/slide_in_left" />
+            app:enterAnim="@anim/exit_anim"
+            app:exitAnim="@anim/open_anim"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/movieDetailsFragment"
@@ -57,8 +67,12 @@
         <action
             android:id="@+id/action_movieDetailsFragment_self"
             app:destination="@id/movieDetailsFragment"
-            app:enterAnim="@anim/slide_in_left"
-            app:popEnterAnim="@anim/slide_out_left" />
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/exit_anim"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"
+            app:popUpTo="@id/movieDetailsFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_movieDetailsFragment_to_actorsDetailsFragment"
             app:destination="@id/actorsDetailsFragment" />
@@ -67,7 +81,15 @@
         android:id="@+id/nav_storage"
         android:name="com.example.movieappazi.ui.storage_movies_screen.StorageMoviesFragment"
         android:label="Favourites"
-        tools:layout="@layout/fragment_storage_movies" />
+        tools:layout="@layout/fragment_storage_movies" >
+        <action
+            android:id="@+id/action_nav_storage_to_movieDetailsFragment"
+            app:destination="@id/movieDetailsFragment"
+            app:enterAnim="@anim/exit_anim"
+            app:exitAnim="@anim/open_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
 
     <fragment
         android:id="@+id/splashScreenFragment2"
@@ -77,7 +99,10 @@
         <action
             android:id="@+id/action_splashScreenFragment2_to_nav_movies"
             app:destination="@id/nav_movies"
-            app:enterAnim="@anim/slide_out_left" />
+            app:enterAnim="@anim/slide_in_left"
+            app:popEnterAnim="@anim/nav_default_exit_anim"
+            app:popUpTo="@id/splashScreenFragment2"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/actorsDetailsFragment"
@@ -94,9 +119,7 @@
         android:label="SearchMoviesFragment">
         <action
             android:id="@+id/action_nav_search_to_movieDetailsFragment"
-            app:destination="@id/movieDetailsFragment"
-            app:enterAnim="@anim/slide_in_left"
-            app:popEnterAnim="@anim/slide_out_left" />
+            app:destination="@id/movieDetailsFragment" />
     </fragment>
 
         <argument
@@ -110,17 +133,16 @@
         android:id="@+id/seeAllMoviesFragment"
         android:name="com.example.movieappazi.ui.see_all_movies_screen.SeeAllMoviesFragment"
         android:label="fragment_all_top_rated_movies"
-        tools:layout="@layout/fragment_all_top_rated_movies" >
+        tools:layout="@layout/fragment_see_more" >
         <argument
             android:name="type"
             app:argType="com.example.movieappazi.ui.see_all_movies_screen.MovieType" />
         <action
             android:id="@+id/action_seeAllMoviesFragment_to_movieDetailsFragment"
-            app:destination="@id/movieDetailsFragment" />
+            app:destination="@id/movieDetailsFragment"
+            app:enterAnim="@anim/exit_anim"
+            app:exitAnim="@anim/open_anim"
+            app:popEnterAnim="@anim/exit_anim"
+            app:popExitAnim="@anim/open_anim" />
     </fragment>
-    <fragment
-        android:id="@+id/fragmentRoot"
-        android:name="com.example.movieappazi.ui.root_fragment.FragmentRoot"
-        android:label="fragment_root"
-        tools:layout="@layout/fragment_root" />
 </navigation>

@@ -1,7 +1,7 @@
 package com.example.data.domainRepositoryImpl.storage
 
 import com.example.data.dataModel.movie.MovieData
-import com.example.data.storage.source.MovieStorageDataSource
+import com.example.data.storage.source.movie.MovieStorageDataSource
 import com.example.domain.base.BaseMapper
 import com.example.domain.domainModels.movie.MovieDomain
 import com.example.domain.domainRepositories.storage.MovieStorageRepository
@@ -25,4 +25,8 @@ class MovieStorageRepositoryImpl(
         dataSourceStorage.getAllMoviesFromDatabase().map { movies ->
             movies.map(mapFromMovieDataToDomain::map)
         }
+
+    override suspend fun getSavedMovies(id: Int): MovieDomain =
+        mapFromMovieDataToDomain.map(dataSourceStorage.getFavouriteMovie(id))
+
 }

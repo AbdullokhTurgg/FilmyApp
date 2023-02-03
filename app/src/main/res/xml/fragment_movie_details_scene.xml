@@ -1,48 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<MotionScene 
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:motion="http://schemas.android.com/apk/res-auto">
 
 
     <Transition
         motion:constraintSetEnd="@+id/end"
         motion:constraintSetStart="@id/start"
-        motion:duration="1000"
-        motion:motionInterpolator="linear">
+        motion:duration="1000">
 
         <OnSwipe
             motion:dragDirection="dragUp"
-            motion:touchAnchorId="@+id/nestedScrollView2"
+            motion:dragScale="1"
+            motion:maxAcceleration="10"
+            motion:touchAnchorId="@+id/card_view"
             motion:touchAnchorSide="top" />
 
         <KeyFrameSet>
-
             <KeyAttribute
-                android:alpha="0.0"
+                android:alpha="0"
                 motion:framePosition="0"
-                motion:motionTarget="@+id/top_title_constraint">
-                <CustomAttribute
-                    motion:attributeName="textSize"
-                    motion:customDimension="20sp" />
-            </KeyAttribute>
-
+                motion:motionTarget="@+id/top_title_constraint" />
             <KeyAttribute
-                android:alpha="1.0"
-                motion:framePosition="80"
-                motion:motionTarget="@+id/top_title_constraint">
-                <CustomAttribute
-                    motion:attributeName="textSize"
-                    motion:customDimension="16sp" />
-            </KeyAttribute>
-
+                android:alpha="0"
+                motion:framePosition="93"
+                motion:motionTarget="@+id/top_title_constraint" />
+            <KeyAttribute
+                android:alpha="1"
+                motion:framePosition="94"
+                motion:motionTarget="@+id/top_title_constraint" />
+            <KeyAttribute
+                android:alpha="1"
+                motion:framePosition="100"
+                motion:motionTarget="@+id/top_title_constraint" />
         </KeyFrameSet>
-
     </Transition>
 
     <ConstraintSet android:id="@+id/start">
 
         <Constraint
-            android:id="@+id/nestedScrollView2"
+            android:id="@+id/card_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             motion:layout_constraintBottom_toBottomOf="parent"
@@ -52,7 +48,7 @@
         <Constraint
             android:id="@+id/top_main_image"
             android:layout_width="match_parent"
-            android:layout_height="240dp"
+            android:layout_height="@dimen/_500sdp"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toTopOf="parent">
@@ -61,16 +57,30 @@
 
         <Constraint
             android:id="@+id/posterImageCard"
-            android:layout_width="0dp"
-            android:layout_height="200dp"
-            motion:layout_constraintBottom_toBottomOf="@id/top_main_image"
-            motion:layout_constraintStart_toStartOf="@id/top_title_constraint"
-            motion:layout_constraintTop_toBottomOf="@+id/top_main_image"
+            android:layout_width="@dimen/_170sdp"
+            android:layout_height="@dimen/_240sdp"
+            motion:layout_constraintBottom_toBottomOf="@+id/top_main_image"
             motion:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="60dp"
-            motion:layout_constraintEnd_toStartOf="@id/toolBarGuidline">
+            motion:layout_constraintStart_toStartOf="@+id/top_main_image"
+            motion:layout_constraintTop_toBottomOf="@+id/top_title_constraint"
+            motion:layout_editor_absoluteX="121dp">
             <PropertySet android:visibility="visible" />
         </Constraint>
+        <Constraint
+            android:id="@+id/card_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@+id/posterImageCard" />
+        <Constraint
+            android:layout_height="?android:attr/actionBarSize"
+            motion:layout_constraintEnd_toStartOf="@id/likeClick"
+            motion:layout_constraintStart_toEndOf="@+id/backClick"
+            motion:layout_constraintTop_toTopOf="parent"
+            android:layout_width="0dp"
+            android:id="@+id/top_title_constraint" />
 
 
     </ConstraintSet>
@@ -78,13 +88,15 @@
     <ConstraintSet android:id="@+id/end">
 
         <Constraint
-            android:id="@+id/nestedScrollView2"
+            android:id="@+id/card_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:elevation="0dp"
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toBottomOf="@+id/top_main_image" />
+            motion:layout_constraintTop_toBottomOf="@+id/top_main_image" >
+        </Constraint>
 
         <Constraint
             android:id="@+id/top_main_image"
@@ -98,13 +110,24 @@
 
         <Constraint
             android:id="@id/posterImageCard"
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:rotation="0"
-            motion:layout_constraintEnd_toStartOf="parent"
-            motion:layout_constraintTop_toTopOf="parent">
+            android:layout_width="@dimen/_200sdp"
+            android:layout_height="200dp"
+            android:layout_marginBottom="0dp"
+            android:rotation="1"
+            motion:layout_constraintBottom_toTopOf="@+id/top_main_image"
+            motion:layout_constraintEnd_toEndOf="@+id/top_title_constraint"
+            motion:layout_constraintStart_toStartOf="@+id/top_title_constraint"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_editor_absoluteX="192dp">
             <PropertySet android:visibility="gone" />
         </Constraint>
+        <Constraint
+            android:id="@+id/likeClick"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="4dp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintTop_toTopOf="@+id/top_main_image" />
 
     </ConstraintSet>
 </MotionScene>

@@ -28,7 +28,7 @@ class PersonsItemDiffCallBack : DiffUtil.ItemCallback<PersonUi>() {
         oldItem == newItem
 }
 
-    class PersonDiffCallback(
+class PersonDiffCallback(
     private val oldList: List<PersonUi>,
     private val newList: List<PersonUi>,
 ) : DiffUtil.Callback() {

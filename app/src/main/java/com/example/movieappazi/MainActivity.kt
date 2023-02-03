@@ -18,6 +18,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        binding.bottomNavMenu.setupWithNavController(findNavController(R.id.fragmentContainer))
+        binding.bottomNavMenu2.setupWithNavController(findNavController(R.id.fragmentContainer))
     }
 }

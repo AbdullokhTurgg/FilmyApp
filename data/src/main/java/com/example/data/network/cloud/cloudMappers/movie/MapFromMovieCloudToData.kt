@@ -25,7 +25,7 @@ class MapFromMovieCloudToData(
             voteCount = voteCount,
             video = video,
             rating = rating,
-            genre_ids = genre_ids.map { id -> id },
+            genre_ids = genre_ids?.map { id -> id },
         )
     }
 }

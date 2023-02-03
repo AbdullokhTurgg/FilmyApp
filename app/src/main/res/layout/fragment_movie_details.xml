@@ -2,30 +2,23 @@
 <androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/motion"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backGround"
     app:layoutDescription="@xml/fragment_movie_details_scene"
     tools:context=".ui.movie_details_screen.MovieDetailsFragment">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/toolBarGuidline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/posterImageCard"
-        android:layout_width="0dp"
-        android:layout_height="200dp"
-        android:layout_marginEnd="20dp"
+        android:layout_width="@dimen/_170sdp"
+        android:layout_height="@dimen/_240sdp"
+        android:layout_marginHorizontal="@dimen/_100sdp"
         app:cardCornerRadius="20dp"
         app:cardElevation="10dp"
-        app:layout_constraintBottom_toBottomOf="@id/top_main_image"
-        app:layout_constraintEnd_toStartOf="@id/toolBarGuidline"
-        app:layout_constraintStart_toStartOf="@id/top_title_constraint"
-        app:layout_constraintTop_toBottomOf="@id/top_main_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:strokeColor="@color/zero_to_one"
         app:strokeWidth="1dp">
 
@@ -33,25 +26,28 @@
             android:id="@+id/poster_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop" />
-    </com.google.android.material.card.MaterialCardView>
+            android:scaleType="centerCrop"
+            tools:layout_editor_absoluteX="151dp"
+            tools:layout_editor_absoluteY="146dp" />
 
+    </com.google.android.material.card.MaterialCardView>
 
     <ImageView
         android:id="@+id/top_main_image"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@color/backGround"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_450sdp"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/top_title_constraint"
         android:layout_width="0dp"
         android:layout_height="?android:attr/actionBarSize"
-        android:layout_marginStart="12dp"
+        android:layout_marginHorizontal="@dimen/_8sdp"
+        android:layout_marginStart="@dimen/_22sdp"
         app:layout_constraintEnd_toStartOf="@id/likeClick"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -60,9 +56,11 @@
             android:id="@+id/top_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_18sdp"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
             android:fontFamily="@font/aclonica"
+            android:maxLines="1"
             android:textColor="@color/white"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -79,22 +77,33 @@
         android:layout_height="40dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="4dp"
-        android:src="@drawable/ic_add"
+        android:src="@drawable/ic_save"
         app:layout_constraintEnd_toEndOf="@+id/top_main_image"
         app:layout_constraintTop_toTopOf="@+id/top_main_image" />
 
+    <ImageView
+        android:id="@+id/backClick"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        android:src="@drawable/ic_arrow_left_3"
+        app:layout_constraintTop_toTopOf="@+id/top_main_image" />
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/nestedScrollView2"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="@dimen/_50sdp"
-        android:background="@drawable/bsd_bg"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:background="@color/backGround"
+        android:backgroundTint="@color/backGround"
+        android:elevation="@dimen/_50sdp"
+        app:cardCornerRadius="@dimen/_50sdp"
+        android:layout_marginBottom="-30dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/posterImageCard">
+        app:layout_constraintTop_toBottomOf="@+id/posterImageCard"
+        tools:layout_editor_absoluteX="20dp">
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/genConstraint"
@@ -119,71 +128,123 @@
                     app:layout_constraintGuide_percent="0.5" />
 
                 <TextView
-                    android:id="@+id/movieTitle"
-                    style="@style/MovieDetailsTextStyle"
-                    android:layout_marginStart="2dp"
-                    android:layout_marginTop="@dimen/movieDetailsTextMarginTop"
-                    android:layout_marginEnd="2dp"
-                    android:text="Название:"
+                    android:id="@+id/tv_rating"
+                    style="@style/StartDetailsTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginHorizontal="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_30sdp"
+                    android:maxEms="4"
+                    android:text="6.9"
                     app:layout_constraintEnd_toStartOf="@+id/guideline"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/vote_tv"
+                    style="@style/StartDetailsTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_30sdp"
+                    android:maxEms="4"
+                    android:maxLines="1"
+                    android:text="40303"
+                    app:layout_constraintBottom_toTopOf="@+id/movieTitle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_rating"
+                    app:layout_goneMarginEnd="@dimen/_40sdp" />
+
+                <TextView
+                    android:id="@+id/movieTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:gravity="center"
+                    android:text="Rating"
+                    android:textColor="@color/textAd"
+                    app:layout_constraintEnd_toEndOf="@+id/tv_rating"
+                    app:layout_constraintStart_toStartOf="@+id/tv_rating"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_rating"
+                    app:layout_goneMarginStart="@dimen/_12sdp" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Vote"
+                    android:textColor="@color/textAd"
+                    app:layout_constraintEnd_toEndOf="@+id/vote_tv"
+                    app:layout_constraintStart_toStartOf="@+id/vote_tv"
+                    app:layout_constraintTop_toBottomOf="@+id/vote_tv" />
+
+                <TextView
+                    android:id="@+id/language_tv"
+                    style="@style/StartDetailsTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_30sdp"
+                    android:maxEms="4"
+                    android:maxLines="1"
+                    android:text="EN"
+                    app:layout_constraintBottom_toTopOf="@+id/textView2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/vote_tv"
+                    app:layout_constraintTop_toTopOf="@+id/vote_tv" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Original Language"
+                    android:textColor="@color/textAd"
+                    app:layout_constraintEnd_toEndOf="@+id/language_tv"
+                    app:layout_constraintStart_toStartOf="@+id/language_tv"
+                    app:layout_constraintTop_toBottomOf="@+id/vote_tv" />
+
+                <TextView
                     android:id="@+id/title"
                     style="@style/MovieDetailsTextStyle.Italic"
-                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="@dimen/_70sdp"
                     android:layout_marginEnd="2dp"
+                    android:fontFamily="@font/bowlby_one"
+                    android:gravity="center"
+                    android:text="Black Adam"
+                    android:textSize="@dimen/_22sdp"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/guideline"
-                    app:layout_constraintTop_toTopOf="@id/movieTitle" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/moviePopularity"
                     style="@style/MovieDetailsTextStyle"
                     android:layout_marginTop="@dimen/movieDetailsTextMarginTop"
-                    android:text="Popularity"
-                    app:layout_constraintEnd_toEndOf="@id/movieTitle"
-                    app:layout_constraintStart_toStartOf="@id/movieTitle"
+                    android:text="Поплуярность"
+                    app:layout_constraintEnd_toStartOf="@+id/releaseDate"
+                    app:layout_constraintStart_toStartOf="@+id/titleConstraint"
                     app:layout_constraintTop_toBottomOf="@id/title" />
 
                 <TextView
                     android:id="@+id/popularity"
                     style="@style/MovieDetailsTextStyle.Italic"
                     app:layout_constraintEnd_toEndOf="@id/title"
-                    app:layout_constraintStart_toStartOf="@id/title"
+                    app:layout_constraintStart_toStartOf="@+id/guideline"
                     app:layout_constraintTop_toTopOf="@id/moviePopularity" />
 
-                <TextView
-                    android:id="@+id/movieVoteCount"
-                    style="@style/MovieDetailsTextStyle"
-                    android:layout_marginTop="@dimen/movieDetailsTextMarginTop"
-                    android:text="Проголосовали:"
-                    app:layout_constraintEnd_toEndOf="@id/movieTitle"
-                    app:layout_constraintStart_toStartOf="@id/movieTitle"
-                    app:layout_constraintTop_toBottomOf="@id/moviePopularity" />
-
-                <TextView
-                    android:id="@+id/voteCount"
-                    style="@style/MovieDetailsTextStyle.Italic"
-                    app:layout_constraintEnd_toEndOf="@id/title"
-                    app:layout_constraintStart_toStartOf="@id/title"
-                    app:layout_constraintTop_toTopOf="@id/movieVoteCount" />
 
                 <TextView
                     android:id="@+id/movieBudget"
                     style="@style/MovieDetailsTextStyle"
-                    android:layout_marginTop="@dimen/movieDetailsTextMarginTop"
                     android:text="Бюджет:"
-                    app:layout_constraintEnd_toEndOf="@id/movieTitle"
-                    app:layout_constraintStart_toStartOf="@id/movieTitle"
-                    app:layout_constraintTop_toBottomOf="@id/movieVoteCount" />
+                    app:layout_constraintEnd_toStartOf="@+id/guideline"
+                    app:layout_constraintStart_toStartOf="@+id/moviePopularity"
+                    app:layout_constraintTop_toBottomOf="@+id/popularity" />
 
                 <TextView
                     android:id="@+id/budget"
                     style="@style/MovieDetailsTextStyle.Italic"
                     app:layout_constraintEnd_toEndOf="@id/title"
-                    app:layout_constraintStart_toStartOf="@id/title"
+                    app:layout_constraintStart_toStartOf="@+id/guideline"
                     app:layout_constraintTop_toTopOf="@id/movieBudget" />
 
                 <TextView
@@ -191,8 +252,8 @@
                     style="@style/MovieDetailsTextStyle"
                     android:layout_marginTop="@dimen/movieDetailsTextMarginTop"
                     android:text="Рейтинг:"
-                    app:layout_constraintEnd_toEndOf="@id/movieTitle"
-                    app:layout_constraintStart_toStartOf="@id/movieTitle"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline"
+                    app:layout_constraintStart_toStartOf="@+id/moviePopularity"
                     app:layout_constraintTop_toBottomOf="@id/movieBudget" />
 
                 <androidx.appcompat.widget.AppCompatRatingBar
@@ -206,26 +267,11 @@
                     android:progressTint="@color/gold"
                     app:layout_constraintBottom_toBottomOf="@id/movieVoteAverage"
                     app:layout_constraintEnd_toEndOf="@id/title"
-                    app:layout_constraintStart_toStartOf="@id/title"
+                    app:layout_constraintStart_toStartOf="@+id/guideline"
                     app:layout_constraintTop_toTopOf="@id/movieVoteAverage">
 
                 </androidx.appcompat.widget.AppCompatRatingBar>
 
-                <TextView
-                    android:id="@+id/movieOriginalLanguage"
-                    style="@style/MovieDetailsTextStyle"
-                    android:layout_marginTop="@dimen/movieDetailsTextMarginTop"
-                    android:text="Оригинальный язык:"
-                    app:layout_constraintEnd_toEndOf="@id/movieTitle"
-                    app:layout_constraintStart_toStartOf="@id/movieTitle"
-                    app:layout_constraintTop_toBottomOf="@id/movieVoteAverage" />
-
-                <TextView
-                    android:id="@+id/originalLanguage"
-                    style="@style/MovieDetailsTextStyle.Italic"
-                    app:layout_constraintEnd_toEndOf="@id/title"
-                    app:layout_constraintStart_toStartOf="@id/title"
-                    app:layout_constraintTop_toTopOf="@id/movieOriginalLanguage" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/titleConstraint"
@@ -233,7 +279,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/movieOriginalLanguage">
+                    app:layout_constraintTop_toBottomOf="@id/voteAverage">
 
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guideline2"
@@ -242,25 +288,6 @@
                         android:orientation="vertical"
                         app:layout_constraintGuide_percent="0.5" />
 
-                    <TextView
-                        android:id="@+id/movieOriginalTitle"
-                        style="@style/MovieDetailsTextStyle"
-                        android:layout_marginStart="2dp"
-                        android:layout_marginTop="@dimen/movieDetailsTextMarginTop"
-                        android:layout_marginEnd="2dp"
-                        android:text="Оригинальное название"
-                        app:layout_constraintEnd_toStartOf="@id/guideline2"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/originalTitle"
-                        style="@style/MovieDetailsTextStyle.Italic"
-                        android:layout_marginStart="2dp"
-                        android:layout_marginEnd="2dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/guideline2"
-                        app:layout_constraintTop_toTopOf="@id/movieOriginalTitle" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -270,47 +297,31 @@
                     style="@style/MovieDetailsTextStyle"
                     android:layout_marginTop="@dimen/movieDetailsTextMarginTop"
                     android:text="Дата релиза:"
-                    app:layout_constraintEnd_toEndOf="@id/movieTitle"
-                    app:layout_constraintStart_toStartOf="@id/movieTitle"
+                    app:layout_constraintEnd_toEndOf="@+id/moviePopularity"
+                    app:layout_constraintStart_toStartOf="@+id/moviePopularity"
                     app:layout_constraintTop_toBottomOf="@id/titleConstraint" />
 
                 <TextView
                     android:id="@+id/releaseDate"
                     style="@style/MovieDetailsTextStyle.Italic"
                     app:layout_constraintEnd_toEndOf="@id/title"
-                    app:layout_constraintStart_toStartOf="@id/title"
+                    app:layout_constraintStart_toStartOf="@+id/guideline"
                     app:layout_constraintTop_toTopOf="@id/movieReleaseDate" />
 
-                <TextView
-                    android:id="@+id/movieRuntime"
-                    style="@style/MovieDetailsTextStyle"
-                    android:layout_marginTop="@dimen/movieDetailsTextMarginTop"
-                    android:text="Продолжительность"
-                    app:layout_constraintEnd_toEndOf="@id/movieTitle"
-                    app:layout_constraintStart_toStartOf="@id/movieTitle"
-                    app:layout_constraintTop_toBottomOf="@id/movieReleaseDate" />
-
-                <TextView
-                    android:id="@+id/runtime"
-                    style="@style/MovieDetailsTextStyle.Italic"
-                    app:layout_constraintEnd_toEndOf="@id/title"
-                    app:layout_constraintStart_toStartOf="@id/title"
-                    app:layout_constraintTop_toTopOf="@id/movieRuntime" />
 
                 <TextView
                     android:id="@+id/movieStatus"
                     style="@style/MovieDetailsTextStyle"
-                    android:layout_marginTop="@dimen/movieDetailsTextMarginTop"
                     android:text="Статус:"
-                    app:layout_constraintEnd_toEndOf="@id/movieTitle"
-                    app:layout_constraintStart_toStartOf="@id/movieTitle"
-                    app:layout_constraintTop_toBottomOf="@id/movieRuntime" />
+                    app:layout_constraintEnd_toEndOf="@+id/moviePopularity"
+                    app:layout_constraintStart_toStartOf="@+id/moviePopularity"
+                    app:layout_constraintTop_toBottomOf="@id/releaseDate" />
 
                 <TextView
                     android:id="@+id/status"
                     style="@style/MovieDetailsTextStyle.Italic"
                     app:layout_constraintEnd_toEndOf="@id/title"
-                    app:layout_constraintStart_toStartOf="@id/title"
+                    app:layout_constraintStart_toStartOf="@+id/guideline"
                     app:layout_constraintTop_toTopOf="@id/movieStatus" />
 
                 <TextView
@@ -318,16 +329,18 @@
                     style="@style/MovieDetailsTextStyle"
                     android:layout_marginTop="@dimen/movieDetailsTextMarginTop"
                     android:text="Описание:"
-                    app:layout_constraintEnd_toEndOf="@id/movieTitle"
-                    app:layout_constraintStart_toStartOf="@id/movieTitle"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline"
+                    app:layout_constraintStart_toStartOf="@+id/moviePopularity"
                     app:layout_constraintTop_toBottomOf="@id/movieStatus" />
 
                 <TextView
                     android:id="@+id/overview"
                     style="@style/MovieDetailsTextStyle.Italic"
                     android:layout_marginTop="@dimen/movieDetailsTextMarginTop"
+                    android:fontFamily="@font/baloo"
+                    android:maxLines="4"
                     app:layout_constraintEnd_toEndOf="@id/title"
-                    app:layout_constraintStart_toStartOf="@id/movieTitle"
+                    app:layout_constraintStart_toStartOf="@+id/moviePopularity"
                     app:layout_constraintTop_toBottomOf="@id/movieOverview" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -336,9 +349,8 @@
                 android:id="@+id/rvs_constraint_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/viewConstraint">
+
+                >
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline3"
@@ -350,8 +362,7 @@
                 <TextView
                     android:id="@+id/actorsText"
                     style="@style/MovieDetailsTextStyle"
-                    android:layout_marginStart="2dp"
-                    android:layout_marginTop="@dimen/movieDetailsTextMarginTop"
+                    android:layout_marginTop="@dimen/_350sdp"
                     android:layout_marginEnd="2dp"
                     android:text="В ролях:"
                     app:layout_constraintEnd_toStartOf="@id/guideline3"
@@ -369,15 +380,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/actorsText" />
 
-                <TextView
-                    android:id="@+id/videoText"
-                    style="@style/MovieDetailsTextStyle"
-                    android:layout_marginTop="@dimen/movieDetailsTextMarginTop"
-                    android:text="Трейлеры и фрагменты"
-                    app:layout_constraintEnd_toEndOf="@id/actorsText"
-                    app:layout_constraintStart_toStartOf="@id/actorsText"
-                    app:layout_constraintTop_toBottomOf="@id/actorsRv" />
-
                 <!--                <com.google.android.youtube.player.YouTubePlayerView-->
                 <!--                    android:id="@+id/youtube_player"-->
                 <!--                    android:layout_width="match_parent"-->
@@ -392,11 +394,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:text="Похожие фильмы:"
-                    android:textColor="@color/gold"
+                    android:textColor="@color/white"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@id/actorsText"
-                    app:layout_constraintTop_toBottomOf="@id/videoText" />
+                    app:layout_constraintTop_toBottomOf="@id/actorsRv" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/similarMoviesRv"
@@ -410,28 +412,30 @@
                     app:layout_constraintTop_toBottomOf="@+id/similarMoviesText"
                     tools:listitem="@layout/object_item_horizontal" />
 
-                <TextView
-                    android:id="@+id/recommendMoviesText"
-                    style="@style/MovieDetailsTextStyle"
-                    android:layout_marginTop="@dimen/movieDetailsTextMarginTop"
-                    android:text="Также рекомендуются"
-                    app:layout_constraintEnd_toEndOf="@id/actorsText"
-                    app:layout_constraintStart_toStartOf="@id/actorsText"
-                    app:layout_constraintTop_toBottomOf="@id/similarMoviesRv" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recommendMoviesRv"
-                    android:layout_width="0dp"
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline5"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/recommendMoviesText"
-                    tools:listitem="@layout/object_item_horizontal" />
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="20dp" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="20dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="20dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
+
+    </com.google.android.material.card.MaterialCardView>
+
 </androidx.constraintlayout.motion.widget.MotionLayout>

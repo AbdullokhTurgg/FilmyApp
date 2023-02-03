@@ -1,7 +1,7 @@
 package com.example.data.storage.mappers
 
 import com.example.data.dataModel.movie.MovieData
-import com.example.data.storage.model.MovieStorage
+import com.example.data.storage.model.movie.MovieStorage
 import com.example.domain.base.BaseMapper
 
 class MapFromMovieStorageToData : BaseMapper<MovieStorage, MovieData> {
@@ -20,7 +20,7 @@ class MapFromMovieStorageToData : BaseMapper<MovieStorage, MovieData> {
             voteCount = voteCount,
             video = video,
             rating = rating,
-            genre_ids = genre_ids.map { id -> id },
+            genre_ids = genre_ids?.map { id -> id },
         )
     }
 }

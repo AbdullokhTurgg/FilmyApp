@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backGround"
-    app:layoutDescription="@xml/activity_main_scene">
+    android:background="@color/backGround">
 
     <!--    <androidx.viewpager2.widget.ViewPager2-->
     <!--        android:id="@+id/view_pager"-->
@@ -24,21 +23,19 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:defaultNavHost="true"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavMenu"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:navGraph="@navigation/general_navigation"
-        />
-
+        app:navGraph="@navigation/general_navigation" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavMenu"
-        style="@style/BottomNavigationTheme"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="@drawable/bottom_nav_bg"
-        android:visibility="visible"
+        android:id="@+id/bottomNavMenu2"
+        android:layout_width="@dimen/_350sdp"
+        android:layout_height="@dimen/_55sdp"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:background="@drawable/bottom_navigation_background"
+        android:elevation="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

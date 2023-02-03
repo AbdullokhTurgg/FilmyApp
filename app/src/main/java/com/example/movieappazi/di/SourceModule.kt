@@ -3,6 +3,7 @@ package com.example.movieappazi.di
 import com.example.data.network.cloud.handler.ResponseHandler
 import com.example.data.network.cloud.handler.ResponseHandlerImpl
 import com.example.domain.assistant.DispatchersProvider
+import com.example.movieappazi.exception.HandleExeption
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,4 +21,7 @@ class SourceModule {
 
     @Provides
     fun provideDispatchersProvider(): DispatchersProvider = DispatchersProvider.Base()
+
+     @Provides
+    fun provideHandlerException(): HandleExeption = HandleExeption.Base()
 }

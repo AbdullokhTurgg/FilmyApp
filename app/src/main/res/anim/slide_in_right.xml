@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <set xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <scale
-        android:fromXScale="0.7"
-        android:toXScale="1.0"
-        android:fromYScale="0.7"
-        android:toYScale="1.0"
-        android:pivotX="50%"
-        android:pivotY="50%"
-        android:duration="500">
-    </scale>
+    <objectAnimator xmlns:android="http://schemas.android.com/apk/res/android"
+        android:interpolator="@android:anim/linear_interpolator"
+        android:valueFrom="-1.0"
+        android:valueTo="0"
+        android:propertyName="xFraction"
+        android:duration="@android:integer/config_mediumAnimTime" />
 </set>

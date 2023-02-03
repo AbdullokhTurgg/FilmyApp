@@ -39,7 +39,7 @@ class MovieItemAdapter(
         holder.bindMovie(getItem(position))
 
         holder.itemMovie.startAnimation(AnimationUtils.loadAnimation(holder.itemView.context,
-            R.anim.anim_for_recyclerview))
+            R.anim.item_anim))
     }
 
     override fun getItemViewType(position: Int): Int {

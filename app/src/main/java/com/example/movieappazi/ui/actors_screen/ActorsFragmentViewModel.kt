@@ -12,8 +12,11 @@ import com.example.domain.base.BaseMapper
 import com.example.domain.domainModels.person.PersonDomain
 import com.example.domain.domainModels.person.PersonsDomain
 import com.example.domain.domainRepositories.network.person.PersonRepositories
+import com.example.movieappazi.base.BaseViewModel
 import com.example.movieappazi.extensions.changeResponseState
 import com.example.movieappazi.uiModels.movie.ResponseState
+import com.example.movieappazi.uiModels.person.PersonDetailsUi
+import com.example.movieappazi.uiModels.person.PersonUi
 import com.example.movieappazi.uiModels.person.PersonsUi
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -26,13 +29,17 @@ class ActorsFragmentViewModel @Inject constructor(
     private val mapPersonResponseFromDomain: BaseMapper<PersonsDomain, PersonsUi>,
     private val resourceProvider: ResourceProvider,
     private val dispatchersProvider: DispatchersProvider,
-) : ViewModel() {
+) : BaseViewModel() {
 
     private val _error = MutableSharedFlow<String>(replay = 0)
     val error get() = _error.asSharedFlow()
     private val personResponsePage = MutableStateFlow(1)
     private val _personResponseState = MutableStateFlow(ResponseState())
     val personResponseState get() = _personResponseState.asStateFlow()
+
+    fun goPersonDetails(person: PersonUi) {
+        navigate(ActorsFragmentDirections.actionNavPersonToActorsDetailsFragment(person))
+    }
 
 
     @OptIn(ExperimentalCoroutinesApi::class)

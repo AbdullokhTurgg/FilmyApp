@@ -16,9 +16,8 @@ import com.example.data.network.cloud.base.ResourceProvider
 import com.example.data.network.cloud.source.movie.CloudDataSourceMovie
 import com.example.data.network.cloud.source.person.CloudDataSourcePerson
 import com.example.data.network.cloud.source.video.CloudDataSourceVideo
-import com.example.data.storage.source.MovieStorageDataSource
+import com.example.data.storage.source.movie.MovieStorageDataSource
 import com.example.domain.assistant.DispatchersProvider
-import com.example.domain.assistant.Resource
 import com.example.domain.base.BaseMapper
 import com.example.domain.domainModels.movie.CreditsResponseDomain
 import com.example.domain.domainModels.movie.MovieDetailsDomain
@@ -99,5 +98,6 @@ class RepositoryModule {
     fun provideResourceProvider(
         @ApplicationContext context: Context,
     ): ResourceProvider = ResourceProvider.Base(context = context)
+
 
 }

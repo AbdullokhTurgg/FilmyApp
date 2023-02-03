@@ -21,7 +21,7 @@ class ObjectViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
     val itemMovie = view.findViewById<CardView>(R.id.motion_layout)
 
     fun bindMovie(movie: MovieUi) {
-        bind(movie.posterPath, movie.rating)
+        bind(movie.posterPath, movie.rating!!)
     }
 
     fun bindPerson(person: PersonUi) {

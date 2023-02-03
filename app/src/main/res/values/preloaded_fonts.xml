@@ -2,6 +2,9 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/aclonica</item>
+        <item>@font/actor</item>
+        <item>@font/baloo</item>
+        <item>@font/bowlby_one</item>
         <item>@font/diplomata</item>
         <item>@font/frijole</item>
         <item>@font/wellfleet</item>

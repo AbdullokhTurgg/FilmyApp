@@ -7,7 +7,6 @@ import com.example.data.dataModel.movie.MoviesData
 import com.example.data.dataModel.person.PersonDetailsData
 import com.example.data.dataModel.person.PersonsData
 import com.example.data.dataModel.video.VideosData
-import com.example.data.network.cloud.base.ResourceProvider
 import com.example.data.network.cloud.cloudModels.movie.MovieDetailsCloud
 import com.example.data.network.cloud.cloudModels.movie.MoviesCloud
 import com.example.data.network.cloud.cloudModels.movie.movie_category.CreditsResponseCloud
@@ -24,10 +23,10 @@ import com.example.data.network.cloud.source.video.CloudDataSourceVideoImpl
 import com.example.data.network.retrofit.api.movie.MovieApi
 import com.example.data.network.retrofit.api.person.PersonApi
 import com.example.data.network.retrofit.api.video.VideoApi
-import com.example.data.storage.db.MovieDao
-import com.example.data.storage.model.MovieStorage
-import com.example.data.storage.source.MovieStorageDataSource
-import com.example.data.storage.source.MovieStorageDataSourceImpl
+import com.example.data.storage.db.movie.MovieDao
+import com.example.data.storage.model.movie.MovieStorage
+import com.example.data.storage.source.movie.MovieStorageDataSource
+import com.example.data.storage.source.movie.MovieStorageDataSourceImpl
 import com.example.domain.assistant.DispatchersProvider
 import com.example.domain.base.BaseMapper
 import dagger.Module
@@ -99,5 +98,19 @@ class CloudRepositoryModule {
         mapToStorage = mapToStorage,
         dispatchersProvider = dispatchersProvider,
     )
+
+//    @Provides
+//    @Singleton
+//    fun provideCloudPersonStorage(
+//        personDao: PersonDao,
+//        mapFromStorageToDataPerson: BaseMapper<PersonStorage, PersonDetailsData>,
+//        mapFromPersonDetailsDataToStorage: BaseMapper<PersonDetailsData, PersonStorage>,
+//        mapListFromMovieDetailsDataToStorage: BaseMapper<List<PersonStorage>, List<PersonDetailsData>>,
+//    ): PersonStorageDataSource = PersonStorageDataSourceImpl(
+//        personDao = personDao,
+//        mapFromStorageToDataPerson = mapFromStorageToDataPerson,
+//        mapFromPersonDetailsDataToStorage = mapFromPersonDetailsDataToStorage,
+//        mapListFromMovieDetailsDataToStorage = mapListFromMovieDetailsDataToStorage,
+//    )
 
 }

@@ -20,7 +20,7 @@ class MapFromMovieDomainToMovieUi : BaseMapper<MovieDomain, MovieUi> {
             voteCount = voteCount,
             video = video,
             rating = rating,
-            genre_ids = genre_ids,
+            genre_ids = genre_ids?.map { id -> id },
         )
     }
 }

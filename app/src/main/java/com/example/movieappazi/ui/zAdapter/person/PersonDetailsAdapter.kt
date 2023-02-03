@@ -1,19 +1,27 @@
 package com.example.movieappazi.ui.zAdapter.person
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.data.network.retrofit.utils.Utils
 import com.example.movieappazi.R
 import com.example.movieappazi.ui.zAdapter.movie.adapter_for_popular.MovieItemAdapter
 import com.example.movieappazi.ui.zAdapter.movie.diffcallbacks.PersonDetailsListDiffCallback
 import com.example.movieappazi.ui.zAdapter.movie.view_holders.ObjectViewHolder
 import com.example.movieappazi.uiModels.movie.CastUi
+import com.example.movieappazi.uiModels.movie.MovieUi
 import com.example.movieappazi.uiModels.person.PersonDetailsUi
+import com.example.movieappazi.uiModels.person.PersonUi
+import com.squareup.picasso.Picasso
+import com.vaibhavlakhera.circularprogressview.CircularProgressView
 
 class PersonDetailsAdapter(
     private val listener: RvClickListener,
-    private val objectViewType: Int,
 ) : RecyclerView.Adapter<ObjectViewHolder>() {
 
     var personsList = emptyList<CastUi>()
@@ -24,25 +32,12 @@ class PersonDetailsAdapter(
             field = value
         }
 
-    override fun getItemViewType(position: Int): Int {
-        return if (objectViewType == MovieItemAdapter.PORTRAIT_TYPE) {
-            MovieItemAdapter.PORTRAIT_TYPE
-        } else MovieItemAdapter.HORIZONTAL_TYPE
-    }
-
-    companion object {
-        const val PORTRAIT_TYPE = 1
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ObjectViewHolder {
-        val layout = when (viewType) {
-            MovieItemAdapter.PORTRAIT_TYPE -> R.layout.object_item_portrait
-            MovieItemAdapter.HORIZONTAL_TYPE -> R.layout.object_item_horizontal
-            else -> throw RuntimeException("Unknown view type: $viewType")
-        }
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.object_item_portrait, parent, false)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.object_item_portrait, parent, false)
         return ObjectViewHolder(view)
     }
+
 
     override fun onBindViewHolder(holder: ObjectViewHolder, position: Int) {
         holder.view.setOnClickListener {

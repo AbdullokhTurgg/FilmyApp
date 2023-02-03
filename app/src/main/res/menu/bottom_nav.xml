@@ -7,11 +7,7 @@
         android:id="@+id/nav_movies"
         android:icon="@drawable/ic_home"
         android:title="@string/home" />
-    <item
-        android:id="@+id/tvShowMenu"
-        android:icon="@drawable/ic_tv"
-        android:title="TV Show"
-        tools:ignore="HardcodedText" />
+
     <item
         android:id="@+id/nav_search"
         android:icon="@drawable/ic_search"

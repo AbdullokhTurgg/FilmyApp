@@ -2,8 +2,8 @@ package com.example.movieappazi.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.data.storage.db.MovieDao
-import com.example.data.storage.db.MovieDatabase
+import com.example.data.storage.db.movie.MovieDao
+import com.example.data.storage.db.movie.MovieDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

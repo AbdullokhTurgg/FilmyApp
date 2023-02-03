@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -83,8 +82,8 @@
                         android:layout_marginRight="10dp"
                         android:fontFamily="@font/aclonica"
                         android:gravity="center_vertical"
-                        android:text="Popular Movies"
-                        android:textColor="@color/primary"
+                        android:text="Popular "
+                        android:textColor="@color/zero_to_one"
                         android:textSize="16sp" />
 
                     <Space
@@ -101,7 +100,7 @@
                         android:fontFamily="@font/aclonica"
                         android:gravity="center_vertical"
                         android:text="See All"
-                        android:textColor="@color/primary"
+                        android:textColor="@color/zero_to_one"
                         android:textSize="16sp" />
 
 
@@ -156,8 +155,8 @@
                         android:layout_marginRight="10dp"
                         android:fontFamily="@font/aclonica"
                         android:gravity="center_vertical"
-                        android:text="Top Rated Movies"
-                        android:textColor="@color/primary"
+                        android:text="Top Rated "
+                        android:textColor="@color/zero_to_one"
                         android:textSize="16sp" />
 
                     <Space
@@ -174,7 +173,7 @@
                         android:fontFamily="@font/aclonica"
                         android:gravity="center_vertical"
                         android:text="See All"
-                        android:textColor="@color/primary"
+                        android:textColor="@color/zero_to_one"
                         android:textSize="16sp" />
 
 
@@ -232,8 +231,8 @@
                         android:layout_marginRight="10dp"
                         android:fontFamily="@font/aclonica"
                         android:gravity="center_vertical"
-                        android:text="Upcoming Movies"
-                        android:textColor="@color/primary"
+                        android:text="Upcoming "
+                        android:textColor="@color/zero_to_one"
                         android:textSize="16sp" />
 
                     <Space
@@ -250,7 +249,7 @@
                         android:fontFamily="@font/aclonica"
                         android:gravity="center_vertical"
                         android:text="See All"
-                        android:textColor="@color/primary"
+                        android:textColor="@color/zero_to_one"
                         android:textSize="16sp" />
 
 
@@ -320,8 +319,8 @@
                         android:layout_marginRight="10dp"
                         android:fontFamily="@font/aclonica"
                         android:gravity="center_vertical"
-                        android:text="Upcoming Movies"
-                        android:textColor="@color/primary"
+                        android:text="Now Playing "
+                        android:textColor="@color/zero_to_one"
                         android:textSize="16sp" />
 
                     <Space
@@ -338,7 +337,7 @@
                         android:fontFamily="@font/aclonica"
                         android:gravity="center_vertical"
                         android:text="See All"
-                        android:textColor="@color/primary"
+                        android:textColor="@color/zero_to_one"
                         android:textSize="16sp" />
 
 
@@ -372,7 +371,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_50sdp"
                 android:visibility="invisible"
-                app:SpinKit_Color="@color/primary"
+                app:SpinKit_Color="@color/zero_to_one"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -389,10 +388,12 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
+                    android:id="@+id/no_connection"
                     android:layout_width="250dp"
                     android:layout_height="300dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_no_internet" />
+                    android:src="@drawable/ic_no_internet"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -400,7 +401,7 @@
                     android:fontFamily="@font/aclonica"
                     android:gravity="center"
                     android:text="No Internet"
-                    android:textColor="@color/primary"
+                    android:textColor="@color/zero_to_one"
                     android:textSize="25sp" />
 
 

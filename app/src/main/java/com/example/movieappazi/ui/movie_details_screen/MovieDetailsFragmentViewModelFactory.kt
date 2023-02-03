@@ -13,6 +13,7 @@ import com.example.domain.domainModels.movie.MoviesDomain
 import com.example.domain.domainModels.person.PersonDetailsDomain
 import com.example.domain.domainRepositories.network.movie.MovieRepositories
 import com.example.domain.domainRepositories.storage.MovieStorageRepository
+import com.example.domain.iteractors.movie_iteractors.GetFavoriteMovieUseCase
 import com.example.movieappazi.uiModels.movie.CreditsResponseUi
 import com.example.movieappazi.uiModels.movie.MovieDetailsUi
 import com.example.movieappazi.uiModels.movie.MovieUi
@@ -21,6 +22,7 @@ import com.example.movieappazi.uiModels.person.PersonDetailsUi
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 private const val MOVIE_ID_KEY = "movie_id_key"
 private const val ACTORS_IDS_KEY = "actors_ids_key"
@@ -36,8 +38,10 @@ class MovieDetailsFragmentViewModelFactory @AssistedInject constructor(
     private val saveMovieRepository: MovieStorageRepository,
     private val mapCreditsResponseDomain: BaseMapper<CreditsResponseDomain, CreditsResponseUi>,
     private val mapMovieResponse: BaseMapper<MoviesDomain, MoviesUi>,
+    private val getFavoriteMovieUseCase: GetFavoriteMovieUseCase,
 ) : ViewModelProvider.Factory {
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         require(modelClass == MovieDetailsFragmentViewModel::class.java)
         return MovieDetailsFragmentViewModel(movieId = movieId,
@@ -50,8 +54,8 @@ class MovieDetailsFragmentViewModelFactory @AssistedInject constructor(
 //            mapPersons = mapPersons,
             saveMovieRepository = saveMovieRepository,
             mapFromUiToDomain = mapFromUiToDomain,
-            mapMovieResponse = mapMovieResponse
-
+            mapMovieResponse = mapMovieResponse,
+            getFavoriteMovieUseCase = getFavoriteMovieUseCase
         ) as T
     }
 

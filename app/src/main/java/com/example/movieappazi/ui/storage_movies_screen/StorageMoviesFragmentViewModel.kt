@@ -5,6 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.domain.base.BaseMapper
 import com.example.domain.domainModels.movie.MovieDomain
 import com.example.domain.domainRepositories.storage.MovieStorageRepository
+import com.example.movieappazi.base.BaseViewModel
+import com.example.movieappazi.uiModels.movie.MovieDetailsUi
 import com.example.movieappazi.uiModels.movie.MovieUi
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
@@ -17,7 +19,7 @@ import javax.inject.Inject
 class StorageMoviesFragmentViewModel @Inject constructor(
     private val savedRepository: MovieStorageRepository,
     private val mapFromListMovieDomainToUi: BaseMapper<List<MovieDomain>, List<MovieUi>>,
-) : ViewModel() {
+) : BaseViewModel() {
 
     val allMoviesFlow: Flow<List<MovieUi>> =
         savedRepository.getAllMoviesFromDatabase().map(mapFromListMovieDomainToUi::map)
@@ -25,4 +27,7 @@ class StorageMoviesFragmentViewModel @Inject constructor(
     fun deleteMovies(movies: Int) = viewModelScope.launch {
         savedRepository.deleteMovieFromDatabase(movieId = movies)
     }
+
+    fun launchMovieDetails(list: MovieUi) =
+        navigate(StorageMoviesFragmentDirections.actionNavStorageToMovieDetailsFragment(list))
 }
