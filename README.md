@@ -5,7 +5,7 @@
 The application shows a list of films and actors, detailed information about them, the ability to
 search, as well as add to favorites.Adding to favorites takes place in the local Room database.
 
-[<img src="meta/android/screenshots/screenshot_1.png" width=160>]([meta/android/screenshots/screenshot_1.png](https://user-images.githubusercontent.com/114995936/216970405-16effdc3-f0e3-4622-b81b-56081e3cdbd6.jpg))
+[<img src="[meta/android/screenshots/screenshot_1.png" width=160>]([meta/android/screenshots/screenshot_1.png](https://user-images.githubusercontent.com/114995936/216970405-16e](https://user-images.githubusercontent.com/114995936/216970405-16effdc3-f0e3-4622-b81b-56081e3cdbd6.jpg)ffdc3-f0e3-4622-b81b-56081e3cdbd6.jpg))
 [<img src="meta/android/screenshots/screenshot_2.png" width=160>](meta/android/screenshots/screenshot_2.png)
 [<img src="meta/android/screenshots/screenshot_3.png" width=160>](meta/android/screenshots/screenshot_3.png)
 [<img src="meta/android/screenshots/screenshot_4.png" width=160>](meta/android/screenshots/screenshot_4.png)
