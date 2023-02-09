@@ -1,4 +1,4 @@
-package com.example.data.network.retrofit.utils
+package com.example.data.network.api.utils
 
 object Endpoints {
     object Movie {

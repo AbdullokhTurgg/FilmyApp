@@ -1,4 +1,4 @@
-package com.example.data.network.retrofit.utils
+package com.example.data.network.api.utils
 
 object Utils {
     const val BASE_URL = "https://api.themoviedb.org/3/"

@@ -1,9 +1,9 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Theme.MovieAppAzi" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/red</item>
+        <item name="colorPrimary">#303F9F</item>
         <item name="colorPrimaryVariant">@color/black</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
@@ -17,7 +17,6 @@
         <item name="android:popupMenuStyle">@style/PopupMenu</item>
         <item name="android:navigationBarColor">@color/black</item>
 
-        <item name="android:windowFullscreen">true</item>
         <!-- Customize your theme here. -->
     </style>
 
@@ -30,8 +29,28 @@
     </style>
 
     <style name="PopupMenu" parent="@android:style/Widget.PopupMenu">
-        <item name="android:popupBackground">@color/black_light</item>
+        <item name="android:popupBackground">@color/backGroundAd</item>
     </style>
+
+    <style name="ShapeAppearance.MovieImageView" parent="ShapeAppearance.MovieCardView">
+        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+    </style>
+
+    <style name="ShapeAppearance.MovieCardView" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">32dp</item>
+        <item name="cornerSizeTopLeft">8dp</item>
+        <item name="cornerSizeBottomRight">8dp</item>
+        <item name="cornerSizeBottomLeft">8dp</item>
+    </style>
+
+    <style name="TopCornerRadius" parent="CardView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">@dimen/_37sdp</item>
+        <item name="cornerSizeTopLeft">@dimen/_37sdp</item>
+    </style>
+
     <!--    <style name="ThemeOverlay.App.TabLayout" parent="">-->
     <!--        <item name="tabIconTint">@color/icons_color</item>-->
     <!--        <item name="colorPrimary">@color/colorAccent</item>-->
@@ -113,6 +132,7 @@
         <item name="fontFamily">@font/aclonica</item>
         <item name="android:textColor">@color/blueClearColor</item>
     </style>
+
     <style name="StartDetailsTv">
         <item name="android:fontFamily">@font/bowlby_one</item>
         <item name="android:textSize">@dimen/_24sdp</item>
@@ -122,7 +142,7 @@
     </style>
 
     <style name="BottomNavigationTheme" parent="Theme.AppCompat.Light">
-        <item name="colorPrimary">@color/zero_to_one</item>
+        <item name="colorPrimary">#303F9F</item>
         <item name="android:textColorSecondary">@color/white</item>
     </style>
 

@@ -6,30 +6,33 @@
     <Transition
         motion:constraintSetEnd="@+id/end"
         motion:constraintSetStart="@id/start"
-        motion:autoTransition="animateToEnd"
+        motion:autoTransition="animateToStart"
         motion:duration="1500">
        <KeyFrameSet>
        </KeyFrameSet>
     </Transition>
 
     <ConstraintSet android:id="@+id/start">
+
         <Constraint
-            android:layout_height="139dp"
-            motion:layout_constraintTop_toTopOf="parent"
-            android:layout_width="411dp"
-            android:id="@+id/imageView3"
+            android:layout_height="match_parent"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintBottom_toTopOf="parent" />
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="@dimen/_150sdp"
+            android:id="@+id/searchViewLottie" />
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">
+
         <Constraint
-            android:layout_height="wrap_content"
-            motion:layout_constraintEnd_toEndOf="parent"
-            android:layout_width="wrap_content"
-            android:id="@+id/imageView3"
+            android:layout_height="@dimen/_300sdp"
             motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
             motion:layout_constraintBottom_toBottomOf="parent"
-            motion:layout_constraintTop_toTopOf="parent" />
+            motion:layout_constraintEnd_toEndOf="@+id/movies_rv"
+            android:layout_width="wrap_content"
+            android:id="@+id/searchViewLottie" />
     </ConstraintSet>
 </MotionScene>

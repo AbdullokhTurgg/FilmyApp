@@ -2,7 +2,7 @@ package com.example.data.network.cloud.source.video
 
 import com.example.data.dataModel.video.VideosData
 import com.example.data.network.cloud.cloudModels.video.VideosCloud
-import com.example.data.network.retrofit.api.video.VideoApi
+import com.example.data.network.api.api.video.VideoApi
 import com.example.domain.assistant.DispatchersProvider
 import com.example.domain.base.BaseMapper
 import kotlinx.coroutines.flow.Flow

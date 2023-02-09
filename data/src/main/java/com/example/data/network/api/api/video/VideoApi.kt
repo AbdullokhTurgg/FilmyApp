@@ -1,8 +1,8 @@
-package com.example.data.network.retrofit.api.video
+package com.example.data.network.api.api.video
 
 import com.example.data.network.cloud.cloudModels.video.VideosCloud
-import com.example.data.network.retrofit.utils.Endpoints
-import com.example.data.network.retrofit.utils.Utils
+import com.example.data.network.api.utils.Endpoints
+import com.example.data.network.api.utils.Utils
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

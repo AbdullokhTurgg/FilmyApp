@@ -1,6 +1,5 @@
 package com.example.domain.domainRepositories.network.movie
 
-import com.example.domain.assistant.Resource
 import com.example.domain.domainModels.movie.CreditsResponseDomain
 import com.example.domain.domainModels.movie.MovieDetailsDomain
 import com.example.domain.domainModels.movie.MoviesDomain
@@ -20,5 +19,6 @@ interface MovieRepositories {
     suspend fun getCategories(): MoviesDomain
     suspend fun getCategoryDetail(id: Int): MoviesDomain
     suspend fun getActors(movieId: Int): DataRequestState<CreditsResponseDomain>
+
 
 }

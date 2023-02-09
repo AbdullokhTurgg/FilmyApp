@@ -2,27 +2,26 @@ package com.example.movieappazi.ui.storage_movies_screen
 
 import android.app.AlertDialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movieappazi.R
 import com.example.movieappazi.adapter.animations.AddableItemAnimator
-import com.example.movieappazi.adapter.animations.SlideInLeftAnimator
 import com.example.movieappazi.adapter.animations.custom.SlideInLeftCommonAnimator
 import com.example.movieappazi.adapter.animations.custom.SlideInTopCommonAnimator
+import com.example.movieappazi.adapter.fingerprints.FingerPrintAdapter
+import com.example.movieappazi.adapter.fingerprints.PostFingerPrint
 import com.example.movieappazi.databinding.FragmentStorageMoviesBinding
 import com.example.movieappazi.extensions.makeToast
 import com.example.movieappazi.ui.zAdapter.movie.adapter_for_popular.SavedMoviesAdapter
 import com.example.movieappazi.uiModels.movie.MovieUi
 import com.example.newsappazi.adapter.decorations.FeedHorizontalDividerItemDecoration
 import com.example.newsappazi.adapter.decorations.GroupVerticalItemDecoration
-import com.example.movieappazi.adapter.fingerprints.FingerPrintAdapter
-import com.example.movieappazi.adapter.fingerprints.PostFingerPrint
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_storage_movies.*
 import kotlinx.coroutines.flow.catch
@@ -32,12 +31,17 @@ import kotlinx.coroutines.flow.onStart
 
 @AndroidEntryPoint
 class StorageMoviesFragment : Fragment() {
+
     private val binding by lazy {
         FragmentStorageMoviesBinding.inflate(layoutInflater)
     }
     private val viewModel: StorageMoviesFragmentViewModel by viewModels()
 
     private lateinit var adapter: FingerPrintAdapter
+
+//    private val moviee: MovieUi by lazy(LazyThreadSafetyMode.NONE) {
+//        MovieDetailsFragmentArgs.fromBundle(requireArguments()).movie
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,7 +58,6 @@ class StorageMoviesFragment : Fragment() {
         setupAdapter()
         animator()
         submitInitialListWithDelayForAnimation()
-//        initObserver()
 
         builder = AlertDialog.Builder(requireContext())
     }
@@ -97,22 +100,6 @@ class StorageMoviesFragment : Fragment() {
         }, 400L)
     }
 
-//    private fun initObserver() = with(viewModel) {
-//        binding.apply {
-//            lifecycleScope.launchWhenStarted {
-//                allMoviesFlow.onEach { articles ->
-//                    savedProgresss.isVisible = false
-//                    listOfFavouritesObserving(articles)
-//                }.onStart {
-//                    savedProgresss.isVisible = true
-//                }.catch {
-//                    savedProgresss.isVisible = false
-//                }.collect()
-//            }
-//
-//        }
-//    }
-
     private fun listOfFavouritesObserving(list: List<MovieUi>) {
         lifecycleScope.launchWhenResumed {
             viewModel.allMoviesFlow.collect {
@@ -135,8 +122,10 @@ class StorageMoviesFragment : Fragment() {
                         }
 
                         override fun onItemClick(position: Int) {
-                          
+                            makeToast("Details", requireContext())
                         }
+
+
                     })
             }
         }

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backGround"
+    android:background="@color/backGroundAd"
     app:layoutDescription="@xml/fragment_actors_details_scene"
     tools:context=".ui.actors_details_screen.ActorsDetailsFragment">
 
@@ -13,7 +13,7 @@
         android:id="@+id/appBarLayout2"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:background="@color/backGround"
+        android:background="@color/backGroundAd"
         android:fitsSystemWindows="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,6 +41,9 @@
                 android:layout_marginHorizontal="4dp"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="20dp"
+                android:backgroundTint="@color/backGroundAd"
+                android:background="@color/backGroundAd"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/guideline"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -96,7 +99,7 @@
         android:id="@+id/nestedScrollView3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="@dimen/_350sdp"
 
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         app:layout_constraintBottom_toBottomOf="parent"

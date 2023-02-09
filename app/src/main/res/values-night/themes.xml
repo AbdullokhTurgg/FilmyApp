@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.MovieAppAzi" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/red</item>
+        <item name="colorPrimary">#303F9F</item>
         <item name="colorPrimaryVariant">@color/black</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
@@ -16,11 +16,10 @@
         <item name="android:popupMenuStyle">@style/PopupMenu</item>
         <item name="android:navigationBarColor">@color/black</item>
 
-        <item name="android:windowFullscreen">true</item>
     </style>
 
     <style name="BottomNavigationTheme" parent="Theme.AppCompat.Light">
-        <item name="colorPrimary">@color/red</item>
+        <item name="colorPrimary">#303F9F</item>
         <item name="android:textColorSecondary">@color/white</item>
     </style>
 

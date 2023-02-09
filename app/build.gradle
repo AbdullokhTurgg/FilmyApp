@@ -164,6 +164,10 @@ dependencies {
     //Shimmer Effect
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
 
+    // Animated Bottom Bar
+    implementation 'nl.joery.animatedbottombar:library:1.1.0'
+
+
     // Slider
 // dependency for slider view
 

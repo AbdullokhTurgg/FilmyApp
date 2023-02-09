@@ -9,6 +9,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.movieappazi.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
+import nl.joery.animatedbottombar.AnimatedBottomBar
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {

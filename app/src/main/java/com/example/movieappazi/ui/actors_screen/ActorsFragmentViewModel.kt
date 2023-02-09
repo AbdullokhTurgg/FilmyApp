@@ -1,21 +1,14 @@
 package com.example.movieappazi.ui.actors_screen
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.data.dataModel.person.PersonsData
 import com.example.data.network.cloud.base.ResourceProvider
-import com.example.data.network.cloud.cloudModels.person.PersonCloud
-import com.example.data.network.cloud.cloudModels.person.PersonsCloud
-import com.example.data.network.cloud.source.person.CloudDataSourcePerson
 import com.example.domain.assistant.DispatchersProvider
 import com.example.domain.base.BaseMapper
-import com.example.domain.domainModels.person.PersonDomain
 import com.example.domain.domainModels.person.PersonsDomain
 import com.example.domain.domainRepositories.network.person.PersonRepositories
 import com.example.movieappazi.base.BaseViewModel
 import com.example.movieappazi.extensions.changeResponseState
 import com.example.movieappazi.uiModels.movie.ResponseState
-import com.example.movieappazi.uiModels.person.PersonDetailsUi
 import com.example.movieappazi.uiModels.person.PersonUi
 import com.example.movieappazi.uiModels.person.PersonsUi
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -34,6 +27,7 @@ class ActorsFragmentViewModel @Inject constructor(
     private val _error = MutableSharedFlow<String>(replay = 0)
     val error get() = _error.asSharedFlow()
     private val personResponsePage = MutableStateFlow(1)
+
     private val _personResponseState = MutableStateFlow(ResponseState())
     val personResponseState get() = _personResponseState.asStateFlow()
 

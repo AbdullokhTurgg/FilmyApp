@@ -3,14 +3,12 @@ package com.example.movieappazi.adapter.fingerprints
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
-import com.example.data.network.retrofit.utils.Utils
+import com.example.data.network.api.utils.Utils
 import com.example.movieappazi.R
 import com.example.movieappazi.adapter.Item
 import com.example.movieappazi.adapter.ItemFingerprint
 import com.example.movieappazi.base.BaseViewHolder
-import com.example.movieappazi.databinding.ItemFavMoviesBinding
 import com.example.movieappazi.databinding.ObjectItemPortraitBinding
 import com.example.movieappazi.uiModels.movie.MovieUi
 import com.squareup.picasso.Picasso

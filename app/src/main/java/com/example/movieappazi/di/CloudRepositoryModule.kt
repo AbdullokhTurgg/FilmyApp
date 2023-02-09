@@ -20,9 +20,9 @@ import com.example.data.network.cloud.source.person.CloudDataSourcePerson
 import com.example.data.network.cloud.source.person.CloudDataSourcePersonImpl
 import com.example.data.network.cloud.source.video.CloudDataSourceVideo
 import com.example.data.network.cloud.source.video.CloudDataSourceVideoImpl
-import com.example.data.network.retrofit.api.movie.MovieApi
-import com.example.data.network.retrofit.api.person.PersonApi
-import com.example.data.network.retrofit.api.video.VideoApi
+import com.example.data.network.api.api.movie.MovieApi
+import com.example.data.network.api.api.person.PersonApi
+import com.example.data.network.api.api.video.VideoApi
 import com.example.data.storage.db.movie.MovieDao
 import com.example.data.storage.model.movie.MovieStorage
 import com.example.data.storage.source.movie.MovieStorageDataSource

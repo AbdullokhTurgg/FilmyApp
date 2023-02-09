@@ -1,10 +1,10 @@
-package com.example.data.network.retrofit.api.person
+package com.example.data.network.api.api.person
 
 import com.example.data.network.cloud.cloudModels.person.PersonDetailsCloud
 import com.example.data.network.cloud.cloudModels.person.PersonsCloud
-import com.example.data.network.retrofit.utils.Endpoints.Person.PERSON_DETAILS
-import com.example.data.network.retrofit.utils.Endpoints.Person.PERSON_POPULAR
-import com.example.data.network.retrofit.utils.Utils
+import com.example.data.network.api.utils.Endpoints.Person.PERSON_DETAILS
+import com.example.data.network.api.utils.Endpoints.Person.PERSON_POPULAR
+import com.example.data.network.api.utils.Utils
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

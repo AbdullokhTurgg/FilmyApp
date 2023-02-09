@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="@dimen/_100sdp"
+    android:layout_width="@dimen/_120sdp"
     android:layout_height="@dimen/_170sdp"
     android:layout_marginLeft="5dp"
     android:clickable="true"
     android:focusable="true"
     android:clipChildren="true"
     android:layout_marginTop="5dp"
+    android:backgroundTint="@color/text_secondary"
     android:id="@+id/motion_layout"
     android:layout_marginRight="5dp"
     android:orientation="vertical"
     app:cardCornerRadius="8dp"
     app:cardElevation="0dp">
 
-<!--    <androidx.cardview.widget.CardView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_margin="2dp"-->
-<!--        app:cardCornerRadius="10dp">-->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="2dp"
+        app:cardCornerRadius="10dp">
 
 
         <androidx.constraintlayout.motion.widget.MotionLayout
@@ -69,5 +70,6 @@
                 app:totalValue="100"
                 app:totalWidth="8dp" />
         </androidx.constraintlayout.motion.widget.MotionLayout>
+    </androidx.cardview.widget.CardView>
     </androidx.cardview.widget.CardView>
 <!--</androidx.cardview.widget.CardView>-->

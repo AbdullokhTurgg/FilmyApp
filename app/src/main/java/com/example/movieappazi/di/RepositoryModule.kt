@@ -47,12 +47,12 @@ class RepositoryModule {
         dispatchersProvider: DispatchersProvider,
         cloudDataSourceMovie: CloudDataSourceMovie,
         mapCreditsResponseData: BaseMapper<CreditsResponseData, CreditsResponseDomain>,
-        mapFromDetailsCloudToData: BaseMapper<MovieDetailsData, MovieDetailsDomain>,
+        mapFromDetailsDataToDomain: BaseMapper<MovieDetailsData, MovieDetailsDomain>,
         mapFromMoviesDataToDomain: BaseMapper<MoviesData, MoviesDomain>,
     ): MovieRepositories = MovieRepositoriesImpl(
         cloudDataSourceMovie = cloudDataSourceMovie,
         mapFromMoviesDataToDomain = mapFromMoviesDataToDomain,
-        mapFromDetailsCloudToData = mapFromDetailsCloudToData,
+        mapFromDetailsCloudToData = mapFromDetailsDataToDomain,
         dispatchersProvider = dispatchersProvider,
         mapCreditsResponseData = mapCreditsResponseData,
 

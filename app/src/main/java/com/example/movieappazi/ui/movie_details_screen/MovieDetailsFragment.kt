@@ -1,18 +1,21 @@
 package com.example.movieappazi.ui.movie_details_screen
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import com.example.data.network.retrofit.utils.Utils
+import com.example.data.network.api.utils.Utils
 import com.example.domain.state.DataRequestState
 import com.example.movieappazi.R
+import com.example.movieappazi.base.BaseFragment
 import com.example.movieappazi.databinding.FragmentMovieDetailsBinding
 import com.example.movieappazi.extensions.hideView
 import com.example.movieappazi.extensions.makeToast
-import com.example.movieappazi.base.BaseFragment
 import com.example.movieappazi.ui.zAdapter.movie.adapter_for_popular.MovieItemAdapter
 import com.example.movieappazi.ui.zAdapter.movie.listener_for_adapters.RvClickListener
 import com.example.movieappazi.ui.zAdapter.person.PersonDetailsAdapter
@@ -21,13 +24,13 @@ import com.example.movieappazi.uiModels.movie.MovieDetailsUi
 import com.example.movieappazi.uiModels.movie.MovieUi
 import com.example.movieappazi.utils.blur_effect.BlurTransformation
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_movie_details.*
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -57,62 +60,32 @@ class MovieDetailsFragment :
         MovieItemAdapter(MovieItemAdapter.PORTRAIT_TYPE, this@MovieDetailsFragment)
     }
 
-    private val recommendMoviesAdapter: MovieItemAdapter by lazy {
-        MovieItemAdapter(MovieItemAdapter.PORTRAIT_TYPE, this@MovieDetailsFragment)
-    }
-
     private val personAdapter: PersonDetailsAdapter by lazy {
         PersonDetailsAdapter(this@MovieDetailsFragment)
     }
     private val moviee: MovieUi by lazy(LazyThreadSafetyMode.NONE) {
         MovieDetailsFragmentArgs.fromBundle(requireArguments()).movie
     }
-    private var isFavorite = false
+
+    override fun onStart() {
+        super.onStart()
+        requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavMenu2).hideView()
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavMenu2).hideView()
-
         setupClickers()
         setAdaptersToRv()
-        observeMovieDetails()
-//        observeRecommended()
         observeSimilarMovies()
-
-//        viewModel.setMovieId(movieId)
-//        viewModel.isFavorite.observe(viewLifecycleOwner) { boolean -> isFavorite = boolean }
-//        g()
-
-
+        observeMovieDetails()
     }
 
-    fun g() = with(requireBinding()) {
-        likeClick.setOnClickListener {
-            if (isFavorite) {
-                isFavorite = false
-                likeClick.setImageResource(R.drawable.ic_save)
-                viewModel.deleteMovieFromRv(movieId = movieId)
-            } else {
-                isFavorite = true
-                likeClick.setImageResource(R.drawable.ic_bookmark)
-                viewModel.saveMovieFromRv(movieUi = moviee)
-            }
-        }
-    }
 
     private fun setAdaptersToRv() = with(requireBinding()) {
-//        recommendMoviesRv.adapter = recommendMoviesAdapter
         similarMoviesRv.adapter = similarMoviesAdapter
         actorsRv.adapter = personAdapter
     }
-
-//    private fun observeRecommended() {
-//        lifecycleScope.launchWhenResumed {
-//            viewModel.recommendMoviesFlow.collectLatest {
-//                recommendMoviesAdapter.submitList(it.movies)
-//            }
-//        }
-//    }
 
     private fun observeSimilarMovies() {
         lifecycleScope.launchWhenStarted {
@@ -143,23 +116,23 @@ class MovieDetailsFragment :
                         makeToast(it.error.message.toString(), requireContext())
                     }
                 }
+            }
+        }
 
-                lifecycleScope.launchWhenStarted {
-                    viewModel.castFLow.collectLatest {
-                        when (it) {
-                            is DataRequestState.Success -> {
-                                personAdapter.personsList = it.data.cast
-                            }
-                            is DataRequestState.Error -> {
-                                makeToast(it.error.message.toString(), requireContext())
-                            }
-                        }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.castFLow.collectLatest {
+
+                when (it) {
+                    is DataRequestState.Success -> {
+                        personAdapter.personsList = it.data.cast
+                    }
+
+                    is DataRequestState.Error -> {
+                        makeToast(it.error.message.toString(), requireContext())
                     }
                 }
             }
-        }
-        viewModel.error.onEach {
-            makeToast(it, requireContext())
         }
     }
 
@@ -195,9 +168,28 @@ class MovieDetailsFragment :
     }
 
     override fun onPersonItemClick(person: CastUi) {
-//        findNavController().navigate(MovieDetailsFragmentDirections.actionMovieDetailsFragmentToActorsDetailsFragment())
+        @SuppressLint("CutPasteId") val bottomSheet = BottomSheetDialog(requireContext())
+        bottomSheet.setContentView(R.layout.bottom_cast)
+        val castImage = bottomSheet.findViewById<ImageView>(R.id.profile_picture)
+        val castName = bottomSheet.findViewById<TextView>(R.id.name)
+        val closeBtn = bottomSheet.findViewById<ImageView>(R.id.close_btn)
+        val popularity = bottomSheet.findViewById<TextView>(R.id.popularity_txt)
+        val gender = bottomSheet.findViewById<TextView>(R.id.gender_name_txt)
+        val originName = bottomSheet.findViewById<TextView>(R.id.origin_name_txt)
+        Picasso.get().load(Utils.POSTER_PATH_URL + person.profilePath).into(castImage)
+        castName?.text = person.name
+        popularity?.text = person.popularity.toString()
+        gender?.text = person.knownForDepartment
+        originName?.text = person.originalName
+        closeBtn?.setOnClickListener {
+            bottomSheet.dismissWithAnimation
+            bottomSheet.dismiss()
+        }
+        bottomSheet.setCancelable(true)
+        bottomSheet.show()
+
     }
 
-
     override fun onReady(savedInstanceState: Bundle?) {}
+
 }

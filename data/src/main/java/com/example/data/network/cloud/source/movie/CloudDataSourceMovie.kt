@@ -19,7 +19,6 @@ interface CloudDataSourceMovie {
     fun deleteRateFromMovie(movieId: Int): Flow<MoviesData>
     suspend fun getCategories(): MoviesData
     suspend fun getCategoryDetail(id: Int): MoviesData
-
     suspend fun getActors(movieId: Int): DataRequestState<CreditsResponseData>
 
 

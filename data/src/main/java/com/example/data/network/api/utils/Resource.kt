@@ -1,4 +1,4 @@
-package com.example.data.network.retrofit.utils
+package com.example.data.network.api.utils
 
 import com.google.assistant.appactions.suggestions.client.ServiceException
 

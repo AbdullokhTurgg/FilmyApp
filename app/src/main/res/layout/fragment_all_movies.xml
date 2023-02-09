@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backGround"
+    android:background="@color/backGroundAd"
     tools:context=".ui.all_movies_screen.AllMoviesFragment"
     tools:ignore="ScrollViewCount">
 
@@ -23,7 +23,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:visibility="visible">
+            tools:visibility="gone">
 
             <include layout="@layout/shimmer_for_all_movies_fragment" />
         </com.facebook.shimmer.ShimmerFrameLayout>
@@ -32,7 +32,7 @@
             android:id="@+id/all_const"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -53,18 +53,18 @@
             <View
                 android:id="@+id/view"
                 android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:background="@drawable/background_fading_ede"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/_50sdp"
+                android:background="@drawable/back"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spin_kit_movieFrag" />
+                app:layout_constraintTop_toTopOf="@+id/spin_kit_movieFrag" />
 
             <LinearLayout
                 android:id="@+id/popular_MovieLayout_movieFrag"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/black_light"
+                android:background="@color/backGroundAd"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -83,8 +83,14 @@
                         android:fontFamily="@font/aclonica"
                         android:gravity="center_vertical"
                         android:text="Popular "
-                        android:textColor="@color/zero_to_one"
+                        android:textColor="@color/four_to_five"
                         android:textSize="16sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:src="@drawable/crown" />
 
                     <Space
                         android:layout_width="0dp"
@@ -100,7 +106,7 @@
                         android:fontFamily="@font/aclonica"
                         android:gravity="center_vertical"
                         android:text="See All"
-                        android:textColor="@color/zero_to_one"
+                        android:textColor="@color/blueClearColor"
                         android:textSize="16sp" />
 
 
@@ -112,15 +118,18 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/object_item_portrait" />
+                    tools:listitem="@layout/item_popular_movies" />
 
             </LinearLayout>
 
             <View
                 android:id="@+id/view2"
                 android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:background="@drawable/background_fading_ede"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:background="@color/four_to_five"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/popular_MovieLayout_movieFrag"
                 app:layout_constraintTop_toBottomOf="@+id/popular_MovieLayout_movieFrag" />
 
 
@@ -136,7 +145,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_40sdp"
-                android:background="@color/black_light"
+                android:background="@color/backGroundAd"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -156,7 +165,7 @@
                         android:fontFamily="@font/aclonica"
                         android:gravity="center_vertical"
                         android:text="Top Rated "
-                        android:textColor="@color/zero_to_one"
+                        android:textColor="@color/colorTextIcons"
                         android:textSize="16sp" />
 
                     <Space
@@ -173,7 +182,7 @@
                         android:fontFamily="@font/aclonica"
                         android:gravity="center_vertical"
                         android:text="See All"
-                        android:textColor="@color/zero_to_one"
+                        android:textColor="@color/blueClearColor"
                         android:textSize="16sp" />
 
 
@@ -212,7 +221,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_240sdp"
-                android:background="@color/black_light"
+                android:background="@color/backGroundAd"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -232,7 +241,7 @@
                         android:fontFamily="@font/aclonica"
                         android:gravity="center_vertical"
                         android:text="Upcoming "
-                        android:textColor="@color/zero_to_one"
+                        android:textColor="@color/colorTextIcons"
                         android:textSize="16sp" />
 
                     <Space
@@ -249,7 +258,7 @@
                         android:fontFamily="@font/aclonica"
                         android:gravity="center_vertical"
                         android:text="See All"
-                        android:textColor="@color/zero_to_one"
+                        android:textColor="@color/blueClearColor"
                         android:textSize="16sp" />
 
 
@@ -300,7 +309,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_30sdp"
                 android:layout_marginBottom="@dimen/_50sdp"
-                android:background="@color/black_light"
+                android:background="@color/backGroundAd"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toTopOf="@+id/upcoming_MovieLayout_movieFrag"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -320,7 +329,7 @@
                         android:fontFamily="@font/aclonica"
                         android:gravity="center_vertical"
                         android:text="Now Playing "
-                        android:textColor="@color/zero_to_one"
+                        android:textColor="@color/colorTextIcons"
                         android:textSize="16sp" />
 
                     <Space
@@ -337,7 +346,7 @@
                         android:fontFamily="@font/aclonica"
                         android:gravity="center_vertical"
                         android:text="See All"
-                        android:textColor="@color/zero_to_one"
+                        android:textColor="@color/blueClearColor"
                         android:textSize="16sp" />
 
 

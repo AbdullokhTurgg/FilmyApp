@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.motion.widget.MotionLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/motion"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backGround"
+    android:background="@color/preview"
     app:layoutDescription="@xml/fragment_movie_details_scene"
     tools:context=".ui.movie_details_screen.MovieDetailsFragment">
 
@@ -20,7 +19,7 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/posterImageCard"
-        android:layout_width="@dimen/_200sdp"
+        android:layout_width="@dimen/_220sdp"
         android:layout_height="200dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="@dimen/_200sdp"
@@ -101,8 +100,7 @@
         android:layout_height="0dp"
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_550sdp"
-        android:background="@color/backGround"
-        android:backgroundTint="@color/backGround"
+        android:backgroundTint="@color/preview"
         android:elevation="@dimen/_50sdp"
         app:cardCornerRadius="@dimen/_50sdp"
         app:layout_constraintTop_toTopOf="parent">
@@ -376,11 +374,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/movieDetailsTextMarginTop"
                     android:orientation="horizontal"
-                    tools:listitem="@layout/object_item_portrait"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/actorsText" />
+                    app:layout_constraintTop_toBottomOf="@+id/actorsText"
+                    tools:listitem="@layout/object_item_portrait" />
 
                 <!--                <com.google.android.youtube.player.YouTubePlayerView-->
                 <!--                    android:id="@+id/youtube_player"-->
@@ -412,7 +410,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/similarMoviesText"
-                    tools:listitem="@layout/object_item_horizontal" />
+                    tools:listitem="@layout/item_person_for_movie_details" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

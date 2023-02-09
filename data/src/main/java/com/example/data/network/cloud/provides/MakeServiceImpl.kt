@@ -1,6 +1,6 @@
 package com.example.data.network.cloud.provides
 
-import com.example.data.network.retrofit.utils.Utils
+import com.example.data.network.api.utils.Utils
 
 class MakeServiceImpl(
     private val retrofitBuilder: ProvideRetrofitBuilder,

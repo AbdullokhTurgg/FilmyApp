@@ -7,6 +7,8 @@ import androidx.viewbinding.ViewBinding
 import com.example.movieappazi.adapter.Item
 import com.example.movieappazi.adapter.ItemFingerprint
 import com.example.movieappazi.base.BaseViewHolder
+import com.example.movieappazi.ui.zAdapter.movie.listener_for_adapters.RvClickListener
+import com.example.movieappazi.uiModels.movie.MovieUi
 import com.example.newsappazi.adapter.diffuitil.FingerprintDiffUtil
 
 class FingerPrintAdapter(

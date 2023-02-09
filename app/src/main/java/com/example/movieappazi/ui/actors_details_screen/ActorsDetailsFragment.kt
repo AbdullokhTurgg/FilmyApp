@@ -1,13 +1,10 @@
 package com.example.movieappazi.ui.actors_details_screen
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.example.data.network.retrofit.utils.Utils
+import com.example.data.network.api.utils.Utils
 import com.example.domain.state.DataRequestState
 import com.example.movieappazi.R
 import com.example.movieappazi.base.BaseFragment
@@ -38,9 +35,13 @@ class ActorsDetailsFragment :
         viewModelFactory.create(movieId = movieId)
     }
 
+    override fun onStart() {
+        super.onStart()
+        requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavMenu2).hideView()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavMenu2).hideView()
         observePersonDetails()
     }
 

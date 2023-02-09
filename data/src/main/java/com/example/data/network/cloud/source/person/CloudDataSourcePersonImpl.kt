@@ -5,7 +5,7 @@ import com.example.data.dataModel.person.PersonsData
 import com.example.data.network.cloud.cloudModels.person.PersonDetailsCloud
 import com.example.data.network.cloud.cloudModels.person.PersonsCloud
 import com.example.data.network.cloud.handler.ResponseHandler
-import com.example.data.network.retrofit.api.person.PersonApi
+import com.example.data.network.api.api.person.PersonApi
 import com.example.domain.assistant.DispatchersProvider
 import com.example.domain.base.BaseMapper
 import com.example.domain.state.DataRequestState

@@ -1,111 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/motion_layout"
     android:layout_width="match_parent"
-    android:id="@+id/const_fav"
     android:layout_height="wrap_content"
-    android:background="@color/backGround"
+    android:layout_marginHorizontal="@dimen/_4sdp"
+    android:layout_marginTop="@dimen/_16sdp"
+    android:backgroundTint="@color/preview"
+    app:cardCornerRadius="@dimen/_20sdp"
+    app:cardElevation="@dimen/_500sdp"
     app:layoutDescription="@xml/item_fav_movies_scene"
     tools:context=".ui.storage_movies_screen.StorageMoviesFragment">
 
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:foreground="?attr/selectableItemBackground"
-        android:paddingStart="@dimen/start_margin"
-        android:paddingTop="@dimen/top_margin_small"
-        android:paddingEnd="@dimen/end_margin"
-        android:paddingBottom="@dimen/bottom_margin_small">
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_1sdp"
+        android:layout_marginStart="@dimen/_1sdp"
+        android:layout_marginTop="@dimen/_1sdp"
+        android:layout_marginEnd="@dimen/_1sdp"
+        android:layout_marginBottom="@dimen/_1sdp"
+        android:backgroundTint="@color/backGroundAd"
+        app:cardCornerRadius="@dimen/_20sdp"
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="@dimen/portrait_image_width_small"
-            android:layout_height="@dimen/portrait_image_height_small"
-            app:cardCornerRadius="@dimen/card_corner_radius"
-            app:cardElevation="@dimen/card_elevation">
+        >
 
-            <ImageView
-                android:id="@+id/saved_image"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                tools:srcCompat="@drawable/ic_baseline_movie_24" />
-
-        </androidx.cardview.widget.CardView>
 
         <LinearLayout
+            android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/start_margin"
-            android:layout_marginEnd="42dp"
-            android:orientation="vertical">
+            android:clipToPadding="false"
+            android:foreground="?attr/selectableItemBackground"
+            android:paddingStart="@dimen/start_margin"
+            android:paddingTop="@dimen/top_margin_small"
+            android:paddingEnd="@dimen/end_margin"
+            android:paddingBottom="@dimen/bottom_margin_small">
 
-            <TextView
-                android:id="@+id/movie_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:ellipsize="end"
-                android:maxLines="4"
-                android:text="@{movie.title}"
-                android:textColor="@color/white"
-                android:textSize="@dimen/title_text_size_small"
-                android:textStyle="bold"
-                tools:text="Movie Title" />
+            <androidx.cardview.widget.CardView
+                android:layout_width="@dimen/portrait_image_width_small"
+                android:layout_height="@dimen/portrait_image_height_small"
+                app:cardCornerRadius="@dimen/card_corner_radius"
+                app:cardElevation="@dimen/card_elevation">
 
-            <TextView
-                android:id="@+id/date_save"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:drawablePadding="@dimen/textview_drawable_padding"
-                android:fontFamily="sans-serif-light"
-                android:text="@{ExtensionsKt.formatDate(movie.releaseDate).empty ? @string/n_a : ExtensionsKt.formatDate(movie.releaseDate)}"
-                android:textColor="@color/white"
-                app:drawableStartCompat="@drawable/ic_baseline_calendar_today_14"
-                tools:text="01 January, 2022" />
+                <ImageView
+                    android:id="@+id/posterImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    tools:srcCompat="@drawable/movie2" />
 
-            <TextView
-                android:id="@+id/rating"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:drawablePadding="@dimen/textview_drawable_padding"
-                android:fontFamily="sans-serif-light"
-                android:text="@{ExtensionsKt.round(movie.voteAverage) + @string/item_count_s(ExtensionsKt.thousandsSeparator(movie.voteCount,context))}"
-                android:textColor="@color/white"
-                app:drawableStartCompat="@drawable/ic_baseline_star_rate_14"
-                app:drawableTint="@color/day_night"
-                tools:text="0.0  (0)" />
+            </androidx.cardview.widget.CardView>
 
-            <TextView
-                android:id="@+id/time_save"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawablePadding="@dimen/textview_drawable_padding"
-                android:fontFamily="sans-serif-light"
-                android:text="@{ExtensionsKt.formatTime(movie.runtime, context) ?? @string/n_a}"
-                android:textColor="@color/white"
-                app:drawableStartCompat="@drawable/ic_baseline_access_time_14"
-                tools:text="0hr 0min" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/start_margin"
+                android:layout_marginEnd="42dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/movie_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:ellipsize="end"
+                    android:maxLines="4"
+                    android:text="@{movie.title}"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/title_text_size_small"
+                    android:textStyle="bold"
+                    tools:text="Movie Title" />
+
+                <TextView
+                    android:id="@+id/date_save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:drawablePadding="@dimen/textview_drawable_padding"
+                    android:fontFamily="sans-serif-light"
+                    android:text="@{ExtensionsKt.formatDate(movie.releaseDate).empty ? @string/n_a : ExtensionsKt.formatDate(movie.releaseDate)}"
+                    android:textColor="@color/white"
+                    app:drawableStartCompat="@drawable/ic_baseline_calendar_today_14"
+                    tools:text="01 January, 2022" />
+
+                <TextView
+                    android:id="@+id/rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:drawablePadding="@dimen/textview_drawable_padding"
+                    android:fontFamily="sans-serif-light"
+                    android:text="@{ExtensionsKt.round(movie.voteAverage) + @string/item_count_s(ExtensionsKt.thousandsSeparator(movie.voteCount,context))}"
+                    android:textColor="@color/white"
+                    app:drawableStartCompat="@drawable/ic_baseline_star_rate_14"
+                    tools:text="0.0  (0)" />
+
+                <TextView
+                    android:id="@+id/vote_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="@dimen/textview_drawable_padding"
+                    android:fontFamily="sans-serif-light"
+                    android:text="@{ExtensionsKt.formatTime(movie.runtime, context) ?? @string/n_a}"
+                    android:textColor="@color/white"
+                    app:drawableStartCompat="@drawable/ic_danger_circle"
+                    tools:text="0hr 0min" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
 
-    <View
-        android:id="@+id/view3"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_10sdp"
-        android:background="@drawable/back"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout2">
+        <com.vaibhavlakhera.circularprogressview.CircularProgressView
+            android:id="@+id/progressView"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_marginStart="@dimen/_300sdp"
+            android:layout_marginTop="@dimen/_120sdp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            app:animate="true"
+            app:animateDuration="800"
+            app:fillColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:progressColor="@color/purple_500"
+            app:progressInterpolator="@android:anim/accelerate_decelerate_interpolator"
+            app:progressTextColor="@color/white"
+            app:progressTextEnabled="true"
+            app:progressTextSize="10sp"
+            app:progressTextType="percent"
+            app:progressValue="0"
+            app:progressWidth="5dp"
+            app:startAngle="270"
+            app:totalColor="@color/black"
+            app:totalValue="100"
+            app:totalWidth="8dp" />
 
+        <View
+            android:id="@+id/view3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/_180sdp"
+            android:background="@drawable/back"
+            app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"></View>
 
-    </View>
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</androidx.cardview.widget.CardView>

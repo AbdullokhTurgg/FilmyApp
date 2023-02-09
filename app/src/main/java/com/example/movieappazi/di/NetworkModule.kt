@@ -1,9 +1,9 @@
 package com.example.movieappazi.di
 
 import com.example.data.network.cloud.provides.*
-import com.example.data.network.retrofit.api.movie.MovieApi
-import com.example.data.network.retrofit.api.person.PersonApi
-import com.example.data.network.retrofit.api.video.VideoApi
+import com.example.data.network.api.api.movie.MovieApi
+import com.example.data.network.api.api.person.PersonApi
+import com.example.data.network.api.api.video.VideoApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

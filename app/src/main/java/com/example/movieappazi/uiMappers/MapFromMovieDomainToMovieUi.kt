@@ -14,12 +14,12 @@ class MapFromMovieDomainToMovieUi : BaseMapper<MovieDomain, MovieUi> {
             id = id,
             originalTitle = originalTitle,
             originalLanguage = originalLanguage,
-            title = title,
+            title = title!!,
             backdropPath = backdropPath,
             popularity = popularity,
             voteCount = voteCount,
             video = video,
-            rating = rating,
+            rating = rating!!,
             genre_ids = genre_ids?.map { id -> id },
         )
     }

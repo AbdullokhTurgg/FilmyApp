@@ -4,48 +4,99 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backGround"
+    android:background="@color/backGroundAd"
     app:layoutDescription="@xml/fragment_see_more_scene"
     tools:context=".ui.see_all_movies_screen.SeeAllMoviesFragment">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/materialCardView"
+    <ScrollView
+        android:id="@+id/scroll_view"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginHorizontal="@dimen/_12sdp"
-        android:layout_marginTop="@dimen/_8sdp"
-        android:elevation="@dimen/_20sdp"
-        app:cardCornerRadius="@dimen/_10sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/toolbar_rating"
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_60sdp"
-            android:background="@color/backGround"
-            android:backgroundTint="@color/backGroundAd"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:title="All Movies"
-            app:titleTextColor="@color/white" />
-    </com.google.android.material.card.MaterialCardView>
+            android:layout_height="match_parent">
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/all_toprated_rv"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:spanCount="2"
+                tools:listitem="@layout/item_for_seemore" />
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/pageConstraint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/all_toprated_rv">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/all_toprated_rv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/materialCardView"
-            app:spanCount="3"
-            tools:listitem="@layout/object_item_portrait" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/prev_btn"
+                    style="@style/PrevBtnStyle"
+                    android:layout_marginBottom="4dp"
+                    android:text="prev"
+                    app:icon="@drawable/ic_previous"
+                    app:iconTint="@color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/prev_page_text"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/prev_page_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/prev_btn"
+                    app:layout_constraintEnd_toStartOf="@+id/current_page_text"
+                    app:layout_constraintStart_toEndOf="@+id/prev_btn"
+                    app:layout_constraintTop_toTopOf="@id/prev_btn" />
+
+                <TextView
+                    android:id="@+id/current_page_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/green"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/next_page_text"
+                    app:layout_constraintStart_toEndOf="@+id/prev_page_text"
+                    app:layout_constraintTop_toTopOf="@id/prev_btn" />
+
+                <TextView
+                    android:id="@+id/next_page_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/prev_btn"
+                    app:layout_constraintEnd_toStartOf="@+id/next_btn"
+                    app:layout_constraintStart_toEndOf="@+id/current_page_text"
+                    app:layout_constraintTop_toTopOf="@id/prev_btn" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/next_btn"
+                    style="@style/BtnNextStyle"
+                    android:text="next"
+                    app:icon="@drawable/ic_next"
+                    app:iconGravity="end"
+                    app:iconTint="@color/black"
+                    app:layout_constraintBottom_toBottomOf="@id/prev_btn"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/next_page_text"
+                    app:layout_constraintTop_toTopOf="@id/prev_btn" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
 </androidx.constraintlayout.motion.widget.MotionLayout>

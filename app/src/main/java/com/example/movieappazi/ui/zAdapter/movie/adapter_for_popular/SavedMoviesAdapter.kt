@@ -4,11 +4,10 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.data.network.retrofit.utils.Utils
+import com.example.data.network.api.utils.Utils
 import com.example.movieappazi.R
 import com.example.movieappazi.databinding.ItemFavMoviesBinding
 import com.example.movieappazi.uiModels.movie.MovieUi
@@ -35,8 +34,6 @@ class SavedMoviesAdapter(
             listener.onLongClick(position)
             true
         }
-//        holder.itemMovie.startAnimation(AnimationUtils.loadAnimation(holder.itemView.context,
-//            R.anim.sli))
     }
 
     override fun getItemCount(): Int {
@@ -51,13 +48,23 @@ class SavedMoviesAdapter(
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val binding = ItemFavMoviesBinding.bind(itemView)
-        val itemMovie = itemView.findViewById<ConstraintLayout>(R.id.const_fav)
         fun bind(article: MovieUi) = article.apply {
             with(binding) {
-                Picasso.get().load(Utils.POSTER_PATH_URL + article.posterPath).into(savedImage)
+                Picasso.get().load(Utils.POSTER_PATH_URL + article.posterPath).into(posterImage)
                 movieTitle.text = article.title
                 dateSave.text = article.releaseDate
                 rating.text = article.rating.toString()
+                voteCount.text = article.voteCount.toString()
+
+                val voteAverage = (popularity!! * 10.0)
+                if (voteAverage.toInt() >= 70) {
+                    progressView.setProgressColorRes(R.color.green)
+                } else if (voteAverage.toInt() in 51..69) {
+                    progressView.setProgressColorRes(android.R.color.holo_orange_light)
+                } else {
+                    progressView.setProgressColorRes(android.R.color.holo_red_dark)
+                }
+                progressView.setProgress(voteAverage.toInt(), true)
             }
         }
     }

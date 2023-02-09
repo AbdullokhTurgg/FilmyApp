@@ -7,7 +7,7 @@ import com.example.data.network.cloud.cloudModels.movie.MovieDetailsCloud
 import com.example.data.network.cloud.cloudModels.movie.MoviesCloud
 import com.example.data.network.cloud.cloudModels.movie.movie_category.CreditsResponseCloud
 import com.example.data.network.cloud.handler.ResponseHandler
-import com.example.data.network.retrofit.api.movie.MovieApi
+import com.example.data.network.api.api.movie.MovieApi
 import com.example.domain.assistant.DispatchersProvider
 import com.example.domain.base.BaseMapper
 import com.example.domain.state.DataRequestState

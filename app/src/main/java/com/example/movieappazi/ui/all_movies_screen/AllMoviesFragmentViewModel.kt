@@ -7,8 +7,8 @@ import com.example.domain.domainModels.movie.MovieDomain
 import com.example.domain.domainModels.movie.MoviesDomain
 import com.example.domain.domainRepositories.network.movie.MovieRepositories
 import com.example.domain.domainRepositories.storage.MovieStorageRepository
-import com.example.movieappazi.exception.HandleExeption
 import com.example.movieappazi.base.BaseViewModel
+import com.example.movieappazi.exception.HandleExeption
 import com.example.movieappazi.ui.see_all_movies_screen.MovieType
 import com.example.movieappazi.uiModels.movie.MovieUi
 import com.example.movieappazi.uiModels.movie.MoviesUi
@@ -27,9 +27,8 @@ class AllMoviesFragmentViewModel @Inject constructor(
     private val mapFromMoviesDomainToUi: BaseMapper<MoviesDomain, MoviesUi>,
     private val dispatchersProvider: DispatchersProvider,
     private val mapper: BaseMapper<MovieUi, MovieDomain>,
-    private val hanEx: HandleExeption
+    private val hanEx: HandleExeption,
 ) : BaseViewModel() {
-
 
     private val _error = MutableSharedFlow<String>(replay = 0)
     val error get() = _error.asSharedFlow()
@@ -52,40 +51,32 @@ class AllMoviesFragmentViewModel @Inject constructor(
 
     val popularMovies = repository.getPopularMovie(1).map(mapFromMoviesDomainToUi::map)
         .flowOn(dispatchersProvider.default())
-        .catch { t:Throwable->
+
+        .catch { t: Throwable ->
             _error.emit(hanEx.hanEx(t))
-        }
-        .shareIn(viewModelScope, SharingStarted.Lazily, 1)
+        }.shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
 
-    val relevanceMovies = repository.getUpcomingMovies(1)
-        .map(mapFromMoviesDomainToUi::map)
-        .flowOn(dispatchersProvider.default())
-        .catch { t:Throwable->
+    val relevanceMovies = repository.getUpcomingMovies(1).map(mapFromMoviesDomainToUi::map)
+        .flowOn(dispatchersProvider.default()).catch { t: Throwable ->
             _error.emit(hanEx.hanEx(t))
-        }
-        .shareIn(viewModelScope, SharingStarted.Lazily, 1)
+        }.shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
 
-    val publishedAtMovies = repository.getNowPlayingMovies(1)
-        .map(mapFromMoviesDomainToUi::map)
-        .flowOn(dispatchersProvider.default())
-        .catch { t:Throwable->
+    val publishedAtMovies = repository.getNowPlayingMovies(1).map(mapFromMoviesDomainToUi::map)
+        .flowOn(dispatchersProvider.default()).catch { t: Throwable ->
             _error.emit(hanEx.hanEx(t))
-        }
-        .shareIn(viewModelScope, SharingStarted.Lazily, 1)
+        }.shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
     val ratingMovies = repository.getTopRatedMovies(1).map(mapFromMoviesDomainToUi::map)
-        .flowOn(dispatchersProvider.default())
-        .catch { t:Throwable->
+        .flowOn(dispatchersProvider.default()).catch { t: Throwable ->
             _error.emit(hanEx.hanEx(t))
-        }
-        .shareIn(viewModelScope, SharingStarted.Lazily, 1)
+        }.shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
     fun goMoreMovieFragment(type: MovieType) =
         navigate(AllMoviesFragmentDirections.actionNavMoviesToSeeAllMoviesFragment(type))
 
-    fun goMovieDetails(item:MovieUi) =
+    fun goMovieDetails(item: MovieUi) =
         navigate(AllMoviesFragmentDirections.actionAllMoviesFragmentToMovieDetailsFragment(item))
 
 }

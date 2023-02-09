@@ -8,24 +8,16 @@ import android.widget.TextView
 import androidx.appcompat.widget.AppCompatRatingBar
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.example.data.network.cloud.base.ResourceProvider
-import com.example.data.network.retrofit.utils.Resource
-import com.example.data.network.retrofit.utils.Utils
+import com.example.data.network.api.utils.Utils
 import com.example.movieappazi.R
-import com.example.movieappazi.adapter.animations.AddableItemAnimator
-import com.example.movieappazi.adapter.animations.custom.SlideInTopCommonAnimator
-import com.example.movieappazi.adapter.fingerprints.PostFingerPrint
+import com.example.movieappazi.base.BaseFragment
 import com.example.movieappazi.databinding.FragmentAllMoviesBinding
 import com.example.movieappazi.extensions.makeToast
 import com.example.movieappazi.extensions.showView
-import com.example.movieappazi.base.BaseFragment
 import com.example.movieappazi.ui.see_all_movies_screen.MovieType
 import com.example.movieappazi.ui.zAdapter.movie.adapter_for_popular.MovieItemAdapter
 import com.example.movieappazi.ui.zAdapter.movie.listener_for_adapters.RvClickListener
 import com.example.movieappazi.uiModels.movie.MovieUi
-import com.example.newsappazi.adapter.decorations.FeedHorizontalDividerItemDecoration
-import com.example.newsappazi.adapter.decorations.GroupVerticalItemDecoration
-import com.example.movieappazi.adapter.fingerprints.FingerPrintAdapter
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButton
@@ -45,10 +37,11 @@ import kotlinx.coroutines.flow.onEach
 class AllMoviesFragment :
     BaseFragment<FragmentAllMoviesBinding, AllMoviesFragmentViewModel>(FragmentAllMoviesBinding::inflate),
     RvClickListener<MovieUi> {
+
     override val viewModel: AllMoviesFragmentViewModel by viewModels()
 
     private val popularAdapter: MovieItemAdapter by lazy {
-        MovieItemAdapter(MovieItemAdapter.PORTRAIT_TYPE, this)
+        MovieItemAdapter(MovieItemAdapter.POPULAR_TYPE, this)
     }
 
     private val upcomingAdapter: MovieItemAdapter by lazy {
@@ -63,87 +56,85 @@ class AllMoviesFragment :
         MovieItemAdapter(objectViewType = MovieItemAdapter.PORTRAIT_TYPE, this)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
+    override fun onStart() {
+        super.onStart()
+        requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavMenu2).showView()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         setAdapterToRv()
+        setupClickers()
+        observeRatingMovies()
         observePopularMovies()
         observeRelevancyMovies()
         observePublishedAtMovies()
-        setupClickers()
-        observeRatingMovies()
-
     }
 
 
-    override fun onStart() {
-        super.onStart()
-        requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavMenu2).showView()
+    private fun setAdapterToRv() {
+        requireBinding().popularMovieRecViewMoviesFragment.adapter = popularAdapter
+        requireBinding().upcomingMovieRecViewMoviesFragment.adapter = upcomingAdapter
+        requireBinding().nowPlayingMovieRecViewMoviesFragment.adapter = publishedAtAdapter
+        requireBinding().topRatedMovieRecViewMoviesFragment.adapter = ratingAdapter
     }
 
+    private fun observeRatingMovies() {
+        viewModel.error.onEach {
+            makeToast(it, requireContext())
+            requireBinding().shimmerLayout.visibility = View.INVISIBLE
+            requireBinding().noConnection.visibility = View.VISIBLE
+        }
 
-    private fun setAdapterToRv() = with(requireBinding()) {
-        popularMovieRecViewMoviesFragment.adapter = popularAdapter
-        upcomingMovieRecViewMoviesFragment.adapter = upcomingAdapter
-        nowPlayingMovieRecViewMoviesFragment.adapter = publishedAtAdapter
-        topRatedMovieRecViewMoviesFragment.adapter = ratingAdapter
-    }
-
-    private fun observeRatingMovies() = with(viewModel) {
         lifecycleScope.launchWhenResumed {
-            ratingMovies.collectLatest {
+            viewModel.ratingMovies.collectLatest {
                 ratingAdapter.submitList(it.movies)
             }
-            error.onEach {
-                makeToast(it, requireContext())
-                requireBinding().shimmerLayout.visibility = View.INVISIBLE
-                requireBinding().noConnection.visibility = View.VISIBLE
-            }
         }
     }
 
-    private fun observePublishedAtMovies() = with(viewModel) {
+    private fun observePublishedAtMovies() {
+        viewModel.error.onEach {
+            makeToast(it, requireContext())
+            requireBinding().shimmerLayout.visibility = View.INVISIBLE
+            requireBinding().noConnection.visibility = View.VISIBLE
+        }
+
         lifecycleScope.launchWhenResumed {
-            publishedAtMovies.collectLatest {
+            viewModel.publishedAtMovies.collectLatest {
                 publishedAtAdapter.submitList(it.movies)
             }
-            error.onEach {
-                makeToast(it, requireContext())
-                requireBinding().shimmerLayout.visibility = View.INVISIBLE
-                requireBinding().noConnection.visibility = View.VISIBLE
-            }
         }
     }
 
-    private fun observePopularMovies() = with(requireBinding()) {
-        lifecycleScope.launchWhenStarted {
+    private fun observePopularMovies() {
+        viewModel.error.onEach {
+            makeToast(it, requireContext())
+            requireBinding().shimmerLayout.visibility = View.INVISIBLE
+            requireBinding().noConnection.visibility = View.VISIBLE
+        }
+
+
+        lifecycleScope.launchWhenResumed {
             viewModel.popularMovies.collectLatest {
                 popularAdapter.submitList(it.movies)
-                allConst.visibility = View.VISIBLE
-                shimmerLayout.visibility = View.INVISIBLE
-            }
-            viewModel.error.onEach {
-                makeToast(it, requireContext())
+                requireBinding().allConst.visibility = View.VISIBLE
                 requireBinding().shimmerLayout.visibility = View.INVISIBLE
-                requireBinding().noConnection.visibility = View.VISIBLE
             }
         }
     }
 
-    private fun observeRelevancyMovies() = with(viewModel) {
+    private fun observeRelevancyMovies() {
+        viewModel.error.onEach {
+            makeToast(it, requireContext())
+            requireBinding().shimmerLayout.visibility = View.INVISIBLE
+            requireBinding().noConnection.visibility = View.VISIBLE
+        }
+
         lifecycleScope.launchWhenResumed {
-            relevanceMovies.collectLatest {
+            viewModel.relevanceMovies.collectLatest {
                 upcomingAdapter.submitList(it.movies)
-            }
-            error.onEach {
-                makeToast(it, requireContext())
-                requireBinding().shimmerLayout.visibility = View.INVISIBLE
-                requireBinding().noConnection.visibility = View.VISIBLE
             }
         }
 
@@ -167,7 +158,6 @@ class AllMoviesFragment :
 
     private fun launchToSeeAllFragment(type: MovieType) = viewModel.goMoreMovieFragment(type)
 
-
     @SuppressLint("CutPasteId")
     fun openDialogSheet(item: MovieUi) {
         val bottomSheet = BottomSheetDialog(requireContext())
@@ -179,7 +169,7 @@ class AllMoviesFragment :
         val cancelBtn = bottomSheet.findViewById<ImageView>(R.id.close_btn)
         val rel = bottomSheet.findViewById<TextView>(R.id.releaseDate)
         val prof_img = bottomSheet.findViewById<ImageView>(R.id.profile_picture)
-        val vote = bottomSheet.findViewById<AppCompatRatingBar>(R.id.voteAverage_item)
+        val vote = bottomSheet.findViewById<AppCompatRatingBar>(R.id.voteAverage_item_cast)
         cancelBtn?.setOnClickListener { bottomSheet.dismiss() }
         Picasso.get().load(Utils.POSTER_PATH_URL + item.backdropPath).into(movieImage)
         movieDes?.text = item.overview
@@ -188,8 +178,8 @@ class AllMoviesFragment :
         vote?.rating = item.voteCount!!.toFloat()
         Picasso.get().load(Utils.POSTER_PATH_URL + item.posterPath).into(prof_img)
         movieMore?.setOnClickListener {
-            viewModel.goMovieDetails(item)
             bottomSheet.dismiss()
+            viewModel.goMovieDetails(item)
         }
         bottomSheet.setCancelable(true)
         bottomSheet.show()

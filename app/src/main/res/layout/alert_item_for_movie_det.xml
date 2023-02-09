@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:background="@android:color/transparent"
     app:layoutDescription="@xml/alert_item_for_movie_det_scene"
-    app:layout_behavior="@string/bottom_sheet_behavior">
+  >
 
     <LinearLayout
         android:id="@+id/linearLayout3"
@@ -74,7 +74,7 @@
 
 
             <androidx.appcompat.widget.AppCompatRatingBar
-                android:id="@+id/voteAverage_item"
+                android:id="@+id/voteAverage_item_cast"
                 style="@style/Widget.AppCompat.RatingBar.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
