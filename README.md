@@ -1,5 +1,5 @@
+# MovieAppAzi
 
-# MovieAppAzi 
 # A program written entirely in Kotlin using the principles of Clean Architecture according to the MVVM pattern.
 
 The application shows a list of films and actors, detailed information about them, the ability to
@@ -8,7 +8,7 @@ search, as well as add to favorites.Adding to favorites takes place in the local
 [<img src="[meta/android/screenshots/screenshot_1.png" width=160>]([meta/android/screenshots/screenshot_1.png](https://user-images.githubusercontent.com/114995936/216970405-16e](https://user-images.githubusercontent.com/114995936/216970405-16effdc3-f0e3-4622-b81b-56081e3cdbd6.jpg)ffdc3-f0e3-4622-b81b-56081e3cdbd6.jpg))
 [<img src="meta/android/screenshots/screenshot_2.png" width=160>](meta/android/screenshots/screenshot_2.png)
 [<img src="meta/android/screenshots/screenshot_3.png" width=160>](meta/android/screenshots/screenshot_3.png)
-[<img src="meta/android/screenshots/screenshot_4.png" width=160>](meta/android/screenshots/screenshot_4.png)
+[<img src="meta/android/screenshots/screenshot_4.png" width="160"/>](app.res.drawable.screen1)
 [<img src="meta/android/screenshots/screenshot_5.png" width=160>](meta/android/screenshots/screenshot_5.png)
 [<img src="meta/android/screenshots/screenshot_6.png" width=160>](meta/android/screenshots/screenshot_6.png)
 [<img src="meta/android/screenshots/screenshot_7.png" width=160>](meta/android/screenshots/screenshot_7.png)
@@ -40,13 +40,14 @@ search, as well as add to favorites.Adding to favorites takes place in the local
   navigation component also provides a consistent and predictable user interface, adhering to an
   established set of principles.
 
-* [Coroutines Flow](https://developer.android.com/topic/libraries/architecture/livedata) Data objects that
-  notify views of changes to the underlying database.
+* [Coroutines Flow](https://developer.android.com/topic/libraries/architecture/livedata) Data
+  objects that notify views of changes to the underlying database.
 
 
-* [Kotlin flows](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/) In coroutines, a flow is a type that can
-  emit multiple values sequentially, as opposed to suspend functions that return only a single
-  value. For example, you can use a flow to receive live updates from a database.
+* [Kotlin flows](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/)
+  In coroutines, a flow is a type that can emit multiple values sequentially, as opposed to suspend
+  functions that return only a single value. For example, you can use a flow to receive live updates
+  from a database.
 
 * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) Data related to
   the user interface that is not destroyed when the application is rotated. Easily schedule
