@@ -5,15 +5,15 @@
 The application shows a list of films and actors, detailed information about them, the ability to
 search, as well as add to favorites.Adding to favorites takes place in the local Room database.
 
-[<img src="[meta/android/screenshots/screenshot_1.png" width=160>]([meta/android/screenshots/screenshot_1.png](https://user-images.githubusercontent.com/114995936/216970405-16e](https://user-images.githubusercontent.com/114995936/216970405-16effdc3-f0e3-4622-b81b-56081e3cdbd6.jpg)ffdc3-f0e3-4622-b81b-56081e3cdbd6.jpg))
-[<img src="meta/android/screenshots/screenshot_2.png" width=160>](meta/android/screenshots/screenshot_2.png)
-[<img src="meta/android/screenshots/screenshot_3.png" width=160>](meta/android/screenshots/screenshot_3.png)
-[<img src="meta/android/screenshots/screenshot_4.png" width="160"/>](app.res.drawable.screen1)
-[<img src="meta/android/screenshots/screenshot_5.png" width=160>](meta/android/screenshots/screenshot_5.png)
-[<img src="meta/android/screenshots/screenshot_6.png" width=160>](meta/android/screenshots/screenshot_6.png)
-[<img src="meta/android/screenshots/screenshot_7.png" width=160>](meta/android/screenshots/screenshot_7.png)
-[<img src="meta/android/screenshots/screenshot_8.png" width=160>](meta/android/screenshots/screenshot_8.png)
-[<img src="meta/android/screenshots/screenshot_9.png" width=160>](meta/android/screenshots/screenshot_9.png)
+![1676061060732 1](https://user-images.githubusercontent.com/114995936/218192150-c3d8e7e8-6ae2-4a0a-a3e0-42812db55436.jpg)
+![1676061060722 1](https://user-images.githubusercontent.com/114995936/218192191-2a2b12af-59ce-4705-a821-0a13fd55ef0e.jpg)
+![1676061060726 1](https://user-images.githubusercontent.com/114995936/218192233-6265b6c4-b399-4eec-8e78-ba9ce9894b07.jpg)
+![1676061292552 1](https://user-images.githubusercontent.com/114995936/218192387-baef0b74-148e-46cf-862b-35b3a2757dec.jpg)
+![1676061292547 1](https://user-images.githubusercontent.com/114995936/218192426-e5aa892d-44dc-4a4b-a064-38e4d78df7f1.jpg)
+![1676061292541 1](https://user-images.githubusercontent.com/114995936/218192466-e9665a47-0c35-49e3-93a0-01be34dd83a2.jpg)
+![1676061292541 1](https://user-images.githubusercontent.com/114995936/218192502-18533e22-de08-4481-b16c-002a45cc2b62.jpg)
+![1676061292537 1](https://user-images.githubusercontent.com/114995936/218192524-48695da1-7b5e-4778-8e50-d84bae1260b1.jpg)
+
 
 ## Libraries
 
