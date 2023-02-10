@@ -17,7 +17,7 @@ search, as well as add to favorites.Adding to favorites takes place in the local
 
 ## Libraries
 
-### Android Jetpack
+### Android Jetpack ...
 
 * [ViewBinding](https://developer.android.com/topic/libraries/view-binding) View binding is a
   feature that makes it easier for you to write code that interacts with views.
