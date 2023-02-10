@@ -40,11 +40,11 @@ search, as well as add to favorites.Adding to favorites takes place in the local
   navigation component also provides a consistent and predictable user interface, adhering to an
   established set of principles.
 
-* [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) Data objects that
+* [Coroutines Flow](https://developer.android.com/topic/libraries/architecture/livedata) Data objects that
   notify views of changes to the underlying database.
 
 
-* [Kotlin flows](https://developer.android.com/kotlin/flow) In coroutines, a flow is a type that can
+* [Kotlin flows](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-flow/) In coroutines, a flow is a type that can
   emit multiple values sequentially, as opposed to suspend functions that return only a single
   value. For example, you can use a flow to receive live updates from a database.
 
