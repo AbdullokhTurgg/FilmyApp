@@ -1,6 +1,7 @@
 package com.example.movieappazi.ui.search_movies_screen
 
 import android.os.Bundle
+import android.transition.TransitionInflater
 import android.view.View
 import android.widget.SearchView
 import androidx.fragment.app.viewModels
@@ -32,6 +33,13 @@ class SearchMoviesFragment :
         MovieItemAdapter(MovieItemAdapter.HORIZONTAL_TYPE, this)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val inflater = TransitionInflater.from(requireContext())
+        enterTransition = inflater.inflateTransition(R.transition.slide_right)
+        exitTransition = inflater.inflateTransition(R.transition.slide_left)
+    }
     override fun onStart() {
         super.onStart()
         requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavMenu2).showView()

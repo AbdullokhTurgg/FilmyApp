@@ -10,7 +10,6 @@
     tools:context=".ui.movie_details_screen.MovieDetailsFragment">
 
 
-
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/posterImageCard"
         android:layout_width="@dimen/_170sdp"

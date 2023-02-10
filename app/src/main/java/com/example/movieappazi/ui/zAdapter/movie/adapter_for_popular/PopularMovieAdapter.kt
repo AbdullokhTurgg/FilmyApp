@@ -23,6 +23,7 @@ class MovieItemAdapter(
             HORIZONTAL_TYPE -> R.layout.item_fav_movies
             POPULAR_TYPE -> R.layout.item_popular_movies
             SEEMORETYPE -> R.layout.item_for_seemore
+            FANCY_TYPE -> R.layout.item_for_fancy_movie
             else -> throw RuntimeException("Unknown view type: $viewType")
         }
         val view = LayoutInflater.from(parent.context).inflate(layout, parent, false)
@@ -50,6 +51,8 @@ class MovieItemAdapter(
             PORTRAIT_TYPE
         } else if (objectViewType == SEEMORETYPE) {
             SEEMORETYPE
+        } else if (objectViewType == FANCY_TYPE) {
+            FANCY_TYPE
         } else {
             POPULAR_TYPE
         }
@@ -60,6 +63,7 @@ class MovieItemAdapter(
         const val HORIZONTAL_TYPE = 1
         const val POPULAR_TYPE = 2
         const val SEEMORETYPE = 3
+        const val FANCY_TYPE = 4
     }
 }
 

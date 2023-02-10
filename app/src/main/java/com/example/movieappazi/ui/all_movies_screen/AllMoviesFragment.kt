@@ -2,6 +2,7 @@ package com.example.movieappazi.ui.all_movies_screen
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.transition.TransitionInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -55,10 +56,21 @@ class AllMoviesFragment :
     private val ratingAdapter: MovieItemAdapter by lazy {
         MovieItemAdapter(objectViewType = MovieItemAdapter.PORTRAIT_TYPE, this)
     }
+    private val fancyAdapter: MovieItemAdapter by lazy {
+        MovieItemAdapter(objectViewType = MovieItemAdapter.FANCY_TYPE, this)
+    }
 
     override fun onStart() {
         super.onStart()
         requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavMenu2).showView()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val inflater = TransitionInflater.from(requireContext())
+        enterTransition = inflater.inflateTransition(R.transition.slide_right)
+        exitTransition = inflater.inflateTransition(R.transition.slide_up)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -70,14 +82,16 @@ class AllMoviesFragment :
         observePopularMovies()
         observeRelevancyMovies()
         observePublishedAtMovies()
+        observeFancyMovies()
     }
 
 
     private fun setAdapterToRv() {
         requireBinding().popularMovieRecViewMoviesFragment.adapter = popularAdapter
-        requireBinding().upcomingMovieRecViewMoviesFragment.adapter = upcomingAdapter
+        requireBinding().allJanrMovieRecViewMoviesFragment.adapter = upcomingAdapter
         requireBinding().nowPlayingMovieRecViewMoviesFragment.adapter = publishedAtAdapter
         requireBinding().topRatedMovieRecViewMoviesFragment.adapter = ratingAdapter
+        requireBinding().allJanrMovieRecViewMoviesFragment2.adapter = fancyAdapter
     }
 
     private fun observeRatingMovies() {
@@ -131,14 +145,26 @@ class AllMoviesFragment :
             requireBinding().shimmerLayout.visibility = View.INVISIBLE
             requireBinding().noConnection.visibility = View.VISIBLE
         }
-
         lifecycleScope.launchWhenResumed {
             viewModel.relevanceMovies.collectLatest {
                 upcomingAdapter.submitList(it.movies)
             }
         }
-
     }
+
+    private fun observeFancyMovies() {
+        viewModel.error.onEach {
+            makeToast(it, requireContext())
+            requireBinding().shimmerLayout.visibility = View.INVISIBLE
+            requireBinding().noConnection.visibility = View.VISIBLE
+        }
+        lifecycleScope.launchWhenResumed {
+            viewModel.fancyMovies.collectLatest {
+                fancyAdapter.submitList(it.movies)
+            }
+        }
+    }
+
 
     private fun setupClickers() = with(requireBinding()) {
         popular_MovieSeeAll_movieFrag.setOnClickListener {

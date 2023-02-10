@@ -2,6 +2,7 @@ package com.example.movieappazi.ui.actors_screen
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.transition.TransitionInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -37,6 +38,13 @@ class ActorsFragment :
         super.onStart()
         requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavMenu2).showView()
     }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val inflater = TransitionInflater.from(requireContext())
+        enterTransition = inflater.inflateTransition(R.transition.slide_up)
+        exitTransition = inflater.inflateTransition(R.transition.slide_up)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -51,7 +59,7 @@ class ActorsFragment :
     private fun observePersons() = with(requireBinding()) {
         lifecycleScope.launchWhenResumed {
             viewModel.persons.collectLatest {
-                shimmerLayout.visibility = View.INVISIBLE
+//                shimmerLayout.visibility = View.INVISIBLE
                 personRv.visibility = View.VISIBLE
                 personAdapter.personsList = it.persons
             }

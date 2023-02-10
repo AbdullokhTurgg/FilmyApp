@@ -2,6 +2,7 @@ package com.example.movieappazi.ui.see_all_movies_screen
 
 import android.os.Bundle
 import android.os.Parcelable
+import android.transition.TransitionInflater
 import android.view.View
 import android.widget.ScrollView
 import androidx.fragment.app.viewModels
@@ -45,6 +46,14 @@ class SeeAllMoviesFragment :
         MovieItemAdapter(MovieItemAdapter.SEEMORETYPE, this)
     }
     override val viewModel: SeeAllMoviesFragmentViewModel by viewModels()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val inflater = TransitionInflater.from(requireContext())
+        enterTransition = inflater.inflateTransition(R.transition.slide_down)
+        exitTransition = inflater.inflateTransition(R.transition.slide_left)
+
+    }
 
     override fun onStart() {
         super.onStart()

@@ -1,90 +1,214 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backGround">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
+    <LinearLayout
+        android:id="@+id/linearLayout6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_40sdp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="30dp"
-            android:src="@drawable/logoo"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ContentDescription" />
-
-        <LinearLayout
-            android:id="@+id/liner_ly1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/spin_kit_movieFrag">
-
-
-            <include layout="@layout/shimmer_for_movie_item" />
-
-            <include layout="@layout/shimmer_for_movie_item" />
-
-            <include layout="@layout/shimmer_for_movie_item" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/liner_ly2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/liner_ly1">
-
-
-            <include layout="@layout/shimmer_for_movie_item" />
-
-            <include layout="@layout/shimmer_for_movie_item" />
-
-            <include layout="@layout/shimmer_for_movie_item" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/liner_ly3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/liner_ly2">
-
-
-            <include layout="@layout/shimmer_for_movie_item" />
-
-            <include layout="@layout/shimmer_for_movie_item" />
-
-            <include layout="@layout/shimmer_for_movie_item" />
-        </LinearLayout>
-
-
-        <com.github.ybq.android.spinkit.SpinKitView
-            android:id="@+id/spin_kit_movieFrag"
-            style="@style/SpinKitView.Large.Wave"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:visibility="invisible"
-            app:SpinKit_Color="@color/shimmer_background"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_marginStart="@dimen/_8sdp"
+            android:fontFamily="@font/baloo"
+            android:text="Popular"
+            android:textColor="@color/shimmer_background"
+            android:textSize="@dimen/_24sdp" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:src="@drawable/hd_bg" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_155sdp"
+            android:fontFamily="@font/baloo"
+            android:text="see more"
+            android:textColor="@color/shimmer_background"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/liner_ly4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
+
+        <include layout="@layout/shimmer_for_popular_item" />
+
+        <include layout="@layout/shimmer_for_popular_item" />
+
+        <include layout="@layout/shimmer_for_popular_item" />
+
+        <include layout="@layout/shimmer_for_popular_item" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/liner_ly4">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:fontFamily="@font/baloo"
+            android:text="Top Rated"
+            android:textColor="@color/shimmer_background"
+            android:textSize="@dimen/_24sdp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_175sdp"
+            android:fontFamily="@font/baloo"
+            android:text="see more"
+            android:textColor="@color/shimmer_background"
+            android:textSize="@dimen/_24sdp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/liner_ly5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
+
+        <include layout="@layout/shimmer_for_movie_item" />
+
+        <include layout="@layout/shimmer_for_movie_item" />
+
+        <include layout="@layout/shimmer_for_movie_item" />
+
+        <include layout="@layout/shimmer_for_movie_item" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/liner_ly5">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:fontFamily="@font/baloo"
+            android:text="Now Playing"
+            android:textColor="@color/shimmer_background"
+            android:textSize="@dimen/_24sdp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_145sdp"
+            android:fontFamily="@font/baloo"
+            android:text="see more"
+            android:textColor="@color/shimmer_background"
+            android:textSize="@dimen/_24sdp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/liner_ly6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout9">
+
+        <include layout="@layout/shimmer_for_movie_item" />
+
+        <include layout="@layout/shimmer_for_movie_item" />
+
+        <include layout="@layout/shimmer_for_movie_item" />
+
+        <include layout="@layout/shimmer_for_movie_item" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/liner_ly6">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:fontFamily="@font/baloo"
+            android:text="Upcoming"
+            android:textColor="@color/shimmer_background"
+            android:textSize="@dimen/_24sdp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_170sdp"
+            android:fontFamily="@font/baloo"
+            android:text="see more"
+            android:textColor="@color/shimmer_background"
+            android:textSize="@dimen/_24sdp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/liner_ly7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout10">
+
+        <include layout="@layout/shimmer_for_movie_item" />
+
+        <include layout="@layout/shimmer_for_movie_item" />
+
+        <include layout="@layout/shimmer_for_movie_item" />
+
+        <include layout="@layout/shimmer_for_movie_item" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/liner_ly8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/liner_ly7">
+
+        <include layout="@layout/shimmer_for_movie_item" />
+
+        <include layout="@layout/shimmer_for_movie_item" />
+
+        <include layout="@layout/shimmer_for_movie_item" />
+
+        <include layout="@layout/shimmer_for_movie_item" />
+
+    </LinearLayout>
 
 
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

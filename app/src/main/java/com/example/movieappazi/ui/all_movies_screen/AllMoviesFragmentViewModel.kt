@@ -63,6 +63,12 @@ class AllMoviesFragmentViewModel @Inject constructor(
         }.shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
 
+    val fancyMovies = repository.getUpcomingMovies(13).map(mapFromMoviesDomainToUi::map)
+        .flowOn(dispatchersProvider.default()).catch { t: Throwable ->
+            _error.emit(hanEx.hanEx(t))
+        }.shareIn(viewModelScope, SharingStarted.Lazily, 1)
+
+
     val publishedAtMovies = repository.getNowPlayingMovies(1).map(mapFromMoviesDomainToUi::map)
         .flowOn(dispatchersProvider.default()).catch { t: Throwable ->
             _error.emit(hanEx.hanEx(t))

@@ -2,6 +2,7 @@ package com.example.movieappazi.ui.movie_details_screen
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.transition.TransitionInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -67,8 +68,18 @@ class MovieDetailsFragment :
         MovieDetailsFragmentArgs.fromBundle(requireArguments()).movie
     }
 
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val inflater = TransitionInflater.from(requireContext())
+        enterTransition = inflater.inflateTransition(R.transition.slide_up)
+        exitTransition = inflater.inflateTransition(R.transition.slide_up)
+    }
+
+
     override fun onStart() {
         super.onStart()
+//        mService.notification
         requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavMenu2).hideView()
     }
 
