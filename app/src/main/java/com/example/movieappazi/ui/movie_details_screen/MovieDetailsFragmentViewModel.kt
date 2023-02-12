@@ -11,6 +11,7 @@ import com.example.domain.domainModels.movie.MoviesDomain
 import com.example.domain.domainRepositories.network.movie.MovieRepositories
 import com.example.domain.domainRepositories.storage.MovieStorageRepository
 import com.example.movieappazi.base.BaseViewModel
+import com.example.movieappazi.exception.HandleExeption
 import com.example.movieappazi.uiModels.movie.CreditsResponseUi
 import com.example.movieappazi.uiModels.movie.MovieDetailsUi
 import com.example.movieappazi.uiModels.movie.MovieUi
@@ -29,9 +30,10 @@ class MovieDetailsFragmentViewModel constructor(
     private val mapMovieResponse: BaseMapper<MoviesDomain, MoviesUi>,
     private val mapFromUiToDomain: BaseMapper<MovieUi, MovieDomain>,
     private val dispatchersProvider: DispatchersProvider,
+    private val mapFromMoviesDomainToUi: BaseMapper<MoviesDomain, MoviesUi>,
     private val resourceProvider: ResourceProvider,
     private val saveMovieRepository: MovieStorageRepository,
-) : BaseViewModel() {
+    ) : BaseViewModel() {
 
     private val _error = MutableSharedFlow<String>(replay = 0)
     val error get() = _error.asSharedFlow()
@@ -45,6 +47,11 @@ class MovieDetailsFragmentViewModel constructor(
 
     val castFLow =
         movieIdFlow.map(movieRepository::getActors).map { it.map(mapCreditsResponseDomain) }
+
+    val presenMovies = movieRepository.getNowPlayingMovies(9).map(mapFromMoviesDomainToUi::map)
+        .flowOn(dispatchersProvider.default()).catch { t: Throwable ->
+            _error.emit(resourceProvider.handleException(t))
+        }.shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
 
     val similarMoviesFlow = movieIdFlow.flatMapLatest {

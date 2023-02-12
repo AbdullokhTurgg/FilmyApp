@@ -1,17 +1,14 @@
-package com.example.movieappazi.ui.zAdapter.person
+package com.example.movieappazi.ui.adapters.person
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieappazi.R
-import com.example.movieappazi.ui.zAdapter.movie.diffcallbacks.PersonDetailsListDiffCallback
-import com.example.movieappazi.ui.zAdapter.movie.diffcallbacks.PersonDiffCallback
-import com.example.movieappazi.ui.zAdapter.movie.diffcallbacks.PersonsItemDiffCallBack
-import com.example.movieappazi.ui.zAdapter.movie.listener_for_adapters.RvClickListener
-import com.example.movieappazi.ui.zAdapter.movie.view_holders.ObjectViewHolder
+import com.example.movieappazi.ui.adapters.movie.diffcallbacks.PersonDiffCallback
+import com.example.movieappazi.ui.adapters.movie.listener_for_adapters.RvClickListener
+import com.example.movieappazi.ui.adapters.movie.view_holders.ObjectViewHolder
 import com.example.movieappazi.uiModels.person.PersonUi
 
 class PersonAdapter(

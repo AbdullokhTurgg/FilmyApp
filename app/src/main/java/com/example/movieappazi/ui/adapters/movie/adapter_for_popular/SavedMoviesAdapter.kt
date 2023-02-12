@@ -1,4 +1,4 @@
-package com.example.movieappazi.ui.zAdapter.movie.adapter_for_popular
+package com.example.movieappazi.ui.adapters.movie.adapter_for_popular
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -14,10 +14,16 @@ import com.example.movieappazi.uiModels.movie.MovieUi
 import com.squareup.picasso.Picasso
 
 class SavedMoviesAdapter(
-    private val list: List<MovieUi>,
     private val listener: RecyclerFavOnClickListener,
 ) : ListAdapter<MovieUi, SavedMoviesAdapter.ViewHolder>(SavedMoviesDiffCallBack()) {
 
+    var movieList = listOf<MovieUi>()
+        set(value) {
+            val callback = DiffCallBack(movieList, value)
+            val diffResult = DiffUtil.calculateDiff(callback)
+            diffResult.dispatchUpdatesTo(this)
+            field = value
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(parent.context)
@@ -25,24 +31,24 @@ class SavedMoviesAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(list[position])
+        holder.bind(movieList[position])
 
         holder.itemView.setOnClickListener {
-            listener.onItemClick(position)
+            listener.onItemClick(movieList[position])
         }
         holder.itemView.setOnLongClickListener {
-            listener.onLongClick(position)
+            listener.onLongClick(movieList[position])
             true
         }
     }
 
     override fun getItemCount(): Int {
-        return list.size
+        return movieList.size
     }
 
     interface RecyclerFavOnClickListener {
-        fun onLongClick(position: Int)
-        fun onItemClick(position: Int)
+        fun onLongClick(movie: MovieUi)
+        fun onItemClick(movie: MovieUi)
     }
 
 
@@ -85,4 +91,19 @@ class SavedMoviesDiffCallBack : DiffUtil.ItemCallback<MovieUi>() {
     ): Boolean {
         return oldItem == newItem
     }
+}
+
+class DiffCallBack(
+    private val oldList: List<MovieUi>,
+    private val newList: List<MovieUi>,
+) : DiffUtil.Callback() {
+    override fun getOldListSize() = oldList.size
+
+    override fun getNewListSize() = newList.size
+
+    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int) =
+        oldList[oldItemPosition].id == newList[newItemPosition].id
+
+    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int) =
+        oldList[oldItemPosition] == newList[newItemPosition]
 }

@@ -1,4 +1,4 @@
-package com.example.newsappazi.adapter.diffuitil
+package com.example.movieappazi.adapter.diffuitil
 
 import androidx.recyclerview.widget.DiffUtil
 import com.example.movieappazi.adapter.Item

@@ -88,7 +88,7 @@
                         android:layout_weight="1" />
 
                     <TextView
-                        android:id="@+id/popular_MovieSeeAll_movieFrag"
+                        android:id="@+id/see_more_popular"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
@@ -164,7 +164,7 @@
                         android:layout_weight="1" />
 
                     <TextView
-                        android:id="@+id/topRated_MovieSeeAll_movieFrag"
+                        android:id="@+id/see_more_toprated"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
@@ -239,7 +239,7 @@
                         android:layout_weight="1" />
 
                     <TextView
-                        android:id="@+id/upcoming_MovieSeeAll_movieFrag"
+                        android:id="@+id/see_more_upcoming"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -325,7 +325,7 @@
                         android:layout_weight="1" />
 
                     <TextView
-                        android:id="@+id/now_playing_MovieSeeAll_movieFrag"
+                        android:id="@+id/see_more_nowplaying"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"

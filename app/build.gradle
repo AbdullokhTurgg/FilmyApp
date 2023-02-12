@@ -167,9 +167,10 @@ dependencies {
     // Animated Bottom Bar
     implementation 'nl.joery.animatedbottombar:library:1.1.0'
 
+    implementation 'androidx.palette:palette:1.0.0'
 
-    // Slider
-// dependency for slider view
-
-
+    //View with push down effect
+    implementation("com.github.thekhaeng:pushdown-anim-click:$pushdown_anim_click_version") {
+        exclude group: 'com.android.support'
+    }
 }

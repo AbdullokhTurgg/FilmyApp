@@ -1,4 +1,4 @@
-package com.example.movieappazi.ui.zAdapter.movie.listener_for_adapters
+package com.example.movieappazi.ui.adapters.movie.listener_for_adapters
 
 
 interface RvClickListener<T> {

@@ -1,4 +1,4 @@
-package com.example.movieappazi.ui.zAdapter.movie.view_holders
+package com.example.movieappazi.ui.adapters.movie.view_holders
 
 import android.view.View
 import android.widget.ImageView

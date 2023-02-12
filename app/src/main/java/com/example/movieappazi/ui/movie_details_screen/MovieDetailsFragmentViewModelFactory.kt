@@ -34,6 +34,7 @@ class MovieDetailsFragmentViewModelFactory @AssistedInject constructor(
     private val saveMovieRepository: MovieStorageRepository,
     private val mapCreditsResponseDomain: BaseMapper<CreditsResponseDomain, CreditsResponseUi>,
     private val mapMovieResponse: BaseMapper<MoviesDomain, MoviesUi>,
+    private val mapFromMoviesDomainToUi: BaseMapper<MoviesDomain, MoviesUi>,
 ) : ViewModelProvider.Factory {
 
     @OptIn(ExperimentalCoroutinesApi::class)
@@ -50,6 +51,7 @@ class MovieDetailsFragmentViewModelFactory @AssistedInject constructor(
             saveMovieRepository = saveMovieRepository,
             mapFromUiToDomain = mapFromUiToDomain,
             mapMovieResponse = mapMovieResponse,
+            mapFromMoviesDomainToUi = mapFromMoviesDomainToUi
         ) as T
     }
 

@@ -7,127 +7,71 @@
         motion:constraintSetEnd="@+id/end"
         motion:constraintSetStart="@id/start"
         motion:duration="1000">
-
         <OnSwipe
-            motion:dragDirection="dragUp"
             motion:dragScale="1"
             motion:maxAcceleration="10"
-            motion:touchAnchorId="@+id/card_view"
+            motion:touchAnchorId="@id/movie_info_block"
             motion:touchAnchorSide="top" />
-
         <KeyFrameSet>
             <KeyAttribute
                 android:alpha="0"
                 motion:framePosition="0"
-                motion:motionTarget="@+id/top_title_constraint" />
+                motion:motionTarget="@id/include_movie_info_toolbar_block" />
             <KeyAttribute
                 android:alpha="0"
                 motion:framePosition="93"
-                motion:motionTarget="@+id/top_title_constraint" />
+                motion:motionTarget="@id/include_movie_info_toolbar_block" />
             <KeyAttribute
                 android:alpha="1"
                 motion:framePosition="94"
-                motion:motionTarget="@+id/top_title_constraint" />
+                motion:motionTarget="@id/include_movie_info_toolbar_block" />
             <KeyAttribute
                 android:alpha="1"
                 motion:framePosition="100"
-                motion:motionTarget="@+id/top_title_constraint" />
+                motion:motionTarget="@id/include_movie_info_toolbar_block" />
         </KeyFrameSet>
     </Transition>
 
     <ConstraintSet android:id="@+id/start">
-
         <Constraint
-            android:id="@+id/card_view"
+            android:id="@+id/movie_info_block"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            motion:layout_constraintBottom_toBottomOf="parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-125dp"
+            android:elevation="28dp"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toBottomOf="@+id/posterImageCard" />
+            motion:layout_constraintTop_toBottomOf="@+id/include_movie_info_poster_block" />
         <Constraint
-            android:id="@+id/top_main_image"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_500sdp"
+            android:id="@+id/include_movie_info_toolbar_block"
+            android:layout_marginTop="8dp"
+            android:visibility="invisible"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toTopOf="parent">
-            <PropertySet android:visibility="visible" />
-        </Constraint>
-
-        <Constraint
-            android:id="@+id/posterImageCard"
-            android:layout_width="@dimen/_170sdp"
-            android:layout_height="@dimen/_240sdp"
-            motion:layout_constraintBottom_toBottomOf="@+id/top_main_image"
-            motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintStart_toStartOf="@+id/top_main_image"
-            motion:layout_constraintTop_toBottomOf="@+id/top_title_constraint"
-            motion:layout_editor_absoluteX="121dp">
-            <PropertySet android:visibility="visible" />
-        </Constraint>
-        <Constraint
-            android:id="@+id/card_view"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            motion:layout_constraintBottom_toBottomOf="parent"
-            motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toBottomOf="@+id/posterImageCard" />
-        <Constraint
-            android:layout_height="?android:attr/actionBarSize"
-            motion:layout_constraintEnd_toStartOf="@id/likeClick"
-            motion:layout_constraintStart_toEndOf="@+id/backClick"
-            motion:layout_constraintTop_toTopOf="parent"
-            android:layout_width="0dp"
-            android:id="@+id/top_title_constraint" />
-
-
+            motion:layout_constraintTop_toTopOf="parent" />
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">
-
         <Constraint
-            android:id="@+id/card_view"
+            android:id="@+id/include_movie_info_toolbar_block"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:elevation="0dp"
-            motion:layout_constraintBottom_toBottomOf="parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toBottomOf="@+id/top_main_image" >
-        </Constraint>
-
+            motion:layout_constraintTop_toTopOf="parent" />
         <Constraint
-            android:id="@+id/top_main_image"
-            android:layout_width="0dp"
-            android:layout_height="?android:attr/actionBarSize"
+            android:id="@+id/include_movie_info_poster_block"
+            android:visibility="invisible"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toTopOf="parent">
-            <PropertySet android:visibility="invisible" />
-        </Constraint>
-
+            motion:layout_constraintTop_toTopOf="parent" />
         <Constraint
-            android:id="@id/posterImageCard"
-            android:layout_width="@dimen/_200sdp"
-            android:layout_height="200dp"
-            android:layout_marginBottom="0dp"
-            android:rotation="1"
-            motion:layout_constraintBottom_toTopOf="@+id/top_main_image"
-            motion:layout_constraintEnd_toEndOf="@+id/top_title_constraint"
-            motion:layout_constraintStart_toStartOf="@+id/top_title_constraint"
-            motion:layout_constraintTop_toTopOf="parent"
-            motion:layout_editor_absoluteX="192dp">
-            <PropertySet android:visibility="gone" />
-        </Constraint>
-        <Constraint
-            android:id="@+id/likeClick"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="4dp"
+            android:id="@+id/movie_info_block"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintTop_toTopOf="@+id/top_main_image" />
-
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@+id/include_movie_info_toolbar_block" />
     </ConstraintSet>
 </MotionScene>

@@ -1,4 +1,4 @@
-package com.example.movieappazi.ui.zAdapter.video
+package com.example.movieappazi.ui.adapters.video
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

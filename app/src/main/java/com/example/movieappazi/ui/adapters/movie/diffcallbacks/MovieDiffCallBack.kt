@@ -1,4 +1,4 @@
-package com.example.movieappazi.ui.zAdapter.movie.diffcallbacks
+package com.example.movieappazi.ui.adapters.movie.diffcallbacks
 
 import androidx.recyclerview.widget.DiffUtil
 import com.example.movieappazi.uiModels.movie.MovieUi

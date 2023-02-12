@@ -1,13 +1,12 @@
 package com.example.movieappazi.uiModels.movie
 
 import android.os.Parcelable
-import com.example.domain.domainModels.movie.MovieDomain
 import com.example.movieappazi.adapter.Item
 import kotlinx.android.parcel.Parcelize
 
 
 @Parcelize
-class MovieUi(
+data class MovieUi(
     val posterPath: String?,
     val adult: Boolean?,
     val overview: String?,

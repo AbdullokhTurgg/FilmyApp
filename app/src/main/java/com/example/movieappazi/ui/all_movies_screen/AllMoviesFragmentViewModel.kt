@@ -45,11 +45,8 @@ class AllMoviesFragmentViewModel @Inject constructor(
             Pair(category, page)
         }
 
-    fun saveMovie(moviesUi: MovieUi) = viewModelScope.launch {
-        storageRepository.saveMovieToDatabase(mapper.map(moviesUi))
-    }
 
-    val popularMovies = repository.getPopularMovie(1).map(mapFromMoviesDomainToUi::map)
+    val popularMoviesFlow = repository.getPopularMovie(1).map(mapFromMoviesDomainToUi::map)
         .flowOn(dispatchersProvider.default())
 
         .catch { t: Throwable ->
@@ -57,24 +54,24 @@ class AllMoviesFragmentViewModel @Inject constructor(
         }.shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
 
-    val relevanceMovies = repository.getUpcomingMovies(1).map(mapFromMoviesDomainToUi::map)
+    val relevanceMoviesFlow = repository.getUpcomingMovies(1).map(mapFromMoviesDomainToUi::map)
         .flowOn(dispatchersProvider.default()).catch { t: Throwable ->
             _error.emit(hanEx.hanEx(t))
         }.shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
 
-    val fancyMovies = repository.getUpcomingMovies(13).map(mapFromMoviesDomainToUi::map)
+    val fancyMoviesFlow = repository.getUpcomingMovies(13).map(mapFromMoviesDomainToUi::map)
         .flowOn(dispatchersProvider.default()).catch { t: Throwable ->
             _error.emit(hanEx.hanEx(t))
         }.shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
 
-    val publishedAtMovies = repository.getNowPlayingMovies(1).map(mapFromMoviesDomainToUi::map)
+    val publishedAtMoviesFlow = repository.getNowPlayingMovies(1).map(mapFromMoviesDomainToUi::map)
         .flowOn(dispatchersProvider.default()).catch { t: Throwable ->
             _error.emit(hanEx.hanEx(t))
         }.shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
-    val ratingMovies = repository.getTopRatedMovies(1).map(mapFromMoviesDomainToUi::map)
+    val ratingMoviesFlow = repository.getTopRatedMovies(1).map(mapFromMoviesDomainToUi::map)
         .flowOn(dispatchersProvider.default()).catch { t: Throwable ->
             _error.emit(hanEx.hanEx(t))
         }.shareIn(viewModelScope, SharingStarted.Lazily, 1)
@@ -84,6 +81,11 @@ class AllMoviesFragmentViewModel @Inject constructor(
 
     fun goMovieDetails(item: MovieUi) =
         navigate(AllMoviesFragmentDirections.actionAllMoviesFragmentToMovieDetailsFragment(item))
+
+    fun saveMovie(moviesUi: MovieUi) = viewModelScope.launch {
+        storageRepository.saveMovieToDatabase(mapper.map(moviesUi))
+    }
+
 
 }
 

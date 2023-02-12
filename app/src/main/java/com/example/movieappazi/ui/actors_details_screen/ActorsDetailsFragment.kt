@@ -1,7 +1,6 @@
 package com.example.movieappazi.ui.actors_details_screen
 
 import android.os.Bundle
-import android.transition.TransitionInflater
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -40,19 +39,11 @@ class ActorsDetailsFragment :
         super.onStart()
         requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavMenu2).hideView()
     }
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        val inflater = TransitionInflater.from(requireContext())
-        enterTransition = inflater.inflateTransition(R.transition.slide_up)
-        exitTransition = inflater.inflateTransition(R.transition.slide_up)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observePersonDetails()
     }
-
 
     private fun observePersonDetails() {
         lifecycleScope.launchWhenStarted {

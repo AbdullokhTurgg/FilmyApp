@@ -1,4 +1,4 @@
-package com.example.movieappazi.ui.zAdapter.movie.diffcallbacks
+package com.example.movieappazi.ui.adapters.movie.diffcallbacks
 
 import android.annotation.SuppressLint
 import androidx.recyclerview.widget.DiffUtil

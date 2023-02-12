@@ -157,4 +157,13 @@
         <item name="android:textSize">20sp</item>
         <item name="fontFamily">@font/aclonica</item>
     </style>
+
+    <style name="BottomCornerRadius.18" parent="@style/Widget.MaterialComponents.CardView">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSizeBottomRight">12dp</item>
+        <item name="cornerSizeTopLeft">0dp</item>
+        <item name="android:topRightRadius">0dp</item>
+        <item name="cornerSizeBottomLeft">12dp</item>
+    </style>
+
 </resources>

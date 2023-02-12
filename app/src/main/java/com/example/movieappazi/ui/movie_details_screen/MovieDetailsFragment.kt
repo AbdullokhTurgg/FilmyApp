@@ -2,7 +2,6 @@ package com.example.movieappazi.ui.movie_details_screen
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.transition.TransitionInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -16,10 +15,11 @@ import com.example.movieappazi.R
 import com.example.movieappazi.base.BaseFragment
 import com.example.movieappazi.databinding.FragmentMovieDetailsBinding
 import com.example.movieappazi.extensions.hideView
+import com.example.movieappazi.extensions.launchWhenViewStarted
 import com.example.movieappazi.extensions.makeToast
-import com.example.movieappazi.ui.zAdapter.movie.adapter_for_popular.MovieItemAdapter
-import com.example.movieappazi.ui.zAdapter.movie.listener_for_adapters.RvClickListener
-import com.example.movieappazi.ui.zAdapter.person.PersonDetailsAdapter
+import com.example.movieappazi.ui.adapters.movie.adapter_for_popular.MovieItemAdapter
+import com.example.movieappazi.ui.adapters.movie.listener_for_adapters.RvClickListener
+import com.example.movieappazi.ui.adapters.person.PersonDetailsAdapter
 import com.example.movieappazi.uiModels.movie.CastUi
 import com.example.movieappazi.uiModels.movie.MovieDetailsUi
 import com.example.movieappazi.uiModels.movie.MovieUi
@@ -29,6 +29,10 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_movie_details.*
+import kotlinx.android.synthetic.main.include_movie_info_block.*
+import kotlinx.android.synthetic.main.include_movie_info_block.view.*
+import kotlinx.android.synthetic.main.include_movie_info_poster_block.*
+import kotlinx.android.synthetic.main.include_movie_info_toolbar.view.*
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collectLatest
@@ -38,8 +42,7 @@ import javax.inject.Inject
 @DelicateCoroutinesApi
 @AndroidEntryPoint
 class MovieDetailsFragment :
-    BaseFragment<FragmentMovieDetailsBinding, MovieDetailsFragmentViewModel>(
-        FragmentMovieDetailsBinding::inflate), RvClickListener<MovieUi>,
+    BaseFragment<FragmentMovieDetailsBinding, MovieDetailsFragmentViewModel>(FragmentMovieDetailsBinding::inflate), RvClickListener<MovieUi>,
     PersonDetailsAdapter.RvClickListener {
 
     private val movieId: Int by lazy {
@@ -51,7 +54,6 @@ class MovieDetailsFragment :
 
     @Inject
     lateinit var viewModelFactory: MovieDetailsFragmentViewModelFactory.Factory
-
     @OptIn(ExperimentalCoroutinesApi::class)
     override val viewModel by viewModels<MovieDetailsFragmentViewModel> {
         viewModelFactory.create(movieId = movieId, actorsIds = actorsIds)
@@ -60,7 +62,12 @@ class MovieDetailsFragment :
     private val similarMoviesAdapter: MovieItemAdapter by lazy {
         MovieItemAdapter(MovieItemAdapter.PORTRAIT_TYPE, this@MovieDetailsFragment)
     }
-
+    private val reccomendAdapter: MovieItemAdapter by lazy {
+        MovieItemAdapter(MovieItemAdapter.PORTRAIT_TYPE, this@MovieDetailsFragment)
+    }
+    private val presentAdapter: MovieItemAdapter by lazy {
+        MovieItemAdapter(MovieItemAdapter.POPULAR_TYPE, this@MovieDetailsFragment)
+    }
     private val personAdapter: PersonDetailsAdapter by lazy {
         PersonDetailsAdapter(this@MovieDetailsFragment)
     }
@@ -69,17 +76,8 @@ class MovieDetailsFragment :
     }
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val inflater = TransitionInflater.from(requireContext())
-        enterTransition = inflater.inflateTransition(R.transition.slide_up)
-        exitTransition = inflater.inflateTransition(R.transition.slide_up)
-    }
-
-
     override fun onStart() {
         super.onStart()
-//        mService.notification
         requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavMenu2).hideView()
     }
 
@@ -88,29 +86,30 @@ class MovieDetailsFragment :
         super.onViewCreated(view, savedInstanceState)
         setupClickers()
         setAdaptersToRv()
-        observeSimilarMovies()
         observeMovieDetails()
+        observeData()
     }
 
-
-    private fun setAdaptersToRv() = with(requireBinding()) {
+    private fun setAdaptersToRv() = with(include_movie_info_block) {
         similarMoviesRv.adapter = similarMoviesAdapter
+        reccomendRv.adapter = reccomendAdapter
         actorsRv.adapter = personAdapter
+        presentMovies.adapter = presentAdapter
     }
 
-    private fun observeSimilarMovies() {
-        lifecycleScope.launchWhenStarted {
-            viewModel.similarMoviesFlow.collectLatest {
-                similarMoviesAdapter.submitList(it.movies)
-            }
+    private fun observeData() = with(viewModel) {
+        launchWhenViewStarted {
+            similarMoviesFlow.observe { similarMoviesAdapter.submitList(it.movies) }
+            recommendMoviesFlow.observe { reccomendAdapter.submitList(it.movies) }
+            presenMovies.observe { presentAdapter.submitList(it.movies) }
         }
     }
 
-    private fun setupClickers() = with(requireBinding()) {
-        backClick.setOnClickListener {
+    private fun setupClickers() = with(include_movie_info_toolbar_block) {
+        back_icon.setOnClickListener {
             viewModel.goBack()
         }
-        likeClick.setOnClickListener {
+        save_icon.setOnClickListener {
             viewModel.saveMovieFromRv(moviee)
             makeToast("${moviee.title} Saved", requireContext())
         }
@@ -129,11 +128,8 @@ class MovieDetailsFragment :
                 }
             }
         }
-
-
         lifecycleScope.launchWhenStarted {
             viewModel.castFLow.collectLatest {
-
                 when (it) {
                     is DataRequestState.Success -> {
                         personAdapter.personsList = it.data.cast
@@ -148,23 +144,27 @@ class MovieDetailsFragment :
     }
 
 
-    private fun setMovieUi(movie: MovieDetailsUi) {
-        with(requireBinding()) {
-            tvRating.text = moviee.rating.toString()
-            voteTv.text = movie.voteCount.toString()
-            languageTv.text = movie.originalLanguage
-            topTitle.text = movie.title
-            title.text = movie.title
-            popularity.text = movie.popularity.toString()
-            budget.text = movie.budget.toString()
+    private fun setMovieUi(movie: MovieDetailsUi) = with(requireBinding()) {
+        includeMovieInfoToolbarBlock.apply {
+            toolbarMovieTitle.text = movie.title
+        }
+
+        includeMovieInfoPosterBlock.apply {
+            Glide.with(requireContext()).asBitmap().load(Utils.POSTER_PATH_URL + movie.posterPath)
+            Picasso.get().load(Utils.POSTER_PATH_URL + movie.posterPath).into(bookPoster)
+            bookTitle.text = movie.title
+            bookAuthor.text = movie.originalTitle
+        }
+
+        includeMovieInfoBlock.apply {
+            moviePublicYear.text = movie.releaseDate
+            movieLanguage.text = movie.originalLanguage
+            moviePopularity.text = movie.voteCount.toString()
+            bookSubtitle.text = movie.overview
+            movieBudgetTxt.text = movie.budget.toString()
+            movieVoteTxt.text = movie.voteCount.toString()
             voteAverage.rating = movie.voteAverage.toFloat()
-            releaseDate.text = movie.releaseDate
-            status.text = movie.status
-            overview.text = movie.overview
-            Glide.with(requireContext()).asBitmap()
-                .load(Utils.POSTER_PATH_URL + movie.posterPath) // or url
-                .transform(BlurTransformation(requireContext())).into(top_main_image)
-            Picasso.get().load(Utils.POSTER_PATH_URL + movie.posterPath).into(poster_image)
+            movieStatusTxt.text = movie.status
         }
     }
 

@@ -1,27 +1,18 @@
 package com.example.movieappazi.ui.actors_screen
 
-import android.annotation.SuppressLint
 import android.os.Bundle
-import android.transition.TransitionInflater
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
-import com.example.data.network.api.utils.Utils
 import com.example.movieappazi.R
 import com.example.movieappazi.base.BaseFragment
 import com.example.movieappazi.databinding.FragmentActorsBinding
+import com.example.movieappazi.extensions.launchWhenViewStarted
 import com.example.movieappazi.extensions.showView
-import com.example.movieappazi.ui.zAdapter.movie.listener_for_adapters.RvClickListener
-import com.example.movieappazi.ui.zAdapter.person.PersonAdapter
+import com.example.movieappazi.ui.adapters.movie.listener_for_adapters.RvClickListener
+import com.example.movieappazi.ui.adapters.person.PersonAdapter
 import com.example.movieappazi.uiModels.person.PersonUi
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.button.MaterialButton
-import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
 
 
 @AndroidEntryPoint
@@ -30,6 +21,7 @@ class ActorsFragment :
     RvClickListener<PersonUi> {
 
     override val viewModel: ActorsFragmentViewModel by viewModels()
+
     private val personAdapter: PersonAdapter by lazy {
         PersonAdapter(this)
     }
@@ -38,13 +30,7 @@ class ActorsFragment :
         super.onStart()
         requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavMenu2).showView()
     }
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
-        val inflater = TransitionInflater.from(requireContext())
-        enterTransition = inflater.inflateTransition(R.transition.slide_up)
-        exitTransition = inflater.inflateTransition(R.transition.slide_up)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -56,44 +42,27 @@ class ActorsFragment :
         personRv.adapter = personAdapter
     }
 
-    private fun observePersons() = with(requireBinding()) {
-        lifecycleScope.launchWhenResumed {
-            viewModel.persons.collectLatest {
-//                shimmerLayout.visibility = View.INVISIBLE
-                personRv.visibility = View.VISIBLE
+
+    private fun observePersons() = with(viewModel) {
+        launchWhenViewStarted {
+            persons.observe {
                 personAdapter.personsList = it.persons
+                visibilities()
             }
         }
     }
 
-    @SuppressLint("CutPasteId")
-    private fun openDialogSheet(item: PersonUi) {
-        val bottomSheet = BottomSheetDialog(requireContext())
-        bottomSheet.setContentView(R.layout.alert_item_for_movie_det)
-        val movieImage = bottomSheet.findViewById<ImageView>(R.id.profile_picture)
-        val movieMore = bottomSheet.findViewById<MaterialButton>(R.id.play_button)
-        val movieTitle = bottomSheet.findViewById<TextView>(R.id.name)
-        val cancelBtn = bottomSheet.findViewById<ImageView>(R.id.close_btn)
-        cancelBtn?.setOnClickListener {
-            bottomSheet.dismiss()
-        }
-        Picasso.get().load(Utils.POSTER_PATH_URL + item.profile_path).into(movieImage)
-        movieTitle?.text = item.name
-        movieMore?.setOnClickListener {
-            viewModel.goPersonDetails(person = item)
-            bottomSheet.dismiss()
-        }
-        bottomSheet.setCancelable(true)
-        bottomSheet.show()
+    private fun visibilities() = with(requireBinding()) {
+        personRv.visibility = View.VISIBLE
+        shimmerLayoutForPerson.visibility = View.INVISIBLE
     }
 
     override fun onLongClick(item: PersonUi) {}
 
     override fun onItemClick(item: PersonUi) {
-        openDialogSheet(item = item)
+        viewModel.goPersonDetails(person = item)
     }
 
     override fun onReady(savedInstanceState: Bundle?) {}
-
 
 }

@@ -1,4 +1,4 @@
-package com.example.movieappazi.ui.zAdapter.movie.adapter_for_popular
+package com.example.movieappazi.ui.adapters.movie.adapter_for_popular
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,9 +6,9 @@ import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.example.movieappazi.R
-import com.example.movieappazi.ui.zAdapter.movie.diffcallbacks.MovieItemDiffCallback
-import com.example.movieappazi.ui.zAdapter.movie.listener_for_adapters.RvClickListener
-import com.example.movieappazi.ui.zAdapter.movie.view_holders.ObjectViewHolder
+import com.example.movieappazi.ui.adapters.movie.diffcallbacks.MovieItemDiffCallback
+import com.example.movieappazi.ui.adapters.movie.listener_for_adapters.RvClickListener
+import com.example.movieappazi.ui.adapters.movie.view_holders.ObjectViewHolder
 import com.example.movieappazi.uiModels.movie.MovieUi
 
 
@@ -16,6 +16,14 @@ class MovieItemAdapter(
     private val objectViewType: Int,
     private val listener: RvClickListener<MovieUi>,
 ) : ListAdapter<MovieUi, ObjectViewHolder>(MovieItemDiffCallback()) {
+
+    var moviesList = listOf<MovieUi>()
+        set(value) {
+            val callback = DiffCallBack(moviesList, value)
+            val diffResult = DiffUtil.calculateDiff(callback)
+            diffResult.dispatchUpdatesTo(this)
+            field = value
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ObjectViewHolder {
         val layout = when (viewType) {

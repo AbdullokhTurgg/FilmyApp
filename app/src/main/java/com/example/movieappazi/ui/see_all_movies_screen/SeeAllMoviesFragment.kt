@@ -2,24 +2,22 @@ package com.example.movieappazi.ui.see_all_movies_screen
 
 import android.os.Bundle
 import android.os.Parcelable
-import android.transition.TransitionInflater
 import android.view.View
 import android.widget.ScrollView
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.example.movieappazi.R
 import com.example.movieappazi.base.BaseFragment
 import com.example.movieappazi.databinding.FragmentSeeMoreBinding
 import com.example.movieappazi.extensions.hideView
+import com.example.movieappazi.extensions.launchWhenViewStarted
 import com.example.movieappazi.extensions.makeToast
-import com.example.movieappazi.ui.zAdapter.movie.adapter_for_popular.MovieItemAdapter
-import com.example.movieappazi.ui.zAdapter.movie.listener_for_adapters.RvClickListener
+import com.example.movieappazi.ui.adapters.movie.adapter_for_popular.MovieItemAdapter
+import com.example.movieappazi.ui.adapters.movie.listener_for_adapters.RvClickListener
 import com.example.movieappazi.uiModels.movie.MovieUi
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.parcel.Parcelize
-import kotlinx.coroutines.flow.collectLatest
 
 @Parcelize
 enum class MovieType : Parcelable {
@@ -30,30 +28,20 @@ enum class MovieType : Parcelable {
 class SeeAllMoviesFragment :
     BaseFragment<FragmentSeeMoreBinding, SeeAllMoviesFragmentViewModel>(FragmentSeeMoreBinding::inflate),
     RvClickListener<MovieUi> {
+
+    override val viewModel: SeeAllMoviesFragmentViewModel by viewModels()
+
     override fun onReady(savedInstanceState: Bundle?) {}
 
     private val args by navArgs<SeeAllMoviesFragmentArgs>()
-    private val ratingAdapter: MovieItemAdapter by lazy {
-        MovieItemAdapter(MovieItemAdapter.SEEMORETYPE, this)
-    }
-    private val popularAdapter: MovieItemAdapter by lazy {
-        MovieItemAdapter(MovieItemAdapter.POPULAR_TYPE, this)
-    }
-    private val upcomingAdapter: MovieItemAdapter by lazy {
-        MovieItemAdapter(MovieItemAdapter.SEEMORETYPE, this)
-    }
-    private val nowPlayingAdapter: MovieItemAdapter by lazy {
-        MovieItemAdapter(MovieItemAdapter.SEEMORETYPE, this)
-    }
-    override val viewModel: SeeAllMoviesFragmentViewModel by viewModels()
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
-        val inflater = TransitionInflater.from(requireContext())
-        enterTransition = inflater.inflateTransition(R.transition.slide_down)
-        exitTransition = inflater.inflateTransition(R.transition.slide_left)
+    private val ratingAdapter by lazy { MovieItemAdapter(MovieItemAdapter.SEEMORETYPE, this) }
 
-    }
+    private val popularAdapter by lazy { MovieItemAdapter(MovieItemAdapter.POPULAR_TYPE, this) }
+
+    private val upcomingAdapter by lazy { MovieItemAdapter(MovieItemAdapter.SEEMORETYPE, this) }
+
+    private val nowPlayingAdapter by lazy { MovieItemAdapter(MovieItemAdapter.SEEMORETYPE, this) }
 
     override fun onStart() {
         super.onStart()
@@ -62,10 +50,26 @@ class SeeAllMoviesFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setupClickers()
         setupTypes()
     }
+
+    private fun observeAllNowPlaying() = with(viewModel) {
+        launchWhenViewStarted { allNowPlayingMovies.observe { nowPlayingAdapter.submitList(it.movies) } }
+    }
+
+    private fun observeAllUpcoming() = with(viewModel) {
+        launchWhenViewStarted { allUpcomingMovies.observe { upcomingAdapter.submitList(it.movies) } }
+    }
+
+    private fun observeAllPopular() = with(viewModel) {
+        launchWhenViewStarted { allPopularMovies.observe { popularAdapter.submitList(it.movies) } }
+    }
+
+    private fun observeAllTopRated() = with(viewModel) {
+        launchWhenViewStarted { allTopRatedMovies.observe { ratingAdapter.submitList(it.movies) } }
+    }
+
 
     private fun setupClickers() = with(requireBinding()) {
         nextBtn.setOnClickListener {
@@ -76,79 +80,25 @@ class SeeAllMoviesFragment :
             viewModel.previousPage()
             scrollView.fullScroll(ScrollView.FOCUS_UP)
         }
-
     }
 
     private fun setupTypes() = with(requireBinding()) {
         when (args.type) {
             MovieType.TOP_RATED -> {
-                allTopratedRv.adapter = ratingAdapter
-                observeRatingsMovie()
+                moviesRv.adapter = ratingAdapter
+                observeAllTopRated()
             }
             MovieType.UPCOMING -> {
-                allTopratedRv.adapter = upcomingAdapter
-                observeUpcomingMovies()
+                moviesRv.adapter = upcomingAdapter
+                observeAllUpcoming()
             }
             MovieType.POPULAR -> {
-                allTopratedRv.adapter = popularAdapter
-                observePopularMovies()
+                moviesRv.adapter = popularAdapter
+                observeAllPopular()
             }
             MovieType.NOW_PLAYING -> {
-                allTopratedRv.adapter = nowPlayingAdapter
-                observeNowPlayingMovies()
-            }
-        }
-    }
-
-    private fun observeRatingsMovie() {
-        lifecycleScope.launchWhenResumed {
-            viewModel.allTopRatedMovies.collectLatest {
-                ratingAdapter.submitList(it.movies)
-                requireBinding().pageConstraint.visibility = View.VISIBLE
-            }
-        }
-    }
-
-    private fun observePopularMovies() {
-        lifecycleScope.launchWhenResumed {
-            viewModel.allPopularMovies.collectLatest {
-                popularAdapter.submitList(it.movies)
-                requireBinding().pageConstraint.visibility = View.VISIBLE
-            }
-        }
-        lifecycleScope.launchWhenResumed {
-            viewModel.movieResponseState.collectLatest { state ->
-                requireBinding().apply {
-                    prevPageText.text = state.previousPage.toString()
-                    currentPageText.text = state.page.toString()
-                    nextPageText.text = state.nextPage.toString()
-                    prevBtn.apply {
-                        isClickable = state.isHasPreviousPage
-                        isFocusable = state.isHasPreviousPage
-                    }
-                    nextBtn.apply {
-                        isClickable = state.isHasNextPage
-                        isFocusable = state.isHasNextPage
-                    }
-                }
-            }
-        }
-    }
-
-    private fun observeUpcomingMovies() {
-        lifecycleScope.launchWhenResumed {
-            viewModel.allUpcomingMovies.collectLatest {
-                upcomingAdapter.submitList(it.movies)
-                requireBinding().pageConstraint.visibility = View.VISIBLE
-            }
-        }
-    }
-
-    private fun observeNowPlayingMovies() {
-        lifecycleScope.launchWhenResumed {
-            viewModel.allNowPlayingMovies.collectLatest {
-                nowPlayingAdapter.submitList(it.movies)
-                requireBinding().pageConstraint.visibility = View.VISIBLE
+                moviesRv.adapter = nowPlayingAdapter
+                observeAllNowPlaying()
             }
         }
     }
@@ -161,6 +111,4 @@ class SeeAllMoviesFragment :
     override fun onLongClick(item: MovieUi) {
         viewModel.goMovieDetailsFragment(item)
     }
-
-
 }

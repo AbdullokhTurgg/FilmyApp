@@ -1,4 +1,4 @@
-package com.example.movieappazi.ui.zAdapter.movie.adapter_for_movie_genres
+package com.example.movieappazi.ui.adapters.movie.adapter_for_movie_genres
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
