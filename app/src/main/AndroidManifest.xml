@@ -9,7 +9,7 @@
 
 
     <application
-        android:name=".App"
+        android:name=".app.App"
         android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -20,10 +20,10 @@
         android:theme="@style/Theme.MovieAppAzi"
         tools:targetApi="31">
         <service
-            android:name=".service.MovieService">
+            android:name=".app.utils.service.MovieService">
         </service>
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.activity_main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

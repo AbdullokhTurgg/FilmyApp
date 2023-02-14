@@ -1,7 +1,6 @@
 package com.example.data.storage.source.movie
 
-import com.example.data.dataModel.movie.MovieData
-import com.example.domain.domainModels.movie.MovieDomain
+import com.example.data.data.models.movie.MovieData
 import kotlinx.coroutines.flow.Flow
 
 interface MovieStorageDataSource {

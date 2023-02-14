@@ -1,7 +1,7 @@
 package com.example.domain.domainModels.movie
 
 
-data class MovieDomain(
+class MovieDomain(
     val posterPath: String?,
     val adult: Boolean?,
     val overview: String?,

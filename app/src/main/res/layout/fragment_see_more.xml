@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/backGroundAd"
     app:layoutDescription="@xml/fragment_see_more_scene"
-    tools:context=".ui.see_all_movies_screen.SeeAllMoviesFragment">
+    tools:context=".ui.movie.see_all_movies_screen.SeeAllMoviesFragment">
 
     <ScrollView
         android:id="@+id/scroll_view"

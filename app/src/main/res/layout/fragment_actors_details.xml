@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/backGroundAd"
     app:layoutDescription="@xml/fragment_actors_details_scene"
-    tools:context=".ui.actors_details_screen.ActorsDetailsFragment">
+    tools:context=".ui.person.actors_details_screen.ActorsDetailsFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout2"

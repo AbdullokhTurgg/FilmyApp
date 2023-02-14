@@ -1,16 +1,17 @@
 package com.example.data.storage.source.movie
 
-import com.example.data.dataModel.movie.MovieData
+import com.example.data.data.models.movie.MovieData
 import com.example.data.storage.db.movie.MovieDao
 import com.example.data.storage.model.movie.MovieStorage
-import com.example.domain.assistant.DispatchersProvider
 import com.example.domain.base.BaseMapper
+import com.example.domain.helper.DispatchersProvider
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class MovieStorageDataSourceImpl(
+class MovieStorageDataSourceImpl @Inject constructor(
     private val movieDao: MovieDao,
     private val mapFromStorage: BaseMapper<MovieStorage, MovieData>,
     private val mapToStorage: BaseMapper<MovieData, MovieStorage>,

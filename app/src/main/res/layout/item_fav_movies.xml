@@ -11,7 +11,7 @@
     app:cardCornerRadius="@dimen/_20sdp"
     app:cardElevation="@dimen/_500sdp"
     app:layoutDescription="@xml/item_fav_movies_scene"
-    tools:context=".ui.storage_movies_screen.StorageMoviesFragment">
+    tools:context=".ui.movie.storage_movies_screen.StorageMoviesFragment">
 
 
     <com.google.android.material.card.MaterialCardView

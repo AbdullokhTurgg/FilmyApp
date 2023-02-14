@@ -2,7 +2,7 @@ package com.example.movieappazi.ui.adapters.movie.diffcallbacks
 
 import android.annotation.SuppressLint
 import androidx.recyclerview.widget.DiffUtil
-import com.example.movieappazi.uiModels.movie.MovieUi
+import com.example.movieappazi.app.models.movie.MovieUi
 
 class MovieItemDiffCallback : DiffUtil.ItemCallback<MovieUi>() {
     override fun areItemsTheSame(oldItem: MovieUi, newItem: MovieUi): Boolean {

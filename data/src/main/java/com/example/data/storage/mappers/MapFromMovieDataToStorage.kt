@@ -1,10 +1,11 @@
 package com.example.data.storage.mappers
 
-import com.example.data.dataModel.movie.MovieData
+import com.example.data.data.models.movie.MovieData
 import com.example.data.storage.model.movie.MovieStorage
 import com.example.domain.base.BaseMapper
+import javax.inject.Inject
 
-class MapFromMovieDataToStorage : BaseMapper<MovieData, MovieStorage> {
+class MapFromMovieDataToStorage @Inject constructor(): BaseMapper<MovieData, MovieStorage> {
     override fun map(from: MovieData) = from.run {
         MovieStorage(
             id = id,

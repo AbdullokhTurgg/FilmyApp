@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_movies"
-        android:name="com.example.movieappazi.ui.all_movies_screen.AllMoviesFragment"
+        android:name="com.example.movieappazi.ui.movie.all_movies_screen.AllMoviesFragment"
         android:label="Movies"
         tools:layout="@layout/fragment_all_movies">
         <action
@@ -34,10 +34,13 @@
         <action
             android:id="@+id/action_nav_movies_to_seeAllMoviesFragment"
             app:destination="@id/seeAllMoviesFragment" />
+        <action
+            android:id="@+id/action_nav_movies_to_seeAllMoviesFragment2"
+            app:destination="@id/seeAllMoviesFragment" />
     </fragment>
     <fragment
         android:id="@+id/nav_person"
-        android:name="com.example.movieappazi.ui.actors_screen.ActorsFragment"
+        android:name="com.example.movieappazi.ui.person.actors_screen.ActorsFragment"
         android:label="Actors"
         tools:layout="@layout/fragment_actors">
         <action
@@ -46,12 +49,9 @@
     </fragment>
     <fragment
         android:id="@+id/movieDetailsFragment"
-        android:name="com.example.movieappazi.ui.movie_details_screen.MovieDetailsFragment"
+        android:name="com.example.movieappazi.ui.movie.movie_details_screen.MovieDetailsFragment"
         android:label="fragment_movie_details"
         tools:layout="@layout/fragment_movie_details">
-        <argument
-            android:name="movie"
-            app:argType="com.example.movieappazi.uiModels.movie.MovieUi" />
         <action
             android:id="@+id/action_movieDetailsFragment_self"
             app:destination="@id/movieDetailsFragment"
@@ -64,10 +64,13 @@
         <action
             android:id="@+id/action_movieDetailsFragment_to_actorsDetailsFragment"
             app:destination="@id/actorsDetailsFragment" />
+        <argument
+            android:name="movie"
+            app:argType="com.example.movieappazi.app.models.movie.MovieUi" />
     </fragment>
     <fragment
         android:id="@+id/nav_storage"
-        android:name="com.example.movieappazi.ui.storage_movies_screen.StorageMoviesFragment"
+        android:name="com.example.movieappazi.ui.movie.storage_movies_screen.StorageMoviesFragment"
         android:label="Favourites"
         tools:layout="@layout/fragment_storage_movies" >
         <action
@@ -81,17 +84,18 @@
 
     <fragment
         android:id="@+id/actorsDetailsFragment"
-        android:name="com.example.movieappazi.ui.actors_details_screen.ActorsDetailsFragment"
+        android:name="com.example.movieappazi.ui.person.actors_details_screen.ActorsDetailsFragment"
         android:label="fragment_actors_details"
         tools:layout="@layout/fragment_actors_details">
         <argument
             android:name="person"
-            app:argType="com.example.movieappazi.uiModels.person.PersonUi" />
+            app:argType="com.example.movieappazi.app.models.person.PersonUi" />
     </fragment>
     <fragment
         android:id="@+id/nav_search"
-        android:name="com.example.movieappazi.ui.search_movies_screen.SearchMoviesFragment"
-        android:label="SearchMoviesFragment">
+        android:name="com.example.movieappazi.ui.movie.search_movies_screen.SearchMoviesFragment"
+        android:label="Search"
+        tools:layout="@layout/fragment_search_movies">
         <action
             android:id="@+id/action_nav_search_to_movieDetailsFragment"
             app:destination="@id/movieDetailsFragment" />
@@ -106,14 +110,14 @@
             app:nullable="true" />
     <fragment
         android:id="@+id/seeAllMoviesFragment"
-        android:name="com.example.movieappazi.ui.see_all_movies_screen.SeeAllMoviesFragment"
+        android:name="com.example.movieappazi.ui.movie.see_all_movies_screen.SeeAllMoviesFragment"
         android:label="fragment_all_top_rated_movies"
         tools:layout="@layout/fragment_see_more" >
-        <argument
-            android:name="type"
-            app:argType="com.example.movieappazi.ui.see_all_movies_screen.MovieType" />
         <action
             android:id="@+id/action_seeAllMoviesFragment_to_movieDetailsFragment"
             app:destination="@id/movieDetailsFragment" />
+        <argument
+            android:name="type"
+            app:argType="com.example.movieappazi.ui.movie.see_all_movies_screen.MovieType" />
     </fragment>
 </navigation>

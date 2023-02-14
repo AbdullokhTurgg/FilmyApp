@@ -7,9 +7,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieappazi.R
 import com.example.movieappazi.ui.adapters.movie.diffcallbacks.PersonDiffCallback
-import com.example.movieappazi.ui.adapters.movie.listener_for_adapters.RvClickListener
-import com.example.movieappazi.ui.adapters.movie.view_holders.ObjectViewHolder
-import com.example.movieappazi.uiModels.person.PersonUi
+import com.example.movieappazi.ui.adapters.movie.listener.RvClickListener
+import com.example.movieappazi.ui.adapters.movie.ObjectViewHolder
+import com.example.movieappazi.app.models.person.PersonUi
 
 class PersonAdapter(
     private val listener: RvClickListener<PersonUi>,
