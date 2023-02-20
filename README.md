@@ -5,14 +5,11 @@
 The application shows a list of films and actors, detailed information about them, the ability to
 search, as well as add to favorites.Adding to favorites takes place in the local Room database.
 
-![1676061060732 1](https://user-images.githubusercontent.com/114995936/218192150-c3d8e7e8-6ae2-4a0a-a3e0-42812db55436.jpg)
-![1676061060722 1](https://user-images.githubusercontent.com/114995936/218192191-2a2b12af-59ce-4705-a821-0a13fd55ef0e.jpg)
-![1676061060726 1](https://user-images.githubusercontent.com/114995936/218192233-6265b6c4-b399-4eec-8e78-ba9ce9894b07.jpg)
-![1676061292552 1](https://user-images.githubusercontent.com/114995936/218192387-baef0b74-148e-46cf-862b-35b3a2757dec.jpg)
-![1676061292547 1](https://user-images.githubusercontent.com/114995936/218192426-e5aa892d-44dc-4a4b-a064-38e4d78df7f1.jpg)
-![1676061292541 1](https://user-images.githubusercontent.com/114995936/218192466-e9665a47-0c35-49e3-93a0-01be34dd83a2.jpg)
-![1676061292541 1](https://user-images.githubusercontent.com/114995936/218192502-18533e22-de08-4481-b16c-002a45cc2b62.jpg)
-![1676061292537 1](https://user-images.githubusercontent.com/114995936/218192524-48695da1-7b5e-4778-8e50-d84bae1260b1.jpg)
+![1676917746711 1](https://user-images.githubusercontent.com/114995936/220178303-b02763de-220d-4396-b3a8-8efee6f4113f.jpg)
+![1676917746706 1](https://user-images.githubusercontent.com/114995936/220178327-b133bd2c-1743-4010-8cdf-ec4c30ca8701.jpg)
+![1676917746687 1](https://user-images.githubusercontent.com/114995936/220178367-b63f9776-75cf-458e-abc9-17d5957fd714.jpg)
+![1676917746682 1](https://user-images.githubusercontent.com/114995936/220178387-a40fd25c-942c-4695-9285-92ff14acd463.jpg)
+
 
 
 ## Libraries
@@ -91,3 +88,4 @@ search, as well as add to favorites.Adding to favorites takes place in the local
 * [Circular Progress View](https://jitpack.io/p/vaibhavlakhera/circular-progress-view)
   A customisable circular progress view for android.
   
+ 
