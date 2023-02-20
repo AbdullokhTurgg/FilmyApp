@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/_20sdp"
+    android:background="@color/backGroundAd"
+    app:layoutDescription="@xml/fragment_movie_details_scene"
+    tools:context=".ui.series.screen_series_details.SeriesDetailsFragment">
+
+
+
+
+    <include
+        android:id="@+id/include_movie_info_toolbar_block"
+        layout="@layout/include_movie_info_toolbar"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="IncludeLayoutParam" />
+
+
+    <include
+        android:id="@+id/include_movie_info_poster_block"
+        layout="@layout/include_movie_info_poster_block"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/movie_info_block"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="-425dp"
+        android:elevation="8dp"
+        android:paddingBottom="200dp"
+        app:cardBackgroundColor="@color/backGroundAd"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include_movie_info_toolbar_block"
+        app:shapeAppearanceOverlay="@style/TopCornerRadius">
+
+        <include
+            android:id="@+id/include_movie_info_block"
+            layout="@layout/include_movie_info_block"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

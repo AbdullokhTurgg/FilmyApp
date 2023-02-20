@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/_24sdp"
+    android:background="@color/backGroundAd"
+    app:layoutDescription="@xml/fragment_see_all_series_scene"
+    tools:context=".ui.movie.see_all_movies_screen.SeeAllSeriesFragment">
+
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/is_empty_loading"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_100sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_rawRes="@raw/loading"
+        />
+
+
+
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_105sdp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toTopOf="@id/scrollView"
+        android:src="@drawable/backseemore" />
+
+    <ImageView
+        android:id="@+id/up_button"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_marginTop="8dp"
+        android:paddingVertical="10dp"
+        android:src="@drawable/left"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/white" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/baloo"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_24sdp"
+        app:layout_constraintEnd_toStartOf="@+id/sort_options"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/up_button"
+        tools:text="All Items" />
+
+    <View
+        android:id="@+id/line_view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title" />
+
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line_view">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/scroll_constraint"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/movies_rv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="6dp"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintBottom_toTopOf="@+id/pageConstraint"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:spanCount="3" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/pageConstraint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/movies_rv"
+                app:layout_constraintStart_toStartOf="@id/movies_rv"
+                app:layout_constraintTop_toBottomOf="@id/movies_rv">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/prev_btn"
+                    style="@style/PrevBtnStyle"
+                    android:layout_marginBottom="4dp"
+                    android:text="prev"
+                    android:backgroundTint="@color/darkBlue1"
+                    app:icon="@drawable/ic_previous"
+                    app:iconTint="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/prev_page_text"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/prev_page_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/divider"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/prev_btn"
+                    app:layout_constraintEnd_toStartOf="@+id/current_page_text"
+                    app:layout_constraintStart_toEndOf="@+id/prev_btn"
+                    app:layout_constraintTop_toTopOf="@id/prev_btn" />
+
+                <TextView
+                    android:id="@+id/current_page_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/next_page_text"
+                    app:layout_constraintStart_toEndOf="@+id/prev_page_text"
+                    app:layout_constraintTop_toTopOf="@id/prev_btn" />
+
+                <TextView
+                    android:id="@+id/next_page_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/divider"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/prev_btn"
+                    app:layout_constraintEnd_toStartOf="@+id/next_btn"
+                    app:layout_constraintStart_toEndOf="@+id/current_page_text"
+                    app:layout_constraintTop_toTopOf="@id/prev_btn" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/next_btn"
+                    style="@style/BtnNextStyle"
+                    android:text="next"
+                    android:backgroundTint="@color/darkBlue1"
+                    app:icon="@drawable/ic_next"
+                    app:iconGravity="end"
+                    app:iconTint="@color/white"
+                    app:layout_constraintBottom_toBottomOf="@id/prev_btn"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/next_page_text"
+                    app:layout_constraintTop_toTopOf="@id/prev_btn" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

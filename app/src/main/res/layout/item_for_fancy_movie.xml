@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/motion_layout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="14dp"
+    android:backgroundTint="@color/backGroundAd"
+    android:clickable="true"
+    tools:ignore="MissingDefaultResource">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_img"
+        android:layout_width="@dimen/_160sdp"
+        android:layout_height="@dimen/_160sdp"
+        android:layout_centerHorizontal="true"
+        android:background="@color/color_gray"
+        android:elevation="12dp"
+        app:cardCornerRadius="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/posterImage"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_160sdp"
+            android:contentDescription="cast_image"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars[0]" />
+    </androidx.cardview.widget.CardView>
+
+    <com.vaibhavlakhera.circularprogressview.CircularProgressView
+        android:id="@+id/progressView"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:visibility="gone"
+        app:animate="true"
+        app:animateDuration="800"
+        app:fillColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:progressColor="@color/purple_500"
+        app:progressInterpolator="@android:anim/accelerate_decelerate_interpolator"
+        app:progressTextColor="@color/white"
+        app:progressTextEnabled="true"
+        app:progressTextSize="10sp"
+        app:progressTextType="percent"
+        app:progressValue="0"
+        app:progressWidth="5dp"
+        app:startAngle="270"
+        app:totalColor="@color/black"
+        app:totalValue="100"
+        app:totalWidth="8dp" />
+</androidx.cardview.widget.CardView>

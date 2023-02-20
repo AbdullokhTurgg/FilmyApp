@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/motion_layout"
+    android:layout_width="@dimen/_180sdp"
+    android:layout_height="@dimen/_250sdp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginRight="5dp"
+    android:clickable="true"
+    android:backgroundTint="@color/bold_text"
+    android:clipChildren="true"
+    android:focusable="true"
+    android:orientation="vertical"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="0dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="2dp"
+        app:cardCornerRadius="10dp">
+
+
+        <androidx.constraintlayout.motion.widget.MotionLayout
+            android:id="@+id/constraintLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:elevation="20dp"
+            app:layoutDescription="@xml/object_item_portrait_xml_constraintlayout2_scene">
+
+            <ImageView
+                android:id="@+id/posterImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/poster" />
+
+            <ImageView
+                android:id="@+id/delete_btn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="end"
+                app:layout_constraintBottom_toBottomOf="@+id/posterImage"
+                app:layout_constraintStart_toStartOf="parent"
+
+                />
+
+            <com.vaibhavlakhera.circularprogressview.CircularProgressView
+                android:id="@+id/progressView"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                app:animate="true"
+                app:animateDuration="800"
+                app:fillColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:progressColor="@color/purple_500"
+                app:progressInterpolator="@android:anim/accelerate_decelerate_interpolator"
+                app:progressTextColor="@color/white"
+                app:progressTextEnabled="true"
+                app:progressTextSize="10sp"
+                app:progressTextType="percent"
+                app:progressValue="0"
+                app:progressWidth="5dp"
+                app:startAngle="270"
+                app:totalColor="@color/black"
+                app:totalValue="100"
+                app:totalWidth="8dp" />
+        </androidx.constraintlayout.motion.widget.MotionLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.cardview.widget.CardView>

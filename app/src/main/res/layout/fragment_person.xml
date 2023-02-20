@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backGroundAd"
+    tools:context=".ui.person.actors_screen.PersonFragment">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/is_empty_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/loading"
+        app:lottie_renderMode="automatic" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/mainScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/personsRv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="6dp"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintBottom_toTopOf="@id/pageConstraint"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:spanCount="2" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/pageConstraint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/personsRv"
+                app:layout_constraintStart_toStartOf="@id/personsRv">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/prev_btn_person"
+                    style="@style/PrevBtnStyle"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginBottom="4dp"
+                    android:text="prev"
+                    app:icon="@drawable/ic_previous"
+                    app:iconTint="@color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/prev_page_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/divider"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/prev_btn_person"
+                    app:layout_constraintEnd_toStartOf="@+id/current_page_text"
+                    app:layout_constraintStart_toEndOf="@+id/prev_btn_person"
+                    app:layout_constraintTop_toTopOf="@id/prev_btn_person" />
+
+                <TextView
+                    android:id="@+id/current_page_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/green"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/prev_btn_person" />
+
+                <TextView
+                    android:id="@+id/next_page_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/divider"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/prev_btn_person"
+                    app:layout_constraintEnd_toStartOf="@+id/next_btn_person"
+                    app:layout_constraintStart_toEndOf="@+id/current_page_text"
+                    app:layout_constraintTop_toTopOf="@id/prev_btn_person" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/next_btn_person"
+                    style="@style/BtnNextStyle"
+                    android:layout_marginEnd="10dp"
+                    android:text="next"
+                    app:icon="@drawable/ic_next"
+                    app:iconGravity="end"
+                    app:iconTint="@color/black"
+                    app:layout_constraintBottom_toBottomOf="@id/prev_btn_person"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/prev_btn_person" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backGroundAd">
+
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer1"
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCardView2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:backgroundTint="@color/black_30_alpha"
+            android:paddingBottom="200dp"
+            app:cardBackgroundColor="@color/black_30_alpha"
+            app:cardCornerRadius="@dimen/_16sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_170sdp"
+                android:background="@color/white" />
+
+            <TextView
+                android:id="@+id/nameGlav"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_6sdp"
+                android:layout_marginTop="@dimen/_65sdp"
+                android:fontFamily="@font/baloo"
+                android:gravity="start"
+                android:text="TopRated Movies! Only For You"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-12dp"
+                android:layout_marginTop="@dimen/_100sdp"
+                android:orientation="horizontal">
+
+                <include layout="@layout/shimmer_for_movie_item" />
+
+                <include layout="@layout/shimmer_for_movie_item" />
+
+                <include layout="@layout/shimmer_for_movie_item" />
+
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/shimmer1">
+        <!--    tools:context=".ui.movie.movies_screen.MovieFragment">-->
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/baloo"
+                android:text="@string/now_playing_category"
+                android:textColor="@color/shimmerColor"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <include layout="@layout/shimmer_for_movie_item" />
+
+                <include layout="@layout/shimmer_for_movie_item" />
+
+                <include layout="@layout/shimmer_for_movie_item" />
+
+                <include layout="@layout/shimmer_for_movie_item" />
+
+                <include layout="@layout/shimmer_for_movie_item" />
+
+                <include layout="@layout/shimmer_for_movie_item" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/adventure_text"
+                android:fontFamily="@font/baloo"
+                android:textColor="@color/shimmerColor"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <include layout="@layout/shimmer_for_movie_item" />
+
+                <include layout="@layout/shimmer_for_movie_item" />
+
+                <include layout="@layout/shimmer_for_movie_item" />
+
+                <include layout="@layout/shimmer_for_movie_item" />
+
+                <include layout="@layout/shimmer_for_movie_item" />
+
+                <include layout="@layout/shimmer_for_movie_item" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/top_rated_category"
+                android:fontFamily="@font/baloo"
+                android:textColor="@color/shimmerColor"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <include layout="@layout/shimmer_for_movie_item" />
+
+                <include layout="@layout/shimmer_for_movie_item" />
+
+                <include layout="@layout/shimmer_for_movie_item" />
+
+                <include layout="@layout/shimmer_for_movie_item" />
+
+                <include layout="@layout/shimmer_for_movie_item" />
+
+                <include layout="@layout/shimmer_for_movie_item" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/now_playing_category"
+                android:textColor="@color/shimmerColor"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <include layout="@layout/shimmer_for_movie_item" />
+
+                <include layout="@layout/shimmer_for_movie_item" />
+
+                <include layout="@layout/shimmer_for_movie_item" />
+
+                <include layout="@layout/shimmer_for_movie_item" />
+
+                <include layout="@layout/shimmer_for_movie_item" />
+
+                <include layout="@layout/shimmer_for_movie_item" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
