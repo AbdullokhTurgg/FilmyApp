@@ -3,10 +3,10 @@ package com.example.movieappazi.ui.movie.movie_details_screen
 import androidx.lifecycle.viewModelScope
 import com.example.domain.helper.DispatchersProvider
 import com.example.domain.base.BaseMapper
-import com.example.domain.domainModels.movie.CreditsResponseDomain
-import com.example.domain.domainModels.movie.MovieDetailsDomain
-import com.example.domain.domainModels.movie.MovieDomain
-import com.example.domain.domainModels.movie.MoviesDomain
+import com.example.domain.models.movie.CreditsResponseDomain
+import com.example.domain.models.movie.MovieDetailsDomain
+import com.example.domain.models.movie.MovieDomain
+import com.example.domain.models.movie.MoviesDomain
 import com.example.domain.repositories.network.movie.MovieRepositories
 import com.example.domain.repositories.storage.MovieStorageRepository
 import com.example.movieappazi.app.base.BaseViewModel
@@ -33,11 +33,22 @@ class MovieDetailsFragmentViewModel constructor(
     private val saveMovieRepository: MovieStorageRepository,
 ) : BaseViewModel() {
 
+    private var _motionPosition = MutableStateFlow(0f)
+    val motionPosition get() = _motionPosition.asStateFlow()
+    fun updateMotionPosition(position: Float) = _motionPosition.tryEmit(position)
+
+    fun saveMovieFromRv(movieUi: MovieUi) = viewModelScope.launch {
+        saveMovieRepository.saveMovieToDatabase(movie = mapFromUiToDomain.map(movieUi))
+    }
+
+    fun goMovieInfo(movieUi: MovieUi) {
+        navigation(MovieDetailsFragmentDirections.actionMovieDetailsFragmentSelf(movieUi))
+    }
+
     private val _error = MutableSharedFlow<String>(replay = 0)
     val error get() = _error.asSharedFlow()
 
     private val movieIdFlow = MutableStateFlow(movieId)
-
 
     val movieFlow =
         movieIdFlow.map(movieRepository::getMovieDetails).map { it.map(mapMovieDetails) }
@@ -46,19 +57,20 @@ class MovieDetailsFragmentViewModel constructor(
         movieIdFlow.map(movieRepository::getActors).map { it.map(mapCreditsResponseDomain) }
 
 
-    val similarMoviesFlow = movieIdFlow.flatMapLatest { movieRepository.getSimilarMovies(it)
-    }.map(mapMovieResponse::map).flowOn(dispatchersProvider.default()).onEach { it.movies.forEach {}
-    }.catch { t: Throwable -> _error.emit(resourceProvider.hanEx(t))
-    }.shareIn(viewModelScope, SharingStarted.Lazily, 1)
+    val similarMoviesFlow = movieIdFlow
+        .flatMapLatest { movieRepository.getSimilarMovies(it) }
+        .map(mapMovieResponse::map)
+        .flowOn(dispatchersProvider.default())
+        .onEach { it.movies.forEach {} }
+        .catch { t: Throwable -> _error.emit(resourceProvider.hanEx(t)) }
+        .shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
-    val recommendMoviesFlow = movieIdFlow.flatMapLatest { movieRepository.getRecommendMovies(it)
-    }.map(mapMovieResponse::map).flowOn(dispatchersProvider.default()).onEach { it.movies.forEach {}
-    }.catch { t: Throwable -> _error.emit(resourceProvider.hanEx(t))
-    }.shareIn(viewModelScope, SharingStarted.Lazily, 1)
-
-
-    fun saveMovieFromRv(movieUi: MovieUi) = viewModelScope.launch {
-        saveMovieRepository.saveMovieToDatabase(movie = mapFromUiToDomain.map(movieUi))
-    }
+    val recommendMoviesFlow = movieIdFlow
+        .flatMapLatest { movieRepository.getRecommendMovies(it) }
+        .map(mapMovieResponse::map)
+        .flowOn(dispatchersProvider.default())
+        .onEach { it.movies.forEach {} }
+        .catch { t: Throwable -> _error.emit(resourceProvider.hanEx(t)) }
+        .shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
 }

@@ -7,6 +7,6 @@ interface CommonItemAnimator {
     fun animateAdd(holder: RecyclerView.ViewHolder)
 
     fun preAnimateRemove(holder: RecyclerView.ViewHolder) {}
-    fun preAnimateAdd(holder: RecyclerView.ViewHolder){}
+    fun preAnimateAdd(holder: RecyclerView.ViewHolder) {}
 }
 

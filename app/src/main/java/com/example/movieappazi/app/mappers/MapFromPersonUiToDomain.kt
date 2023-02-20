@@ -1,8 +1,8 @@
 package com.example.movieappazi.app.mappers
 
 import com.example.domain.base.BaseMapper
-import com.example.domain.domainModels.movie.MovieDomain
-import com.example.domain.domainModels.person.PersonDomain
+import com.example.domain.models.movie.MovieDomain
+import com.example.domain.models.person.PersonDomain
 import com.example.movieappazi.app.models.movie.MovieUi
 import com.example.movieappazi.app.models.person.PersonUi
 

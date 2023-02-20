@@ -3,8 +3,8 @@ package com.example.data.data.mappers
 import com.example.data.data.models.movie.CastData
 import com.example.data.data.models.movie.CreditsResponseData
 import com.example.domain.base.BaseMapper
-import com.example.domain.domainModels.movie.CastDomain
-import com.example.domain.domainModels.movie.CreditsResponseDomain
+import com.example.domain.models.movie.CastDomain
+import com.example.domain.models.movie.CreditsResponseDomain
 import javax.inject.Inject
 
 class MapCreditsResponseDataToDomain @Inject constructor(private val mapper: BaseMapper<List<CastData>, List<CastDomain>>) :

@@ -1,7 +1,7 @@
 package com.example.movieappazi.app.mappers
 
 import com.example.domain.base.BaseMapper
-import com.example.domain.domainModels.person.PersonDetailsDomain
+import com.example.domain.models.person.PersonDetailsDomain
 import com.example.movieappazi.app.models.person.PersonDetailsUi
 
 class MapFromLisOfPersonDetDomainToUi(

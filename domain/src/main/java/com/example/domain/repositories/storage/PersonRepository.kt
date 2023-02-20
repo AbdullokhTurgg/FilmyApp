@@ -1,6 +1,6 @@
 package com.example.domain.repositories.storage
 
-import com.example.domain.domainModels.person.PersonDetailsDomain
+import com.example.domain.models.person.PersonDetailsDomain
 import kotlinx.coroutines.flow.Flow
 
 interface PersonRepository {

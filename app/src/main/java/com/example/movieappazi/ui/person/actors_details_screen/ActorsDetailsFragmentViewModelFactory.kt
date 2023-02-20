@@ -3,7 +3,7 @@ package com.example.movieappazi.ui.person.actors_details_screen
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.domain.base.BaseMapper
-import com.example.domain.domainModels.person.PersonDetailsDomain
+import com.example.domain.models.person.PersonDetailsDomain
 import com.example.domain.repositories.network.person.PersonRepositories
 import com.example.movieappazi.app.models.person.PersonDetailsUi
 import dagger.assisted.Assisted

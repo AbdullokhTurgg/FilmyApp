@@ -66,7 +66,7 @@ abstract class BaseItemAnimator : SimpleItemAnimator() {
         }
 
         override fun toString(): String {
-            return ("ChangeInfo{" + "oldHolder=" + oldHolder + ", newHolder=" + newHolder + ", fromX=" + fromX + ", fromY=" + fromY + ", toX=" + toX + ", toY=" + toY + '}')
+            return ("ChangeInfo{oldHolder=$oldHolder, newHolder=$newHolder, fromX=$fromX, fromY=$fromY, toX=$toX, toY=$toY}")
         }
     }
 

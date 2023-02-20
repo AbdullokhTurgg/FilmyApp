@@ -11,7 +11,7 @@ data class MovieUi(
     val adult: Boolean?,
     val overview: String?,
     val releaseDate: String?,
-    val id: Int?,
+    val id: Int,
     val originalTitle: String?,
     val originalLanguage: String?,
     val title: String,
@@ -21,7 +21,4 @@ data class MovieUi(
     val video: Boolean?,
     val rating: Double,
     val genre_ids: List<Int>?,
-//    val runtime: String,
-//    val credits: MovieUi?,
-//    val cast: List<MovieUi>,
 ) : Parcelable, Item

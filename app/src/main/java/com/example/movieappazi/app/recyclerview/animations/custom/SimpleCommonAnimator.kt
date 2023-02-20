@@ -4,6 +4,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class SimpleCommonAnimator : CommonItemAnimator {
 
+
     override fun animateRemove(holder: RecyclerView.ViewHolder) {
         holder.itemView.animate().alpha(0f)
     }
@@ -19,5 +20,4 @@ class SimpleCommonAnimator : CommonItemAnimator {
     override fun preAnimateAdd(holder: RecyclerView.ViewHolder) {
         holder.itemView.alpha = 0f
     }
-
 }

@@ -1,7 +1,7 @@
 package com.example.data.movie_iteractors.get_movie_actors_usecase
 
 import com.example.domain.helper.DispatchersProvider
-import com.example.domain.domainModels.person.PersonsDomain
+import com.example.domain.models.person.PersonsDomain
 import com.example.domain.repositories.network.person.PersonRepositories
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

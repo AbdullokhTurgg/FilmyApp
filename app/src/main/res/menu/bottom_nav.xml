@@ -9,6 +9,11 @@
         android:title="@string/home" />
 
     <item
+        android:id="@+id/nav_tvShows"
+        android:icon="@drawable/monitor"
+        android:title="Series" />
+
+    <item
         android:id="@+id/nav_search"
         android:icon="@drawable/ic_search"
         android:title="@string/search" />
@@ -21,6 +26,8 @@
         android:id="@+id/nav_storage"
         android:icon="@drawable/save_vector"
         android:title="BookMarks" />
+
+
 
 
 </menu>

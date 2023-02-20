@@ -2,8 +2,8 @@ package com.example.movieappazi.ui.movie.search_movies_screen
 
 import androidx.lifecycle.viewModelScope
 import com.example.domain.base.BaseMapper
-import com.example.domain.domainModels.movie.MovieDomain
-import com.example.domain.domainModels.movie.MoviesDomain
+import com.example.domain.models.movie.MovieDomain
+import com.example.domain.models.movie.MoviesDomain
 import com.example.domain.repositories.network.movie.MovieRepositories
 import com.example.domain.repositories.storage.MovieStorageRepository
 import com.example.domain.state.takeSuccess
@@ -14,8 +14,8 @@ import com.example.movieappazi.app.utils.exception.HandleExeption
 import com.example.movieappazi.app.utils.extensions.createMutableSharedFlowAsLiveData
 import com.example.movieappazi.ui.movie.search_movies_screen.router.FragmentSearchMoviesRouter
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -26,31 +26,27 @@ class SearchMoviesFragmentViewModel @Inject constructor(
     private val mapMoviesResponse: BaseMapper<MoviesDomain, MoviesUi>,
     private val repository: MovieRepositories,
     private val resourceProvider: HandleExeption,
-    private val fragmentSearchMoviesRouter: FragmentSearchMoviesRouter,
 ) : BaseViewModel() {
+
+    private var _motionPosition = MutableStateFlow(0f)
+    val motionPosition get() = _motionPosition.asStateFlow()
+    fun updateMotionPosition(position: Float) = _motionPosition.tryEmit(position)
 
     private val _error = MutableSharedFlow<String>(replay = 0)
     val error get() = _error.asSharedFlow()
+    val moviesFlow = createMutableSharedFlowAsLiveData<MoviesUi>()
 
-    val movies = createMutableSharedFlowAsLiveData<MoviesUi>()
 
-    fun searchMovie(query: String) = viewModelScope.launch {
-        kotlin.runCatching {
-            repository.searchMovie(query)
-        }.onSuccess {
-            if (it.takeSuccess() != null) {
-                movies.emit(mapMoviesResponse.map(it.takeSuccess()!!))
-            }
-        }.onFailure {
-            _error.emit(resourceProvider.hanEx(it))
-        }
-    }
+    fun searchMovie(keyword: String) = repository.getSearchMovies(query = keyword)
+        .map(mapMoviesResponse::map)
+        .flowOn(Dispatchers.Default)
+        .catch { error: Throwable -> _error.emit(resourceProvider.hanEx(error)) }
+        .shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
-    fun saveMovie(movie: MovieUi) = viewModelScope.launch {
-        storageRepository.saveMovieToDatabase(movie = saveMapper.map(movie))
-    }
+    fun saveMovie(movie: MovieUi) =
+        viewModelScope.launch { storageRepository.saveMovieToDatabase(saveMapper.map(movie)) }
 
-   fun launchMovieDetails(movie: MovieUi) =
-        navigate(fragmentSearchMoviesRouter.navigateToMovieDetailsFragment(movie = movie))
+    fun launchMovieDetails(movie: MovieUi) =
+        navigation(SearchMoviesFragmentDirections.actionNavSearchToMovieDetailsFragment(movie))
 
 }

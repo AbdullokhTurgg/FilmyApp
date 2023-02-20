@@ -14,8 +14,10 @@ import com.example.movieappazi.app.utils.navigation.NavigationCommand
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
 
 abstract class BaseViewModel : ViewModel() {
 
@@ -45,8 +47,13 @@ abstract class BaseViewModel : ViewModel() {
 
     fun navigate(navCommand: NavCommand) = _navCommand.tryEmit(navCommand)
 
-    fun navigateBack() =
-        launchInBackground { navigationCommunication.put(Event(value = NavigationCommand.Back)) }
+    fun navigation(navDirections: NavDirections) {
+        _navigation.value = Event(NavigationCommand.ToDirection(navDirections))
+    }
+
+    fun navigateBack() {
+        _navigation.value = Event(NavigationCommand.Back)
+    }
 
     fun <T> launchInBackground(backGroundCall: suspend () -> T) =
         dispatcher.launchInBackground(viewModelScope) { backGroundCall() }

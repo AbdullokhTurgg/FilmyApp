@@ -3,7 +3,7 @@ package com.example.movieappazi.ui.person.actors_screen
 import androidx.lifecycle.viewModelScope
 import com.example.domain.helper.DispatchersProvider
 import com.example.domain.base.BaseMapper
-import com.example.domain.domainModels.person.PersonsDomain
+import com.example.domain.models.person.PersonsDomain
 import com.example.domain.repositories.network.person.PersonRepositories
 import com.example.movieappazi.app.base.BaseViewModel
 import com.example.movieappazi.app.utils.extensions.changeResponseState
@@ -35,17 +35,18 @@ class ActorsFragmentViewModel @Inject constructor(
 //        navigate(ActorsFragmentDirections.actionNavPersonToActorsDetailsFragment(person))
     }
 
-
     @OptIn(ExperimentalCoroutinesApi::class)
-    val persons = personResponsePage.flatMapLatest {
-        personRepository.getPersons(personResponsePage.value)
-    }.map(mapPersonResponseFromDomain::map).flowOn(dispatchersProvider.default())
-        .catch { t: Throwable ->
-            _error.emit(resourceProvider.hanEx(t))
-        }.onEach {
-            _personResponseState.emit(changeResponseState(page = it.page,
-                totalPage = it.total_pages))
-        }.shareIn(viewModelScope, SharingStarted.Lazily, 1)
+    val persons = personResponsePage
+        .flatMapLatest { personRepository.getPersons(personResponsePage.value) }
+        .map(mapPersonResponseFromDomain::map)
+        .flowOn(dispatchersProvider.default())
+        .catch { t: Throwable -> _error.emit(resourceProvider.hanEx(t)) }
+        .onEach { _personResponseState.emit(changeResponseState(it.page, it.total_pages)) }
+        .shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
+
+    fun nextPage() = personResponsePage.tryEmit(_personResponseState.value.nextPage)
+
+    fun previousPage() = personResponsePage.tryEmit(_personResponseState.value.previousPage)
 
 }

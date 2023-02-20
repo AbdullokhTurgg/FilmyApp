@@ -2,7 +2,7 @@ package com.example.data.data.mappers
 
 import com.example.data.data.models.person.PersonDetailsData
 import com.example.domain.base.BaseMapper
-import com.example.domain.domainModels.person.PersonDetailsDomain
+import com.example.domain.models.person.PersonDetailsDomain
 import javax.inject.Inject
 
 class MapFromPersonDetailsDomainToData @Inject constructor():BaseMapper<PersonDetailsDomain, PersonDetailsData> {

@@ -2,35 +2,27 @@ package com.example.movieappazi.app.di
 
 import com.example.data.cloud.mappers.movie.*
 import com.example.data.cloud.mappers.person.MapFromListPersonCloudToData
-import com.example.data.cloud.mappers.person.MapFromPersonCloudToData
-import com.example.data.cloud.mappers.person.MapFromPersonDetailsCloudToData
-import com.example.data.cloud.mappers.person.MapFromPersonsCloudToData
 import com.example.data.cloud.models.movie.MovieCloud
-import com.example.data.cloud.models.movie.MovieDetailsCloud
 import com.example.data.cloud.models.movie.MovieGenresCloud
-import com.example.data.cloud.models.movie.MoviesCloud
 import com.example.data.cloud.models.movie.movie_category.CastCloud
-import com.example.data.cloud.models.movie.movie_category.CreditsResponseCloud
+import com.example.data.cloud.models.movie.tv_shows.SeriesCloud
 import com.example.data.cloud.models.person.PersonCloud
-import com.example.data.cloud.models.person.PersonDetailsCloud
-import com.example.data.cloud.models.person.PersonsCloud
 import com.example.data.data.mappers.*
 import com.example.data.data.models.movie.*
+import com.example.data.data.models.movie.tv_shows.SeriesData
 import com.example.data.data.models.person.PersonData
-import com.example.data.data.models.person.PersonDetailsData
-import com.example.data.data.models.person.PersonsData
-import com.example.data.storage.mappers.*
-import com.example.data.storage.model.movie.MovieStorage
+import com.example.data.storage.tv.mappers.MapListTvStorageToData
+import com.example.data.storage.tv.models.TvStorage
 import com.example.domain.base.BaseMapper
-import com.example.domain.domainModels.movie.*
-import com.example.domain.domainModels.person.PersonDetailsDomain
-import com.example.domain.domainModels.person.PersonDomain
-import com.example.domain.domainModels.person.PersonsDomain
+import com.example.domain.models.movie.*
+import com.example.domain.models.movie.tv_shows.SeriesDomain
+import com.example.domain.models.person.PersonDetailsDomain
+import com.example.domain.models.person.PersonDomain
 import com.example.movieappazi.app.mappers.*
 import com.example.movieappazi.app.models.movie.*
+import com.example.movieappazi.app.models.movie.tv_shows.SeriesUi
 import com.example.movieappazi.app.models.person.PersonDetailsUi
 import com.example.movieappazi.app.models.person.PersonUi
-import com.example.movieappazi.app.models.person.PersonsUi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -39,6 +31,11 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 object MapperModule {
+
+    @Provides
+    fun provideMapListTvStorageToData(
+        mapper: BaseMapper<TvStorage, SeriesData>,
+    ): BaseMapper<List<TvStorage>, List<SeriesData>> = MapListTvStorageToData(mapper = mapper)
 
     @Provides
     fun provideMapperFromListOfMovieDataToDomain(
@@ -112,4 +109,16 @@ object MapperModule {
     @Provides
     fun provideMapListCastDomainToUi(mapper: BaseMapper<CastDomain, CastUi>): BaseMapper<List<CastDomain>, List<CastUi>> =
         MapListCastDomainToUi(mapper = mapper)
+
+    @Provides
+    fun provideMapFromListSeriesCloudToData(mapper: BaseMapper<SeriesCloud, SeriesData>): BaseMapper<List<SeriesCloud>, List<SeriesData>> =
+        MapFromListSeriesCloudToData(mapper = mapper)
+
+    @Provides
+    fun provideMapFromListSeriesDataToDomain(mapper: BaseMapper<SeriesData, SeriesDomain>): BaseMapper<List<SeriesData>, List<SeriesDomain>> =
+        MapFromListSeriesDataToDomain(mapper = mapper)
+
+    @Provides
+    fun provideMapperFromListSeriesDomainToUi(mapper: BaseMapper<SeriesDomain, SeriesUi>): BaseMapper<List<SeriesDomain>, List<SeriesUi>> =
+        MapFromListSeriesDomainToUi(mapper = mapper)
 }

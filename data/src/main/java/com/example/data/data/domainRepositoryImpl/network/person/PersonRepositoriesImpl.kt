@@ -4,8 +4,8 @@ import com.example.data.cloud.source.person.CloudDataSourcePerson
 import com.example.data.data.models.person.PersonDetailsData
 import com.example.data.data.models.person.PersonsData
 import com.example.domain.base.BaseMapper
-import com.example.domain.domainModels.person.PersonDetailsDomain
-import com.example.domain.domainModels.person.PersonsDomain
+import com.example.domain.models.person.PersonDetailsDomain
+import com.example.domain.models.person.PersonsDomain
 import com.example.domain.helper.DispatchersProvider
 import com.example.domain.repositories.network.person.PersonRepositories
 import com.example.domain.state.DataRequestState

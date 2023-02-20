@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/motion"
     android:layout_width="match_parent"
+    android:layout_marginTop="@dimen/_20sdp"
     android:layout_height="match_parent"
     android:background="@color/backGroundAd"
     app:layoutDescription="@xml/fragment_movie_details_scene"
@@ -16,7 +17,8 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="IncludeLayoutParam" />
 
 
     <include
@@ -48,6 +50,5 @@
             android:layout_height="wrap_content" />
 
     </com.google.android.material.card.MaterialCardView>
-
 
 </androidx.constraintlayout.motion.widget.MotionLayout>

@@ -10,6 +10,7 @@ import com.example.movieappazi.ui.adapters.movie.diffcallbacks.PersonDiffCallbac
 import com.example.movieappazi.ui.adapters.movie.listener.RvClickListener
 import com.example.movieappazi.ui.adapters.movie.ObjectViewHolder
 import com.example.movieappazi.app.models.person.PersonUi
+import com.example.movieappazi.app.utils.extensions.startSlideInLeftAnim
 
 class PersonAdapter(
     private val listener: RvClickListener<PersonUi>,
@@ -24,18 +25,21 @@ class PersonAdapter(
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ObjectViewHolder =
-        ObjectViewHolder(LayoutInflater.from(parent.context)
-            .inflate(R.layout.object_item_portrait, parent, false))
+        ObjectViewHolder(
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.item_for_seemore, parent, false
+            )
+        )
 
     override fun onBindViewHolder(holder: ObjectViewHolder, position: Int) {
         holder.bindPerson(person = personsList[position])
+
         holder.view.setOnClickListener {
             listener.onItemClick(item = personsList[position])
+
         }
-        holder.itemMovie.startAnimation(AnimationUtils.loadAnimation(holder.itemView.context,
-            R.anim.anim_for_recyclerview))
+        holder.itemView.startSlideInLeftAnim()
     }
 
     override fun getItemCount() = personsList.size
 }
-

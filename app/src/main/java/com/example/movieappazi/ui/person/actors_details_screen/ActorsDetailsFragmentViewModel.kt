@@ -1,7 +1,7 @@
 package com.example.movieappazi.ui.person.actors_details_screen
 
 import com.example.domain.base.BaseMapper
-import com.example.domain.domainModels.person.PersonDetailsDomain
+import com.example.domain.models.person.PersonDetailsDomain
 import com.example.domain.repositories.network.person.PersonRepositories
 import com.example.movieappazi.app.base.BaseViewModel
 import com.example.movieappazi.app.models.person.PersonDetailsUi

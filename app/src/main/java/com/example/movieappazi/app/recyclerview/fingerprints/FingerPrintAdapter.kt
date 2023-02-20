@@ -4,9 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.viewbinding.ViewBinding
+import com.example.movieappazi.R
 import com.example.movieappazi.app.recyclerview.Item
 import com.example.movieappazi.app.recyclerview.ItemFingerprint
 import com.example.movieappazi.app.base.BaseViewHolder
+import com.example.movieappazi.app.models.movie.MovieUi
 import com.example.movieappazi.app.recyclerview.diffuitil.FingerprintDiffUtil
 
 
@@ -51,5 +53,6 @@ class FingerprintAdapter(
             ?.getLayoutId()
             ?: throw IllegalArgumentException("View type not found: $item")
     }
+
 
 }

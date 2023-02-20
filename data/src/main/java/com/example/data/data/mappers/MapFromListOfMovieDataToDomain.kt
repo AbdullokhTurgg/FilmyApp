@@ -2,7 +2,7 @@ package com.example.data.data.mappers
 
 import com.example.data.data.models.movie.MovieData
 import com.example.domain.base.BaseMapper
-import com.example.domain.domainModels.movie.MovieDomain
+import com.example.domain.models.movie.MovieDomain
 
 class MapFromListOfMovieDataToDomain(
     private val mapFromMovieDataToDomain: BaseMapper<MovieData, MovieDomain>,

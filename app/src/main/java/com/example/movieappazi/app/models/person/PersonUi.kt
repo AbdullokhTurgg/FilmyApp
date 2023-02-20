@@ -5,7 +5,7 @@ import com.example.movieappazi.app.models.movie.MovieUi
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-class PersonUi(
+data class PersonUi(
     val profile_path: String?,
     val adult: Boolean,
     val id: Int,

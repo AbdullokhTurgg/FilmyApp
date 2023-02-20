@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="@dimen/_4sdp"
-    android:layout_marginTop="@dimen/_16sdp"
+    android:layout_marginTop="@dimen/_8sdp"
     android:backgroundTint="@color/preview"
     app:cardCornerRadius="@dimen/_20sdp"
     app:cardElevation="@dimen/_500sdp"
@@ -26,6 +26,17 @@
         app:cardCornerRadius="@dimen/_20sdp"
 
         >
+
+        <ImageButton
+            android:id="@+id/buttonBookmark"
+            android:layout_width="wrap_content"
+            android:layout_height="55dp"
+            android:layout_gravity="end"
+            android:background="?selectableItemBackground"
+            android:padding="12dp"
+            android:src="@drawable/ic_close"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <LinearLayout
@@ -63,11 +74,11 @@
 
                 <TextView
                     android:id="@+id/movie_title"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="4dp"
                     android:ellipsize="end"
-                    android:maxLines="4"
+                    android:maxLines="2"
                     android:text="@{movie.title}"
                     android:textColor="@color/white"
                     android:textSize="@dimen/title_text_size_small"
@@ -80,6 +91,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="4dp"
                     android:drawablePadding="@dimen/textview_drawable_padding"
+                    android:layout_marginTop="@dimen/_8sdp"
                     android:fontFamily="sans-serif-light"
                     android:text="@{ExtensionsKt.formatDate(movie.releaseDate).empty ? @string/n_a : ExtensionsKt.formatDate(movie.releaseDate)}"
                     android:textColor="@color/white"
@@ -100,45 +112,70 @@
 
                 <TextView
                     android:id="@+id/vote_count"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawablePadding="@dimen/textview_drawable_padding"
                     android:fontFamily="sans-serif-light"
+                    android:maxLines="4"
                     android:text="@{ExtensionsKt.formatTime(movie.runtime, context) ?? @string/n_a}"
                     android:textColor="@color/white"
                     app:drawableStartCompat="@drawable/ic_danger_circle"
                     tools:text="0hr 0min" />
 
+
+                <com.vaibhavlakhera.circularprogressview.CircularProgressView
+                    android:id="@+id/progressView"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_marginTop="@dimen/_120sdp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    app:animate="true"
+                    app:animateDuration="800"
+                    app:fillColor="@color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:progressColor="@color/purple_500"
+                    app:progressInterpolator="@android:anim/accelerate_decelerate_interpolator"
+                    app:progressTextColor="@color/white"
+                    app:progressTextEnabled="true"
+                    app:progressTextSize="10sp"
+                    app:progressTextType="percent"
+                    app:progressValue="0"
+                    app:progressWidth="5dp"
+                    app:startAngle="270"
+                    app:totalColor="@color/black"
+                    app:totalValue="100"
+                    app:totalWidth="8dp" />
+
             </LinearLayout>
+
+
+            <com.vaibhavlakhera.circularprogressview.CircularProgressView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                app:animate="true"
+                app:animateDuration="800"
+                app:fillColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:progressColor="@color/purple_500"
+                app:progressInterpolator="@android:anim/accelerate_decelerate_interpolator"
+                app:progressTextColor="@color/white"
+                app:progressTextEnabled="true"
+                app:progressTextSize="10sp"
+                app:progressTextType="percent"
+                app:progressValue="0"
+                app:progressWidth="5dp"
+                app:startAngle="270"
+                app:totalColor="@color/black"
+                app:totalValue="100"
+                app:totalWidth="8dp" />
+
 
         </LinearLayout>
 
-
-        <com.vaibhavlakhera.circularprogressview.CircularProgressView
-            android:id="@+id/progressView"
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="@dimen/_50sdp"
-            android:layout_marginStart="@dimen/_300sdp"
-            android:layout_marginTop="@dimen/_120sdp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            app:animate="true"
-            app:animateDuration="800"
-            app:fillColor="@color/black"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:progressColor="@color/purple_500"
-            app:progressInterpolator="@android:anim/accelerate_decelerate_interpolator"
-            app:progressTextColor="@color/white"
-            app:progressTextEnabled="true"
-            app:progressTextSize="10sp"
-            app:progressTextType="percent"
-            app:progressValue="0"
-            app:progressWidth="5dp"
-            app:startAngle="270"
-            app:totalColor="@color/black"
-            app:totalValue="100"
-            app:totalWidth="8dp" />
 
         <View
             android:id="@+id/view3"
@@ -146,7 +183,7 @@
             android:layout_height="1dp"
             android:layout_marginTop="@dimen/_180sdp"
             android:background="@drawable/back"
-            app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"></View>
+            app:layout_constraintBottom_toBottomOf="@+id/linearLayout2" />
 
     </com.google.android.material.card.MaterialCardView>
 </androidx.cardview.widget.CardView>

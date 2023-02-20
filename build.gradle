@@ -1,6 +1,15 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     ext {
+        // Base
+        core_ktx_verion = "1.9.0"
+        app_compat_verion = "1.4.1"
+        activity_ktx_version = "1.6.1"
+        fragment_ktx_version = "1.5.5"
+        material_version = "1.8.0"
+        constraint_layout_version = "2.1.4"
+        legacy_support_version = "1.0.0"
+
         coroutines_version = "1.5.2"
         retrofit_version = "2.9.0"
         pushdown_anim_click_version = "1.1.1"

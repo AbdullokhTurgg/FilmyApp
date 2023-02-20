@@ -38,12 +38,25 @@
         <item name="cornerSizeBottomLeft">0dp</item>
     </style>
 
+    <style name="AppSearchView" parent="Widget.AppCompat.SearchView" >
+        <item name="android:textSize">12sp</item>
+    </style>
+
     <style name="ShapeAppearance.MovieCardView" parent="ShapeAppearance.MaterialComponents.MediumComponent">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSizeTopRight">32dp</item>
         <item name="cornerSizeTopLeft">8dp</item>
         <item name="cornerSizeBottomRight">8dp</item>
         <item name="cornerSizeBottomLeft">8dp</item>
+    </style>
+
+    <style name="genres_rv">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:padding">4dp</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
     </style>
 
     <style name="TopCornerRadius" parent="CardView">
@@ -73,7 +86,7 @@
     </style>
 
     <style name="BtnNextStyle" parent="PrevBtnStyle">
-        <item name="shapeAppearance">@style/ShapeAppearanceNextBtn</item>
+        <item name="shapeAppearance">@style/ShapeAppearanceNextBtn</item>"
     </style>
 
     <style name="ShapeAppearanceNextBtn" parent="ShapeAppearance.MaterialComponents.SmallComponent">
@@ -93,7 +106,7 @@
         <item name="shapeAppearance">@style/ShapeAppearancePrevBtn</item>
         <item name="android:textStyle">bold</item>
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_height">@dimen/_50sdp</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">14sp</item>
 

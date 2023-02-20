@@ -12,6 +12,12 @@ object Endpoints {
         const val RECOMMENDATIONS = "movie/{movie_id}/recommendations"
         const val RATE_MOVIE = "movie/{movie_id}/rating"
         const val DELETE_RATE = "movie/{movie_id}/rating"
+
+        const val TRENDING_TV = "trending/tv/day"
+        const val TOP_RATED_TV = "tv/top_rated"
+        const val ON_THE_AIR_TV = "tv/on_the_air"
+        const val POPULAR_TV = "tv/popular"
+        const val AIRING_TODAY_TV = "tv/airing_today"
     }
 
     object TRAILER {

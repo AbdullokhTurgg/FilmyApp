@@ -9,6 +9,7 @@ import com.example.data.cloud.api.utils.Utils
 import com.example.movieappazi.R
 import com.example.movieappazi.app.models.movie.CastUi
 import com.example.movieappazi.app.models.movie.MovieUi
+import com.example.movieappazi.app.models.movie.tv_shows.SeriesUi
 import com.example.movieappazi.app.models.person.PersonUi
 import com.squareup.picasso.Picasso
 import com.vaibhavlakhera.circularprogressview.CircularProgressView
@@ -20,12 +21,17 @@ class ObjectViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
     val itemMovie = view.findViewById<CardView>(R.id.motion_layout)
 
 
+
     fun bindMovie(movie: MovieUi) {
         bind(movie.posterPath, movie.rating)
     }
 
     fun bindPerson(person: PersonUi) {
         bind(person.profile_path, person.popularity)
+    }
+
+    fun bindTvMovie(tv: SeriesUi) {
+        bind(tv.posterPath, tv.voteAverage)
     }
 
     fun bindActors(person: CastUi) {

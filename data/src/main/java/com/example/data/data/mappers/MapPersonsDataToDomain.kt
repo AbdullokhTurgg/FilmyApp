@@ -3,8 +3,8 @@ package com.example.data.data.mappers
 import com.example.data.data.models.person.PersonData
 import com.example.data.data.models.person.PersonsData
 import com.example.domain.base.BaseMapper
-import com.example.domain.domainModels.person.PersonDomain
-import com.example.domain.domainModels.person.PersonsDomain
+import com.example.domain.models.person.PersonDomain
+import com.example.domain.models.person.PersonsDomain
 import javax.inject.Inject
 
 class MapPersonsDataToDomain @Inject constructor(

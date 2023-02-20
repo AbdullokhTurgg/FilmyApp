@@ -1,24 +1,27 @@
 package com.example.movieappazi.ui.movie.all_movies_screen
 
 import android.os.Bundle
+import android.transition.TransitionInflater
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.example.movieappazi.R
 import com.example.movieappazi.app.base.BaseFragment
-import com.example.movieappazi.databinding.FragmentAllMoviesBinding
 import com.example.movieappazi.app.models.movie.MovieUi
-import com.example.movieappazi.ui.adapters.movie.adapter_for_popular.MovieItemAdapter
+import com.example.movieappazi.app.utils.extensions.*
+import com.example.movieappazi.databinding.FragmentAllMoviesBinding
+import com.example.movieappazi.ui.adapters.movie.MovieItemAdapter
 import com.example.movieappazi.ui.adapters.movie.listener.RvClickListener
+import com.example.movieappazi.ui.movie.all_movies_screen.adapter.fingerprints.*
 import com.example.movieappazi.ui.movie.see_all_movies_screen.MovieType
-import com.example.movieappazi.app.utils.extensions.launchWhenViewStarted
-import com.example.movieappazi.app.utils.extensions.makeToast
-import com.example.movieappazi.app.utils.extensions.showView
+import com.example.movieappazi.ui.movie.see_all_movies_screen.SeeAllSeriesFragment.Companion.PRESSONCE
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_all_movies.*
 import kotlinx.android.synthetic.main.fragment_root.*
+import kotlinx.android.synthetic.main.item_popular_movies.*
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.filterNotNull
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @DelicateCoroutinesApi
@@ -27,17 +30,20 @@ class AllMoviesFragment :
     BaseFragment<FragmentAllMoviesBinding, AllMoviesFragmentViewModel>(FragmentAllMoviesBinding::inflate),
     RvClickListener<MovieUi> {
 
+    override fun onReady(savedInstanceState: Bundle?) {}
     override val viewModel: AllMoviesFragmentViewModel by viewModels()
 
-    private val popularAdapter by lazy { MovieItemAdapter(MovieItemAdapter.POPULAR_TYPE, this) }
+    private val popularAdapter by lazy { MovieItemAdapter(MovieItemAdapter.PORTRAIT_TYPE, this) }
+    private val upcomingAdapter by lazy { MovieItemAdapter(MovieItemAdapter.SEEMORETYPE, this) }
+    private val publAdapter by lazy { MovieItemAdapter(MovieItemAdapter.SEEMORETYPE, this) }
+    private val ratingAdapter by lazy { MovieItemAdapter(MovieItemAdapter.SEEMORETYPE, this) }
 
-    private val upcomingAdapter by lazy { MovieItemAdapter(MovieItemAdapter.PORTRAIT_TYPE, this) }
 
-    private val publAdapter by lazy { MovieItemAdapter(MovieItemAdapter.PORTRAIT_TYPE, this) }
-
-    private val ratingAdapter by lazy { MovieItemAdapter(MovieItemAdapter.PORTRAIT_TYPE, this) }
-
-    private val fancyAdapter by lazy { MovieItemAdapter(MovieItemAdapter.FANCY_TYPE, this) }
+    private fun setupClickers() = with(requireBinding()) {
+        seeMoreToprated.setOnDownEffectClickListener { viewModel.goMoreMovieFragment(MovieType.TOP_RATED) }
+        seeMoreNowplaying.setOnDownEffectClickListener { viewModel.goMoreMovieFragment(MovieType.NOW_PLAYING) }
+        seeMoreUpcoming.setOnDownEffectClickListener { viewModel.goMoreMovieFragment(MovieType.UPCOMING) }
+    }
 
     override fun onStart() {
         super.onStart()
@@ -46,28 +52,31 @@ class AllMoviesFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setAdapterToRv()
-        setupClickers()
+        observeMovie()
         observeData()
+        setupClickers()
+    }
 
+    private fun observeMovie() = with(viewModel) {
+        launchWhenViewStarted {
+            allFilteredMovieItems.filterNotNull().observe {
+                visibilities()
+                observeData()
+            }
+        }
     }
 
     private fun observeData() = with(viewModel) {
         launchWhenViewStarted {
             popularMoviesFlow.observe { popularAdapter.submitList(it.movies) }
-            ratingMoviesFlow.observe { ratingAdapter.submitList(it.movies) }
+            ratingMoviesFlow.observe { upcomingAdapter.submitList(it.movies) }
             publishedAtMoviesFlow.observe { publAdapter.submitList(it.movies) }
-            relevanceMoviesFlow.observe { upcomingAdapter.submitList(it.movies) }
-            fancyMoviesFlow.observe { fancyAdapter.submitList(it.movies)
+            relevanceMoviesFlow.observe {
+                ratingAdapter.submitList(it.movies)
                 visibilities()
             }
         }
-    }
-
-    private fun visibilities() = with(requireBinding()) {
-        shimmerLayout.visibility = View.INVISIBLE
-        allConst.visibility = View.VISIBLE
     }
 
     private fun setAdapterToRv() = with(requireBinding()) {
@@ -75,17 +84,11 @@ class AllMoviesFragment :
         allJanrMovieRecViewMoviesFragment.adapter = upcomingAdapter
         nowPlayingMovieRecViewMoviesFragment.adapter = publAdapter
         topRatedMovieRecViewMoviesFragment.adapter = ratingAdapter
-        allJanrMovieRecViewMoviesFragment2.adapter = fancyAdapter
     }
 
-    private fun setupClickers() = with(requireBinding()) {
-        see_more_popular.setOnClickListener { viewModel.goMoreMovieFragment(MovieType.POPULAR) }
-
-        see_more_toprated.setOnClickListener { viewModel.goMoreMovieFragment(MovieType.TOP_RATED) }
-
-        see_more_nowplaying.setOnClickListener { viewModel.goMoreMovieFragment(MovieType.NOW_PLAYING) }
-
-        see_more_upcoming.setOnClickListener { viewModel.goMoreMovieFragment(MovieType.UPCOMING) }
+    private fun visibilities() {
+        requireBinding().shimmerLayout.visibility = View.INVISIBLE
+        requireBinding().allConst.showView()
     }
 
     override fun onLongClick(item: MovieUi) {
@@ -93,10 +96,7 @@ class AllMoviesFragment :
     }
 
     override fun onItemClick(item: MovieUi) {
-        viewModel.saveMovie(item)
-        makeToast("${item.title} saved successfully", requireContext())
+        showErrorSnackbar(PRESSONCE)
     }
-
-    override fun onReady(savedInstanceState: Bundle?) {}
 }
 

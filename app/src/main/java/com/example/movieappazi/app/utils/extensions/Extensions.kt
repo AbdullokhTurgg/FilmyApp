@@ -2,9 +2,11 @@ package com.example.movieappazi.app.utils.extensions
 
 import android.content.Context
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
+import com.example.movieappazi.R
 import com.example.movieappazi.app.models.movie.ResponseState
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -33,6 +35,7 @@ fun View.showView() {
 fun View.hideView() {
     this.visibility = View.GONE
 }
+
 
 fun <T> LiveData<T>.observeNonNull(owner: LifecycleOwner, observer: (t: T) -> Unit) {
     this.observe(owner) {

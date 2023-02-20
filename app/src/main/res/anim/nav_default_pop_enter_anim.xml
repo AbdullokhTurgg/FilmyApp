@@ -14,10 +14,11 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
+
 <set xmlns:android="http://schemas.android.com/apk/res/android">
     <alpha
         android:interpolator="@android:anim/linear_interpolator"
-        android:duration="150"
+        android:duration="@integer/config_navAnimTime"
         android:fromAlpha="0.0"
         android:toAlpha="1.0"/>
 </set>

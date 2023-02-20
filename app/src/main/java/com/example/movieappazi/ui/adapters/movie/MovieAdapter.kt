@@ -1,4 +1,4 @@
-package com.example.movieappazi.ui.adapters.movie.adapter_for_popular
+package com.example.movieappazi.ui.adapters.movie
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,22 +8,16 @@ import androidx.recyclerview.widget.ListAdapter
 import com.example.movieappazi.R
 import com.example.movieappazi.ui.adapters.movie.diffcallbacks.MovieItemDiffCallback
 import com.example.movieappazi.ui.adapters.movie.listener.RvClickListener
-import com.example.movieappazi.ui.adapters.movie.ObjectViewHolder
 import com.example.movieappazi.app.models.movie.MovieUi
+import com.example.movieappazi.app.utils.extensions.downEffect
+import com.example.movieappazi.app.utils.extensions.startSlideInLeftAnim
+import com.example.movieappazi.app.utils.extensions.startSlideInRightAnim
 
 
 class MovieItemAdapter(
     private val objectViewType: Int,
     private val listener: RvClickListener<MovieUi>,
 ) : ListAdapter<MovieUi, ObjectViewHolder>(MovieItemDiffCallback()) {
-
-    var moviesList = listOf<MovieUi>()
-        set(value) {
-            val callback = DiffCallBack(moviesList, value)
-            val diffResult = DiffUtil.calculateDiff(callback)
-            diffResult.dispatchUpdatesTo(this)
-            field = value
-        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ObjectViewHolder {
         val layout = when (viewType) {
@@ -43,14 +37,14 @@ class MovieItemAdapter(
             listener.onItemClick(getItem(position))
             true
         }
-        holder.view.setOnClickListener {
+        holder.view.downEffect().setOnClickListener {
             listener.onLongClick(getItem(position))
         }
         holder.bindMovie(getItem(position))
 
-        holder.itemMovie.startAnimation(AnimationUtils.loadAnimation(holder.itemView.context,
-            R.anim.item_anim))
+        holder.itemMovie.startSlideInLeftAnim()
     }
+
 
     override fun getItemViewType(position: Int): Int {
         return if (objectViewType == HORIZONTAL_TYPE) {

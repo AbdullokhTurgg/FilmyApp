@@ -1,7 +1,7 @@
 package com.example.movieappazi.app.mappers
 
 import com.example.domain.base.BaseMapper
-import com.example.domain.domainModels.movie.CastDomain
+import com.example.domain.models.movie.CastDomain
 import com.example.movieappazi.app.models.movie.CastUi
 
 class MapListCastDomainToUi(private val mapper: BaseMapper<CastDomain, CastUi>) :

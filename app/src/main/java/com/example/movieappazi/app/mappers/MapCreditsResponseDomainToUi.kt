@@ -1,8 +1,8 @@
 package com.example.movieappazi.app.mappers
 
 import com.example.domain.base.BaseMapper
-import com.example.domain.domainModels.movie.CastDomain
-import com.example.domain.domainModels.movie.CreditsResponseDomain
+import com.example.domain.models.movie.CastDomain
+import com.example.domain.models.movie.CreditsResponseDomain
 import com.example.movieappazi.app.models.movie.CastUi
 import com.example.movieappazi.app.models.movie.CreditsResponseUi
 import javax.inject.Inject
