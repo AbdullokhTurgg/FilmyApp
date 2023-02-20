@@ -57,31 +57,46 @@ search, as well as add to favorites.Adding to favorites takes place in the local
   injection into your project. Performing manual dependency injection requires that you create each
   class and its dependencies manually, and use containers to reuse and manage dependencies.
 
+
+* [Navigation](https://developer.android.com/guide/navigation?gclsrc=aw.ds&gclid=Cj0KCQiA09eQBhCxARIsAAYRiymyM6hTEs0cGr5ZCXOWtLhVUwDK1O86vf8V_Uq2DWvVYNFZwPFznzAaAllMEALw_wcB)
+  Navigation refers to interactions that allow users to navigate through , enter, and exit various
+  parts of the content in your app. Navigation component Android Jetpack helps you navigate, from
+  simple button clicks to more complex templates like application panels and navigation bar. The
+  navigation component also provides a consistent and predictable user interface, adhering to an
+  established set of principles.
 ### Image
 
-* [Glide](https://github.com/bumptech/glide) Image loading and caching library for Android, focused
-  on smooth scrolling.
-
-* [Picasso](https://square.github.io/picasso/) Picasso allows you to easily upload images to your
-  app - often in a single line of code.
-
-## HTTP
+* [Glide](https://github.com/bumptech/glide) Glide is a fast and efficient open source media
+  management and image loading framework for Android that wraps media decoding, memory and disk
+  caching, and resource pooling into a simple and easy to use interface.
+### Network
 
 * [Retrofit2](https://github.com/square/retrofit) Type-safe HTTP client for Android and Java.
 
 * [OkHttp](https://github.com/square/okhttp) HTTP + HTTP/2 client for Android and Java applications.
 
+* [Parse-SDK-Android](https://github.com/parse-community/Parse-SDK-Android) A library that gives you
+  access to the powerful Parse Server backend from your Android app. For more information about
+  Parse and its features, see the website, getting started, and blog.
 ### Coroutines
 
 * [Kotlin Coroutines](https://github.com/Kotlin/kotlinx.coroutines) Coroutines is a rich library for
   coroutines developed by JetBrains. It contains a number of high-level primitives with support for
   coroutines, which are discussed in this guide, including startup, asynchrony, and others.
+* [Circular Progress View](https://github.com/VaibhavLakhera/Circular-Progress-View) A customisable
+  circular progress view for android.
 
-### Video Player
+* [Push Down Animation Click](https://github.com/nontravis/pushdown-anim-click) A library for
+  Android developers who want to create "push down animation click" for view like spotify
+  application. :)
+* [Expandable TextView](https://github.com/Manabu-GT/ExpandableTextView) ExpandableTextView is an
+  Android library that allows developers to easily create an TextView which can expand/collapse just
+  like the Google Play's app description. Feel free to use it all you want in your Android apps
+  provided that you cite this project.
 
-* [Youtube Player](https://github.com/PierfrancescoSoffritti/android-youtube-player)
-  Android-Youtube-Player is a stable and customizable open source YouTube player for Android. It
-  provides a simple view that can be easily integrated into each Activity/Fragment.
+* [Shimmer](https://github.com/facebook/shimmer-android) Shimmer is an Android library that provides
+  an easy way to add a shimmer effect to any view in your Android app.
+
 
 ### GitHub Custom Libraries
 
