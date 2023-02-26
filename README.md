@@ -1,3 +1,23 @@
+
+
+https://user-images.githubusercontent.com/114995936/221431243-8507ec63-9023-4b60-b1c8-7e2f0e9a6b97.MP4
+
+
+
+https://user-images.githubusercontent.com/114995936/221431395-55102c68-620e-415f-90a5-90cce454d670.MP4
+
+
+
+https://user-images.githubusercontent.com/114995936/221431425-1d004ea3-cb53-42da-b9cf-72053989b977.MP4
+
+
+
+https://user-images.githubusercontent.com/114995936/221431468-f4d5152b-e856-4ab2-b2c5-c6692b2cc446.MP4
+
+
+
+https://user-images.githubusercontent.com/114995936/221431620-42c5a91f-864d-434a-8ee0-ec4f7d469881.MP4
+
 # MovieAppAzi
 
 # A program written entirely in Kotlin using the principles of Clean Architecture according to the MVVM pattern.
