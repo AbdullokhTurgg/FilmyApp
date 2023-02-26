@@ -5,10 +5,6 @@
 The application shows a list of films and actors, detailed information about them, the ability to
 search, as well as add to favorites.Adding to favorites takes place in the local Room database.
 
-![1676917746711 1](https://user-images.githubusercontent.com/114995936/220178303-b02763de-220d-4396-b3a8-8efee6f4113f.jpg)
-![1676917746706 1](https://user-images.githubusercontent.com/114995936/220178327-b133bd2c-1743-4010-8cdf-ec4c30ca8701.jpg)
-![1676917746687 1](https://user-images.githubusercontent.com/114995936/220178367-b63f9776-75cf-458e-abc9-17d5957fd714.jpg)
-![1676917746682 1](https://user-images.githubusercontent.com/114995936/220178387-a40fd25c-942c-4695-9285-92ff14acd463.jpg)
 
 
 
