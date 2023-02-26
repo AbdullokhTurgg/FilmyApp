@@ -2,14 +2,16 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scroll_main2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backGroundAd"
+    android:background="@color/backgroundDarker"
     tools:context=".ui.movie.all_movies_screen.AllMoviesFragment"
     tools:ignore="ScrollViewCount">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="visible">
@@ -22,7 +24,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:visibility="gone">
+            tools:visibility="visible">
 
             <include layout="@layout/shimmer_for_all_movies_fragment" />
         </com.facebook.shimmer.ShimmerFrameLayout>
@@ -31,247 +33,103 @@
             android:id="@+id/all_const"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="visible"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintStart_toStartOf="parent">
 
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/materialCardView2"
+            <LinearLayout
+                android:id="@+id/search_liner"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_320sdp"
-                android:layout_marginHorizontal="@dimen/_22sdp"
-                android:layout_marginTop="@dimen/_30sdp"
-                android:backgroundTint="@color/backGroundAd"
-                android:paddingBottom="200dp"
-                app:cardElevation="@dimen/_200sdp"
-                android:elevation="@dimen/_200sdp"
-                app:cardBackgroundColor="@color/backGroundAd"
-                app:cardCornerRadius="@dimen/_16sdp"
+                android:layout_height="0dp"
+                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_170sdp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/popularback" />
-
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/popularMovieRecViewMoviesFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_130sdp"
-                    android:layout_marginBottom="@dimen/_10sdp"
-                    android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/object_item_portrait" />
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <LinearLayout
-                android:id="@+id/topRated_MovieLayout_movieFrag"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/backGroundAd"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/noInternet_Layout_movieFragment">
-
-                <LinearLayout
-                    android:id="@+id/liner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        style="@style/MovieTextStyle"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:gravity="center_vertical"
-                        android:text="Top Rated "
-                        android:textSize="@dimen/_24sdp" />
-
-                    <Space
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1" />
-
-                    <TextView
-                        android:id="@+id/see_more_toprated"
-                        style="@style/MovieTextStyle2"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:fontFamily="@font/aclonica"
-                        android:gravity="center_vertical"
-                        android:text="See All"
-                        android:textSize="@dimen/_20sdp" />
-
-
-                </LinearLayout>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/topRatedMovieRecView_moviesFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/upcoming_MovieLayout_movieFrag"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_14sdp"
-                android:background="@color/backGroundAd"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/now_playing_MovieLayout_movieFrag">
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_marginTop="@dimen/_40sdp"
+                    android:orientation="vertical">
+
 
                     <TextView
-                        style="@style/MovieTextStyle"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:gravity="center_vertical"
-                        android:text="Upcoming "
-                        android:textSize="@dimen/_24sdp" />
-
-                    <Space
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1" />
-
-                    <TextView
-                        android:id="@+id/see_more_upcoming"
-                        style="@style/MovieTextStyle2"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:gravity="center_vertical"
-                        android:text="See All"
-                        android:textSize="20sp" />
-
-
-                </LinearLayout>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/allJanrMovieRecView_moviesFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/_20sdp"
-                    android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/now_playing_MovieLayout_movieFrag"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:background="@color/backGroundAd"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/topRated_MovieLayout_movieFrag">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        style="@style/MovieTextStyle"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:gravity="center_vertical"
-                        android:text="Now Playing "
-                        android:textSize="@dimen/_24sdp" />
-
-                    <Space
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1" />
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:fontFamily="@font/poppins_extra_bold"
+                        android:gravity="center"
+                        android:text="Самы топовые фильмы для вас!"
+                        android:textColor="@color/white"
+                        android:textSize="18sp" />
 
-                    <TextView
-                        android:id="@+id/see_more_nowplaying"
-                        style="@style/MovieTextStyle2"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:gravity="center_vertical"
-                        android:text="See All"
-                        android:textSize="@dimen/_20sdp" />
 
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/goSearchBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_60sdp"
+                        android:layout_marginHorizontal="@dimen/_12sdp"
+                        android:backgroundTint="@color/backGroundAd"
+                        android:drawableEnd="@drawable/ic_search"
+                        android:fontFamily="@font/poppins_extra_bold"
+                        android:text="Нажмите чтобы начать поиск"
+                        app:cornerRadius="@dimen/_18sdp"
+                        app:iconTint="@color/white" />
 
                 </LinearLayout>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/nowPlayingMovieRecView_moviesFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                <include
+                    android:id="@+id/popularMovie"
+                    layout="@layout/include_item_horizontal_block" />
+
+                <include
+                    android:id="@+id/upcomingMovie"
+                    layout="@layout/include_item_horizontal_block" />
+
+                <include
+                    android:id="@+id/nowPlayingMovie"
+                    layout="@layout/include_item_horizontal_block" />
+
+                <include
+                    android:id="@+id/topRatedMovie"
+                    layout="@layout/include_item_horizontal_block" />
+
+                <include
+                    android:id="@+id/comedyMovie"
+                    layout="@layout/include_item_horizontal_block" />
+
+                <include
+                    android:id="@+id/historyMovie"
+                    layout="@layout/include_item_horizontal_block" />
+
+                <include
+                    android:id="@+id/dramaMovie"
+                    layout="@layout/include_item_horizontal_block" />
+
+                <include
+                    android:id="@+id/westernMovie"
+                    layout="@layout/include_item_horizontal_block" />
+
+                <include
+                    android:id="@+id/mysteryMovie"
+                    layout="@layout/include_item_horizontal_block" />
+
+                <include
+                    android:id="@+id/familyMovie"
+                    layout="@layout/include_item_horizontal_block" />
+
+                <include
+                    android:id="@+id/crimeMovie"
+                    layout="@layout/include_item_horizontal_block" />
+
+                <include
+                    android:id="@+id/thrillerMovie"
+                    layout="@layout/include_item_horizontal_block" />
 
             </LinearLayout>
-
-
-            <com.github.ybq.android.spinkit.SpinKitView
-                android:id="@+id/spin_kit_movieFrag"
-                style="@style/SpinKitView.Large.Wave"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/_50sdp"
-                android:visibility="invisible"
-                app:SpinKit_Color="@color/zero_to_one"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <LinearLayout
-                android:id="@+id/noInternet_Layout_movieFragment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="@+id/materialCardView2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageView
-                    android:id="@+id/no_connection"
-                    android:layout_width="250dp"
-                    android:layout_height="300dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/popularback"
-                    tools:ignore="ContentDescription" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/aclonica"
-                    android:gravity="center"
-                    android:text="No Internet"
-                    android:textColor="@color/zero_to_one"
-                    android:textSize="25sp" />
-
-
-            </LinearLayout>
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

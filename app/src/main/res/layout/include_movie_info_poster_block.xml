@@ -11,31 +11,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="@dimen/_40sdp"
         android:elevation="1dp"
         android:src="@drawable/ic_back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/white" />
 
-    <ImageView
-        android:id="@+id/save_icon"
-        android:layout_width="@dimen/_26sdp"
-        android:layout_height="@dimen/_26sdp"
-        android:layout_marginEnd="@dimen/_20sdp"
-        android:elevation="@dimen/_10sdp"
-        android:src="@drawable/save_single_blok"
-        app:layout_constraintBottom_toBottomOf="@+id/back_icon"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/back_icon"
-        app:tint="@color/white" />
 
-    <ImageView
+    <com.flaviofaria.kenburnsview.KenBurnsView
         android:id="@+id/movie_blur_background_poster"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:foreground="@drawable/blur_background_gradient"
         android:scaleType="centerCrop"
+        app:layout_collapseMode="pin"
+        android:foreground="@drawable/blur_background_gradient"
         app:layout_constraintBottom_toBottomOf="@+id/book_blur_background_poster_container"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,7 +44,6 @@
 
     </FrameLayout>
 
-
     <ImageView
         android:id="@+id/book_poster"
         android:layout_width="191dp"
@@ -71,7 +60,6 @@
         android:id="@+id/outline"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/item_outline"
         android:elevation="1dp"
         app:layout_constraintBottom_toBottomOf="@+id/book_poster"
         app:layout_constraintEnd_toEndOf="@+id/book_poster"
@@ -85,10 +73,15 @@
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="16dp"
         android:elevation="3dp"
-        android:fontFamily="@font/baloo"
-        android:ellipsize="none"
-        android:fadingEdgeLength="60dp"
+        android:fontFamily="@font/poppins_extra_bold"
+        android:ellipsize="marquee"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:scrollHorizontally="true"
+        android:transitionName="bookTitle"
         android:requiresFadingEdge="horizontal"
+        android:fadingEdgeLength="60dp"
         android:singleLine="true"
         android:textAlignment="center"
         android:textColor="@color/white"

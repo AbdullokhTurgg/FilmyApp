@@ -7,15 +7,14 @@ import com.example.data.data.models.movie.MoviesData
 import com.example.data.data.models.movie.tv_shows.TvSeriesDetailsData
 import com.example.data.data.models.movie.tv_shows.TvSeriesResponseData
 import com.example.domain.base.BaseMapper
+import com.example.domain.helper.DispatchersProvider
 import com.example.domain.models.movie.CreditsResponseDomain
 import com.example.domain.models.movie.MovieDetailsDomain
 import com.example.domain.models.movie.MoviesDomain
-import com.example.domain.helper.DispatchersProvider
 import com.example.domain.models.movie.tv_shows.TvSeriesDetailsDomain
 import com.example.domain.models.movie.tv_shows.TvSeriesResponseDomain
 import com.example.domain.repositories.network.movie.MovieRepositories
 import com.example.domain.state.DataRequestState
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
@@ -64,65 +63,82 @@ class MovieRepositoriesImpl @Inject constructor(
             .map(mapFromMoviesDataToDomain::map)
             .flowOn(dispatchersProvider.default())
 
+    override fun getMovieDetails(movieId: Int): Flow<MovieDetailsDomain> =
+        cloudDataSourceMovie.getMovieDetails(movieId = movieId)
+            .map(mapFromDetailsCloudToData::map)
+            .flowOn(dispatchersProvider.default())
+
+    override  fun getActors(movieId: Int): Flow<CreditsResponseDomain> =
+        cloudDataSourceMovie.getActors(movieId = movieId)
+            .map(mapCreditsResponseData::map)
+            .flowOn(dispatchersProvider.default())
+
+    override fun getTvCasts(tvId: Int): Flow<CreditsResponseDomain> =
+        cloudDataSourceMovie.getTvCasts(tvId = tvId)
+            .map(mapCreditsResponseData::map)
+            .flowOn(dispatchersProvider.default())
+
     /**    Tv Shows And Series   */
 
     override fun getTrendingTvSeries(page: Int): Flow<TvSeriesResponseDomain> =
         cloudDataSourceMovie.getAllTrendingTvSeries(page = page)
             .map(mapTvResponseDataToDomain::map)
-            .flowOn(Dispatchers.Default)
+            .flowOn(dispatchersProvider.default())
 
     override fun getTopRatedTvSeries(page: Int): Flow<TvSeriesResponseDomain> =
         cloudDataSourceMovie.getAllTopRatedTvSeries(page = page)
             .map(mapTvResponseDataToDomain::map)
-            .flowOn(Dispatchers.Default)
+            .flowOn(dispatchersProvider.default())
 
     override fun getOnTheAirTvSeries(page: Int): Flow<TvSeriesResponseDomain> =
-        cloudDataSourceMovie.getAllOnTheAirTvSeries(page = page)
-            .map(mapTvResponseDataToDomain::map)
-            .flowOn(Dispatchers.Default)
+        cloudDataSourceMovie.getAllOnTheAirTvSeries(page = page).map(mapTvResponseDataToDomain::map)
+            .flowOn(dispatchersProvider.default())
 
     override fun getPopularTvSeries(page: Int): Flow<TvSeriesResponseDomain> =
         cloudDataSourceMovie.getAllPopularTvSeries(page = page)
             .map(mapTvResponseDataToDomain::map)
-            .flowOn(Dispatchers.Default)
+            .flowOn(dispatchersProvider.default())
 
     override fun getAiringTodayTvSeries(page: Int): Flow<TvSeriesResponseDomain> =
         cloudDataSourceMovie.getAllAiringTodayTvSeries(page = page)
             .map(mapTvResponseDataToDomain::map)
-            .flowOn(Dispatchers.Default)
+            .flowOn(dispatchersProvider.default())
 
     override suspend fun getTvSeriesDetails(tvId: Int): Flow<TvSeriesDetailsDomain> =
         cloudDataSourceMovie.getAllTvSeriesDetails(tvId = tvId)
             .map(mapTvDetailsDataToDomain::map)
-            .flowOn(Dispatchers.Default)
+            .flowOn(dispatchersProvider.default())
 
     override fun getTvRecommendations(tvId: Int): Flow<TvSeriesResponseDomain> =
         cloudDataSourceMovie.getAllTvRecommendations(tvId = tvId)
             .map(mapTvResponseDataToDomain::map)
-            .flowOn(Dispatchers.Default)
+            .flowOn(dispatchersProvider.default())
 
     override fun getTvSimilar(tvId: Int): Flow<TvSeriesResponseDomain> =
         cloudDataSourceMovie.getAllTvSimilar(tvId = tvId)
             .map(mapTvResponseDataToDomain::map)
-            .flowOn(Dispatchers.Default)
+            .flowOn(dispatchersProvider.default())
 
-    override fun getFantasyMovies(page: Int, genres: String): Flow<TvSeriesResponseDomain> =
+    override fun getFantasySeries(page: Int, genres: String): Flow<TvSeriesResponseDomain> =
         cloudDataSourceMovie.getAllFantasySeries(page = page, genres = genres)
             .map(mapTvResponseDataToDomain::map)
-            .flowOn(Dispatchers.Default)
+            .flowOn(dispatchersProvider.default())
+
+    override fun getFantasyMovies(page: Int, genres: String): Flow<MoviesDomain> =
+        cloudDataSourceMovie.getAllFantasyMovies(page = page, genres = genres)
+            .map(mapFromMoviesDataToDomain::map)
+            .flowOn(dispatchersProvider.default())
 
 
-    override  fun getSearchMovies(query: String): Flow<MoviesDomain> =
-        cloudDataSourceMovie.getAllSearchMovies(query = query).map(mapFromMoviesDataToDomain::map)
-            .flowOn(Dispatchers.Default)
+    override fun getSearchMovies(query: String): Flow<MoviesDomain> =
+        cloudDataSourceMovie.getAllSearchMovies(query = query)
+            .map(mapFromMoviesDataToDomain::map)
+            .flowOn(dispatchersProvider.default())
 
-
-    override suspend fun getMovieDetails(movieId: Int): DataRequestState<MovieDetailsDomain> =
-        cloudDataSourceMovie.getMovieDetails(movieId = movieId).map(mapFromDetailsCloudToData)
-
-
-    override suspend fun getActors(movieId: Int): DataRequestState<CreditsResponseDomain> =
-        cloudDataSourceMovie.getActors(movieId = movieId).map(mapCreditsResponseData)
+    override fun getAllSearchSeries(query: String): Flow<TvSeriesResponseDomain> =
+        cloudDataSourceMovie.getAllSearchSeries(query = query)
+            .map(mapTvResponseDataToDomain::map)
+            .flowOn(dispatchersProvider.default())
 
 
 }

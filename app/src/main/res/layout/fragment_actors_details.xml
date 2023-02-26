@@ -5,107 +5,61 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backGroundAd"
-    app:layoutDescription="@xml/fragment_actors_details_scene"
-    tools:context=".ui.person.actors_details_screen.ActorsDetailsFragment">
+    android:backgroundTint="@color/backgroundDarker"
+    android:background="@color/backgroundDarker"
+    app:layoutDescription="@xml/fragment_actors_details_scene">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout2"
+    <include
+        android:id="@+id/include_user_info_toolbar_block"
+        layout="@layout/include_user_info_toolbar_block"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:background="@color/backGroundAd"
-        android:fitsSystemWindows="true"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <include
+        android:id="@+id/include_user_info_blue_toolbar_block"
+        layout="@layout/include_user_info_blue_toolbar_block"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_120sdp"
+        android:layout_marginTop="-6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="6dp"
-            app:layout_collapseMode="parallax">
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/user_image"
+        android:layout_width="84dp"
+        android:layout_height="84dp"
+        android:layout_marginTop="-42dp"
+        android:elevation="1dp"
+        android:src="@drawable/ron"
+        app:civ_border_color="@color/shimmerColor"
+        app:civ_border_width="3dp"
+        app:layout_constraintEnd_toEndOf="@+id/include_user_info_blue_toolbar_block"
+        app:layout_constraintStart_toStartOf="@+id/include_user_info_blue_toolbar_block"
+        app:layout_constraintTop_toBottomOf="@+id/include_user_info_blue_toolbar_block" />
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.45" />
+    <TextView
+        android:id="@+id/user_full_name_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/user_image"
+        app:layout_constraintStart_toStartOf="@+id/user_image"
+        app:layout_constraintTop_toBottomOf="@+id/user_image"
+        tools:text="@tools:sample/full_names" />
 
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/poster_card"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginHorizontal="4dp"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="20dp"
-                android:backgroundTint="@color/backGroundAd"
-                android:background="@color/backGroundAd"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/guideline"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-
-                <ImageView
-                    android:id="@+id/personImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fitsSystemWindows="true"
-                    android:scaleType="centerCrop"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
-            </androidx.cardview.widget.CardView>
-
-            <TextView
-                android:id="@+id/names_text"
-                style="@style/MovieDetailsTextStyle"
-                android:layout_marginTop="@dimen/movieDetailsTextMarginTop"
-                app:layout_constraintBottom_toTopOf="@+id/names_list"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@id/guideline"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ListView
-                android:id="@+id/names_list"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@id/names_text"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="@id/names_text"
-                app:layout_constraintTop_toBottomOf="@+id/names_text" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?android:attr/actionBarSize"
-            app:layout_collapseMode="pin"
-            app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light" />
-    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView3"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/_350sdp"
-
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout2">
+        android:layout_height="0dp"
+        android:visibility="visible"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -132,6 +86,7 @@
                 android:id="@+id/personName"
                 style="@style/MovieDetailsTextStyle.Italic"
                 android:layout_marginStart="6dp"
+                app:layout_constraintBottom_toBottomOf="@+id/personNameText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/guideline2"
                 app:layout_constraintTop_toTopOf="@id/personNameText" />
@@ -140,13 +95,14 @@
                 android:id="@+id/gender_text"
                 style="@style/MovieDetailsTextStyle"
                 android:text="@string/actor_gender"
-                app:layout_constraintEnd_toEndOf="@id/personNameText"
-                app:layout_constraintStart_toStartOf="@+id/personNameText"
+                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/personNameText" />
 
             <TextView
                 android:id="@+id/person_gender"
                 style="@style/MovieDetailsTextStyle.Italic"
+                app:layout_constraintBottom_toBottomOf="@+id/gender_text"
                 app:layout_constraintEnd_toEndOf="@id/personName"
                 app:layout_constraintStart_toStartOf="@id/personName"
                 app:layout_constraintTop_toTopOf="@id/gender_text" />
@@ -154,15 +110,15 @@
             <TextView
                 android:id="@+id/popularityText"
                 style="@style/MovieDetailsTextStyle"
-                android:layout_marginTop="@dimen/movieDetailsTextMarginTop"
                 android:text="@string/actor_popularity"
-                app:layout_constraintEnd_toEndOf="@id/personNameText"
-                app:layout_constraintStart_toStartOf="@id/personNameText"
+                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/gender_text" />
 
             <TextView
                 android:id="@+id/personPopularity"
                 style="@style/MovieDetailsTextStyle.Italic"
+                app:layout_constraintBottom_toBottomOf="@+id/popularityText"
                 app:layout_constraintEnd_toEndOf="@id/personName"
                 app:layout_constraintStart_toStartOf="@id/personName"
                 app:layout_constraintTop_toTopOf="@id/popularityText" />
@@ -170,103 +126,106 @@
             <TextView
                 android:id="@+id/professionText"
                 style="@style/MovieDetailsTextStyle"
-                android:layout_marginTop="@dimen/movieDetailsTextMarginTop"
                 android:text="@string/actor_profession"
                 app:layout_constraintEnd_toEndOf="@id/personNameText"
-                app:layout_constraintStart_toStartOf="@id/personNameText"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/popularityText" />
 
             <TextView
                 android:id="@+id/profession"
                 style="@style/MovieDetailsTextStyle.Italic"
+                app:layout_constraintBottom_toBottomOf="@+id/professionText"
                 app:layout_constraintEnd_toEndOf="@id/personName"
                 app:layout_constraintStart_toStartOf="@id/personName"
-                app:layout_constraintTop_toTopOf="@id/professionText" />
+                app:layout_constraintTop_toTopOf="@+id/professionText" />
 
             <TextView
                 android:id="@+id/birthdayText"
                 style="@style/MovieDetailsTextStyle"
-                android:layout_marginTop="@dimen/movieDetailsTextMarginTop"
                 android:text="@string/actor_birthday"
                 app:layout_constraintEnd_toEndOf="@id/personNameText"
-                app:layout_constraintStart_toStartOf="@id/personNameText"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/professionText" />
 
             <TextView
                 android:id="@+id/birthday"
+                android:maxLines="1"
                 style="@style/MovieDetailsTextStyle.Italic"
+                app:layout_constraintBottom_toBottomOf="@+id/birthdayText"
                 app:layout_constraintEnd_toEndOf="@id/personName"
                 app:layout_constraintStart_toStartOf="@id/personName"
                 app:layout_constraintTop_toTopOf="@id/birthdayText" />
 
             <TextView
-                android:id="@+id/deathDayText"
+                android:id="@+id/birthPlaceText"
                 style="@style/MovieDetailsTextStyle"
-                android:layout_marginTop="@dimen/movieDetailsTextMarginTop"
-                android:text="@string/actor_death_day"
+                android:text="@string/actor_birth_place"
                 app:layout_constraintEnd_toEndOf="@id/personNameText"
-                app:layout_constraintStart_toStartOf="@id/personNameText"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/birthdayText" />
 
             <TextView
-                android:id="@+id/deathDay"
-                style="@style/MovieDetailsTextStyle.Italic"
-                app:layout_constraintEnd_toEndOf="@id/personName"
-                app:layout_constraintStart_toStartOf="@id/personName"
-                app:layout_constraintTop_toTopOf="@id/deathDayText" />
-
-            <TextView
-                android:id="@+id/birthPlaceText"
-                style="@style/MovieDetailsTextStyle"
-                android:layout_marginTop="@dimen/movieDetailsTextMarginTop"
-                android:text="@string/actor_birth_place"
-                app:layout_constraintEnd_toEndOf="@id/personNameText"
-                app:layout_constraintStart_toStartOf="@id/personNameText"
-                app:layout_constraintTop_toBottomOf="@id/deathDayText" />
-
-            <TextView
                 android:id="@+id/birthPlace"
+                android:maxLines="1"
                 style="@style/MovieDetailsTextStyle.Italic"
+                app:layout_constraintBottom_toBottomOf="@+id/birthPlaceText"
                 app:layout_constraintEnd_toEndOf="@id/personName"
                 app:layout_constraintStart_toStartOf="@id/personName"
-                app:layout_constraintTop_toTopOf="@id/birthPlaceText" />
+                app:layout_constraintTop_toBottomOf="@+id/birthdayText" />
 
 
             <TextView
                 android:id="@+id/biographyText"
                 style="@style/MovieDetailsTextStyle"
-                android:layout_marginTop="@dimen/movieDetailsTextMarginTop"
                 android:text="@string/actor_biography"
                 app:layout_constraintEnd_toEndOf="@id/personName"
-                app:layout_constraintStart_toStartOf="@id/personNameText"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/birthPlaceText" />
+
+            <View
+                android:id="@+id/viiew"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:background="@color/shimmerColor"
+                app:layout_constraintBottom_toTopOf="@+id/biography"
+                app:layout_constraintTop_toBottomOf="@+id/biographyText"
+                tools:layout_editor_absoluteX="4dp" />
 
             <TextView
                 android:id="@+id/biography"
                 style="@style/MovieDetailsTextStyle.Italic"
-                android:layout_marginTop="@dimen/movieDetailsTextMarginTop"
-                app:layout_constraintEnd_toEndOf="@id/personName"
-                app:layout_constraintStart_toStartOf="@id/personNameText"
-                app:layout_constraintTop_toBottomOf="@id/biographyText" />
+                android:layout_marginTop="12dp"
+                app:layout_constraintEnd_toEndOf="@+id/viiew"
+                app:layout_constraintHorizontal_bias="0.461"
+                app:layout_constraintStart_toStartOf="@+id/viiew"
+                app:layout_constraintTop_toBottomOf="@+id/biographyText" />
+
+            <View
+                android:id="@+id/viiew2"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:background="@color/shimmerColor"
+                app:layout_constraintBottom_toTopOf="@+id/personMoviesText"
+                app:layout_constraintTop_toBottomOf="@+id/biography"
+                tools:layout_editor_absoluteX="4dp" />
 
             <TextView
                 android:id="@+id/personMoviesText"
                 style="@style/MovieDetailsTextStyle.Italic"
                 android:layout_marginTop="@dimen/movieDetailsTextMarginTop"
-                app:layout_constraintEnd_toEndOf="@id/personName"
-                app:layout_constraintStart_toStartOf="@id/personNameText"
+                android:text="Фильмы Актёра"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/biography" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/personMoviesRv"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/movieDetailsTextMarginTop"
-                android:layout_marginBottom="@dimen/movieDetailsTextMarginTop"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="@id/personName"
-                app:layout_constraintStart_toStartOf="@id/personNameText"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/personMoviesText"
                 tools:listitem="@layout/object_item_portrait" />
 

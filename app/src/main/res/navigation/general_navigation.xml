@@ -28,17 +28,27 @@
         <action
             android:id="@+id/action_nav_movies_to_movieDetailsFragment2"
             app:destination="@id/movieDetailsFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_enter_anim"
-            app:popExitAnim="@anim/nav_default_exit_anim" />
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
         <action
             android:id="@+id/action_nav_movies_to_seeAllMoviesFragment"
-            app:destination="@id/seeAllMoviesFragment" />
+            app:destination="@id/seeAllMoviesFragment"
+            app:enterAnim="@anim/to_left_in"
+            app:exitAnim="@anim/to_right_out"
+            app:popEnterAnim="@anim/to_left_in"
+            app:popExitAnim="@anim/to_right_out" />
         <action
-            android:id="@+id/action_nav_movies_to_seeAllMoviesFragment2"
-            app:destination="@id/seeAllMoviesFragment" />
+            android:id="@+id/action_nav_movies_to_nav_search"
+            app:destination="@id/nav_search"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
+
+
     <fragment
         android:id="@+id/movieDetailsFragment"
         android:name="com.example.movieappazi.ui.movie.movie_details_screen.MovieDetailsFragment"
@@ -55,16 +65,22 @@
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_movieDetailsFragment_to_actorsDetailsFragment"
-            app:destination="@id/actorsDetailsFragment" />
+            app:destination="@id/actorsDetailsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
         <argument
-            android:name="movie"
-            app:argType="com.example.movieappazi.app.models.movie.MovieUi" />
+            android:name="id"
+            app:argType="integer" />
     </fragment>
+
+
     <fragment
         android:id="@+id/nav_storage"
         android:name="com.example.movieappazi.ui.movie.storage_movies_screen.StorageMoviesFragment"
         android:label="Favourites"
-        tools:layout="@layout/fragment_storage_movies" >
+        tools:layout="@layout/fragment_storage_movies">
         <action
             android:id="@+id/action_nav_storage_to_movieDetailsFragment"
             app:destination="@id/movieDetailsFragment"
@@ -77,15 +93,25 @@
             app:destination="@id/seriesDetailsFragment" />
     </fragment>
 
+
     <fragment
         android:id="@+id/actorsDetailsFragment"
         android:name="com.example.movieappazi.ui.person.actors_details_screen.ActorsDetailsFragment"
         android:label="fragment_actors_details"
         tools:layout="@layout/fragment_actors_details">
         <argument
-            android:name="person"
-            app:argType="com.example.movieappazi.app.models.person.PersonUi" />
+            android:name="id"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_actorsDetailsFragment_to_movieDetailsFragment"
+            app:destination="@id/movieDetailsFragment"
+            app:enterAnim="@anim/to_left_in"
+            app:exitAnim="@anim/to_right_out"
+            app:popEnterAnim="@anim/to_left_in"
+            app:popExitAnim="@anim/to_right_out" />
     </fragment>
+
+
     <fragment
         android:id="@+id/nav_search"
         android:name="com.example.movieappazi.ui.movie.search_movies_screen.SearchMoviesFragment"
@@ -94,19 +120,36 @@
         <action
             android:id="@+id/action_nav_search_to_movieDetailsFragment"
             app:destination="@id/movieDetailsFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_enter_anim"
-            app:popExitAnim="@anim/nav_default_exit_anim" />
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+        <argument
+            android:name="type"
+            app:argType="com.example.movieappazi.ui.movie.search_movies_screen.SearchType" />
+        <action
+            android:id="@+id/action_nav_search_to_seriesDetailsFragment"
+            app:destination="@id/seriesDetailsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_nav_search_to_seeAllMoviesFragment"
+            app:destination="@id/seeAllMoviesFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
 
-        <argument
-            android:name="id"
-            app:argType="integer" />
-        <argument
-            android:name="name"
-            app:argType="string"
-            app:nullable="true" />
+    <argument
+        android:name="id"
+        app:argType="integer" />
+    <argument
+        android:name="name"
+        app:argType="string"
+        app:nullable="true" />
     <fragment
         android:id="@+id/seeAllMoviesFragment"
         android:name="com.example.movieappazi.ui.movie.see_all_movies_screen.SeeAllMoviesFragment"
@@ -123,6 +166,76 @@
             android:name="type"
             app:argType="com.example.movieappazi.ui.movie.see_all_movies_screen.MovieType" />
     </fragment>
+
+
+    <fragment
+        android:id="@+id/nav_tvShows"
+        android:name="com.example.movieappazi.ui.series.screen_all_series.AllSeriesFragment"
+        android:label="fragment_all_series"
+        tools:layout="@layout/fragment_all_series">
+        <action
+            android:id="@+id/action_nav_tvShows_to_seeAllSeriesFragment"
+            app:destination="@id/seeAllSeriesFragment"
+            app:enterAnim="@anim/to_left_in"
+            app:exitAnim="@anim/to_right_out"
+            app:popEnterAnim="@anim/to_left_in"
+            app:popExitAnim="@anim/to_right_out" />
+        <action
+            android:id="@+id/action_nav_tvShows_to_seriesDetailsFragment"
+            app:destination="@id/seriesDetailsFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_nav_tvShows_to_nav_search"
+            app:destination="@id/nav_search"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/seriesDetailsFragment"
+        android:name="com.example.movieappazi.ui.series.screen_series_details.SeriesDetailsFragment"
+        android:label="fragment_series_details"
+        tools:layout="@layout/fragment_series_details">
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_seriesDetailsFragment_self"
+            app:destination="@id/seriesDetailsFragment"
+            app:enterAnim="@anim/to_left_in"
+            app:exitAnim="@anim/to_right_out"
+            app:popEnterAnim="@anim/to_left_in"
+            app:popExitAnim="@anim/to_right_out"
+            app:popUpTo="@id/seriesDetailsFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_seriesDetailsFragment_to_actorsDetailsFragment"
+            app:destination="@id/actorsDetailsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/seeAllSeriesFragment"
+        android:name="com.example.movieappazi.ui.movie.see_all_movies_screen.SeeAllSeriesFragment"
+        android:label="fragment_see_all_series"
+        tools:layout="@layout/fragment_see_all_series">
+        <action
+            android:id="@+id/action_seeAllSeriesFragment_to_seriesDetailsFragment"
+            app:destination="@id/seriesDetailsFragment" />
+        <argument
+            android:name="type"
+            app:argType="com.example.movieappazi.ui.movie.see_all_movies_screen.SeeAllTvType" />
+    </fragment>
     <fragment
         android:id="@+id/nav_person"
         android:name="com.example.movieappazi.ui.person.actors_screen.PersonFragment"
@@ -130,48 +243,11 @@
         tools:layout="@layout/fragment_person" >
         <action
             android:id="@+id/action_nav_person_to_actorsDetailsFragment"
-            app:destination="@id/actorsDetailsFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/nav_tvShows"
-        android:name="com.example.movieappazi.ui.series.screen_all_series.AllSeriesFragment"
-        android:label="fragment_all_series"
-        tools:layout="@layout/fragment_all_series" >
-        <action
-            android:id="@+id/action_nav_tvShows_to_seeAllSeriesFragment"
-            app:destination="@id/seeAllSeriesFragment"
-            app:enterAnim="@anim/nav_default_pop_enter_anim"
+            app:destination="@id/actorsDetailsFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
-        <action
-            android:id="@+id/action_nav_tvShows_to_seriesDetailsFragment"
-            app:destination="@id/seriesDetailsFragment" />
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim" />
     </fragment>
-    <fragment
-        android:id="@+id/seriesDetailsFragment"
-        android:name="com.example.movieappazi.ui.series.screen_series_details.SeriesDetailsFragment"
-        android:label="fragment_series_details"
-        tools:layout="@layout/fragment_series_details" >
-        <argument
-            android:name="tv"
-            app:argType="com.example.movieappazi.app.models.movie.tv_shows.SeriesUi" />
-        <action
-            android:id="@+id/action_seriesDetailsFragment_self"
-            app:destination="@id/seriesDetailsFragment"
-            app:popUpTo="@id/seriesDetailsFragment"
-            app:popUpToInclusive="true" />
-    </fragment>
-    <fragment
-        android:id="@+id/seeAllSeriesFragment"
-        android:name="com.example.movieappazi.ui.movie.see_all_movies_screen.SeeAllSeriesFragment"
-        android:label="fragment_see_all_series"
-        tools:layout="@layout/fragment_see_all_series" >
-        <argument
-            android:name="tvtype"
-            app:argType="com.example.movieappazi.ui.series.screen_all_series.SeeAllTvType" />
-        <action
-            android:id="@+id/action_seeAllSeriesFragment_to_seriesDetailsFragment"
-            app:destination="@id/seriesDetailsFragment" />
-    </fragment>
+
 </navigation>

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="@dimen/_24sdp"
-    android:background="@color/backGroundAd"
+    android:backgroundTint="@color/dark_with_alpha_0"
     app:layoutDescription="@xml/fragment_see_all_series_scene"
     tools:context=".ui.movie.see_all_movies_screen.SeeAllSeriesFragment">
 
@@ -22,15 +22,6 @@
         app:lottie_rawRes="@raw/loading"
         />
 
-
-
-    <ImageView
-        android:id="@+id/img"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_105sdp"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toTopOf="@id/scrollView"
-        android:src="@drawable/backseemore" />
 
     <ImageView
         android:id="@+id/up_button"
@@ -49,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:ellipsize="end"
-        android:fontFamily="@font/baloo"
+        android:fontFamily="@font/poppins_extra_bold"
         android:textColor="@color/white"
         android:textSize="@dimen/_24sdp"
         app:layout_constraintEnd_toStartOf="@+id/sort_options"
@@ -92,7 +83,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:spanCount="3" />
+                app:spanCount="2" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/pageConstraint"
@@ -109,7 +100,8 @@
                     android:id="@+id/prev_btn"
                     style="@style/PrevBtnStyle"
                     android:layout_marginBottom="4dp"
-                    android:text="prev"
+                    android:text="Назад"
+                    android:fontFamily="@font/poppins_extra_bold"
                     android:backgroundTint="@color/darkBlue1"
                     app:icon="@drawable/ic_previous"
                     app:iconTint="@color/white"
@@ -155,7 +147,8 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/next_btn"
                     style="@style/BtnNextStyle"
-                    android:text="next"
+                    android:text="Вперёд"
+                    android:fontFamily="@font/poppins_extra_bold"
                     android:backgroundTint="@color/darkBlue1"
                     app:icon="@drawable/ic_next"
                     app:iconGravity="end"

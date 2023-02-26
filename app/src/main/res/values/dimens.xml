@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="movieDetailsTextSize">14sp</dimen>
-    <dimen name="movieDetailsTextMarginTop">6dp</dimen>
+    <dimen name="movieDetailsTextSize">16dp</dimen>
+    <dimen name="movieDetailsTextMarginTop">22dp</dimen>
 
     <dimen name="recyclerview_bottom_margin">12dp</dimen>
     <dimen name="recyclerview_item_end_margin">8dp</dimen>

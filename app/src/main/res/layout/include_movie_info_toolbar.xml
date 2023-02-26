@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="@color/backGroundAd"
+    android:background="@color/backgroundDarker"
+    app:cardBackgroundColor="@color/backgroundDarker"
     app:cardCornerRadius="@dimen/_12sdp"
     app:cardElevation="5dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_80sdp"
         android:gravity="center"
         android:paddingTop="16dp"
         android:paddingBottom="8dp"
@@ -20,6 +21,7 @@
             android:id="@+id/back_icon"
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:layout_marginTop="@dimen/_8sdp"
             android:layout_marginStart="16dp"
             android:src="@drawable/ic_back" />
 
@@ -29,22 +31,20 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginTop="@dimen/_8sdp"
             android:layout_weight="1"
-            android:ellipsize="none"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:transitionName="toolbarMovieTitle"
             android:textColor="@color/white"
             android:fadingEdgeLength="60dp"
             android:requiresFadingEdge="horizontal"
-            android:singleLine="true"
             android:textSize="20sp"
             tools:text="@tools:sample/lorem/random" />
-
-        <ImageView
-            android:id="@+id/save_icon"
-            android:layout_width="@dimen/_26sdp"
-            android:layout_height="@dimen/_26sdp"
-            android:layout_marginEnd="@dimen/_14sdp"
-            android:src="@drawable/save_single_blok"
-            app:tint="@color/white" />
 
 
     </LinearLayout>

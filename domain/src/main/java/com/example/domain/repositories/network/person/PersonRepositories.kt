@@ -7,5 +7,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface PersonRepositories {
     fun getPersons(page: Int): Flow<PersonsDomain>
-    suspend fun getPersonDetails(personId: Int): DataRequestState<PersonDetailsDomain>
+    fun getPersonDetails(personId: Int): Flow<PersonDetailsDomain>
+    fun getSearchPerson(query:String):Flow<PersonsDomain>
 }

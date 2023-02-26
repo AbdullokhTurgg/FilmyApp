@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">MovieAppAzi</string>
+    <string name="app_name">Filmy App</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="recommendMoviesTextRu">Рекомендуемые фильмы</string>
@@ -18,12 +18,12 @@
     <string name="all_movies_fr">see all</string>
 
     <string name="actor_name">Имя Актёра:</string>
-    <string name="actor_gender">Пол Актёра:</string>
-    <string name="actor_popularity">Популярность Актёра:</string>
-    <string name="actor_profession">Профессиональность Актёра:</string>
-    <string name="actor_birthday">Дата рождение:</string>
-    <string name="actor_death_day">Дата Смерти:</string>
-    <string name="actor_birth_place">Место рождения:</string>
+    <string name="actor_gender">Пол:</string>
+    <string name="actor_popularity">Популярность:</string>
+    <string name="actor_profession">Проффессионалсоть:</string>
+    <string name="actor_birthday">Дата рождения:</string>
+    <string name="actor_death_day">Дата смерти:</string>
+    <string name="actor_birth_place">Место рождение:</string>
     <string name="actor_biography">Биография:</string>
     <string name="movie_genre">Жанры Фильмов:</string>
     <string name="seeMore">See More</string>
@@ -49,16 +49,16 @@
     <string name="thriller">Thriller Movie</string>
     <string name="war">War Movie</string>
     <string name="western">Western Movie</string>
-    <string name="tv_trending_text">Tv Trending Movies</string>
-    <string name="tv_topreted_text">Tv Top Movies</string>
-    <string name="tv_on_the_air_text">Tv On The Air</string>
-    <string name="tv_popular_text">Tv Popular Movies</string>
-    <string name="tv_airing_today_rv">Tv Airing Today</string>
+    <string name="tv_trending_text">Популярные сериалы на телевидении</string>
+    <string name="tv_topreted_text">Лучшие сериалы на ТВ</string>
+    <string name="tv_on_the_air_text">ТВ в эфире</string>
+    <string name="tv_popular_text">Популярные Сериалы</string>
+    <string name="tv_airing_today_rv">В эфире сегодня</string>
 
 
     <string name="back_button">back_button</string>
 
-    <string name="profile">Profile</string>
+    <string name="profile">Actors</string>
     <string name="search">Search</string>
     <string name="home">Home</string>
 
@@ -73,17 +73,27 @@
         <item name="android:layout_marginTop">16dp</item>
     </style>
 
+    <style name="genreImageStyle">
+        <item name="android:layout_width">@dimen/_100sdp</item>
+        <item name="android:layout_height">@dimen/_100sdp</item>
+        <item name="android:scaleType">centerCrop</item>
+        <item name="android:layout_gravity">center</item>
+
+
+    </style>
+
     <style name="MovieTextStyle">
-        <item name="android:textSize">22sp</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:textStyle">bold</item>
-        <item name="fontFamily">@font/baloo</item>
+        <item name="drawableEndCompat">@drawable/arrow_right</item>
+        <item name="fontFamily">@font/poppins_extra_bold</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">6dp</item>
     </style>
 
-    <style name="viewStyle">
+    <style name="viewStyle1">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">1dp</item>
         <item name="android:layout_marginTop">10dp</item>
@@ -95,5 +105,18 @@
         <item name="layout_constraintStart_toStartOf">parent</item>
         <item name="layout_constraintEnd_toEndOf">parent</item>
     </style>
+
+
+    <string name="horror_image">"https://static1.colliderimages.com/wordpress/wp-content/uploads/2021/10/Every-A24-Horror-Movie-Ranked.jpg"</string>
+    <string name="deadpool_image">"https://c4.wallpaperflare.com/wallpaper/160/350/464/darth-vader-star-wars-sith-lightsaber-wallpaper-preview.jpg"</string>
+    <string name="comedy_image">"https://img2.akspic.ru/previews/4/3/7/8/4/148734/148734-komiksy-razvlechenie-predstavlenie-sobytie-art-x750.jpg"</string>
+    <string name="crime_image">"https://img3.akspic.ru/previews/7/1/1/0/60117/60117-akter-2014-temnota-film-pricep-x750.jpg"</string>
+    <string name="documentary_image">"https://img1.akspic.ru/crops/2/2/2/9/4/149222/149222-geralt_iz_rivii-televideniye-chelovek-kompyuternaya_igra-pricep-2560x1440.jpg"</string>
+    <string name="drama_image">"https://img1.akspic.ru/crops/3/7/0/1/31073/31073-belye_vorotnichki-televizionnoe_shou-akter-televideniye-dzhentlmen-1920x1080.jpg"</string>
+    <string name="fantasy_image">"https://img2.akspic.ru/crops/9/5/7/3/2/123759/123759-chernaya_pantera-film-nebo-vakanda-priklyuchencheskij_film-2560x1440.jpg"</string>
+    <string name="history_image">"https://c4.wallpaperflare.com/wallpaper/86/598/484/star-wars-millennium-falcon-star-wars-the-force-awakens-c-3po-wallpaper-preview.jpg"</string>
+    <string name="music_image">"https://c4.wallpaperflare.com/wallpaper/448/831/718/photography-digital-digital-art-artwork-photoshop-hd-wallpaper-preview.jpg"</string>
+    <string name="romance_image">"https://c1.wallpaperflare.com/preview/187/656/966/moon-couple-blue-love.jpg"</string>
+    <string name="war_image">"https://c4.wallpaperflare.com/wallpaper/1023/259/600/god-of-war-god-of-war-2018-god-of-war-4-video-games-wallpaper-preview.jpg"</string>
 
 </resources>

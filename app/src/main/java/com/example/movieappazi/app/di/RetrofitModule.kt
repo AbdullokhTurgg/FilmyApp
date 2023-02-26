@@ -1,7 +1,5 @@
 package com.example.movieappazi.app.di
 
-import com.example.data.cloud.api.api.movie.MovieApi
-import com.example.data.cloud.api.api.person.PersonApi
 import com.example.data.cloud.provides.*
 import dagger.Module
 import dagger.Provides

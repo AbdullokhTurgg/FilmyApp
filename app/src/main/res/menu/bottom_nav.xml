@@ -10,21 +10,17 @@
 
     <item
         android:id="@+id/nav_tvShows"
-        android:icon="@drawable/monitor"
+        android:icon="@drawable/tv_y_svgrepo_com"
         android:title="Series" />
 
     <item
-        android:id="@+id/nav_search"
-        android:icon="@drawable/ic_search"
-        android:title="@string/search" />
-    <item
         android:id="@+id/nav_person"
-        android:icon="@drawable/ic_user"
+        android:icon="@drawable/person_svgrepo_com"
         android:title="@string/profile" />
 
     <item
         android:id="@+id/nav_storage"
-        android:icon="@drawable/save_vector"
+        android:icon="@drawable/bookmark_svgrepo_com"
         android:title="BookMarks" />
 
 

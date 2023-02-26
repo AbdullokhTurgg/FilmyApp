@@ -10,6 +10,7 @@
             motion:dragScale="1"
             motion:touchAnchorId="@id/movies_rv"
             motion:touchAnchorSide="top" />
+
     </Transition>
 
     <ConstraintSet android:id="@+id/start">
@@ -32,6 +33,15 @@
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toBottomOf="@+id/cardView2" />
+        <Constraint
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="@+id/movies_rv"
+            android:layout_width="wrap_content"
+            android:id="@+id/searchImage"
+            motion:layout_constraintTop_toBottomOf="@+id/cardView2"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">

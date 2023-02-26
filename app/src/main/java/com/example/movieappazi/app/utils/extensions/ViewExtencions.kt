@@ -7,7 +7,7 @@ import com.thekhaeng.pushdownanim.PushDownAnim
 
 
 fun View.startSlideInLeftAnim() {
-    this.startAnimation(AnimationUtils.loadAnimation(this.context, R.anim.item_anim))
+    this.startAnimation(AnimationUtils.loadAnimation(this.context, com.example.ui_core.R.anim.item_anim))
 }
 fun View.startSlideInRightAnim() {
     this.startAnimation(AnimationUtils.loadAnimation(this.context, com.airbnb.lottie.R.anim.abc_slide_in_top))

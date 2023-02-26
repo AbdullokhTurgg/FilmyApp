@@ -1,7 +1,7 @@
 package com.example.movieappazi.ui.movie.movie_details_screen
 
+import android.animation.ObjectAnimator
 import android.os.Bundle
-import android.transition.TransitionInflater
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -42,19 +42,21 @@ class MovieDetailsFragment :
         FragmentMovieDetailsBinding::inflate), RvClickListener<MovieUi>,
     PersonDetailsAdapter.RvClickListener {
 
+    private val screenWidth: Float = 0f
+    private val animationSpeed: Float = 1f
+
     private val similarMoviesAdapter by lazy { MovieItemAdapter(PORTRAIT_TYPE, this) }
     private val reccomendAdapter by lazy { MovieItemAdapter(PORTRAIT_TYPE, this) }
     private val personAdapter by lazy { PersonDetailsAdapter(this) }
 
-    private val moviee: MovieUi by lazy { MovieDetailsFragmentArgs.fromBundle(requireArguments()).movie }
-    private val movieId: Int by lazy { MovieDetailsFragmentArgs.fromBundle(requireArguments()).movie.id!! }
-    private val actorsIds: List<Int> by lazy { MovieDetailsFragmentArgs.fromBundle(requireArguments()).movie.genre_ids!! }
+    private val movieId: Int by lazy { MovieDetailsFragmentArgs.fromBundle(requireArguments()).id }
 
     @Inject
     lateinit var viewModelFactory: MovieDetailsFragmentViewModelFactory.Factory
+
     @OptIn(ExperimentalCoroutinesApi::class)
     override val viewModel by viewModels<MovieDetailsFragmentViewModel> {
-        viewModelFactory.create(movieId = movieId, actorsIds = actorsIds)
+        viewModelFactory.create(movieId = movieId)
     }
     private val motionListener = MotionListener(::setToolbarState)
 
@@ -64,15 +66,10 @@ class MovieDetailsFragment :
         requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavMenu2).hideView()
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val inflater = TransitionInflater.from(requireContext())
-        enterTransition = inflater.inflateTransition(R.transition.slide_up)
-        exitTransition = inflater.inflateTransition(R.transition.start)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         setupViews()
         setupClickers()
         setAdaptersToRv()
@@ -92,70 +89,65 @@ class MovieDetailsFragment :
             recommendMoviesFlow.observe { reccomendAdapter.submitList(it.movies) }
         }
     }
-    private fun setupViews() = with(requireBinding()){
+
+    private fun setupViews() = with(requireBinding()) {
         root.addTransitionListener(motionListener)
     }
 
     private fun setToolbarState(state: MotionState) {
         when (state) {
-            MotionState.COLLAPSED ->{
+            MotionState.COLLAPSED -> {
                 viewModel.updateMotionPosition(COLLAPSED)
-                requireBinding().includeMovieInfoBlock.nestedScroolView.smoothScrollTo(0,0)
+                requireBinding().includeMovieInfoBlock.nestedScroolView.smoothScrollTo(0, 0)
             }
 
             MotionState.EXPANDED -> viewModel.updateMotionPosition(EXPANDED)
             else -> Unit
         }
     }
+
     private fun setupClickers() = with(requireBinding()) {
         includeMovieInfoPosterBlock.backIcon.setOnDownEffectClickListener { viewModel.navigateBack() }
         includeMovieInfoToolbarBlock.backIcon.setOnDownEffectClickListener { viewModel.navigateBack() }
-        includeMovieInfoToolbarBlock.saveIcon.setOnDownEffectClickListener{viewModel.saveMovieFromRv(moviee)
-            showSuccessSnackBar("${moviee.title} Saved Successful")}
-        includeMovieInfoPosterBlock.saveIcon.setOnDownEffectClickListener { viewModel.saveMovieFromRv(moviee)
-            showSuccessSnackBar("${moviee.title} Saved Successful") }
     }
 
     private fun observeMovieDetails() = with(viewModel) {
         launchWhenViewStarted {
-            movieFlow.observe {
-                when (it) {
-                    is DataRequestState.Success -> {
-                        setMovieUi(it.data)
-                    }
-                    is DataRequestState.Error -> {
-                        makeToast(it.error.message.toString(), requireContext())
-                    }
-                }
-
-            }
+            movieDetailsFlow.observe(::setMovieUi)
         }
         launchWhenViewStarted {
-            castFLow.observe {
-                when (it) {
-                    is DataRequestState.Success -> {
-                        personAdapter.personsList = it.data.cast
-                    }
-
-                    is DataRequestState.Error -> {
-                        makeToast(it.error.message.toString(), requireContext())
-                    }
-
-                }
-            }
+            castFlow.observe { personAdapter.personsList = it.cast }
         }
     }
 
-    private fun setMovieUi(movie: MovieDetailsUi) = with(requireBinding()) {
-        includeMovieInfoToolbarBlock.apply { toolbarMovieTitle.text = movie.title }
 
+
+    private fun setMovieUi(movie: MovieDetailsUi) = with(requireBinding()) {
+        includeMovieInfoToolbarBlock.apply {
+            toolbarMovieTitle.isSelected = true
+            toolbarMovieTitle.text = movie.title
+            toolbarMovieTitle.translationX = -screenWidth
+            val duration = (200 * animationSpeed).toLong()
+            ObjectAnimator.ofFloat(toolbarMovieTitle, "translationX", 0f).setDuration(duration)
+                .start()
+        }
         includeMovieInfoPosterBlock.apply {
-            Glide.with(requireContext()).asBitmap().load(Utils.POSTER_PATH_URL + movie.posterPath)
-            requireContext().showBlurImage(blurSize = BACKGROUND_IMAGE_BLUR_SIZE,
-                imageUrl = Utils.POSTER_PATH_URL + movie.posterPath,
+            Glide.with(requireContext())
+                .load(Utils.POSTER_PATH_URL + movie.posterPath)
+                .dontAnimate()
+                .doOnFinished { startPostponedEnterTransition() }
+                .into(bookPoster)
+
+            requireContext()
+                .showBlurImage(blurSize = BACKGROUND_IMAGE_BLUR_SIZE,
+                imageUrl = Utils.POSTER_PATH_URL + movie.backdrop_path,
                 imageView = requireBinding().includeMovieInfoPosterBlock.movieBlurBackgroundPoster)
             Picasso.get().load(Utils.POSTER_PATH_URL + movie.posterPath).into(bookPoster)
             bookTitle.text = movie.title
+            bookTitle.isSelected = true
+            bookTitle.translationX = -screenWidth
+            val duration = (200 * animationSpeed).toLong()
+            ObjectAnimator.ofFloat(bookTitle, "translationX", 0f).setDuration(duration).start()
         }
 
         includeMovieInfoBlock.apply {
@@ -172,7 +164,7 @@ class MovieDetailsFragment :
 
     override fun onItemClick(item: MovieUi) {
         viewModel.saveMovieFromRv(item)
-        showSuccessSnackBar("${item.title} saved successful")
+        showSuccessSnackBar("Фильм ${item.title} успешно сохранено!")
     }
 
     companion object {
@@ -181,10 +173,17 @@ class MovieDetailsFragment :
     }
 
     override fun onLongClick(item: MovieUi) {
-        findNavController().navigate(MovieDetailsFragmentDirections.actionMovieDetailsFragmentSelf(item))
+        try {
+            findNavController().navigate(MovieDetailsFragmentDirections.actionMovieDetailsFragmentSelf(
+                item.id!!))
+        } catch (e: Exception) {
+            showErrorSnackbar(e.toString())
+        }
     }
 
     override fun onReady(savedInstanceState: Bundle?) {}
-    override fun onPersonItemClick(person: CastUi) {showWarningSnackbar(NOTYET)}
+    override fun onPersonItemClick(person: CastUi) {
+        viewModel.goCastInfo(cast = person)
+    }
 
 }

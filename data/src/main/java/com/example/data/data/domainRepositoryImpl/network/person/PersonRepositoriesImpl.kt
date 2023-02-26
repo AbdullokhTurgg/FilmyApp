@@ -9,6 +9,7 @@ import com.example.domain.models.person.PersonsDomain
 import com.example.domain.helper.DispatchersProvider
 import com.example.domain.repositories.network.person.PersonRepositories
 import com.example.domain.state.DataRequestState
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
@@ -22,11 +23,17 @@ class PersonRepositoriesImpl @Inject constructor(
 ) : PersonRepositories {
 
     override fun getPersons(page: Int): Flow<PersonsDomain> =
-        dataSourcePerson.getPersons(page = page).map(mapFromPersonsDataToDomain::map)
+        dataSourcePerson.getPersons(page = page)
+            .map(mapFromPersonsDataToDomain::map)
             .flowOn(dispatchersProvider.default())
 
+    override fun getPersonDetails(personId: Int): Flow<PersonDetailsDomain> =
+        dataSourcePerson.getAllPersonDetails(personId = personId)
+            .map(mapFromPersonsDetailsDataToDomain::map)
+            .flowOn(dispatchersProvider.default())
 
-    override suspend fun getPersonDetails(personId: Int): DataRequestState<PersonDetailsDomain> =
-        dataSourcePerson.getPersonDetails(personId = personId)
-            .map(mapFromPersonsDetailsDataToDomain)
+    override fun getSearchPerson(query: String): Flow<PersonsDomain> =
+        dataSourcePerson.searchPerson(query = query)
+            .map(mapFromPersonsDataToDomain::map)
+            .flowOn(dispatchersProvider.default())
 }

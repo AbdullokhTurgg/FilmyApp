@@ -110,16 +110,5 @@
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toBottomOf="@id/title" />
-        <Constraint
-            android:id="@+id/img"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_1sdp"
-            android:layout_marginBottom="@dimen/_50sdp"
-            android:layout_marginTop="8dp"
-            android:visibility="invisible"
-            motion:layout_constraintBottom_toTopOf="@+id/scrollView"
-            motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toTopOf="@+id/scrollView" />
     </ConstraintSet>
 </MotionScene>

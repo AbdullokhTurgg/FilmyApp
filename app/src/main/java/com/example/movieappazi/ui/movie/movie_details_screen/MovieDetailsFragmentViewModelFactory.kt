@@ -25,7 +25,6 @@ private const val ACTORS_IDS_KEY = "actors_ids_key"
 
 class MovieDetailsFragmentViewModelFactory @AssistedInject constructor(
     @Assisted(MOVIE_ID_KEY) private val movieId: Int,
-    @Assisted(ACTORS_IDS_KEY) private val actorsIds: List<Int>,
     private val movieRepository: MovieRepositories,
     private val mapMovieDetails: BaseMapper<MovieDetailsDomain, MovieDetailsUi>,
     private val dispatchersProvider: DispatchersProvider,
@@ -41,7 +40,6 @@ class MovieDetailsFragmentViewModelFactory @AssistedInject constructor(
         require(modelClass == MovieDetailsFragmentViewModel::class.java)
         return MovieDetailsFragmentViewModel(
             movieId = movieId,
-            actorsIds = actorsIds,
             mapCreditsResponseDomain = mapCreditsResponseDomain,
             movieRepository = movieRepository,
             mapMovieDetails = mapMovieDetails,
@@ -57,7 +55,6 @@ class MovieDetailsFragmentViewModelFactory @AssistedInject constructor(
     interface Factory {
         fun create(
             @Assisted(MOVIE_ID_KEY) movieId: Int,
-            @Assisted(ACTORS_IDS_KEY) actorsIds: List<Int>,
         ): MovieDetailsFragmentViewModelFactory
     }
 }

@@ -3,8 +3,8 @@
     <style name="Theme.MovieAppAzi" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#303F9F</item>
-        <item name="colorPrimaryVariant">@color/black</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/backGroundAd80</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/white</item>
@@ -12,13 +12,20 @@
         <item name="colorOnSecondary">@color/white</item>
         <!-- Customize your theme here. -->
         <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowBackground">@color/black</item>
+        <item name="android:windowBackground">@color/backgroundDarker</item>
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialog</item>
         <item name="android:popupMenuStyle">@style/PopupMenu</item>
-        <item name="android:navigationBarColor">@color/black</item>
+        <item name="android:navigationBarColor">@color/backgroundDarker</item>
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
 
         <!-- Customize your theme here. -->
+    </style>
+
+    <style name="viewStyle11">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/_1sdp</item>
+        <item name="android:backgroundTint">@color/white</item>
+        <item name="background">@color/white</item>
     </style>
 
     <style name="AppBottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
@@ -27,6 +34,22 @@
 
     <style name="AppBottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="BottomCornerRadius" parent="@style/Widget.MaterialComponents.CardView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeBottomRight">45dp</item>
+        <item name="cornerSizeTopLeft">0dp</item>
+        <item name="android:topRightRadius">0dp</item>
+        <item name="cornerSizeBottomLeft">45dp</item>
+    </style>
+
+    <style name="BottomCornerRadiusCollapsed" parent="@style/Widget.MaterialComponents.CardView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeTopLeft">@dimen/_20sdp</item>
+        <item name="android:topRightRadius">@dimen/_20sdp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
     </style>
 
     <style name="PopupMenu" parent="@android:style/Widget.PopupMenu">
@@ -61,6 +84,7 @@
 
     <style name="TopCornerRadius" parent="CardView">
         <item name="cornerFamily">rounded</item>
+        <item name="background">@drawable/transperent_background</item>
         <item name="cornerSizeTopRight">@dimen/_37sdp</item>
         <item name="cornerSizeTopLeft">@dimen/_37sdp</item>
     </style>
@@ -72,16 +96,15 @@
     <!--    </style>-->
 
     <style name="MovieDetailsTextStyle.Italic" parent="MovieDetailsTextStyle">
-        <item name="fontFamily">@font/baloo</item>
+        <item name="fontFamily">@font/poppins</item>
     </style>
 
     <style name="MovieDetailsTextStyle" parent="Widget.MaterialComponents.TextView">
         <item name="android:textSize">@dimen/movieDetailsTextSize</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:layout_marginStart">@dimen/_12sdp</item>
+        <item name="android:layout_marginStart">@dimen/_4sdp</item>
         <item name="android:textColor">@color/shimmer_background</item>
         <item name="android:layout_width">0dp</item>
-        <item name="fontFamily">@font/actor</item>
+        <item name="fontFamily">@font/poppins_extra_bold</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 
@@ -162,7 +185,6 @@
 
     <style name="CircularDeterminateProgressBar">
         <item name="android:indeterminateOnly">false</item>
-        <item name="android:progressDrawable">@drawable/circle_progress</item>
     </style>
 
     <style name="titleAppBar" parent="Theme.MovieAppAzi">
@@ -179,4 +201,31 @@
         <item name="cornerSizeBottomLeft">12dp</item>
     </style>
 
+
+    <!-- New design -->
+    <style name="Headline6">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Caption">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="Body2">
+        <item name="android:textSize">14sp</item>
+
+    </style>
+    <style name="Body1">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="Headline5">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="Subtitle2">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>

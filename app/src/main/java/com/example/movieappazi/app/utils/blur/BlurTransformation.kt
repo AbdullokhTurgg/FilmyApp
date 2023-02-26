@@ -16,7 +16,7 @@ import com.bumptech.glide.load.resource.bitmap.BitmapTransformation
 import java.security.MessageDigest
 import kotlin.math.roundToInt
 
-private const val BITMAP_SCALE = 0.15f
+private const val BITMAP_SCALE = 1f
 private const val FORMAT_RGBA_F16 = "RGBA_F16"
 
 class BlurTransformation(private val blurRadius: Float) : Transformation<Bitmap> {

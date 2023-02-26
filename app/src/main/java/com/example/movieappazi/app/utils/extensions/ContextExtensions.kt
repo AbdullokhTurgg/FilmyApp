@@ -33,7 +33,7 @@ fun Context.showRoundedImage(
     roundedSize: Int = 8.toDp,
     imageUrl: String,
     imageView: ImageView,
-    @DrawableRes placeHolder: Int = R.drawable.image_placeholder,
+    @DrawableRes placeHolder: Int = R.drawable.ron,
 ) {
     val requestOptions = RequestOptions()
         .transforms(CenterCrop(), RoundedCorners(roundedSize))

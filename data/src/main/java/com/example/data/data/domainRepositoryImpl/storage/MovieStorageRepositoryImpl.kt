@@ -25,11 +25,9 @@ class MovieStorageRepositoryImpl @Inject constructor(
     override suspend fun deleteMovieFromDatabase(movieId: Int) =
         dataSourceStorage.deleteMovieFromDatabase(movieId = movieId)
 
-
     override fun getAllMoviesFromDatabase(): Flow<List<MovieDomain>> =
-        dataSourceStorage.getAllMoviesFromDatabase().map {
-            it.map(mapFromMovieDataToDomain::map)
-        }
+        dataSourceStorage.getAllMoviesFromDatabase()
+            .map { it.map(mapFromMovieDataToDomain::map) }
 
     override suspend fun getSavedMovies(id: Int): MovieDomain =
         mapFromMovieDataToDomain.map(dataSourceStorage.getFavouriteMovie(id))
@@ -41,8 +39,7 @@ class MovieStorageRepositoryImpl @Inject constructor(
     override suspend fun tvDelete(tvId: Int) = dataSourceStorage.deleteTV(id = tvId)
 
     override fun tvGetStorage(): Flow<List<SeriesDomain>> =
-        dataSourceStorage.getTvStorage().map { movies ->
-            movies.map(mapSeriesDataToDomain::map)
-        }
+        dataSourceStorage.getTvStorage()
+            .map { movies -> movies.map(mapSeriesDataToDomain::map) }
 
 }

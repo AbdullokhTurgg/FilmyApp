@@ -16,18 +16,18 @@ import com.vaibhavlakhera.circularprogressview.CircularProgressView
 
 class ObjectViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
     private val image = view.findViewById<ImageView>(R.id.posterImage)
+    private val movie_rating = view.findViewById<TextView>(R.id.movie_rating_txt)
     private val progressView = view.findViewById<CircularProgressView>(R.id.progressView)
     private val castName = view.findViewById<TextView>(R.id.titleText)
     val itemMovie = view.findViewById<CardView>(R.id.motion_layout)
 
-
-
     fun bindMovie(movie: MovieUi) {
         bind(movie.posterPath, movie.rating)
+        movie_rating.text = movie.rating.toFloat().toString()
     }
 
     fun bindPerson(person: PersonUi) {
-        bind(person.profile_path, person.popularity)
+        bind(posterPath = person.profile_path, popularity =person.popularity)
     }
 
     fun bindTvMovie(tv: SeriesUi) {
@@ -55,5 +55,4 @@ class ObjectViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
     private fun binCastTitle(name: String) {
         castName.text = name
     }
-
 }

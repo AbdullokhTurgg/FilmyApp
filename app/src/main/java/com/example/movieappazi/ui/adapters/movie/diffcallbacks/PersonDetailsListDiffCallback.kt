@@ -31,13 +31,14 @@ class PersonDiffCallback(
     private val oldList: List<PersonUi>,
     private val newList: List<PersonUi>,
 ) : DiffUtil.Callback() {
-    override fun getOldListSize(): Int = oldList.size
 
-    override fun getNewListSize(): Int = newList.size
+    override fun getOldListSize() = oldList.size
 
-    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
+    override fun getNewListSize() = newList.size
+
+    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int) =
         oldList[oldItemPosition].id == newList[newItemPosition].id
 
-    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
+    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int) =
         oldList[oldItemPosition] == newList[newItemPosition]
 }

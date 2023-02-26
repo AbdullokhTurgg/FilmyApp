@@ -1,6 +1,5 @@
 package com.example.movieappazi.app.models.person
 
-
 data class PersonsUi(
     val page: Int,
     val persons: List<PersonUi>,

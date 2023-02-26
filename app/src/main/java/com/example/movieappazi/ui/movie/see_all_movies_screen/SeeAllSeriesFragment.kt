@@ -1,7 +1,7 @@
 package com.example.movieappazi.ui.movie.see_all_movies_screen
 
 import android.os.Bundle
-import android.transition.TransitionInflater
+import android.os.Parcelable
 import android.view.View
 import android.widget.ScrollView
 import androidx.fragment.app.viewModels
@@ -10,25 +10,28 @@ import androidx.navigation.fragment.navArgs
 import com.example.movieappazi.R
 import com.example.movieappazi.app.base.BaseFragment
 import com.example.movieappazi.app.models.movie.tv_shows.SeriesUi
-import com.example.movieappazi.app.recyclerview.animations.AddableItemAnimator
-import com.example.movieappazi.app.recyclerview.animations.custom.SlideBackCommonAnimator
-import com.example.movieappazi.app.recyclerview.animations.custom.SlideInLeftCommonAnimator
-import com.example.movieappazi.app.recyclerview.animations.custom.SlideInTopCommonAnimator
-import com.example.movieappazi.app.utils.extensions.*
+import com.example.movieappazi.app.utils.recyclerview.animations.AddableItemAnimator
+import com.example.movieappazi.app.utils.recyclerview.animations.custom.SlideBackCommonAnimator
+import com.example.movieappazi.app.utils.recyclerview.animations.custom.SlideInTopCommonAnimator
+import com.example.movieappazi.app.utils.extensions.hideView
+import com.example.movieappazi.app.utils.extensions.launchWhenViewStarted
+import com.example.movieappazi.app.utils.extensions.setOnDownEffectClickListener
+import com.example.movieappazi.app.utils.extensions.showView
 import com.example.movieappazi.app.utils.motion.MotionListener
 import com.example.movieappazi.app.utils.motion.MotionState
 import com.example.movieappazi.databinding.FragmentSeeAllSeriesBinding
-import com.example.movieappazi.ui.movie.movie_details_screen.MovieDetailsFragment
-import com.example.movieappazi.ui.movie.movie_details_screen.MovieDetailsFragment.Companion.NOTYET
-import com.example.movieappazi.ui.series.adapter.TvAdapter
+import com.example.movieappazi.ui.adapters.tv.TvAdapter
 import com.example.movieappazi.ui.series.screen_all_series.AllSeriesFragmentViewModel
-import com.example.movieappazi.ui.series.screen_all_series.SeeAllTvType
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.delay
+import kotlinx.android.parcel.Parcelize
 import kotlinx.coroutines.flow.collectLatest
 
+@Parcelize
+enum class SeeAllTvType : Parcelable {
+    POPULAR, TOP_RATED, AIRINGTODAY, ONTHEAIR, TRENDING, FAMILYTYPE, ANIMETYPE, DRAMATYPE, COMEDY, HISTORY, MYSTERY, WESTERN,
+    CRYME, DOCUMENTARY, KIDS, NEWS, REALITY, SOAP
+}
 @AndroidEntryPoint
 class SeeAllSeriesFragment : BaseFragment<FragmentSeeAllSeriesBinding, AllSeriesFragmentViewModel>(
     FragmentSeeAllSeriesBinding::inflate), TvAdapter.RecyclerOnClickListener {
@@ -40,27 +43,25 @@ class SeeAllSeriesFragment : BaseFragment<FragmentSeeAllSeriesBinding, AllSeries
     override fun onItemClick(movie: SeriesUi) = viewModel.goTvInfoFromSeeMore(movie)
     override fun onLongItemClick(movie: SeriesUi) {showErrorSnackbar(PRESSONCE)}
 
-    private val trendingRv by lazy { TvAdapter(TvAdapter.POPULAR_TYPE, this) }
-    private val topRatedRv by lazy { TvAdapter(TvAdapter.POPULAR_TYPE, this) }
-    private val onTheAirRv by lazy { TvAdapter(TvAdapter.POPULAR_TYPE, this) }
-    private val popularRv by lazy { TvAdapter(TvAdapter.POPULAR_TYPE, this) }
-    private val airingRv by lazy { TvAdapter(TvAdapter.POPULAR_TYPE, this) }
-    private val familyRv by lazy { TvAdapter(TvAdapter.POPULAR_TYPE, this) }
-    private val dramaRv by lazy { TvAdapter(TvAdapter.POPULAR_TYPE, this) }
-    private val animeRv by lazy { TvAdapter(TvAdapter.POPULAR_TYPE, this) }
-    private val comedRv by lazy { TvAdapter(TvAdapter.POPULAR_TYPE, this) }
-    private val historyRv by lazy { TvAdapter(TvAdapter.POPULAR_TYPE, this) }
-    private val mysteryRv by lazy { TvAdapter(TvAdapter.POPULAR_TYPE, this) }
-    private val westernRv by lazy { TvAdapter(TvAdapter.POPULAR_TYPE, this) }
+    private val trendingRv by lazy { TvAdapter(TvAdapter.HORIZONTAL_TYPE, this) }
+    private val topRatedRv by lazy { TvAdapter(TvAdapter.HORIZONTAL_TYPE, this) }
+    private val onTheAirRv by lazy { TvAdapter(TvAdapter.HORIZONTAL_TYPE, this) }
+    private val popularRv by lazy { TvAdapter(TvAdapter.HORIZONTAL_TYPE, this) }
+    private val airingRv by lazy { TvAdapter(TvAdapter.HORIZONTAL_TYPE, this) }
+    private val familyRv by lazy { TvAdapter(TvAdapter.HORIZONTAL_TYPE, this) }
+    private val dramaRv by lazy { TvAdapter(TvAdapter.HORIZONTAL_TYPE, this) }
+    private val animeRv by lazy { TvAdapter(TvAdapter.HORIZONTAL_TYPE, this) }
+    private val comedRv by lazy { TvAdapter(TvAdapter.HORIZONTAL_TYPE, this) }
+    private val historyRv by lazy { TvAdapter(TvAdapter.HORIZONTAL_TYPE, this) }
+    private val mysteryRv by lazy { TvAdapter(TvAdapter.HORIZONTAL_TYPE, this) }
+    private val westernRv by lazy { TvAdapter(TvAdapter.HORIZONTAL_TYPE, this) }
+    private val crimeRv by lazy { TvAdapter(TvAdapter.HORIZONTAL_TYPE, this) }
+    private val documentaryRv by lazy { TvAdapter(TvAdapter.HORIZONTAL_TYPE, this) }
+    private val kidsRv by lazy { TvAdapter(TvAdapter.HORIZONTAL_TYPE, this) }
+    private val newsRv by lazy { TvAdapter(TvAdapter.HORIZONTAL_TYPE, this) }
+    private val realityRv by lazy { TvAdapter(TvAdapter.HORIZONTAL_TYPE, this) }
+    private val soapRv by lazy { TvAdapter(TvAdapter.HORIZONTAL_TYPE, this) }
     private val motionListener = MotionListener(::setToolbarState)
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val inflater = TransitionInflater.from(requireContext())
-        enterTransition = inflater.inflateTransition(R.transition.slide_up)
-        exitTransition = inflater.inflateTransition(R.transition.right)
-    }
 
     override fun onStart() {
         super.onStart()
@@ -71,7 +72,7 @@ class SeeAllSeriesFragment : BaseFragment<FragmentSeeAllSeriesBinding, AllSeries
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupViews()
-        observeType(args.tvtype)
+        observeType(args.type)
         setupClickers()
         nextAnim()
     }
@@ -124,37 +125,57 @@ class SeeAllSeriesFragment : BaseFragment<FragmentSeeAllSeriesBinding, AllSeries
         launchWhenViewStarted { mysteryMoviesFlow.observe { mysteryRv.seriesList = it.series
             visibilities()} } }
 
+    private fun observeCrymeTv() = with(viewModel){
+        launchWhenViewStarted { crimeSeriesFlow.observe { crimeRv.seriesList = it.series
+        visibilities() } } }
+
+    private fun observeDosumentaryTv() = with(viewModel){
+        launchWhenViewStarted { documentarySeriesFlow.observe { documentaryRv.seriesList = it.series
+            visibilities() } } }
+
+    private fun observeKidsTv() = with(viewModel){
+        launchWhenViewStarted { kidsSeriesFlow.observe { kidsRv.seriesList = it.series
+            visibilities() } } }
+
+    private fun observeNewsTv() = with(viewModel){
+        launchWhenViewStarted { newsSeriesFlow.observe { newsRv.seriesList = it.series
+            visibilities() } } }
+
+    private fun observeRealityTv() = with(viewModel){
+        launchWhenViewStarted { realitySeriesFlow.observe { realityRv.seriesList = it.series
+            visibilities() } } }
+
+    private fun observeSoapTv() = with(viewModel){
+        launchWhenViewStarted { soapSeriesFlow.observe { soapRv.seriesList = it.series
+            visibilities() } } }
+
+
     private fun observeType(tv: SeeAllTvType) = with(requireBinding()) {
         when (tv) {
             SeeAllTvType.TOP_RATED -> {
                 observeTopRatedTv()
                 moviesRv.adapter = topRatedRv
                 title.text = TOPRATED
-                img.setImageResource(R.drawable.topratedimg)
             }
             SeeAllTvType.AIRINGTODAY -> {
                 observeAiringTv()
                 moviesRv.adapter = airingRv
                 title.text = AIRINGTODAY
-                img.setImageResource(R.drawable.airingtoday)
             }
             SeeAllTvType.ONTHEAIR -> {
                 observeOnTheAirTv()
                 moviesRv.adapter = onTheAirRv
                 title.text = ONTHEAIR
-                img.setImageResource(R.drawable.ontheairimg)
             }
             SeeAllTvType.POPULAR -> {
                 observePopularTv()
                 moviesRv.adapter = popularRv
                 title.text = POPULAR
-                img.setImageResource(R.drawable.popularimg)
             }
             SeeAllTvType.TRENDING -> {
                 observeTrendingTv()
                 moviesRv.adapter = trendingRv
                 title.text = TRENDING
-                img.setImageResource(R.drawable.trendingimg)
             }
             SeeAllTvType.FAMILYTYPE -> {
                 observeFamilyTv()
@@ -195,7 +216,36 @@ class SeeAllSeriesFragment : BaseFragment<FragmentSeeAllSeriesBinding, AllSeries
                 observeMysteryTv()
                 moviesRv.adapter = mysteryRv
                 title.text = MYSTERY
-
+            }
+            SeeAllTvType.CRYME -> {
+                observeCrymeTv()
+                moviesRv.adapter = crimeRv
+                title.text = CRIME
+            }
+            SeeAllTvType.DOCUMENTARY -> {
+                observeDosumentaryTv()
+                moviesRv.adapter = documentaryRv
+                title.text = DOCUMENTARY
+            }
+            SeeAllTvType.KIDS -> {
+                observeKidsTv()
+                moviesRv.adapter = kidsRv
+                title.text = KIDS
+            }
+            SeeAllTvType.NEWS -> {
+                observeNewsTv()
+                moviesRv.adapter = newsRv
+                title.text = NEWS
+            }
+            SeeAllTvType.REALITY -> {
+                observeRealityTv()
+                moviesRv.adapter = realityRv
+                title.text = REALITY
+            }
+            SeeAllTvType.SOAP -> {
+                observeSoapTv()
+                moviesRv.adapter = soapRv
+                title.text = SOAP
             }
         }
         observeBtns()
@@ -285,21 +335,25 @@ class SeeAllSeriesFragment : BaseFragment<FragmentSeeAllSeriesBinding, AllSeries
     companion object {
         const val COLLAPSED = 1f
         const val EXPANDED = 0f
-        const val DEFAULT_ITEMS_ANIMATOR_DURATION = 500L
-        const val POPULAR = "Popular"
-        const val TOPRATED = "Top Rated"
-        const val ONTHEAIR = "On The Air"
-        const val AIRINGTODAY = "Airing Today"
-        const val TRENDING = "Trending"
-        const val FAMILIY = "Family"
-        const val ANIME = "Anime"
-        const val DRAMA = "Drama"
-        const val COMEDY = "Comedy"
-        const val HISTORY = "History"
-        const val WESTERN = "Western"
-        const val MYSTERY = "Mystery"
-        const val SOMETHINGWENTWRONG = "Something went wrong while processing"
-        const val PRESSONCE = "Press Once"
+        const val POPULAR = "Популярные"
+        const val TOPRATED = "Самые популярные"
+        const val ONTHEAIR = "На экранах"
+        const val AIRINGTODAY = "Сегодня в эфире"
+        const val TRENDING = "В тренде"
+        const val FAMILIY = "Семейные"
+        const val ANIME = "Аниме"
+        const val DRAMA = "Драмы"
+        const val COMEDY = "Комедии"
+        const val HISTORY = "Исторические"
+        const val WESTERN = "Западные"
+        const val MYSTERY = "Тайные"
+        const val CRIME = "Криминальные"
+        const val DOCUMENTARY = "Документальные"
+        const val KIDS = "Детские"
+        const val NEWS = "О новостей"
+        const val REALITY = "Реалистичные"
+        const val SOAP = "Мыльные"
+        const val PRESSONCE = "Нажмите один раз!"
     }
 }
 

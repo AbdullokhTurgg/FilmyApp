@@ -4,7 +4,7 @@ import com.example.data.cloud.mappers.movie.*
 import com.example.data.cloud.mappers.person.MapFromListPersonCloudToData
 import com.example.data.cloud.models.movie.MovieCloud
 import com.example.data.cloud.models.movie.MovieGenresCloud
-import com.example.data.cloud.models.movie.movie_category.CastCloud
+import com.example.data.cloud.models.movie.CastCloud
 import com.example.data.cloud.models.movie.tv_shows.SeriesCloud
 import com.example.data.cloud.models.person.PersonCloud
 import com.example.data.data.mappers.*

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backGroundAd"
+    android:background="@drawable/transperent_background"
     tools:context=".ui.movie.storage_movies_screen.StorageMoviesFragment">
 
 
@@ -12,8 +12,8 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_30sdp"
         android:elevation="@dimen/_100sdp"
+        android:background="@color/backGroundAd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -28,6 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
+                android:layout_marginTop="@dimen/_30sdp"
                 android:backgroundTint="@color/backGroundAd"
                 android:fontFamily="@font/baloo"
                 android:text="Movies"
@@ -38,6 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
+                android:layout_marginTop="@dimen/_30sdp"
                 android:layout_marginEnd="@dimen/_8sdp"
                 android:backgroundTint="@color/backGroundAd"
                 android:fontFamily="@font/baloo"
@@ -65,7 +67,6 @@
             android:id="@+id/rv_fav_movies"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/_20sdp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -91,7 +92,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/lovee"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

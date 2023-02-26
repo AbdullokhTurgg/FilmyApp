@@ -5,57 +5,54 @@
     android:layout_height="match_parent"
     android:background="@color/backGround">
 
-
     <LinearLayout
-        android:id="@+id/linearLayout6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_40sdp"
-        android:orientation="horizontal"
+        android:id="@+id/search_liner"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_8sdp"
-            android:fontFamily="@font/baloo"
-            android:text="Popular"
-            android:textColor="@color/shimmer_background"
-            android:textSize="@dimen/_24sdp" />
+            android:layout_marginTop="@dimen/_40sdp"
+            android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_8sdp"
-            android:src="@drawable/hd_bg" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_155sdp"
-            android:fontFamily="@font/baloo"
-            android:text="see more"
-            android:textColor="@color/shimmer_background"
-            android:textSize="20sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/poppins_extra_bold"
+                android:gravity="center"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:text="Самы топовые фильмы для вас!"
+                android:textColor="@color/shimmerColor"
+                android:textSize="18sp" />
+
+
+
+
+            <com.google.android.material.button.MaterialButton
+                android:backgroundTint="@color/shimmerColor"
+                android:layout_width="match_parent"
+                android:layout_marginHorizontal="@dimen/_12sdp"
+                android:layout_height="@dimen/_60sdp"
+                app:cornerRadius="@dimen/_18sdp"
+                android:text="Нажмите чтобы начать поиск"
+                android:fontFamily="@font/poppins_extra_bold"
+                app:icon="@drawable/ic_search"
+                app:iconTint="@color/colorPrimaryLight"
+                />
+
+
+        </LinearLayout>
+
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/liner_ly4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
-
-        <include layout="@layout/shimmer_for_popular_item" />
-
-        <include layout="@layout/shimmer_for_popular_item" />
-
-        <include layout="@layout/shimmer_for_popular_item" />
-
-        <include layout="@layout/shimmer_for_popular_item" />
-    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout5"
@@ -63,25 +60,18 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/liner_ly4">
+        app:layout_constraintTop_toBottomOf="@+id/search_liner">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_8sdp"
+            android:drawableEnd="@drawable/arrow_right"
             android:fontFamily="@font/baloo"
             android:text="Top Rated"
             android:textColor="@color/shimmer_background"
             android:textSize="@dimen/_24sdp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_175sdp"
-            android:fontFamily="@font/baloo"
-            android:text="see more"
-            android:textColor="@color/shimmer_background"
-            android:textSize="@dimen/_24sdp" />
 
     </LinearLayout>
 
@@ -114,19 +104,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_8sdp"
+            android:drawableEnd="@drawable/arrow_right"
             android:fontFamily="@font/baloo"
             android:text="Now Playing"
             android:textColor="@color/shimmer_background"
             android:textSize="@dimen/_24sdp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_145sdp"
-            android:fontFamily="@font/baloo"
-            android:text="see more"
-            android:textColor="@color/shimmer_background"
-            android:textSize="@dimen/_24sdp" />
 
     </LinearLayout>
 
@@ -160,19 +143,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_8sdp"
+            android:drawableEnd="@drawable/arrow_right"
             android:fontFamily="@font/baloo"
             android:text="Upcoming"
             android:textColor="@color/shimmer_background"
             android:textSize="@dimen/_24sdp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_170sdp"
-            android:fontFamily="@font/baloo"
-            android:text="see more"
-            android:textColor="@color/shimmer_background"
-            android:textSize="@dimen/_24sdp" />
 
     </LinearLayout>
 
@@ -193,12 +169,34 @@
 
     </LinearLayout>
 
+
+    <LinearLayout
+        android:id="@+id/linearLayout101"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/liner_ly7">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:drawableEnd="@drawable/arrow_right"
+            android:fontFamily="@font/baloo"
+            android:text="Comedy"
+            android:textColor="@color/shimmer_background"
+            android:textSize="@dimen/_24sdp" />
+
+
+    </LinearLayout>
+
     <LinearLayout
         android:id="@+id/liner_ly8"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/liner_ly7">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout101">
 
         <include layout="@layout/shimmer_for_movie_item" />
 

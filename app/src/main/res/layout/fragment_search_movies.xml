@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="@dimen/_20sdp"
-    android:background="@color/backGroundAd"
-    app:layoutDescription="@xml/fragment_search_movies_scene"
+    android:background="@drawable/transperent_background"
     tools:context=".ui.movie.search_movies_screen.SearchMoviesFragment">
 
 
@@ -15,17 +14,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_30sdp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:cardBackgroundColor="@color/whiteTransparent"
-        app:cardCornerRadius="8dp">
+        android:layout_marginHorizontal="@dimen/_14sdp"
+        app:cardBackgroundColor="@color/white_silver"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintTop_toTopOf="parent">
 
         <SearchView
+            style="@style/AppSearchView"
             android:id="@+id/searchView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:iconifiedByDefault="false"
             android:paddingStart="24dp"
-            android:queryHint="Search for the main news" />
+            android:layout_weight="1"
+            android:background="@drawable/bg_white_rounded"
+            android:closeIcon="@drawable/ic_close"
+            android:elevation="2dp"
+            android:inputType="textCapWords"
+            android:queryBackground="@null"
+            android:queryHint="Поиск" />
     </androidx.cardview.widget.CardView>
 
     <androidx.constraintlayout.widget.Guideline
@@ -33,22 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.1" />
-
-
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/search_pb"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/progress"
-        app:lottie_renderMode="automatic" />
+        app:layout_constraintGuide_begin="87dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/movies_rv"
@@ -61,5 +53,77 @@
         app:layout_constraintTop_toBottomOf="@+id/cardView2"
         app:spanCount="2" />
 
+    <ImageView
+        android:id="@+id/tvSearchImage"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_200sdp"
+        android:visibility="gone"
+        android:src="@drawable/television_tv_svgrepo_com"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/movies_rv"
+        app:layout_constraintTop_toBottomOf="@+id/cardView2" />
 
-</androidx.constraintlayout.motion.widget.MotionLayout>
+    <ScrollView
+        android:id="@+id/item_movie"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        android:layout_marginBottom="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_80sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView2">
+
+        <LinearLayout
+            android:id="@+id/genreLiner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/genres_adventure"
+                layout="@layout/include_movie_genre" />
+
+            <include
+                android:id="@+id/genres_horror"
+                layout="@layout/include_movie_genre" />
+
+            <include
+                android:id="@+id/genre_comedy"
+                layout="@layout/include_movie_genre" />
+
+            <include
+                android:id="@+id/genre_crime"
+                layout="@layout/include_movie_genre" />
+
+            <include
+                android:id="@+id/genre_drama"
+                layout="@layout/include_movie_genre" />
+
+            <include
+                android:id="@+id/genre_fantasy"
+                layout="@layout/include_movie_genre" />
+
+            <include
+                android:id="@+id/genre_history"
+                layout="@layout/include_movie_genre" />
+
+            <include
+                android:id="@+id/genres_music"
+                layout="@layout/include_movie_genre" />
+
+            <include
+                android:id="@+id/genres_romance"
+                layout="@layout/include_movie_genre" />
+
+            <include
+                android:id="@+id/genres_western"
+                layout="@layout/include_movie_genre" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

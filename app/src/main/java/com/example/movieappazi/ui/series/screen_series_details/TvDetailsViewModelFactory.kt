@@ -3,11 +3,13 @@ package com.example.movieappazi.ui.series.screen_series_details
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.domain.base.BaseMapper
+import com.example.domain.models.movie.CreditsResponseDomain
 import com.example.domain.models.movie.tv_shows.SeriesDomain
 import com.example.domain.models.movie.tv_shows.TvSeriesDetailsDomain
 import com.example.domain.models.movie.tv_shows.TvSeriesResponseDomain
 import com.example.domain.repositories.network.movie.MovieRepositories
 import com.example.domain.repositories.storage.MovieStorageRepository
+import com.example.movieappazi.app.models.movie.CreditsResponseUi
 import com.example.movieappazi.app.models.movie.tv_shows.SeriesUi
 import com.example.movieappazi.app.models.movie.tv_shows.TvSeriesDetailsUi
 import com.example.movieappazi.app.models.movie.tv_shows.TvSeriesResponseUi
@@ -27,7 +29,8 @@ class TvDetailsViewModelFactory @AssistedInject constructor(
     private val mapTvSeriesResponseDomainToUi: BaseMapper<TvSeriesResponseDomain, TvSeriesResponseUi>,
     private val saveMapper: BaseMapper<SeriesUi, SeriesDomain>,
     private val resourceProvider: HandleExeption,
-) : ViewModelProvider.Factory {
+    private val mapCreditsResponseDomain: BaseMapper<CreditsResponseDomain, CreditsResponseUi>,
+    ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         require(modelClass == SeriesDetailsFragmentViewModel::class.java)
@@ -38,7 +41,8 @@ class TvDetailsViewModelFactory @AssistedInject constructor(
             movieRepository = movieRepository,
             mapTvSeriesResponseDomainToUi = mapTvSeriesResponseDomainToUi,
             saveMapper = saveMapper,
-            resourceProvider = resourceProvider
+            resourceProvider = resourceProvider,
+            mapCreditsResponseDomain=mapCreditsResponseDomain
         ) as T
     }
 

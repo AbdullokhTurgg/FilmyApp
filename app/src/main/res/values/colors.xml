@@ -67,6 +67,7 @@
     <color name="primary">#F2B833</color>
     <color name="backGround">#1F2123</color>
     <color name="backGroundAd">#0E1011</color>
+    <color name="backGroundAd80">#800E1011</color>
     <color name="mainText">#FFFFFFFF</color>
     <color name="textAd">#BABABA</color>
     <color name="black_30_alpha">#4C000000</color>
@@ -77,6 +78,7 @@
     <color name="fg">#0E141B</color>
     <color name="bg">#141d26</color>
     <color name="box">#886944</color>
+    <color name="box2">#AF7632</color>
     <color name="bold_text">#BFAE99</color>
     <color name="text">#F2E6D0</color>
     <color name="black_light">#191919</color>

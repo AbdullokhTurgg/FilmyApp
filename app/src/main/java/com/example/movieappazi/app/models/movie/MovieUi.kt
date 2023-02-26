@@ -1,7 +1,7 @@
 package com.example.movieappazi.app.models.movie
 
 import android.os.Parcelable
-import com.example.movieappazi.app.recyclerview.Item
+import com.example.movieappazi.app.utils.recyclerview.Item
 import kotlinx.android.parcel.Parcelize
 
 
@@ -11,10 +11,10 @@ data class MovieUi(
     val adult: Boolean?,
     val overview: String?,
     val releaseDate: String?,
-    val id: Int,
+    val id: Int?,
     val originalTitle: String?,
     val originalLanguage: String?,
-    val title: String,
+    val title: String?,
     val backdropPath: String?,
     val popularity: Double?,
     val voteCount: Int?,

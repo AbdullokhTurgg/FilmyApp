@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-   android:layout_marginTop="@dimen/_20sdp"
-    android:background="@color/backGroundAd"
+    android:backgroundTint="@color/dark_with_alpha_0"
     app:layoutDescription="@xml/fragment_see_all_series_scene"
     tools:context=".ui.movie.see_all_movies_screen.SeeAllMoviesFragment">
 
@@ -23,18 +23,10 @@
         app:lottie_rawRes="@raw/loading" />
 
     <ImageView
-        android:id="@+id/img"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_105sdp"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toTopOf="@id/scrollView"
-        android:src="@drawable/backseemore" />
-
-    <ImageView
         android:id="@+id/up_button"
         android:layout_width="@dimen/_50sdp"
         android:layout_height="@dimen/_50sdp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/_30sdp"
         android:paddingVertical="10dp"
         android:src="@drawable/left"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,9 +39,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:ellipsize="end"
-        android:fontFamily="@font/baloo"
+        android:fontFamily="@font/poppins_extra_bold"
         android:textColor="@color/white"
-        android:textSize="@dimen/_24sdp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/sort_options"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/up_button"
@@ -64,18 +56,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title" />
 
-    <ImageButton
-        android:id="@+id/sort_options"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="20dp"
-        android:background="@color/black_30_alpha"
-        android:paddingVertical="10dp"
-        android:visibility="gone"
-        android:src="@drawable/hierarchy_2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 
     <androidx.core.widget.NestedScrollView
@@ -104,7 +84,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:spanCount="3" />
+                app:spanCount="2" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/pageConstraint"
@@ -122,7 +102,7 @@
                     style="@style/PrevBtnStyle"
                     android:layout_marginBottom="4dp"
                     android:backgroundTint="@color/darkBlue1"
-                    android:text="prev"
+                    android:text="Назад"
                     app:icon="@drawable/ic_previous"
                     app:iconTint="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -168,7 +148,7 @@
                     android:id="@+id/next_btn_movie"
                     style="@style/BtnNextStyle"
                     android:backgroundTint="@color/darkBlue1"
-                    android:text="next"
+                    android:text="Вперёд"
                     app:icon="@drawable/ic_next"
                     app:iconGravity="end"
                     app:iconTint="@color/white"

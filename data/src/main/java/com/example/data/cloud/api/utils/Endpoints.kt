@@ -25,6 +25,7 @@ object Endpoints {
     }
 
     object Person {
+        const val SEARCH_PEOPLE = "search/person"
         const val PERSON_POPULAR = "person/popular"
         const val PERSON_DETAILS = "person/{person_id}"
     }

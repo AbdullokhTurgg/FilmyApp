@@ -2,7 +2,7 @@ package com.example.movieappazi.app.base
 
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
-import com.example.movieappazi.app.recyclerview.Item
+import com.example.movieappazi.app.utils.recyclerview.Item
 
 abstract class BaseViewHolder<out V : ViewBinding, I : Item>(
     val binding: V,

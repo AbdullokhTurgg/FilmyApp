@@ -3,7 +3,7 @@
     <style name="Theme.MovieAppAzi" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">#303F9F</item>
-        <item name="colorPrimaryVariant">@color/black</item>
+        <item name="colorPrimaryVariant">@color/backgroundDarker</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/white</item>
@@ -11,10 +11,10 @@
         <item name="colorOnSecondary">@color/white</item>
         <!-- Customize your theme here. -->
         <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowBackground">@color/black</item>
+        <item name="android:windowBackground">@color/backgroundDarker</item>
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialog</item>
         <item name="android:popupMenuStyle">@style/PopupMenu</item>
-        <item name="android:navigationBarColor">@color/black</item>
+        <item name="android:navigationBarColor">@color/backgroundDarker</item>
 
     </style>
 
@@ -25,7 +25,6 @@
 
     <style name="CircularDeterminateProgressBar">
         <item name="android:indeterminateOnly">false</item>
-        <item name="android:progressDrawable">@drawable/circle_progress</item>
     </style>
 
     <style name="titleAppBar" parent="Theme.MovieAppAzi">

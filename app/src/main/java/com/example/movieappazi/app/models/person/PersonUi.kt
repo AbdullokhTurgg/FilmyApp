@@ -5,11 +5,11 @@ import com.example.movieappazi.app.models.movie.MovieUi
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class PersonUi(
+class PersonUi(
     val profile_path: String?,
     val adult: Boolean,
     val id: Int,
     val known_for: List<MovieUi>,
     val name: String,
-    val popularity: Double,
+    val popularity: Double
 ) : Parcelable

@@ -4,12 +4,7 @@ import com.example.data.cloud.mappers.movie.*
 import com.example.data.cloud.mappers.person.MapFromPersonCloudToData
 import com.example.data.cloud.mappers.person.MapFromPersonDetailsCloudToData
 import com.example.data.cloud.mappers.person.MapFromPersonsCloudToData
-import com.example.data.cloud.models.movie.MovieCloud
-import com.example.data.cloud.models.movie.MovieDetailsCloud
-import com.example.data.cloud.models.movie.MovieGenresCloud
-import com.example.data.cloud.models.movie.MoviesCloud
-import com.example.data.cloud.models.movie.movie_category.CastCloud
-import com.example.data.cloud.models.movie.movie_category.CreditsResponseCloud
+import com.example.data.cloud.models.movie.*
 import com.example.data.cloud.models.movie.tv_shows.SeriesCloud
 import com.example.data.cloud.models.movie.tv_shows.TvSeriesDetailsCloud
 import com.example.data.cloud.models.movie.tv_shows.TvSeriesResponseCloud
@@ -46,8 +41,6 @@ import com.example.movieappazi.app.models.movie.tv_shows.TvSeriesResponseUi
 import com.example.movieappazi.app.models.person.PersonDetailsUi
 import com.example.movieappazi.app.models.person.PersonUi
 import com.example.movieappazi.app.models.person.PersonsUi
-import com.example.movieappazi.ui.movie.all_movies_screen.mappers.MainItemsToSearchFilteredModelMapper
-import com.example.movieappazi.ui.movie.all_movies_screen.mappers.MainItemsToSearchFilteredModelMapperImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -95,9 +88,6 @@ abstract class MappersBindModule {
 
     @Binds
     abstract fun bindMapperFromTvSeriesDetailsDomainToUi(impl: MapFromTvSeriesDetailsDomainToUi): BaseMapper<TvSeriesDetailsDomain, TvSeriesDetailsUi>
-
-    @Binds
-    abstract fun bindMainItemsToSearchFilteredModelMapper(impl: MainItemsToSearchFilteredModelMapperImpl): MainItemsToSearchFilteredModelMapper
 
     @Binds
     abstract fun bindMovieCloudToMovieDataMapper(impl: MapFromMovieCloudToData): BaseMapper<MovieCloud, MovieData>

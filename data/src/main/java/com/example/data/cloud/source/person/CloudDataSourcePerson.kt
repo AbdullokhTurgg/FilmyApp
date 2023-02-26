@@ -7,5 +7,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface CloudDataSourcePerson {
     fun getPersons(page: Int): Flow<PersonsData>
-    suspend fun getPersonDetails(personId: Int): DataRequestState<PersonDetailsData>
+    fun getAllPersonDetails(personId: Int): Flow<PersonDetailsData>
+    fun searchPerson(query: String): Flow<PersonsData>
 }

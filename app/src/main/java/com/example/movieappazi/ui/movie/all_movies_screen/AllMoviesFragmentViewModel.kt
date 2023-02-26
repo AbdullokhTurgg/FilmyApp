@@ -3,25 +3,37 @@ package com.example.movieappazi.ui.movie.all_movies_screen
 import androidx.lifecycle.viewModelScope
 import com.example.domain.base.BaseMapper
 import com.example.domain.helper.DispatchersProvider
-import com.example.domain.models.HomeScreenItems
 import com.example.domain.models.movie.MovieDomain
 import com.example.domain.models.movie.MoviesDomain
 import com.example.domain.repositories.network.movie.MovieRepositories
 import com.example.domain.repositories.storage.MovieStorageRepository
-import com.example.domain.usecases.FetchAllHomeScreenItemsUseCase
 import com.example.movieappazi.app.base.BaseViewModel
 import com.example.movieappazi.app.models.movie.MovieUi
 import com.example.movieappazi.app.models.movie.MoviesUi
 import com.example.movieappazi.app.models.movie.ResponseState
 import com.example.movieappazi.app.utils.exception.HandleExeption
 import com.example.movieappazi.app.utils.extensions.changeResponseState
-import com.example.movieappazi.ui.movie.all_movies_screen.listeners.MovieItemOnClickListener
-import com.example.movieappazi.ui.movie.all_movies_screen.mappers.MainItemsToSearchFilteredModelMapper
-import com.example.movieappazi.ui.movie.all_movies_screen.router.FragmentAllMoviesRouter
+import com.example.movieappazi.ui.movie.search_movies_screen.SearchType
 import com.example.movieappazi.ui.movie.see_all_movies_screen.MovieType
 import com.example.movieappazi.ui.movie.see_all_movies_screen.SeeAllMoviesFragmentDirections
+import com.example.movieappazi.ui.series.screen_all_series.AllSeriesFragmentViewModel.Companion.ACTION
+import com.example.movieappazi.ui.series.screen_all_series.AllSeriesFragmentViewModel.Companion.ADVENTURE
+import com.example.movieappazi.ui.series.screen_all_series.AllSeriesFragmentViewModel.Companion.COMEDY
+import com.example.movieappazi.ui.series.screen_all_series.AllSeriesFragmentViewModel.Companion.CRIME
+import com.example.movieappazi.ui.series.screen_all_series.AllSeriesFragmentViewModel.Companion.DOCUMENTARY
+import com.example.movieappazi.ui.series.screen_all_series.AllSeriesFragmentViewModel.Companion.DRAMA
+import com.example.movieappazi.ui.series.screen_all_series.AllSeriesFragmentViewModel.Companion.FAMILY
+import com.example.movieappazi.ui.series.screen_all_series.AllSeriesFragmentViewModel.Companion.FANTASY
+import com.example.movieappazi.ui.series.screen_all_series.AllSeriesFragmentViewModel.Companion.HISTORY
+import com.example.movieappazi.ui.series.screen_all_series.AllSeriesFragmentViewModel.Companion.HORROR
+import com.example.movieappazi.ui.series.screen_all_series.AllSeriesFragmentViewModel.Companion.MUSIC
+import com.example.movieappazi.ui.series.screen_all_series.AllSeriesFragmentViewModel.Companion.MYSTERY
+import com.example.movieappazi.ui.series.screen_all_series.AllSeriesFragmentViewModel.Companion.ROMANCE
+import com.example.movieappazi.ui.series.screen_all_series.AllSeriesFragmentViewModel.Companion.SCIENCEFICTION
+import com.example.movieappazi.ui.series.screen_all_series.AllSeriesFragmentViewModel.Companion.THRILLER
+import com.example.movieappazi.ui.series.screen_all_series.AllSeriesFragmentViewModel.Companion.WAR
+import com.example.movieappazi.ui.series.screen_all_series.AllSeriesFragmentViewModel.Companion.WESTERN
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -30,16 +42,13 @@ import javax.inject.Inject
 @ExperimentalCoroutinesApi
 @HiltViewModel
 class AllMoviesFragmentViewModel @Inject constructor(
-    private val fetchAllHomeScreenItemsUseCase: FetchAllHomeScreenItemsUseCase,
     private val repository: MovieRepositories,
     private val storageRepository: MovieStorageRepository,
     private val mapFromMoviesDomainToUi: BaseMapper<MoviesDomain, MoviesUi>,
     private val dispatchersProvider: DispatchersProvider,
     private val mapper: BaseMapper<MovieUi, MovieDomain>,
     private val hanEx: HandleExeption,
-    private val fragmentAllMoviesRouter: FragmentAllMoviesRouter,
-    private val itemsToSearchFilteredModelMapper: MainItemsToSearchFilteredModelMapper,
-) : BaseViewModel(), MovieItemOnClickListener {
+) : BaseViewModel() {
 
     private val _error = MutableSharedFlow<String>(replay = 0)
     val error get() = _error.asSharedFlow()
@@ -53,37 +62,20 @@ class AllMoviesFragmentViewModel @Inject constructor(
     private val pageToResponseFlow = MutableStateFlow(_movieResponseState.value.page)
 
 
-    val allFilteredMovieItems = fetchAllHomeScreenItemsUseCase()
-        .map { items -> mapToAdapterModel(items) }
-        .onStart {}
-        .flowOn(dispatchersProvider.default())
-        .catch { exception: Throwable -> hanEx.hanEx(exception) }
-        .stateIn(viewModelScope, SharingStarted.Lazily, null)
-
-
     val popularMoviesFlow = pageToResponseFlow
         .flatMapLatest { repository.getPopularMovie(it) }
         .map(mapFromMoviesDomainToUi::map)
         .flowOn(dispatchersProvider.default())
-        .catch { exception: Throwable -> hanEx.hanEx(exception) }
+        .catch { exception: Throwable -> _error.emit(hanEx.hanEx(exception)) }
         .onEach { value -> settings(value.page, value.totalPage) }
         .shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
 
-    val relevanceMoviesFlow = pageToResponseFlow
+    val upcomingMoviesFlow = pageToResponseFlow
         .flatMapLatest { repository.getUpcomingMovies(it) }
         .map(mapFromMoviesDomainToUi::map)
         .flowOn(dispatchersProvider.default())
-        .catch { exception: Throwable -> hanEx.hanEx(exception) }
-        .onEach { value -> settings(value.page, value.totalPage) }
-        .shareIn(viewModelScope, SharingStarted.Lazily, 1)
-
-
-    val fancyMoviesFlow = pageToResponseFlow
-        .flatMapLatest { repository.getUpcomingMovies(it) }
-        .map(mapFromMoviesDomainToUi::map)
-        .flowOn(dispatchersProvider.default())
-        .catch { exception: Throwable -> hanEx.hanEx(exception) }
+        .catch { exception: Throwable -> _error.emit(hanEx.hanEx(exception)) }
         .onEach { value -> settings(value.page, value.totalPage) }
         .shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
@@ -92,7 +84,7 @@ class AllMoviesFragmentViewModel @Inject constructor(
         .flatMapLatest { repository.getNowPlayingMovies(it) }
         .map(mapFromMoviesDomainToUi::map)
         .flowOn(dispatchersProvider.default())
-        .catch { exception: Throwable -> hanEx.hanEx(exception) }
+        .catch { exception: Throwable -> _error.emit(hanEx.hanEx(exception)) }
         .onEach { value -> settings(value.page, value.totalPage) }
         .shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
@@ -101,31 +93,160 @@ class AllMoviesFragmentViewModel @Inject constructor(
         .flatMapLatest {repository.getTopRatedMovies(it)}
         .map(mapFromMoviesDomainToUi::map)
         .flowOn(dispatchersProvider.default())
-        .catch { exception: Throwable -> hanEx.hanEx(exception) }
+        .catch { exception: Throwable -> _error.emit(hanEx.hanEx(exception)) }
         .onEach { value -> settings(value.page, value.totalPage) }
         .shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
 
-    val featuredMoviesFlow = pageToResponseFlow
-        .flatMapLatest { repository.getPopularMovie(it)}
-        .map(mapFromMoviesDomainToUi::map)
+    val comedyMoviesFlow = pageToResponseFlow
+        .flatMapLatest { repository.getFantasyMovies(it, COMEDY)
+        .map(mapFromMoviesDomainToUi::map)}
         .flowOn(dispatchersProvider.default())
-        .catch { exception: Throwable -> hanEx.hanEx(exception) }
         .onEach { value -> settings(value.page, value.totalPage) }
+        .catch { exception: Throwable -> _error.emit(hanEx.hanEx(exception)) }
         .shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
+    val historyMoviesFlow = pageToResponseFlow
+        .flatMapLatest { repository.getFantasyMovies(it, HISTORY)
+        .map(mapFromMoviesDomainToUi::map)}
+        .flowOn(dispatchersProvider.default())
+        .onEach { value -> settings(value.page, value.totalPage) }
+        .catch { t: Throwable -> _error.emit(hanEx.hanEx(t)) }
+        .shareIn(viewModelScope, SharingStarted.Lazily, 1)
+
+    val mysteryMoviesFlow = pageToResponseFlow
+        .flatMapLatest { repository.getFantasyMovies(it, MYSTERY)
+            .map(mapFromMoviesDomainToUi::map)}
+        .flowOn(dispatchersProvider.default())
+        .onEach { value -> settings(value.page, value.totalPage) }
+        .catch { t: Throwable -> _error.emit(hanEx.hanEx(t)) }
+        .shareIn(viewModelScope, SharingStarted.Lazily, 1)
+
+    val westernMoviesFlow = pageToResponseFlow
+        .flatMapLatest { repository.getFantasyMovies(it, WESTERN)
+            .map(mapFromMoviesDomainToUi::map)}
+        .flowOn(dispatchersProvider.default())
+        .onEach { value -> settings(value.page, value.totalPage) }
+        .catch { t: Throwable -> _error.emit(hanEx.hanEx(t)) }
+        .shareIn(viewModelScope, SharingStarted.Lazily, 1)
+
+    val dramaMoviesFlow = pageToResponseFlow
+        .flatMapLatest { repository.getFantasyMovies(it, DRAMA)
+            .map(mapFromMoviesDomainToUi::map)}
+        .flowOn(dispatchersProvider.default())
+        .onEach { value -> settings(value.page, value.totalPage) }
+        .catch { t: Throwable -> _error.emit(hanEx.hanEx(t)) }
+        .shareIn(viewModelScope, SharingStarted.Lazily, 1)
+
+    val familyMoviesFlow = pageToResponseFlow
+        .flatMapLatest { repository.getFantasyMovies(it, FAMILY)
+            .map(mapFromMoviesDomainToUi::map)}
+        .flowOn(dispatchersProvider.default())
+        .onEach { value -> settings(value.page, value.totalPage) }
+        .catch { t: Throwable -> _error.emit(hanEx.hanEx(t)) }
+        .shareIn(viewModelScope, SharingStarted.Lazily, 1)
+
+    val actionMoviesFlow = pageToResponseFlow
+        .flatMapLatest { repository.getFantasyMovies(it, ACTION)
+            .map(mapFromMoviesDomainToUi::map)}
+        .flowOn(dispatchersProvider.default())
+        .onEach { value -> settings(value.page, value.totalPage) }
+        .catch { t: Throwable -> _error.emit(hanEx.hanEx(t)) }
+        .shareIn(viewModelScope, SharingStarted.Lazily, 1)
+
+
+    val adventureMoviesFlow = pageToResponseFlow
+        .flatMapLatest { repository.getFantasyMovies(it, ADVENTURE)
+            .map(mapFromMoviesDomainToUi::map)}
+        .flowOn(dispatchersProvider.default())
+        .onEach { value -> settings(value.page, value.totalPage) }
+        .catch { t: Throwable -> _error.emit(hanEx.hanEx(t)) }
+        .shareIn(viewModelScope, SharingStarted.Lazily, 1)
+
+    val crimeMoviesFlow = pageToResponseFlow
+        .flatMapLatest { repository.getFantasyMovies(it, CRIME)
+            .map(mapFromMoviesDomainToUi::map)}
+        .flowOn(dispatchersProvider.default())
+        .onEach { value -> settings(value.page, value.totalPage) }
+        .catch { t: Throwable -> _error.emit(hanEx.hanEx(t)) }
+        .shareIn(viewModelScope, SharingStarted.Lazily, 1)
+
+    val documentaryMoviesFlow = pageToResponseFlow
+        .flatMapLatest { repository.getFantasyMovies(it, DOCUMENTARY)
+            .map(mapFromMoviesDomainToUi::map)}
+        .flowOn(dispatchersProvider.default())
+        .onEach { value -> settings(value.page, value.totalPage) }
+        .catch { t: Throwable -> _error.emit(hanEx.hanEx(t)) }
+        .shareIn(viewModelScope, SharingStarted.Lazily, 1)
+
+
+    val fantasyMoviesFlow = pageToResponseFlow
+        .flatMapLatest { repository.getFantasyMovies(it, FANTASY)
+            .map(mapFromMoviesDomainToUi::map)}
+        .flowOn(dispatchersProvider.default())
+        .onEach { value -> settings(value.page, value.totalPage) }
+        .catch { t: Throwable -> _error.emit(hanEx.hanEx(t)) }
+        .shareIn(viewModelScope, SharingStarted.Lazily, 1)
+
+    val horrorMoviesFlow = pageToResponseFlow
+        .flatMapLatest { repository.getFantasyMovies(it, HORROR)
+            .map(mapFromMoviesDomainToUi::map)}
+        .flowOn(dispatchersProvider.default())
+        .onEach { value -> settings(value.page, value.totalPage) }
+        .catch { t: Throwable -> _error.emit(hanEx.hanEx(t)) }
+        .shareIn(viewModelScope, SharingStarted.Lazily, 1)
+
+    val musicMoviesFlow = pageToResponseFlow
+        .flatMapLatest { repository.getFantasyMovies(it, MUSIC)
+            .map(mapFromMoviesDomainToUi::map)}
+        .flowOn(dispatchersProvider.default())
+        .onEach { value -> settings(value.page, value.totalPage) }
+        .catch { t: Throwable -> _error.emit(hanEx.hanEx(t)) }
+        .shareIn(viewModelScope, SharingStarted.Lazily, 1)
+
+    val romanceMoviesFlow = pageToResponseFlow
+        .flatMapLatest { repository.getFantasyMovies(it, ROMANCE)
+            .map(mapFromMoviesDomainToUi::map)}
+        .flowOn(dispatchersProvider.default())
+        .onEach { value -> settings(value.page, value.totalPage) }
+        .catch { t: Throwable -> _error.emit(hanEx.hanEx(t)) }
+        .shareIn(viewModelScope, SharingStarted.Lazily, 1)
+
+    val scienceFictionMoviesFlow = pageToResponseFlow
+        .flatMapLatest { repository.getFantasyMovies(it, SCIENCEFICTION)
+            .map(mapFromMoviesDomainToUi::map)}
+        .flowOn(dispatchersProvider.default())
+        .onEach { value -> settings(value.page, value.totalPage) }
+        .catch { t: Throwable -> _error.emit(hanEx.hanEx(t)) }
+        .shareIn(viewModelScope, SharingStarted.Lazily, 1)
+
+    val thrillerMoviesFlow = pageToResponseFlow
+        .flatMapLatest { repository.getFantasyMovies(it, THRILLER)
+            .map(mapFromMoviesDomainToUi::map)}
+        .flowOn(dispatchersProvider.default())
+        .onEach { value -> settings(value.page, value.totalPage) }
+        .catch { t: Throwable -> _error.emit(hanEx.hanEx(t)) }
+        .shareIn(viewModelScope, SharingStarted.Lazily, 1)
+
+    val warMoviesFlow = pageToResponseFlow
+        .flatMapLatest { repository.getFantasyMovies(it, WAR)
+            .map(mapFromMoviesDomainToUi::map)}
+        .flowOn(dispatchersProvider.default())
+        .onEach { value -> settings(value.page, value.totalPage) }
+        .catch { t: Throwable -> _error.emit(hanEx.hanEx(t)) }
+        .shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
     fun goMoreMovieFragment(type: MovieType) =
         navigation(AllMoviesFragmentDirections.actionNavMoviesToSeeAllMoviesFragment(type))
 
     fun goMovieDetails(moviesUi: MovieUi) =
-        navigation(AllMoviesFragmentDirections.actionNavMoviesToMovieDetailsFragment2(moviesUi))
+        navigation(AllMoviesFragmentDirections.actionNavMoviesToMovieDetailsFragment2(moviesUi.id!!))
+
+    fun goSearchMovie(type:SearchType) =
+        navigation(AllMoviesFragmentDirections.actionNavMoviesToNavSearch(type))
 
     fun goMovieDetailsFromSeeMore(movieUi: MovieUi) =
-        navigation(SeeAllMoviesFragmentDirections.actionSeeAllMoviesFragmentToMovieDetailsFragment(movieUi))
-
-    fun mapToAdapterModel(items: HomeScreenItems) =
-        itemsToSearchFilteredModelMapper.map(items, this)
+        navigation(SeeAllMoviesFragmentDirections.actionSeeAllMoviesFragmentToMovieDetailsFragment(movieUi.id!!))
 
     fun nextPage() = pageToResponseFlow.tryEmit(_movieResponseState.value.nextPage)
 
@@ -137,10 +258,6 @@ class AllMoviesFragmentViewModel @Inject constructor(
     fun saveMovie(moviesUi: MovieUi) = viewModelScope.launch {
         storageRepository.saveMovieToDatabase(mapper.map(moviesUi)) }
 
-
-    override fun movieItemOnClick(movieUi: MovieUi) {
-        navigate(fragmentAllMoviesRouter.navigateToMovieDetailsFragment(movieUi))
-    }
 }
 
 

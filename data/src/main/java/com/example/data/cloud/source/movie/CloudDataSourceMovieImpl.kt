@@ -3,7 +3,7 @@ package com.example.data.cloud.source.movie
 import com.example.data.cloud.api.api.movie.MovieApi
 import com.example.data.cloud.models.movie.MovieDetailsCloud
 import com.example.data.cloud.models.movie.MoviesCloud
-import com.example.data.cloud.models.movie.movie_category.CreditsResponseCloud
+import com.example.data.cloud.models.movie.CreditsResponseCloud
 import com.example.data.cloud.models.movie.tv_shows.TvSeriesDetailsCloud
 import com.example.data.cloud.models.movie.tv_shows.TvSeriesResponseCloud
 import com.example.data.cloud.source.handler.ResponseHandler
@@ -63,12 +63,19 @@ class CloudDataSourceMovieImpl @Inject constructor(
             .map(mapFromMoviesCloudToData::map)
             .flowOn(dispatchersProvider.default())
 
-    override fun getAllSearchMovies(query: String): Flow<MoviesData> = flow {
-        emit(api.searchMovies(query = query))
-    }.flowOn(Dispatchers.IO).map { it.body()!! }.map(mapFromMoviesCloudToData::map)
-        .flowOn(Dispatchers.Default)
+    override fun getAllSearchMovies(query: String): Flow<MoviesData> =
+        flow { emit(api.searchMovies(query = query)) }
+            .flowOn(dispatchersProvider.io())
+            .map { it.body()!! }
+            .map(mapFromMoviesCloudToData::map)
+            .flowOn(dispatchersProvider.default())
 
-
+    override fun getAllSearchSeries(query: String): Flow<TvSeriesResponseData> =
+        flow { emit(api.searchSeries(searchQuery = query)) }
+            .flowOn(dispatchersProvider.io())
+            .map{it.body()!!}
+            .map(mapTvResponseCloudToData::map)
+            .flowOn(dispatchersProvider.default())
 
     override fun getSimilarMovies(movieId: Int): Flow<MoviesData> =
         flow { emit(api.getSimilarMovies(movieId = movieId)) }
@@ -84,6 +91,12 @@ class CloudDataSourceMovieImpl @Inject constructor(
             .map(mapFromMoviesCloudToData::map)
             .flowOn(dispatchersProvider.default())
 
+    override fun getMovieDetails(movieId: Int): Flow<MovieDetailsData> =
+        flow { emit(api.getMovieDetails(movieId)) }
+            .flowOn(dispatchersProvider.io())
+            .map { it.body()!! }
+            .map(mapFromDetailsCloudToData::map)
+            .flowOn(dispatchersProvider.default())
 
     override fun addRateForMovie(movieId: Int): Flow<MoviesData> =
         flow { emit(api.postRateForMovie(movieId = movieId)) }
@@ -98,6 +111,20 @@ class CloudDataSourceMovieImpl @Inject constructor(
             .flowOn(dispatchersProvider.io())
             .map { it.body()!! }
             .map(mapFromMoviesCloudToData::map)
+            .flowOn(dispatchersProvider.default())
+
+    override fun getActors(movieId: Int): Flow<CreditsResponseData> =
+        flow { emit(api.getMovieCredits(movieId = movieId)) }
+            .flowOn(dispatchersProvider.io())
+            .map { it.body()!! }
+            .map(mapCreditsResponseCloudToData::map)
+            .flowOn(dispatchersProvider.default())
+
+    override fun getTvCasts(tvId: Int): Flow<CreditsResponseData> =
+        flow { emit(api.getTvCredits(tvId)) }
+            .flowOn(dispatchersProvider.io())
+            .map { it.body()!! }
+            .map(mapCreditsResponseCloudToData::map)
             .flowOn(dispatchersProvider.default())
 
     /**    Tv Shows And Series   */
@@ -160,20 +187,19 @@ class CloudDataSourceMovieImpl @Inject constructor(
 
     override fun getAllFantasySeries(page: Int, genres: String): Flow<TvSeriesResponseData> =
         flow { emit(api.getFantasySeries(page = page, genres = genres)) }
-            .flowOn(Dispatchers.IO)
+            .flowOn(dispatchersProvider.io())
             .map { it.body()!! }
             .map(mapTvResponseCloudToData::map)
-            .flowOn(Dispatchers.Default)
+            .flowOn(dispatchersProvider.default())
+
+    override fun getAllFantasyMovies(page: Int, genres: String): Flow<MoviesData> =
+        flow { emit(api.getMovieGenres(page = page, genres = genres)) }
+            .flowOn(dispatchersProvider.io())
+            .map { it.body()!! }
+            .map(mapFromMoviesCloudToData::map)
+            .flowOn(dispatchersProvider.default())
 
 
-    override suspend fun getActors(movieId: Int): DataRequestState<CreditsResponseData> =
-        responseHandler.safeApiMapperCall(mapCreditsResponseCloudToData) {
-            api.getMovieCredits(movieId = movieId)
-        }
 
 
-    override suspend fun getMovieDetails(movieId: Int): DataRequestState<MovieDetailsData> =
-        responseHandler.safeApiMapperCall(mapFromDetailsCloudToData) {
-            api.getMovieDetails(id = movieId)
-        }
 }

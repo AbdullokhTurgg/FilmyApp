@@ -2,25 +2,35 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="@dimen/_120sdp"
-    android:layout_height="@dimen/_170sdp"
-    android:layout_marginLeft="5dp"
+    android:layout_width="@dimen/_140sdp"
+    android:layout_height="@dimen/_190sdp"
     android:clickable="true"
     android:focusable="true"
     android:clipChildren="true"
-    android:layout_marginTop="5dp"
     android:backgroundTint="@color/black_30_alpha"
     android:id="@+id/motion_layout"
     android:layout_marginRight="5dp"
     android:orientation="vertical"
-    app:cardCornerRadius="8dp"
     app:cardElevation="0dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="2dp"
-        app:cardCornerRadius="10dp">
+        app:cardCornerRadius="4dp">
+
+        <TextView
+            android:id="@+id/movie_rating_txt"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_gravity="end|top"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:layout_marginEnd="@dimen/_4sdp"
+            android:background="@drawable/adult_bg"
+            android:fontFamily="@font/baloo"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="10sp" />
 
 
         <androidx.constraintlayout.motion.widget.MotionLayout
@@ -35,7 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/poster" />
+                 />
 
             <ImageView
                 android:id="@+id/delete_btn"
@@ -49,8 +59,8 @@
 
             <com.vaibhavlakhera.circularprogressview.CircularProgressView
                 android:id="@+id/progressView"
-                android:layout_width="@dimen/_40sdp"
-                android:layout_height="@dimen/_40sdp"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
                 app:animate="true"
@@ -62,7 +72,7 @@
                 app:progressInterpolator="@android:anim/accelerate_decelerate_interpolator"
                 app:progressTextColor="@color/white"
                 app:progressTextEnabled="true"
-                app:progressTextSize="10sp"
+                app:progressTextSize="7sp"
                 app:progressTextType="percent"
                 app:progressValue="0"
                 app:progressWidth="5dp"

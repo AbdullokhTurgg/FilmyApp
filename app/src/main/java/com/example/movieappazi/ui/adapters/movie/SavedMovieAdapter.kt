@@ -1,11 +1,9 @@
 package com.example.movieappazi.ui.adapters.movie
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.data.cloud.api.utils.Utils
 import com.example.movieappazi.R
@@ -14,11 +12,20 @@ import com.example.movieappazi.app.utils.extensions.downEffect
 import com.example.movieappazi.app.utils.extensions.setOnDownEffectClickListener
 import com.example.movieappazi.app.utils.extensions.startSlideInRightAnim
 import com.example.movieappazi.databinding.ItemFavMoviesBinding
+import com.example.movieappazi.ui.adapters.movie.diffcallbacks.MovieDiffCallBack
 import com.squareup.picasso.Picasso
 
 class SavedMoviesAdapter(
     private val listener: RecyclerFavOnClickListener,
-) : ListAdapter<MovieUi, SavedMoviesAdapter.ViewHolder>(TvDiffCallBack()) {
+) :  RecyclerView.Adapter<SavedMoviesAdapter.ViewHolder>() {
+
+    var moviesList = listOf<MovieUi>()
+        set(value) {
+            val callback = MovieDiffCallBack(moviesList, value)
+            val diffResult = DiffUtil.calculateDiff(callback)
+            diffResult.dispatchUpdatesTo(this)
+            field = value
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(parent.context)
@@ -26,11 +33,12 @@ class SavedMoviesAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(getItem(position))
+
+        holder.bind(moviesList[position])
 
 
         holder.itemView.downEffect().setOnClickListener {
-            listener.onItemClick(getItem(position))
+            listener.onItemClick(moviesList[position])
         }
     }
 
@@ -46,10 +54,10 @@ class SavedMoviesAdapter(
                 Picasso.get().load(Utils.POSTER_PATH_URL + posterPath).into(posterImage)
 
                 buttonBookmark.setOnDownEffectClickListener {
-                    listener.onClearItemClick(getItem(adapterPosition))
+                    listener.onClearItemClick(moviesList[adapterPosition])
                 }
                 motionLayout.setOnDownEffectClickListener {
-                    listener.onItemClick(getItem(adapterPosition))
+                    listener.onItemClick(moviesList[adapterPosition])
                 }
                 motionLayout.startSlideInRightAnim()
 
@@ -61,13 +69,6 @@ class SavedMoviesAdapter(
         }
     }
 
-}
-
-class TvDiffCallBack : DiffUtil.ItemCallback<MovieUi>() {
-
-    override fun areItemsTheSame(oldItem: MovieUi, newItem: MovieUi) = oldItem.id == newItem.id
-
-    @SuppressLint("DiffUtilEquals")
-    override fun areContentsTheSame(oldItem: MovieUi, newItem: MovieUi) = oldItem == newItem
+    override fun getItemCount(): Int  = moviesList.size
 
 }

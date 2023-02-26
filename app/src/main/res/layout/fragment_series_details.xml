@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="@dimen/_20sdp"
-    android:background="@color/backGroundAd"
+    android:background="@drawable/transperent_background"
     app:layoutDescription="@xml/fragment_movie_details_scene"
     tools:context=".ui.series.screen_series_details.SeriesDetailsFragment">
 
@@ -37,7 +36,7 @@
         android:layout_marginTop="-425dp"
         android:elevation="8dp"
         android:paddingBottom="200dp"
-        app:cardBackgroundColor="@color/backGroundAd"
+        app:cardBackgroundColor="@color/backgroundDarker"
         app:layout_constraintBottom_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

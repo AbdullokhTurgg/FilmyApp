@@ -10,7 +10,6 @@
     android:backgroundTint="@color/preview"
     app:cardCornerRadius="@dimen/_20sdp"
     app:cardElevation="@dimen/_500sdp"
-    app:layoutDescription="@xml/item_fav_movies_scene"
     tools:context=".ui.movie.storage_movies_screen.StorageMoviesFragment">
 
 
@@ -48,7 +47,8 @@
             android:paddingStart="@dimen/start_margin"
             android:paddingTop="@dimen/top_margin_small"
             android:paddingEnd="@dimen/end_margin"
-            android:paddingBottom="@dimen/bottom_margin_small">
+            android:paddingBottom="@dimen/bottom_margin_small"
+            android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="@dimen/portrait_image_width_small"
@@ -61,7 +61,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    tools:srcCompat="@drawable/movie2" />
+                    />
 
             </androidx.cardview.widget.CardView>
 
@@ -182,7 +182,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="@dimen/_180sdp"
-            android:background="@drawable/back"
+            android:backgroundTint="@color/shimmerColor"
             app:layout_constraintBottom_toBottomOf="@+id/linearLayout2" />
 
     </com.google.android.material.card.MaterialCardView>
